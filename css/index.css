@@ -1,0 +1,223 @@
+/*global*/
+body {
+    position: relative;
+}
+html,body{
+    min-height:100%;
+    height:100%;
+}
+
+/*intro*/
+
+#cf-intro{
+    height:100%;
+    font-size:16px;
+}
+
+/* 顶部标题处理 */
+#cf-intro h1{
+    color:#006400;
+}
+#cf-intro h1 img{
+    height:40px;
+    margin-bottom:5px;
+}
+
+/* 文本段落间距处理 */
+#cf-intro p{
+    text-indent:2em;
+    line-height:1.8;
+}
+#cf-intro h3{
+    margin:35px 0;
+}
+
+
+/* icon标签处理 */
+#cf-intro .landing-skill-icon {
+    color: darkgreen;
+    font-size: 80px;
+}
+#cf-intro .font-awesome-padding {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align:center;
+}
+#cf-intro .img-awesome-padding{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align:center;
+}
+#cf-intro .icon-content{
+    text-align:center;
+}
+#cf-intro .icon-content img{
+    width:80px;
+}
+/* icon动画效果 */
+@keyframes flip {
+    from {
+        -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+        transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    40% {
+        -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+        transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+
+    50% {
+        -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+        transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    80% {
+        -webkit-transform: perspective(400px) scale3d(.95, .95, .95);
+        transform: perspective(400px) scale3d(.95, .95, .95);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+
+    to {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+}
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.animated.flip {
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    -webkit-animation-name: flip;
+    animation-name: flip;
+}
+
+/*gallery*/
+#content-peoplework{
+    background: #f7f8f3;
+    background-size:cover;
+}
+#content-div-peoplework{
+    padding-top:100px;
+    margin-left:10em;
+    margin-right:10em;
+}
+
+.memberwork_usr_portrait{
+    border-radius: 50%;
+    width:100px;
+    margin-bottom:2em;
+}
+.full-content{
+    height: 100vh;
+}
+.usr_nickname{
+    font-size:1.5em;
+}
+.memberwork_content{
+    margin-top: 15vh;
+}
+.content_peopleworktitle{
+    font-size: 3em;
+}
+
+/*join-us*/
+html, a {
+    color: #333;
+}
+
+.lead {
+    text-indent: 2em;
+}
+
+.box {
+    padding-bottom: 2em;
+    min-height: 268px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.box a {
+    color: #212121;
+}
+
+.box:hover {
+    /*   color: #fff;
+      background-color: rgba(0, 100, 0, 0.9); */
+    border: 1px solid darkgreen;
+}
+
+.box-image, .box-icon {
+    font-size: 10em;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    color: darkgreen;
+}
+
+.box-icon:hover {
+    /*   color: #fff; */
+}
+
+.box-image {
+    height: 200px;
+    padding: 10px;
+}
+
+.box-image img {
+    width: 150px;
+    margin-top: -35px;
+}
+
+.box-title {
+    font-size: 3em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.box-link {
+    text-decoration: none;
+}
+
+.box-link:hover, .box-link:active, .box-link:visited, .box-link:focus {
+    text-decoration: none;
+}
+/*navbar*/
+@media (max-width: 969px) {
+    #cf-navbar {
+        display: none;
+    }
+}
+#cf-navbar {
+    position: fixed;
+    top:200px;
+    right:0;
+    min-height: 100%;
+    height: 100%;
+    width:25%;
+}
+
+#cf-navbar a {
+    /*background-color: #4CAF50;*/
+}
+.spacer {
+    height: 800px;
+}
+.red {
+    background-color: red;
+}
+.blue {
+    background-color: blue;
+}
