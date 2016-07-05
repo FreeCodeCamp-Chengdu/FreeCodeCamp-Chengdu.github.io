@@ -103,16 +103,99 @@ html,body{
     -webkit-animation-name: flip;
     animation-name: flip;
 }
-
+/*members*/
+#cf-members {
+    width:90%;
+    height:100%;
+    margin:auto;
+}
+.member-panel-title{
+    font-size:36px;
+}
+.members-city{
+    font-size:22px;
+    color:#898989;
+}
+.members-city em{
+    margin-left: 460px;
+}
+.members {
+    width:100%;
+    margin-top:40px;
+}
+.member{
+    border:none;
+}
+.member h3 {
+    color:#565656;
+    font-size:16px;
+}
+.member img{
+    border-radius: 50%;
+    border: 2px solid #4caf50;
+    width: 90px;
+    height:90px;
+    cursor: pointer;
+}
+@media(min-width:1201px){
+    #member-panel{
+        width:1200px;
+        padding-top:30px;
+    }
+    .members .col-lg-2 {
+        width: 12.5%;
+    }
+    .member img{
+        width: 90px;
+        height:90px;
+    }
+}
+@media(min-width:991px) and (max-width:1200px){
+    #member-panel{
+        width:98%;
+        padding-top: 30px;
+    }
+    .member img{
+        width: 80px;
+        height:80px;
+    }
+}
+@media(min-width:767px) and (max-width:990px){
+    #member-panel{
+        width:90%;
+        padding-top: 30px;
+    }
+}
+@media(min-width:481px) and (max-width:766px){
+    #member-panel{
+        width:90%;
+        padding-top: 20px;
+    }
+    .member img{
+        width: 90px;
+        height:90px;
+    }
+}
+@media(max-width:480px){
+    #member-panel{
+        width:96%;
+        padding-top: 20px;
+    }
+    .member img{
+        width: 90px;
+        height:90px;
+    }
+}
 /*gallery*/
 #content-peoplework{
     background: #f7f8f3;
     background-size:cover;
 }
-#content-div-peoplework{
+#cf-gallery{
     padding-top:100px;
-    margin-left:10em;
-    margin-right:10em;
+    /*margin-left:10em;*/
+    /*margin-right:10em;*/
+    height: 100%;
 }
 
 .memberwork_usr_portrait{
@@ -121,13 +204,13 @@ html,body{
     margin-bottom:2em;
 }
 .full-content{
-    height: 100vh;
+
 }
 .usr_nickname{
     font-size:1.5em;
 }
 .memberwork_content{
-    margin-top: 15vh;
+    margin-top: 15%;
 }
 .content_peopleworktitle{
     font-size: 3em;
