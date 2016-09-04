@@ -4,7 +4,7 @@
 
 var data = {
     "nodes" : [
-        {"name": "余烜", "imgurl": "https://avatars2.githubusercontent.com/u/11681135?v=3&s=460",},
+        {"name": "余烜Yasic", "imgurl": "https://avatars2.githubusercontent.com/u/11681135?v=3&s=460",},
         {"name": "王嘉琨", "imgurl": "./img/members/wangjiakun.jpg"},
         {"name": "肖鹏", "imgurl": "./img/members/xiaopeng.jpg"},
         {"name": "姜玉珍", "imgurl": "./img/members/jiangyuzhen.jpg"},
@@ -39,17 +39,19 @@ var data = {
     ]
 }
 
-var width = 1500, height = 900;
+var width = document.body.clientWidth * 0.75, height = 1000;
 
 var svg = d3.select("body").select(".members").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
 
 
 var force = d3.layout.force()
     .size([width, height])
-    .linkDistance(700)
-    .charge([-400])
+    .linkDistance(600)
+    .linkStrength(0.8)
+    .theta(0.1)
+    .charge([-500])
     .nodes(data.nodes)
     .links(data.links)
     .start();
@@ -114,8 +116,8 @@ var link = svg.selectAll(".link")
     .attr("stroke","black")
     .attr("stroke-width",1).call(force.drag());*/
 
-var img_width = 50;
-var img_height = 50;
+var img_width = 70;
+var img_height = 70;
 
 var nodes_img = svg.selectAll("image")
     .data(data.nodes)
