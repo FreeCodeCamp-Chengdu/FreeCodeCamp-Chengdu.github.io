@@ -137,6 +137,15 @@ html,body{
     height:90px;
     cursor: pointer;
 }
+
+.member-image{
+    border-radius: 50%;
+    border: 2px solid #4caf50;
+    width: 50px;
+    height:50px;
+    cursor: pointer;
+}
+
 @media(min-width:1201px){
     #member-panel{
         width:1200px;
@@ -210,7 +219,7 @@ html,body{
     font-size:1.5em;
 }
 .memberwork_content{
-    margin-top: 15%;
+    margin-top: 5%;
 }
 .content_peopleworktitle{
     font-size: 3em;
@@ -303,4 +312,10 @@ html, a {
 }
 .blue {
     background-color: blue;
+}
+
+.list-wait-tip{
+    color: #4caf50;
+    font-family: Cousine;
+    font-size: 100px;
 }
