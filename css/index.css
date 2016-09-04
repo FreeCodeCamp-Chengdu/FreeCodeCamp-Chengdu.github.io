@@ -27,6 +27,7 @@ html,body{
 #cf-intro p{
     text-indent:2em;
     line-height:1.8;
+    font-size: 16px;
 }
 #cf-intro h3{
     margin:35px 0;
@@ -103,11 +104,30 @@ html,body{
     -webkit-animation-name: flip;
     animation-name: flip;
 }
-/*members*/
+
+/*cf-events*/
+#cf-events h3{
+    margin:35px 0;
+}
+#cf-events p{
+    text-indent:2em;
+    line-height:1.8;
+    font-size: 16px;
+}
+
+/*cf-members*/
 #cf-members {
     width:90%;
     height:100%;
     margin:auto;
+}
+#cf-members h3{
+    margin:35px 0;
+}
+#cf-members p{
+    text-indent:2em;
+    line-height:1.8;
+    font-size: 16px;
 }
 .member-panel-title{
     font-size:36px;
@@ -139,7 +159,7 @@ html,body{
 }
 
 .members{
-    border-radius: 5%;
+    border-radius: 3%;
     border: 2px solid #555555;
     cursor: pointer;
 }
@@ -199,10 +219,17 @@ html,body{
     background-size:cover;
 }
 #cf-gallery{
-    padding-top:100px;
     /*margin-left:10em;*/
     /*margin-right:10em;*/
     height: 100%;
+}
+#cf-gallery h3{
+    margin:35px 0;
+}
+#cf-gallery p{
+    text-indent:2em;
+    line-height:1.8;
+    font-size: 16px;
 }
 
 .memberwork_usr_portrait{
@@ -219,8 +246,15 @@ html,body{
 .memberwork_content{
     margin-top: 5%;
 }
-.content_peopleworktitle{
-    font-size: 3em;
+
+/*cf-join*/
+#cf-join h3{
+    margin:35px 0;
+}
+#cf-join p{
+    text-indent:2em;
+    line-height:1.8;
+    font-size: 16px;
 }
 
 /*join-us*/
@@ -315,5 +349,5 @@ html, a {
 .list-wait-tip{
     color: #4caf50;
     font-family: Cousine;
-    font-size: 100px;
+    font-size: 4em;
 }

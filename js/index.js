@@ -1,4 +1,12 @@
 window.onload = function () {
+    $("div#cf-intro").height(window.screen.availHeight);
+    $("div#cf-events").height(window.screen.availHeight);
+    $("div#cf-gallery").height(window.screen.availHeight);
+    $("div#cf-members").height(window.screen.availHeight);
+    $("div#cf-join").height(window.screen.availHeight);
+
+
+
     var iconArr = document.querySelectorAll('#cf-intro .landing-skill-icon,#cf-intro .img-awesome-padding');
     /*iconArr.forEach(function (el) {
         el.className += ' animated';

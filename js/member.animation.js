@@ -39,7 +39,7 @@ var data = {
     ]
 }
 
-var width = document.body.clientWidth * 0.75, height = 1000;
+var width = document.body.clientWidth * 0.75, height = 700;
 
 var svg = d3.select("body").select(".members").append("svg")
     .attr("width", width)
@@ -48,7 +48,7 @@ var svg = d3.select("body").select(".members").append("svg")
 
 var force = d3.layout.force()
     .size([width, height])
-    .linkDistance(600)
+    .linkDistance(400)
     .linkStrength(0.8)
     .theta(0.1)
     .charge([-500])
@@ -116,8 +116,8 @@ var link = svg.selectAll(".link")
     .attr("stroke","black")
     .attr("stroke-width",1).call(force.drag());*/
 
-var img_width = 70;
-var img_height = 70;
+var img_width = 40;
+var img_height = 40;
 
 var nodes_img = svg.selectAll("image")
     .data(data.nodes)
