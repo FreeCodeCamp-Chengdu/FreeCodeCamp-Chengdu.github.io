@@ -68,7 +68,7 @@ window.onload = function () {
         $(html).appendTo($(".members"));
     }
 
-    for (var i = 0; i < members.length; i++) {
+    /*for (var i = 0; i < members.length; i++) {
         addHtml(members[i]);
-    }
+    }*/
 }
