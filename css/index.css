@@ -28,9 +28,10 @@ html,body{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
+    text-align: center;
 }
 #cf-intro h3{
-    margin:35px 0;
+    margin:3em 0;
 }
 
 
@@ -107,12 +108,22 @@ html,body{
 
 /*cf-events*/
 #cf-events h3{
-    margin:35px 0;
+    margin:3em 0;
 }
 #cf-events p{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
+    text-align: center;
+}
+
+#cf-events .img-responsive{
+
+}
+
+.cf-events-image{
+    text-align: center;
+    display: block;
 }
 
 /*cf-members*/
@@ -122,12 +133,13 @@ html,body{
     margin:auto;
 }
 #cf-members h3{
-    margin:35px 0;
+    margin:3em 0;
 }
 #cf-members p{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
+    text-align: center;
 }
 .member-panel-title{
     font-size:36px;
@@ -224,12 +236,13 @@ html,body{
     height: 100%;
 }
 #cf-gallery h3{
-    margin:35px 0;
+    margin:3em 0;
 }
 #cf-gallery p{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
+    text-align: center;
 }
 
 .memberwork_usr_portrait{
@@ -249,15 +262,19 @@ html,body{
 
 /*cf-join*/
 #cf-join h3{
-    margin:35px 0;
+    margin:3em 0;
 }
 #cf-join p{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
+    text-align: center;
 }
 
-/*join-us*/
+.cf-join-image{
+    padding-top: 10em;
+}
+
 html, a {
     color: #333;
 }
@@ -318,6 +335,8 @@ html, a {
 .box-link:hover, .box-link:active, .box-link:visited, .box-link:focus {
     text-decoration: none;
 }
+
+
 /*navbar*/
 @media (max-width: 969px) {
     #cf-navbar {
@@ -326,11 +345,13 @@ html, a {
 }
 #cf-navbar {
     position: fixed;
-    top:200px;
-    right:0;
+    top:0px;
+    right:-20%;
+    padding-top: 30px;
     min-height: 100%;
     height: 100%;
     width:25%;
+    background-color: #4caf50;
 }
 
 #cf-navbar a {

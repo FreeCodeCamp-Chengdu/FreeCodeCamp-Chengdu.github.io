@@ -7,8 +7,8 @@ window.onload = function () {
 
 
 
-    var iconArr = document.querySelectorAll('#cf-intro .landing-skill-icon,#cf-intro .img-awesome-padding');
-    /*iconArr.forEach(function (el) {
+    /*var iconArr = document.querySelectorAll('#cf-intro .landing-skill-icon,#cf-intro .img-awesome-padding');
+    /!*iconArr.forEach(function (el) {
         el.className += ' animated';
         el.addEventListener("mouseover", function () {
             if (this.className.indexOf('flip') === -1) {
@@ -18,7 +18,7 @@ window.onload = function () {
         el.addEventListener("webkitAnimationEnd", function () { //动画结束时事件
             this.className = this.className.replace('flip', ' ');
         })
-    });*/
+    });*!/
 
     var members = [
         {
@@ -74,7 +74,7 @@ window.onload = function () {
             '</div>' +
             '</div>';
         $(html).appendTo($(".members"));
-    }
+    }*/
 
     /*for (var i = 0; i < members.length; i++) {
         addHtml(members[i]);
