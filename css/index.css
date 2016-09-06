@@ -151,10 +151,6 @@ html,body{
 .members-city em{
     margin-left: 460px;
 }
-.members {
-    width:100%;
-    margin-top:40px;
-}
 .member{
     border:none;
 }
@@ -171,8 +167,10 @@ html,body{
 }
 
 .members{
+    width:100%;
+    margin-top:40px;
     border-radius: 3%;
-    border: 2px solid #555555;
+    /*border: 2px solid #555555;*/
     cursor: pointer;
 }
 
@@ -355,7 +353,13 @@ html, a {
 }
 
 #cf-navbar a {
-    /*background-color: #4CAF50;*/
+    font-size: 100%;
+}
+
+@media (max-width: 1500px) {
+    #cf-navbar a {
+        font-size: 60%;
+    }
 }
 .spacer {
     height: 800px;

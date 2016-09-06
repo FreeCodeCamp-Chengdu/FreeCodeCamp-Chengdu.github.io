@@ -25,7 +25,7 @@ var data = {
         {"name": "Miya", "imgurl": "./img/members/miya.jpg"},
         {"name": "王峰", "imgurl": "./img/members/wangfeng.jpg"}
     ],
-    "links": [
+    /*"links": [
         {"source":1,"target":0},    {"source":2,"target":1},
         {"source":3,"target":2},    {"source":4,"target":3},
         {"source":5,"target":4},    {"source":6,"target":0},
@@ -36,7 +36,31 @@ var data = {
         {"source":15,"target":14},    {"source":16,"target":0},
         {"source":17,"target":16},    {"source":18,"target":17},
         {"source":19,"target":18},
-    ]
+    ],*/
+    "links": [
+     {"source":1,"target":0},    {"source":2,"target":1},
+     {"source":3,"target":2},    {"source":4,"target":3},
+     {"source":5,"target":4},    {"source":6,"target":5},
+     {"source":7,"target":6},    {"source":8,"target":7},
+     {"source":9,"target":8},    {"source":10,"target":9},
+     {"source":11,"target":10},    {"source":12,"target":11},
+     {"source":13,"target":12},    {"source":14,"target":13},
+     {"source":15,"target":14},    {"source":16,"target":15},
+     {"source":17,"target":16},    {"source":18,"target":17},
+     {"source":19,"target":18},    {"source":0,"target":19},
+     ]
+    /*"links": [
+        {"source":1,"target":0},    {"source":2,"target":0},
+        {"source":3,"target":0},    {"source":4,"target":0},
+        {"source":5,"target":0},    {"source":6,"target":0},
+        {"source":7,"target":0},    {"source":8,"target":0},
+        {"source":9,"target":0},    {"source":10,"target":0},
+        {"source":11,"target":0},    {"source":12,"target":0},
+        {"source":13,"target":0},    {"source":14,"target":0},
+        {"source":15,"target":0},    {"source":16,"target":0},
+        {"source":17,"target":0},    {"source":18,"target":0},
+        {"source":19,"target":0},
+    ]*/
 }
 
 var width = document.body.clientWidth * 0.9, height = 700;
