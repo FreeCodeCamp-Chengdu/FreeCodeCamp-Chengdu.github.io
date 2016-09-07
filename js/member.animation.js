@@ -63,7 +63,7 @@ var data = {
     ]*/
 }
 
-var width = document.body.clientWidth * 0.9, height = 700;
+var width = document.body.clientWidth * 0.9, height = document.body.clientHeight * 7/8;
 
 var svg = d3.select("body").select(".members").append("svg")
     .attr("width", width)
@@ -71,8 +71,8 @@ var svg = d3.select("body").select(".members").append("svg")
 
 
 var force = d3.layout.force()
-    .size([width * 3/4, height])
-    .linkDistance(400)
+    .size([width * 3/4, height * 7/8])
+    .linkDistance(height/3)
     .linkStrength(0.8)
     .theta(0.1)
     .charge([-500])
