@@ -18,6 +18,9 @@ html,body{
 #cf-intro h1{
     color:#006400;
 }
+#cf-intro h1 i.fa {
+    float:    right;
+}
 #cf-intro h1 img{
     height:40px;
     margin-bottom:5px;
@@ -341,25 +344,13 @@ html, a {
     }
 }
 #cf-navbar {
-    position: fixed;
-    top:0px;
-    right:-20%;
-    padding-top: 30px;
-    min-height: 100%;
-    height: 100%;
-    width:25%;
-    background-color: #4caf50;
+    position:      fixed;
+    top:           0;
+    right:         0;
+    height:        100%;
+    background:    #4caf50;
 }
 
-#cf-navbar a {
-    font-size: 100%;
-}
-
-@media (max-width: 1500px) {
-    #cf-navbar a {
-        font-size: 60%;
-    }
-}
 .spacer {
     height: 800px;
 }

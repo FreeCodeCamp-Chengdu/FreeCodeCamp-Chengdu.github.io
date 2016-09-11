@@ -101,5 +101,24 @@ window.onload = function () {
             addHtml(members[i]);
         }
     }
-
 }
+
+
+
+$(document).ready(function () {
+
+/* ---------- 滑动导航栏 ---------- */
+//
+//    [Author]    https://github.com/TechQuery
+//
+
+    $('#cf-intro h1 i.fa').click(function () {
+
+        $('#cf-navbar').fadeToggle(100,  function () {
+
+            $('body > .container > .row > :first-child').animate({
+                width:    (this.style.display == 'none')  ?  '100%'  :  '91%'
+            }, 100);
+        });
+    });
+});
