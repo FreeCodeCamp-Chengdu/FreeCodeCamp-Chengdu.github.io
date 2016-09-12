@@ -112,13 +112,31 @@ $(document).ready(function () {
 //    [Author]    https://github.com/TechQuery
 //
 
-    $('#cf-intro h1 i.fa').click(function () {
+    var $_Content = $('body > .container > .row > :first-child'),
+        $_NavBar = $('#cf-navbar'),
+        isPhone = (screen.width <= 720);
 
-        $('#cf-navbar').fadeToggle(100,  function () {
+    var Content_Width = $_Content.width();
 
-            $('body > .container > .row > :first-child').animate({
-                width:    (this.style.display == 'none')  ?  '100%'  :  '91%'
+    function NavToggle() {
+        $_NavBar.fadeToggle(100,  function () {
+
+            var iHidden = (this.style.display == 'none');
+
+            if (isPhone) {
+                if (! iHidden)  this.focus();
+                return;
+            }
+
+            var $_Content = $('body > .container > .row > :first-child');
+
+            $_Content.animate({
+                width:    iHidden ? '100%' : Content_Width
             }, 100);
         });
-    });
+    }
+
+    $('#cf-intro h1 i.fa').click(NavToggle);
+
+    if (isPhone)  $_NavBar.blur(NavToggle);
 });

@@ -15,15 +15,26 @@ html,body{
 }
 
 /* 顶部标题处理 */
-#cf-intro h1{
-    color:#006400;
+#cf-intro h1 {
+    display:      table;
+    width:        100%;
+    font-size:    2em;
+    color:        #006400;
+}
+@media (max-width: 720px) {
+    #cf-intro h1 {
+        font-size:    1.5em;
+    }
+}
+#cf-intro h1 > * {
+    display:           table-cell;
+    vertical-align:    middle;
+}
+#cf-intro h1 img {
+    max-width:    60%;
 }
 #cf-intro h1 i.fa {
     float:    right;
-}
-#cf-intro h1 img{
-    height:40px;
-    margin-bottom:5px;
 }
 
 /* 文本段落间距处理 */
@@ -169,11 +180,9 @@ html,body{
     cursor: pointer;
 }
 
-.members{
-    width:100%;
-    border-radius: 3%;
-    /*border: 2px solid #555555;*/
-    cursor: pointer;
+.members {
+    text-align:    center;
+    cursor:        pointer;
 }
 
 @media(min-width:1201px){
@@ -338,17 +347,18 @@ html, a {
 
 
 /*navbar*/
-@media (max-width: 969px) {
-    #cf-navbar {
-        display: none;
-    }
-}
 #cf-navbar {
     position:      fixed;
     top:           0;
     right:         0;
     height:        100%;
     background:    #4caf50;
+    outline:       none;
+}
+@media (max-width: 720px) {
+    #cf-navbar {
+        display:    none;
+    }
 }
 
 .spacer {
