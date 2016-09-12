@@ -101,5 +101,42 @@ window.onload = function () {
             addHtml(members[i]);
         }
     }
-
 }
+
+
+
+$(document).ready(function () {
+
+/* ---------- 滑动导航栏 ---------- */
+//
+//    [Author]    https://github.com/TechQuery
+//
+
+    var $_Content = $('body > .container > .row > :first-child'),
+        $_NavBar = $('#cf-navbar'),
+        isPhone = (screen.width <= 720);
+
+    var Content_Width = $_Content.width();
+
+    function NavToggle() {
+        $_NavBar.fadeToggle(100,  function () {
+
+            var iHidden = (this.style.display == 'none');
+
+            if (isPhone) {
+                if (! iHidden)  this.focus();
+                return;
+            }
+
+            var $_Content = $('body > .container > .row > :first-child');
+
+            $_Content.animate({
+                width:    iHidden ? '100%' : Content_Width
+            }, 100);
+        });
+    }
+
+    $('#cf-intro h1 i.fa').click(NavToggle);
+
+    if (isPhone)  $_NavBar.blur(NavToggle);
+});
