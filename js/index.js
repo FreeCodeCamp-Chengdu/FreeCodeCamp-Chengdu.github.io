@@ -128,8 +128,6 @@ $(document).ready(function () {
                 return;
             }
 
-            var $_Content = $('body > .container > .row > :first-child');
-
             $_Content.animate({
                 width:    iHidden ? '100%' : Content_Width
             }, 100);
@@ -138,5 +136,27 @@ $(document).ready(function () {
 
     $('#cf-intro h1 i.fa').click(NavToggle);
 
-    if (isPhone)  $_NavBar.blur(NavToggle);
+    if (isPhone)  return $_NavBar.blur(NavToggle);
+
+    var $_NavItem = $_NavBar.find('li > a[href^="#"]'),
+        $_Point = $('body > .container > .row');
+
+    function NavLinkage() {
+        var Current_Section = this.document.elementFromPoint(
+                $_Point.offset().left + 10,  $(this).height() / 2
+            );
+
+        if (! (Current_Section || '').id)
+            Current_Section = $(Current_Section).parents('*[id]')[0];
+
+        if (! Current_Section)  return;
+
+        $_NavItem.removeClass('active');
+
+        $('a[href="#' + Current_Section.id + '"]').addClass('active');
+    }
+
+    NavLinkage();
+
+    $(window).on('load scroll resize', NavLinkage);
 });
