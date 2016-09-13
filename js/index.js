@@ -112,8 +112,21 @@ $(document).ready(function () {
 //    [Author]    https://github.com/TechQuery
 //
 
+    /* ----- 页面平滑滚动 ----- */
+
+    var $_NavItem = 'li > a[href^="#"]';
+
+    var $_NavBar = $('#cf-navbar').on('click',  $_NavItem,  function () {
+
+            arguments[0].preventDefault();
+
+            $('body').scrollTo( this.getAttribute('href') );
+        });
+
+
+    /* ----- 显示 / 隐藏 ----- */
+
     var $_Content = $('body > .container > .row > :first-child'),
-        $_NavBar = $('#cf-navbar'),
         isPhone = (screen.width <= 720);
 
     var Content_Width = $_Content.width();
@@ -128,8 +141,6 @@ $(document).ready(function () {
                 return;
             }
 
-            var $_Content = $('body > .container > .row > :first-child');
-
             $_Content.animate({
                 width:    iHidden ? '100%' : Content_Width
             }, 100);
@@ -138,5 +149,29 @@ $(document).ready(function () {
 
     $('#cf-intro h1 i.fa').click(NavToggle);
 
-    if (isPhone)  $_NavBar.blur(NavToggle);
+    if (isPhone)  return $_NavBar.blur(NavToggle);
+
+
+    /* ----- 页面滚动联动 ----- */
+
+    $_NavItem = $_NavBar.find( $_NavItem );
+
+    function NavLinkage() {
+        var Current_Section = this.document.elementFromPoint(
+                $_Content.offset().left + 10,  $(this).height() / 2
+            );
+
+        if (! (Current_Section || '').id)
+            Current_Section = $(Current_Section).parents('*[id]')[0];
+
+        if (! Current_Section)  return;
+
+        $_NavItem.removeClass('active');
+
+        $('a[href="#' + Current_Section.id + '"]').addClass('active');
+    }
+
+    NavLinkage();
+
+    $(window).on('load scroll resize', NavLinkage);
 });

@@ -360,6 +360,33 @@ html, a {
         display:    none;
     }
 }
+#cf-navbar li > a {
+        color:            white;
+        border-radius:    0;
+   -moz-transition:       0.25s;
+     -o-transition:       0.25s;
+-webkit-transition:       0.25s;
+        transition:       0.25s;
+        position:         relative;
+}
+#cf-navbar li > a:before {
+        content:       "";
+        position:      absolute;
+        border:        0.3em  solid  transparent;
+        left:          0;
+        top:           1.2em;
+   -moz-transition:    0.25s;
+     -o-transition:    0.25s;
+-webkit-transition:    0.25s;
+        transition:    0.25s;
+}
+#cf-navbar li > a:hover,   #cf-navbar li > a:hover:before,
+#cf-navbar li > a.active,  #cf-navbar li > a.active:before {
+    color:                yellow;
+    background:           transparent;
+    border-left-color:    white;
+}
+
 
 .spacer {
     height: 800px;
