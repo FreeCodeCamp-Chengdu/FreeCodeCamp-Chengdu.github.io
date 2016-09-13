@@ -112,8 +112,21 @@ $(document).ready(function () {
 //    [Author]    https://github.com/TechQuery
 //
 
+    /* ----- 页面平滑滚动 ----- */
+
+    var $_NavItem = 'li > a[href^="#"]';
+
+    var $_NavBar = $('#cf-navbar').on('click',  $_NavItem,  function () {
+
+            arguments[0].preventDefault();
+
+            $('body').scrollTo( this.getAttribute('href') );
+        });
+
+
+    /* ----- 显示 / 隐藏 ----- */
+
     var $_Content = $('body > .container > .row > :first-child'),
-        $_NavBar = $('#cf-navbar'),
         isPhone = (screen.width <= 720);
 
     var Content_Width = $_Content.width();
@@ -138,12 +151,14 @@ $(document).ready(function () {
 
     if (isPhone)  return $_NavBar.blur(NavToggle);
 
-    var $_NavItem = $_NavBar.find('li > a[href^="#"]'),
-        $_Point = $('body > .container > .row');
+
+    /* ----- 页面滚动联动 ----- */
+
+    $_NavItem = $_NavBar.find( $_NavItem );
 
     function NavLinkage() {
         var Current_Section = this.document.elementFromPoint(
-                $_Point.offset().left + 10,  $(this).height() / 2
+                $_Content.offset().left + 10,  $(this).height() / 2
             );
 
         if (! (Current_Section || '').id)
