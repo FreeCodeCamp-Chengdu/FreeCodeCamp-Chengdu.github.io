@@ -2,7 +2,7 @@
 //              >>>  jQuery+  <<<
 //
 //
-//    [Version]    v8.1  (2016-09-10)
+//    [Version]    v8.1  (2016-09-18)
 //
 //    [Require]    jQuery  v1.9+
 //
@@ -36,6 +36,12 @@
             return iKey;
         };
 
+    Object.getPrototypeOf = Object.getPrototypeOf  ||  function (iObject) {
+        return  (iObject != null)  &&  (
+            iObject.constructor.prototype || iObject.__proto__
+        );
+    };
+
     /* ----- String Extension ----- */
 
     var _Trim_ = ''.trim;
@@ -61,10 +67,9 @@
         return  this.slice(iFrom, iTo);
     };
 
-    if (! ''.repeat)
-        String.prototype.repeat = function (Times) {
-            return  (new Array(Times + 1)).join(this);
-        };
+    String.prototype.repeat = String.prototype.repeat  ||  function (Times) {
+        return  (new Array(Times + 1)).join(this);
+    };
 
     String.prototype.toCamelCase = function () {
         var iName = this.split(arguments[0] || '-');
@@ -83,27 +88,25 @@
 
     /* ----- Array Extension ----- */
 
-    if (! [ ].indexOf)
-        Array.prototype.indexOf = function () {
-            for (var i = 0;  i < this.length;  i++)
-                if (arguments[0] === this[i])
-                    return i;
+    Array.prototype.indexOf = Array.prototype.indexOf  ||  function () {
+        for (var i = 0;  i < this.length;  i++)
+            if (arguments[0] === this[i])
+                return i;
 
-            return -1;
-        };
+        return -1;
+    };
 
-    if (! [ ].reduce)
-        Array.prototype.reduce = function () {
-            var iResult = arguments[1];
+    Array.prototype.reduce = Array.prototype.reduce  ||  function () {
+        var iResult = arguments[1];
 
-            for (var i = 1;  i < this.length;  i++) {
-                if (i == 1)  iResult = this[0];
+        for (var i = 1;  i < this.length;  i++) {
+            if (i == 1)  iResult = this[0];
 
-                iResult = arguments[0](iResult, this[i], i, this);
-            }
+            iResult = arguments[0](iResult, this[i], i, this);
+        }
 
-            return iResult;
-        };
+        return iResult;
+    };
 
     /* ----- Function Extension ----- */
 
@@ -120,8 +123,7 @@
 
     /* ----- Date Extension ----- */
 
-    if (! Date.now)
-        Date.now = function () { return  +(new Date()); };
+    Date.now = Date.now  ||  function () { return  +(new Date()); };
 
 
     /* ----- JSON Extension  v0.4 ----- */
@@ -751,11 +753,11 @@
         return Boolean(
             (this.pageX  &&  (
                 (this.pageX < iOffset.left)  ||
-                (this.pageX  >  (iOffset.left + $_This.width()))
+                (this.pageX  >  (iOffset.left + parseFloat($_This.css('width'))))
             ))  ||
             (this.pageY  &&  (
                 (this.pageY < iOffset.top)  ||
-                (this.pageY  >  (iOffset.top + $_This.height()))
+                (this.pageY  >  (iOffset.top + parseFloat($_This.css('height'))))
             ))
         );
     };
@@ -1136,7 +1138,7 @@
         return iArgs.join('');
     }
 
-    DOM.documentElement.style.constructor.prototype.setProperty =
+    Object.getPrototypeOf( DOM.documentElement.style ).setProperty =
         function (iName, iValue) {
             var iString = '',  iWrapper,  iScale = 1,  iConvert;
 
@@ -1320,7 +1322,7 @@
     }
 
     if (! ('currentScript' in DOM))
-        Object.defineProperty(DOM.constructor.prototype, 'currentScript', {
+        Object.defineProperty(Object.getPrototypeOf(DOM), 'currentScript', {
             get:    function () {
                 var iURL = ($.browser.msie < 10)  ||  Script_URL();
 

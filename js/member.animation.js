@@ -63,7 +63,8 @@ if (window.screen.availWidth > 900){
          ]*/
     }
 
-    var width = document.body.clientWidth * 0.5, height = document.body.clientHeight * 7/8;
+    var width = document.documentElement.clientWidth * 0.5,
+        height = document.documentElement.clientHeight * 7/8;
 
     var svg = d3.select("body").select(".members").append("svg")
         .attr("width", width)

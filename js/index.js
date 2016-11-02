@@ -1,13 +1,5 @@
 window.onload = function () {
-    if (window.screen.availWidth > 900){
-        $("div#cf-intro").height(window.screen.availHeight);
-        $("div#cf-events").height(window.screen.availHeight);
-        $("div#cf-gallery").height(window.screen.availHeight);
-        $("div#cf-members").height(window.screen.availHeight);
-        $("div#cf-join").height(window.screen.availHeight);
-    }
-
-    else{
+    if (window.screen.availWidth < 900){
         var iconArr = document.querySelectorAll('#cf-intro .landing-skill-icon,#cf-intro .img-awesome-padding');
         /*iconArr.forEach(function (el) {
          el.className += ' animated';
@@ -120,7 +112,9 @@ $(document).ready(function () {
 
             arguments[0].preventDefault();
 
-            $('body').scrollTo( this.getAttribute('href') );
+            $($.browser.webkit ? 'body' : 'html').scrollTo(
+                this.getAttribute('href')
+            );
         });
 
 
