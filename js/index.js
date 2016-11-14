@@ -120,7 +120,15 @@ $(document).ready(function () {
     });
 
     if ($.fancybox){
-        $('.fancybox').fancybox();
+        $('.fancybox').fancybox({
+            openEffect: "elastic",
+            closeEffect: "elastic",
+            helpers: {
+                title: {
+                    type: 'inside'
+                }
+            }
+        });
     }
     /* ----- 页面平滑滚动 ----- */
 
