@@ -104,6 +104,24 @@ $(document).ready(function () {
 //    [Author]    https://github.com/TechQuery
 //
 
+    /* -----  fancybox  ----- */
+    $('#cf-events').each(function(i){
+        $(this).find('img').each(function(){
+            if ($(this).parent().hasClass('fancybox')) return;
+
+            var alt = this.alt;
+
+            if (alt) $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+        });
+
+        $(this).find('.fancybox').each(function(){
+            $(this).attr('rel', 'article' + i);
+        });
+    });
+
+    if ($.fancybox){
+        $('.fancybox').fancybox();
+    }
     /* ----- 页面平滑滚动 ----- */
 
     var $_NavItem = 'li > a[href^="#"]';
