@@ -7,24 +7,32 @@
 	<title>FreeCodeCamp 成都社区</title>
 
 	<link rel="stylesheet" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"/>
-	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-
-	<link rel="stylesheet" href="css/index.css"/>
-	<!--fancybox css-->
 	<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
-	<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-	<!-- fancybox js start -->
-	<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
-	<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-	<!-- fancybox js end -->
-    <script src="js/jQuery+.js"></script>
-	<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="js/index.js"></script>
-	<script src="js/d3.js"></script>
-</head>
+	<link rel="stylesheet" href="css/index.css"/>
 
+    <script src="//cdn.bootcss.com/require.js/2.3.0/require.min.js"></script>
+    <script>
+        require.config({
+            baseUrl:    'js/',
+            paths:      {
+                jquery:       '//cdn.bootcss.com/jquery/1.12.4/jquery.min',
+                bootstrap:    '//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min',
+                fancybox:     '//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack',
+                d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
+                members:      '../img/members/index'
+            },
+            shim:       {
+                bootstrap:    ['jquery'],
+                fancybox:     ['jquery']
+            }
+        });
+
+        require(['index']);
+    </script>
+</head>
 <body><div class="container">
 	<div class="row">
 		<div class="col-md-11 col-sm-12">
@@ -48,7 +56,7 @@
 						通过学习4个部分课程，你将获得FCC颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。</p>
 					<hr/>
 					<h3 class="text-center">你将学到什么</h3>
-					<div class="icon-content">
+					<div class="icon-content" id="Skill">
 						<div class="col-xs-3 ">
 							<div class="landing-skill-icon ion-social-html5"></div>
 							<h4>HTML5</h4>
@@ -245,8 +253,11 @@
 						</div>
 						<div class="col-xs-6 col-md-4">
                             <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=561b0bf9d066d15f7d8b06306443b1ace12de128b4deb15ba2ccb91269cdbc1f">
-                                <img src="img/join/FCC-CDG_QQ.png" class="box-image"
-                                     alt="FreeCodeCamp 成都社区 QQ群" title="点击、扫码皆可">
+                                <span class="box-image">
+                                    <img src="img/join/FCC-CDG_QQ.png"
+                                         alt="FreeCodeCamp 成都社区 QQ群"
+                                         title="点击、扫码皆可">
+                                </span>
 								<div class="box-title">QQ 群</div>
                             </a>
 						</div>
@@ -264,5 +275,4 @@
         </ul>
 	</div>
 </div></body>
-<script src="./js/member.animation.js"></script>
 </html>
