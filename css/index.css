@@ -3,6 +3,32 @@ html, body {
     min-height:    100%;
 }
 
+/* 顶部标题处理 */
+.row h1 {
+    display:       table;
+    width:         100%;
+    font-size:     2em;
+    color:         #006400;
+    background:    white;
+    margin:        0;
+    padding:       0.5em;
+}
+@media (max-width: 720px) {
+    .row h1 {
+        font-size:    1.5em;
+    }
+}
+.row h1 > * {
+    display:           table-cell;
+    vertical-align:    middle;
+}
+.row h1 img {
+    max-width:    60%;
+}
+.row h1 i.fa {
+    float:    right;
+}
+
 /*intro*/
 
 #cf-intro{
@@ -10,35 +36,11 @@ html, body {
     font-size:16px;
 }
 
-/* 顶部标题处理 */
-#cf-intro h1 {
-    display:      table;
-    width:        100%;
-    font-size:    2em;
-    color:        #006400;
-}
-@media (max-width: 720px) {
-    #cf-intro h1 {
-        font-size:    1.5em;
-    }
-}
-#cf-intro h1 > * {
-    display:           table-cell;
-    vertical-align:    middle;
-}
-#cf-intro h1 img {
-    max-width:    60%;
-}
-#cf-intro h1 i.fa {
-    float:    right;
-}
-
 /* 文本段落间距处理 */
 #cf-intro p{
     text-indent:2em;
     line-height:1.8;
     font-size: 16px;
-    text-align: center;
 }
 #cf-intro h3{
     margin:3em 0;
@@ -349,6 +351,7 @@ html, a {
     position:      fixed;
     top:           0;
     right:         0;
+    z-index:       101;
     height:        100%;
     background:    #4caf50;
     outline:       none;

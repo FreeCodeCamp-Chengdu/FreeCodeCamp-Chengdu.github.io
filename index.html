@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
+<!DocType html>
+<html lang="zh-CN"><head>
+
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+
 	<title>FreeCodeCamp 成都社区</title>
 
-	<link rel="stylesheet" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"/>
-	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
-	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+	<link rel="stylesheet"
+          href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"/>
+	<link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+          href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
+	<link rel="stylesheet"
+          href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+	<link rel="stylesheet"
+          href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
 	<link rel="stylesheet" href="css/index.css"/>
 
-    <script src="//cdn.bootcss.com/require.js/2.3.0/require.min.js"></script>
+    <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
     <script>
         require.config({
             baseUrl:    'js/',
             paths:      {
                 jquery:       '//cdn.bootcss.com/jquery/1.12.4/jquery.min',
-                bootstrap:    '//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min',
+                bootstrap:    '//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
                 fancybox:     '//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack',
                 d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
                 members:      '../img/members/index'
@@ -32,29 +40,26 @@
 
         require(['index']);
     </script>
-</head>
-<body><div class="container">
+</head><body>
+<div class="container">
 	<div class="row">
 		<div class="col-md-11 col-sm-12">
+            <h1>
+                <span>
+                    <img src="img/intro/fcc-logo.gif" alt="FCC_ChengDu"/>·成都
+                </span>
+                <span>
+                    <i class="fa fa-bars"></i>
+                </span>
+            </h1>
 			<div class="row">
 
 				<!--introduction for fcc chengdu-->
 				<div class="col-sm-12" id="cf-intro">
-					<h1>
-                        <span>
-                            <img src="img/intro/fcc-logo.gif" alt="FCC_ChengDu"/>·成都
-                        </span>
-                        <span>
-                            <i class="fa fa-bars"></i>
-                        </span>
-                    </h1>
-					<hr/>
 					<h3 class="text-center">什么是FreeCodeCamp</h3>
-					<p>FreeCodeCamp是由Quincy
-						Larson创办的开源社区，它致力于帮助人们利用零散时间学习编程，内容以前端和JS全栈为主。
-						目前已经发展成为一个30万开发者的社区，通过游戏化的项目实战，来吸引大家学习编程，并在社区内给予实时的帮助。同时，为NPO组织给予技术支持。
-						通过学习4个部分课程，你将获得FCC颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。</p>
-					<hr/>
+					<p>
+                        FreeCodeCamp 是由 Quincy Larson 创办的开源社区，它致力于帮助人们利用零散时间学习编程，内容以前端和JS全栈为主。目前已经发展成为一个30万开发者的社区，通过游戏化的项目实战，来吸引大家学习编程，并在社区内给予实时的帮助。同时，为 NPO、NGO 组织给予技术支持。通过学习4个部分课程，你将获得 FCC 颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。
+                    </p>
 					<h3 class="text-center">你将学到什么</h3>
 					<div class="icon-content" id="Skill">
 						<div class="col-xs-3 ">
@@ -95,7 +100,9 @@
 				<!--events-->
 				<div class="col-sm-12" id="cf-events">
 					<h3 class="text-center">FCC成都</h3>
-					<P>FreeCodeCamp成都社区致力于为成都本地FCC学员提供线下交流互动的平台，自2016年4月以来，FCC成都学习小组一直有新鲜血液加入，同时在学员们积极筹划和参与下，线下Code&amp;Coffee活动得以顺利进行。</P>
+					<p>
+                        FreeCodeCamp 成都社区致力于为成都本地 FCC 学员提供线下交流互动的平台，自2016年4月以来，FCC 成都学习小组一直有新鲜血液加入，同时在学员们积极筹划和参与下，线下 Code&amp;Coffee 活动得以顺利进行。
+                    </p>
 					<div class="row">
 						<div class="col-xs-12 col-sm-4 cf-events-image">
 							<img src="./img/events/events-1.jpg" alt="event 1">
@@ -229,10 +236,8 @@
 				<div class="col-sm-12" id="cf-join">
 					<h3 id="join" class="text-center">加入我们</h3>
 					<p class="lead">
-						<p>
-							不论你是技术大牛，还是前端菜鸟，亦或是对编程感兴趣的新人，如果你对我们成都线下交流活动感兴趣，现在就加入我们吧。很棒的是，线下交流，向大牛取经，这一切都是免费的！
-						</p>
-					</p>
+                        不论你是技术大牛，还是前端菜鸟，亦或是对编程感兴趣的新人，如果你对我们成都线下交流活动感兴趣，现在就加入我们吧。很棒的是，线下交流，向大牛取经，这一切都是免费的！
+                    </p>
 					<div class="row cf-join-image">
 						<div class="col-xs-6 col-md-4">
 							<div class="box" title="github FCC成都小组">
@@ -274,5 +279,5 @@
             <li role="presentation"><a href="html/feature.html" target="_blank">Feature</a></li>
         </ul>
 	</div>
-</div></body>
-</html>
+</div>
+</body></html>

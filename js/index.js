@@ -1,8 +1,11 @@
 define([
-    'jquery', 'members', 'member.animation', 'jQuery+', 'fancybox'
+    'jquery', 'members', 'member.animation', 'EasyWebUI', 'fancybox'
 ],  function ($, members) {
 
 $(document).ready(function () {
+
+    $('.row h1').scrollFixed();
+
 
     if (self.screen.availWidth >= 900)
         $('#Skill').on(
@@ -81,30 +84,29 @@ $(document).ready(function () {
 
     /* ----- 显示 / 隐藏 ----- */
 
-    var $_Content = $('body > .container > .row > :first-child'),
-        isPhone = (screen.width <= 720);
+    var $_Content = $('body > .container > .row > :first-child');
 
     var Content_Width = $_Content.width();
 
     function NavToggle() {
+
         $_NavBar.fadeToggle(100,  function () {
 
-            var iHidden = (this.style.display == 'none');
+            var iHidden = (this.style.display === 'none');
 
-            if (isPhone) {
+            if ( $.browser.phone ) {
+
                 if (! iHidden)  this.focus();
-                return;
-            }
-
-            $_Content.animate({
-                width:    iHidden ? '100%' : Content_Width
-            }, 100);
+            } else
+                $_Content.animate({
+                    width:    iHidden ? '100%' : Content_Width
+                }, 100);
         });
     }
 
-    $('#cf-intro h1 i.fa').click(NavToggle);
+    $('.row h1 i.fa').click( NavToggle );
 
-    if (isPhone)  return $_NavBar.blur(NavToggle);
+    if ( $.browser.phone )  return  $_NavBar.blur( NavToggle );
 
 
     /* ----- 页面滚动联动 ----- */
@@ -112,12 +114,13 @@ $(document).ready(function () {
     $_NavItem = $_NavBar.find( $_NavItem );
 
     function NavLinkage() {
+
         var Current_Section = this.document.elementFromPoint(
-                $_Content.offset().left + 10,  $(this).height() / 2
+                $_Content.offset().left + 10,  $( this ).height() / 2
             );
 
         if (! (Current_Section || '').id)
-            Current_Section = $(Current_Section).parents('*[id]')[0];
+            Current_Section = $( Current_Section ).parents('*[id]')[0];
 
         if (! Current_Section)  return;
 
@@ -128,6 +131,6 @@ $(document).ready(function () {
 
     NavLinkage();
 
-    $(window).on('load scroll resize', NavLinkage);
+    $( self ).on('load scroll resize', NavLinkage);
 });
 });
