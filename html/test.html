@@ -1,10 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DocType html>
+<html lang="zh-CN"><head>
 
-</body>
-</html>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+
+    <link rel="stylesheet" href="../css/EasyWebUI.css" />
+    <style>
+        section .Grid-Row li:first-child {
+            text-align:    left;
+        }
+        section .Grid-Row li:last-child {
+            text-align:    right;
+        }
+    </style>
+	<title>FreeCodeCamp 成都社区</title>
+
+    <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+    <script>
+        require.config({
+            baseUrl:    '../js/',
+            paths:      {
+                jquery:       '//cdn.bootcss.com/jquery/3.2.1/jquery.min',
+                LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min'
+            }
+        });
+
+        require([
+            'jquery', 'LeanCloud', 'EasyWebApp', 'TimeKit'
+        ],  function ($, LC, EWA, TK) {
+
+            LC.init({
+                appId:     '8H9ovR4htxgVoqdf0BO8Stac',
+                appKey:    'iNTx6f6blTD05YJFL0xuJR7U'
+            });
+
+            self.localStorage.setItem('debug', 'leancloud*');
+
+
+            Promise.resolve(
+                LC.Cloud.run('github',  {URI: 'orgs/FreeCodeCamp-Chengdu/repos'})
+            ).then(function () {
+
+                $('body > div').view('ListView').render(
+                    $.each(arguments[0],  function () {
+
+                        this.language = this.language || '';
+
+                        this.passedTime = TK.passed(
+                            this.pushed_at = new Date( this.pushed_at )
+                        );
+                    }).sort(function (A, B) {
+
+                        return  B.pushed_at - A.pushed_at;
+                    })
+                );
+            });
+        });
+    </script>
+</head><body>
+    <div class="PC_Narrow">
+        <section>
+            <h3><a target="_blank" href="${this.html_url}">
+                ${this.name}
+            </a></h3>
+            <p>${this.description}</p>
+            <ul class="Grid-Row CenterX">
+                <li class="Column_1-5">
+                    <span style="display: ${this.language ? '' : 'none'}">
+                        主力语言：${this.language}
+                    </span>
+                </li>
+                <li class="Column_1-5">
+                    <span style="display: ${this.stargazers_count ? '' : 'none'}">
+                        星标数：${this.stargazers_count}
+                    </span>
+                </li>
+                <li class="Column_1-5">
+                    <span style="display: ${this.watchers_count ? '' : 'none'}">
+                        关注者：${this.watchers_count}
+                    </span>
+                </li>
+                <li class="Column_1-5">
+                    <span style="display: ${this.forks_count ? '' : 'none'}">
+                        衍生版：${this.forks_count}
+                    </span>
+                </li>
+                <li class="Column_1-5">
+                    更新时间：${this.passedTime}
+                </li>
+            </ul>
+        </section>
+    </div>
+</body></html>
