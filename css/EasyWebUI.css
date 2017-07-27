@@ -1,0 +1,1505 @@
+@charset "UTF-8";
+
+/*
+ *            >>>  EasyWebUI.css  <<<
+ *
+ *
+ *    A CSS Framework which is similar to BootStrap,
+ *    and can be used in the Web UI development of
+ *    Any Platform.
+ *
+ *    [Version]    v1.0  (2017-05-26)
+ *
+ *    [Require]    CSS 2.1  (Best Effect with CSS 3),
+ *
+ *                 Font Awesome  v4,
+ *
+ *                 EasyWebUI.js
+ *
+ *
+ *      (C)2014-2017    test_32@fyscu.com
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* ----------- HTML Reset ---------- */
+/*
+    Reset the style of HTML Element to a Modern View,
+    to improve the User Experience.
+*/
+html, body {
+    margin:         0;
+    padding:        0;
+    /*  Specific Font Names is used for setting Sans-Serif Chinese Font
+        in Google Chrome on Windows, Linux/UNIX and Mac OS X.            */
+    font-family:    "Microsoft YaHei", "WenQuanYi Micro Hei", STXihei,
+                    sans-serif, monospace;
+    background:     rgb(231, 231, 231);
+    height:         100%;
+}
+@media (min-width: 1920px), (min-height:  600px) {
+    html, body {
+        font-size:    18px  !important;
+    }
+}
+input, textarea, select, button {
+    /*  This setting is used for Elements within Document Fragment
+        or as a Form Sub-Element.                                   */
+    font-family:    "Microsoft YaHei", "WenQuanYi Micro Hei", STXihei,
+                    sans-serif, monospace;
+}
+/* ----- Textual Elements ----- */
+/* --- HyperLink --- */
+a:link, a:visited {
+    text-decoration:    none;
+}
+a:hover, a:active {
+    text-decoration:    underline;
+}
+a:hover {
+    color:    blue;
+}
+a:active {
+    color:    red;
+}
+a img {
+    border:    none;
+}
+/* --- Important Information --- */
+em,  output  {
+    padding:        0  0.25em;
+    font-style:     normal;
+    font-weight:    bold;
+}
+hr {
+    margin:    1.5em  3em  !important;
+    border:    1px  solid  darkgray;
+}
+/* --- Quote --- */
+pre {
+    text-align:       left;
+    white-space:      pre-wrap;
+    background:       lightgray;
+    border:           1px  solid  darkgray;
+    border-radius:    3px;
+    padding:          1em;
+    margin:           auto;
+}
+code {
+    color:            darkred;
+    background:       pink;
+    padding:          0.1em  0.3em;
+    border:           1px  solid  hotpink;
+    border-radius:    0.3em;
+}
+pre > code {
+    color:            inherit;
+    background:       transparent;
+    padding:          0;
+    border:           none;
+    border-radius:    inherit;
+}
+/* ----- Data Table ----- */
+table {
+    border-collapse:    collapse;
+    margin:             0.1em  0;
+    width:              100%;
+}
+table tr {
+    line-height:    2em;
+}
+thead tr {
+    background:    rgb(93, 92, 96)  !important;
+    color:         white  !important;
+}
+tbody tr {
+        font-size:     0.9em;
+        max-height:    20em;
+   -moz-transition:    0.25s;
+     -o-transition:    0.25s;
+-webkit-transition:    0.25s;
+        transition:    0.25s;
+}
+tbody tr:hover {
+    background:    whitesmoke  !important;
+}
+tbody tr.selected {
+    background:    rgb(176, 190, 217);
+}
+tbody tr.focus {
+    background-color:    rgb(35, 160, 220)  !important;
+    box-shadow:          inset  0  1px  1px  rgba(0, 0, 0, 0.075),
+                         0  0  8px  rgba(14, 144, 210, 0.6);
+}
+table th, table td {
+    padding:      0.5em;
+    max-width:    55em;
+}
+table th {
+    white-space:    nowrap;
+    text-align:     center;
+}
+table td {
+    white-space:    pre-line;
+}
+table td > * {
+    white-space:    normal;
+}
+@media (max-width: 1280px) {
+    table th, table td {
+        max-width:    25em;
+    }
+}
+table.Page > tfoot {
+    border-top:    1px  solid  lightgray;
+}
+table.Page > tfoot input[type="number"] {
+    width:    5em;
+}
+table.Page > tfoot .NavBar > li {
+    padding:       0.5em  1em;
+    background:    white;
+}
+table.Page > tfoot .NavBar > li:hover,
+table.Page > tfoot .NavBar > li.active {
+    background:    darkgray;
+    color:         white;
+}
+table.Page > tfoot .NavBar > li:first-child {
+    border-left:    1px  solid;
+}
+table.Page > tfoot .NavBar > li:last-child {
+    border-right:    1px  solid;
+}
+
+/* ----- Form Elements ----- */
+form {
+    padding:    0  1em;
+}
+label {
+    word-spacing:    0.5em;
+    cursor:          pointer;
+}
+input[disabled], textarea[disabled], button[disabled], select[disabled] {
+    background:      rgb(230, 230, 230)  !important;
+    border-color:    rgb(230, 230, 230)  !important;
+}
+fieldset {
+    margin:     1em  0;
+    padding:    1em;
+	border:     1px  solid;
+}
+fieldset > legend {
+    padding:          0  1em;
+    border:           1px  solid;
+    border-top:       0;
+    border-bottom:    0;
+}
+/* --- Button --- */
+input[type="button"],  button,  a.Button,
+input[type="submit"],  input[type="reset"]  {
+-webkit-appearance:         none;
+   -moz-appearance:         none;
+        appearance:         none;
+        text-decoration:    none;
+        text-align:         center;
+        font-size:          1em;
+        word-wrap:          break-word;
+        word-break:         break-all;
+        line-height:        normal;
+        padding:            0.5em  1em;
+        background:         white;
+        color:              black;
+        border:             1px  solid  gray;
+        border-radius:      5px;
+        display:            inline-block;
+        margin:             0  0.5em;
+   -moz-transition:         0.25s;
+     -o-transition:         0.25s;
+-webkit-transition:         0.25s;
+        transition:         0.25s;
+}
+input[type="button"]:hover,  input[type="button"]:active,
+button:hover,                button:active,
+a.Button:hover,              a.Button:active,
+input[type="submit"]:hover,  input[type="submit"]:active,
+input[type="reset"]:hover,   input[type="reset"]:active  {
+    background:      lightgray;
+    border-color:    transparent;
+    opacity:         0.7;
+    filter:          Alpha(opacity=70);
+    cursor:          pointer;
+}
+button > *,  a.Button > *  {
+    display:           inline-block;
+    vertical-align:    middle;
+    max-height:        1.5em;
+    margin:            0  0.5em;
+}
+button > sup,  a.Button > sup,
+button > sub,  a.Button > sub  {
+    margin:       auto;
+    font-size:    x-small;
+}
+button > sup,  a.Button > sup  {
+    vertical-align:    super;
+}
+button > sub,  a.Button > sub  {
+    vertical-align:    sub;
+}
+input[type="submit"], button[type="submit"] {
+    background:      rgb(88, 167, 0);
+    color:           white;
+    border-color:    rgb(88, 167, 0);
+    display:         block;
+    max-width:       50%  !important;
+    min-width:       8em;
+    margin:          1em  auto;
+}
+/* --- Text Input --- */
+input[type="text"],   input[type="password"],
+input[type="tel"],    input[type="number"],
+input[type="email"],  input[type="url"],
+input[type="search"], input[type="date"],
+select,               textarea,
+[contentEditable],    [designMode] {
+        display:          inline-block;
+        font-size:        1em;
+        background:       white;
+        padding:          0.5em;
+        border:           1px  solid  rgb(204, 204, 204);
+        border-radius:    5px;
+   -moz-transition:       0.25s;
+     -o-transition:       0.25s;
+-webkit-transition:       0.25s;
+        transition:       0.25s;
+}
+input[type="text"]:focus,     input[type="text"]:hover,
+input[type="password"]:focus, input[type="password"]:hover,
+input[type="tel"]:focus,      input[type="tel"]:hover,
+input[type="number"]:focus,   input[type="number"]:hover,
+input[type="email"]:focus,    input[type="email"]:hover,
+input[type="url"]:focus,      input[type="url"]:hover,
+input[type="search"]:focus,   input[type="search"]:hover,
+input[type="date"]:focus,     input[type="date"]:hover,
+select:focus,                 select:hover,
+textarea:focus,               textarea:hover,
+[contentEditable]:focus,      [contentEditable]:hover,
+[designMode]:focus,           [designMode]:hover {
+    outline:         none;
+    border-color:    rgb(14, 144, 210);
+    box-shadow:      inset  0  1px  1px  rgba(0, 0, 0, 0.075),
+                     0  0  8px  rgba(14, 144, 210, 0.6);
+}
+input:-moz-placeholder,
+input::-moz-placeholder,
+input::-webkit-input-placeholder,
+input:-ms-input-placeholder {
+    text-overflow:    ellipsis;
+}
+/* --- Search Bar --- */
+input.Search, input[type="search"] {
+        width:         7em;
+   -moz-transition:    0.25s;
+     -o-transition:    0.25s;
+-webkit-transition:    0.25s;
+        transition:    0.25s;
+}
+input.Search:hover, input[type="search"]:hover,
+input.Search:focus, input[type="search"]:focus {
+    width:    15em;
+}
+/* --- Radio & Check --- */
+input[type="radio"] {
+-webkit-appearance:       none;
+   -moz-appearance:       none;
+        appearance:       none;
+        width:            1.5em;
+        height:           1.5em;
+        border:           1px  solid  gray;
+        background:       white;
+        outline:          none;
+        border-radius:    50%;
+}
+input[type="radio"]:before {
+    display:        inline-block;
+    width:          100%;
+    height:         100%;
+    line-height:    70%;
+    text-align:     center;
+    opacity:        0;
+    content:        "\25CF";
+    font-size:      1.5em;
+}
+input[type="radio"]:checked:before {
+	opacity:    1;
+}
+input[type="checkbox"].Switch {
+        vertical-align:       middle;
+-webkit-appearance:           none;
+   -moz-appearance:           none;
+        appearance:           none;
+        width:                50px;
+        height:               25px;
+        border:               1px  solid  darkgray;
+        border-radius:        12.5px;
+        background:           white;
+        outline:              none;
+        background-image:     url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAACAUlEQVRIS7WVz4vTQBTHnW7QTIJtaBSaNnMogm1x08MiguddWAVFxT9G/AfEv0aLgiB48LAH8cdhm5YWihSaCTRs0+RgJtM2JjKFlN3YumuZzSm8efN533nvzRtwZcPX6XQOFUV5JYriHQhhIkmSmLoSQighBMznc9N13ZfNZvPTOgxYZxyNRu80TTsQBAFuCp7aF4sFdRznI0Loadb3DLzX693WNO24UCisVJ4HT9d93w8xxoZhGD9T2wrOwAihI1mWb14UmPULguBkOBzeTwOs4CzyNoqzATzPC4vFosTsSzjLMULo8baKs/swxi2E0DPAuqJWq7UEQfjvPG8Sw4o8GAweAYzxj0qlssdLdcrBGH8Hk8lkpqrqVd5w13UpIISEEEJuKTl10WYgSZKEt2rGi+N4cWnwZSteovIIBEFAJUm6xjs1hJAZ6xaqqip3+LJbbNv+Vi6X7/JWbtv2V9Butw8ajcZ7njc0iiLa7/cfLmeLZVktXdef8FKPMX6DEHrOfSpOp9NfqqpeX01F9mOa5q1qtfpFluUb254gCIIJxvhevV4fnoGnAXRdNxVFOfd5ywrwfZ84jrObgv+Cpxssy3pbKpUeXKTIrHjj8fgDy/E/39DTi91udz+fz7+GEO5CCIEoiju5XE6I4ziilP4OwzChlLY9z3thGMbndan8Ay43638fA48CAAAAAElFTkSuQmCC");
+        background-repeat:    no-repeat;
+   -moz-transition:           0.25s;
+     -o-transition:           0.25s;
+-webkit-transition:           0.25s;
+        transition:           0.25s;
+        background-color:     lightgray;
+}
+input[type="checkbox"].Switch:checked,  input[type="checkbox"].Switch.checked  {
+    background-position:    right;
+    background-color:       limegreen;
+}
+/* --- File Input --- */
+input[type="file"] {
+    cursor:    pointer;
+}
+/* --- Range Input --- */
+/*
+    Thank for Range.css --- http://danielstern.ca/range.css/
+*/
+input[type="range"] {
+-webkit-appearance:    none;
+   -moz-appearance:    none;
+        appearance:    none;
+        width:         85%;
+        height:        1.5em;
+        background:    transparent;
+        outline:       none;
+        cursor:        pointer;
+        position:      relative;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    width:     100%;
+    height:    0;
+    border:    1px  solid  gray;
+}
+input[type="range"]::-moz-range-track {
+    width:     100%;
+    height:    0;
+    border:    1px  solid  gray;
+}
+input[type="range"]::-ms-track {
+    width:     100%;
+    height:    0;
+    border:    1px  solid  gray;
+    color:     transparent;
+}
+input[type="range"]:before,
+input[type="range"]:after   {
+    position:    absolute;
+}
+input[type="range"]:before {
+        content:       "";
+        left:          0;
+        top:           45%;
+        height:        0;
+        border:        1px  solid  limegreen;
+   -moz-transition:    0.1s;
+     -o-transition:    0.1s;
+-webkit-transition:    0.1s;
+        transition:    0.1s;
+        width:         0;
+}
+input[type="range"]::-ms-fill-lower {
+    background:    greenyellow;
+}
+input[type="range"]::-ms-fill-upper {
+    background:    lightgray;
+}
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance:       none;
+   -moz-appearance:       none;
+        appearance:       none;
+        background:       white;
+        box-shadow:       0  3px  1px  0  rgba(0, 0, 0, 0.05),
+                          0  2px  2px  0  rgba(0, 0, 0, 0.10),
+                          0  3px  3px  0  rgba(0, 0, 0, 0.05);
+        height:           1.5em;
+        width:            1.5em;
+        border-radius:    0.75em;
+        margin-top:       -0.75em;
+        position:         relative;
+}
+input[type="range"]::-moz-range-thumb,
+input[type="range"]::-ms-thumb {
+-webkit-appearance:       none;
+   -moz-appearance:       none;
+        appearance:       none;
+        background:       white;
+        box-shadow:       0  3px  1px  0  rgba(0, 0, 0, 0.05),
+                          0  2px  2px  0  rgba(0, 0, 0, 0.10),
+                          0  3px  3px  0  rgba(0, 0, 0, 0.05);
+        height:           1.5em;
+        width:            1.5em;
+        border-radius:    0.75em;
+        margin-top:       -0.75em;
+}
+datalist {
+    display:    none  !important;
+}
+/* ----- iFrame ----- */
+iframe {
+    width:    100%;
+}
+iframe[src^="http:"],
+iframe[src^="https:"],
+iframe[src^="//"],
+iframe[rel~="nofollow"] {
+    min-height:    600px;
+}
+
+
+/* ----------- Layout System ---------- */
+/*
+    Build three kinds of Layout Box based on Border-Box Model
+    (with Float Clear Fix), which are very easy to use:
+
+    [ Grid Row/Column ]
+
+        Column Box based on the Proportion of Parent Element Width,
+        which is easy to set contents to Vertical-Center.
+
+    [ Item Box ]
+
+        A kind of Content Box with Cool Border, which can Float to
+        Fit the Size Changing of the Viewport.
+
+        It also can be set Horizontal-Center easily.
+
+    [ Flex Box ]
+
+        A Compatibility Wrapper of CSS 3 Flex-Box Layout
+
+    -----------
+
+    [ Tool Classes ]
+
+        CenterX, CenterY, Ellipsis, Float-L, Float-R, Fix-Top, PC_Narrow
+*/
+* {
+    box-sizing:    border-box;
+}
+.Block {
+    display:    block;
+}
+.ClearFix:after, body:after,
+ul:after,        form:after,    div:after,
+header:after,    footer:after,  nav:after,
+article:after,   section:after, aside:after {
+    content:        " ";
+    font-size:      0;
+    line-height:    0;
+    height:         0;
+    width:          0;
+    visibility:     hidden;
+    display:        block;
+    clear:          both;
+    zoom:           1;
+}
+.CenterX {
+    text-align:    center  !important;
+}
+.Ellipsis,
+.Ellipsis a,  .Ellipsis span,
+.Ellipsis li, .Ellipsis td {
+    overflow:         hidden;
+    white-space:      nowrap;
+    text-overflow:    ellipsis;
+}
+.Float-L { float:  left; }
+.Float-R { float:  right; }
+.Fix-Top {
+    position:    fixed;
+    z-index:     2000000000;    /*  Max: 2147483647  */
+}
+/* ----- Adaptive Fix-Top ----- */
+html.Fixed,
+html.Fixed > body {
+    position:    relative;
+    overflow:    hidden;
+}
+html.Fixed > body > .Fix-Top {
+    position:    relative;
+}
+.PC_Narrow {
+    min-width:    800px;
+    max-width:    960px;
+    margin:       auto  !important;
+}
+@media (max-width: 960px) {
+    .PC_Narrow {
+        width:        100%  !important;
+        min-width:    initial;
+    }
+}
+@media (min-width: 1280px) {
+    .PC_Narrow {
+        width:        80%  !important;
+        max-width:    initial;
+    }
+}
+
+/* ----- Grid Column ----- */
+.Grid-Row {
+    display:            table  !important;
+    width:              100%;
+    margin:             0  auto  !important;
+    padding:            0  !important;
+    border-collapse:    collapse;
+}
+.Grid-Row > * {
+    display:           table-cell;
+    vertical-align:    top;
+}
+.Grid-Row.CenterY > *,  .Grid-Row > *.CenterY  {
+    float:             none  !important;
+    vertical-align:    middle;
+}
+.Grid-Row.Bottom > *,  .Grid-Row > *.Bottom  {
+    float:             none  !important;
+    vertical-align:    bottom;
+}
+.Grid-Row > * > p {
+    margin:     0;
+    padding:    1em  0;
+}
+.Column_1-1 {
+    width:         100%;
+    text-align:    left  !important;
+}
+.Column_1-2 {
+    width:    50%;
+}
+.Column_1-3 {
+    width:    33.3%;
+}
+.Column_2-3 {
+    width:    66.6%;
+}
+.Column_1-4 {
+    width:    25%;
+}
+.Column_3-4 {
+    width:    75%;
+}
+.Column_1-5 {
+    width:    20%;
+}
+.Column_4-5 {
+    width:    80%;
+}
+.Column_2-5 {
+    width:    40%;
+}
+.Column_3-5 {
+    width:    60%;
+}
+.Column_1-6 {
+    width:    16.6%;
+}
+.Column_5-6 {
+    width:    83.3%;
+}
+.Column_1-7 {
+    width:    14.2%;
+}
+.Column_6-7 {
+    width:    85.7%;
+}
+.Column_3-7 {
+    width:    42.8%;
+}
+.Column_4-7 {
+    width:    57.1%;
+}
+.Column_4-9 {
+    width:    44.4%;
+}
+.Column_5-9 {
+    width:    55.5%;
+}
+.Column_3-10 {
+    width:    30%;
+}
+.Column_11-20 {
+    width:    55%;
+}
+/* ----- Item Box ----- */
+.Item-Box {
+    display:           inline-block;
+    vertical-align:    middle;
+}
+.Item-Box.visible {
+        background-color:    white;
+        padding:             1em;
+        margin:              0.25em  2px;
+        border:              1px  solid  rgb(215, 215, 215);
+        box-shadow:          1px  2px  3px  rgb(200, 200, 200);
+   -moz-transition:          0.25s;
+     -o-transition:          0.25s;
+-webkit-transition:          0.25s;
+        transition:          0.25s;
+}
+.Item-Box.visible:hover,
+.Item-Box.active {
+    border-color:    rgb(14, 144, 210);
+    box-shadow:      inset  0  1px  1px  rgba(0, 0, 0, 0.075),
+                     0  0  8px  rgba(14, 144, 210, 0.6);
+}
+/* ----- Flex Box ----- */
+.Flex-Box {
+    display:   -moz-box      !important;    /*  Old Version:  Firefox (buggy)  */
+    display:-webkit-box      !important;    /*  Old Version:  Safari, iOS, Android Browser, older WebKit Browsers  */
+    display:     -o-box      !important;    /*  Classic Opera  */
+    display:    -ms-flexbox  !important;    /*  Mix Version:  IE 10  */
+    display:   -moz-flex     !important;
+    display:-webkit-flex     !important;
+    display:     -o-flex     !important;
+    display:        flex     !important;
+
+    width:          auto;
+}
+.Flex-Box.Column {
+   -moz-box-orient:        vertical;
+-webkit-box-orient:        vertical;
+     -o-box-orient:        vertical;
+   -moz-flex-direction:    column;
+-webkit-flex-direction:    column;
+     -o-flex-direction:    column;
+        flex-direction:    column;
+}
+.Flex-Box.Column > * {
+    width:    100%;
+}
+.Flex-Box.Row {
+       -moz-box-orient:        horizontal;
+    -webkit-box-orient:        horizontal;
+         -o-box-orient:        horizontal;
+       -moz-flex-direction:    row;
+    -webkit-flex-direction:    row;
+         -o-flex-direction:    row;
+            flex-direction:    row;
+}
+.Flex-Box.Row > * {
+    min-height:    3em;
+}
+.Flex-Box.CenterX {
+   -moz-box-pack:           center;
+-webkit-box-pack:           center;
+     -o-box-pack:           center;
+    -ms-flex-pack:          center;
+   -moz-justify-content:    center;
+-webkit-justify-content:    center;
+     -o-justify-content:    center;
+        justify-content:    center;
+        text-align:         left;
+}
+.Flex-Box.CenterY {
+-webkit-box-align:      center;
+   -moz-box-align:      center;
+    -ms-flex-align:     center;
+   -moz-align-items:    center;
+-webkit-align-items:    center;
+     -o-align-items:    center;
+        align-items:    center;
+}
+
+
+/* ----------- Function Module ---------- */
+/*
+    Control Modes:
+
+    [ Tab Mode classes ]
+
+        *  Point :      Content Element Serial Number
+
+        *  Card :       Tab Card looking within Text (Icon is optional)
+
+        *  Button :     Switch Button looking within Text (Icon is optional)
+
+        *  Monitor :    Monitors looking within Thumbnail
+
+*/
+/* ---------- Form Row ---------- */
+form .Row {
+    margin:        16px  auto;
+    max-width:     100%;
+    text-align:    left;
+    font-size:     0;
+}
+form .Flex-Box.Row {
+    margin:       auto;
+    font-size:    16px;
+}
+form .Row > * {
+    display:           inline-block;
+    vertical-align:    middle;
+    font-size:         14px;
+}
+@media (min-width: 400px) {
+    form .Row > * {
+        font-size:    18px;
+    }
+}
+form .Row > label[for] {
+    text-align:       center;
+    width:            28.5%;
+    max-width:        28.5%;
+    white-space:      nowrap;
+    overflow:         hidden;
+    text-overflow:    ellipsis;
+}
+form .Row > label[for] + * {
+    width:    68.5%;
+}
+form .Row > label[for] + input[type="radio"],
+form .Row > label[for] + input[type="checkbox"],
+form .Row > label[for] + select {
+    width:    auto;
+}
+form .Row.Grid-Row > * {
+    padding-left:    0.5em;
+}
+form .Row.Grid-Row > *:first-child {
+    padding:    0;
+}
+
+/* ---------- Form Dialog ---------- */
+form.Dialog {
+    position:         fixed;
+    left:             0;
+    top:              0;
+    z-index:          10000;
+    font-size:        16px  !important;
+    border:           0.5em  solid  lightgray;
+    border-radius:    5px;
+    padding:          0;
+    max-width:        90%;
+    max-height:       90%;
+    display:          none;
+    opacity:          0;
+    transition:       0.5s;
+}
+form.Dialog:before {
+    content:       "";
+    position:      fixed;
+    left:          0;
+    top:           0;
+    background:    rgba(0, 0, 0, 0.5);
+    width:         100%;
+    height:        100%;
+}
+form.Dialog > fieldset {
+    position:      relative;
+    background:    white;
+    border:        none;
+    margin:        0;
+}
+form.Dialog > fieldset > legend {
+    background:       white;
+    width:            100%;
+    margin-left:      -0.75em;
+    padding:          0.5em;
+    padding-right:    1em;
+}
+form.Dialog img,  form.Dialog table  {
+    max-width:    100%;
+}
+
+/* ---------- Navigation Bar ---------- */
+ul.NavBar {
+    list-style:    none;
+    margin:        0;
+    padding:       0;
+}
+ul.NavBar > li {
+    display:           inline-block;
+    text-align:        center;
+    vertical-align:    middle;
+}
+ul.NavBar > li.Separator:before {
+    content:    "|";
+}
+ul.NavBar > li > a {
+    display:    block;
+    width:      100%;
+    color:      inherit;
+    cursor:     pointer;
+    outline:    none;
+}
+ul.NavBar > li:empty,  ul.NavBar > li > a  {
+    padding:    0.5em;
+}
+ul.NavBar.visible > li:nth-child(n+2) > a {
+    border-left:    1px  solid  rgb(200, 200, 200);
+}
+ul.NavBar > li > a:active,
+ul.NavBar > li > a:hover {
+    text-decoration:    none;
+}
+ul.NavBar > li:active {
+    background:    rgb(230, 230, 230);
+}
+
+/* ----- DropDown Menu ----- */
+.DropDown.Head {
+    display:       inline-block;
+    min-height:    1.5em;
+    cursor:        pointer;
+    position:      relative;
+}
+.DropDown.Body {
+    display:       none;
+    position:      absolute;
+    top:           100%;
+    left:          0;
+    z-index:       2000000000;
+    box-shadow:    0  1px  2px  gray;
+    padding:       0.5em;
+}
+.DropDown.Head:hover > .DropDown.Body {
+    display:       block;
+    background:    white;
+    color:         black;
+}
+ul.DropDown.Body {
+    margin:        0;
+    padding:       0;
+    list-style:    none;
+}
+ul.DropDown.Body > li {
+        white-space:    nowrap;
+        background:     white;
+        color:          black;
+   -moz-transition:     0.25s;
+     -o-transition:     0.25s;
+-webkit-transition:     0.25s;
+        transition:     0.25s;
+}
+ul.DropDown.Body > li:hover,
+ul.DropDown.Body > li:focus  {
+    background:    lightgray;
+}
+ul.DropDown.Body > li > a {
+    display:            block;
+    padding:            1em  2em;
+    text-decoration:    none;
+}
+/*
+    ul.NavBar has same appearance as .DropDown.Body on Mobile Device
+*/
+@media (max-width:  640px) {
+    .DropDown.Head {
+        font-size:        1.5em;
+        border:           1px  solid;
+        border-radius:    5px;
+        width:            1.5em;
+    }
+    .DropDown.Head:before {
+        content:       "\221e";
+        display:       inline-block;
+        width:         100%;
+        height:        100%;
+        text-align:    center;
+    }
+    ul.NavBar {
+        display:        none;
+        position:       absolute;
+        top:            105%;
+        left:           -5.5em;
+        z-index:        2000000000;
+        box-shadow:     0  1px  2px  gray;
+        white-space:    normal;
+    }
+    .DropDown.Head:hover > ul.NavBar {
+        background:    white;
+        color:         black;
+        min-width:     7em;
+    }
+    .DropDown.Head:not([tabindex]):hover > ul.NavBar,
+    .DropDown.Head[tabindex]:focus > ul.NavBar {
+        display:    block;
+    }
+    ul.NavBar > li.Separator {
+        border-top:    1px  solid  gray;
+        padding:       0;
+        width:         80%;
+    }
+    ul.NavBar > li.Separator:before {
+        content:    none;
+    }
+    ul.NavBar > li {
+        padding:       0;
+        width:         90%;
+        margin:        5%;
+        border:        none  !important;
+        color:         black  !important;
+   -moz-transition:    0.25s;
+     -o-transition:    0.25s;
+-webkit-transition:    0.25s;
+        transition:    0.25s;
+    }
+    ul.NavBar > li:hover,
+    ul.NavBar > li:focus  {
+        background:    lightgray;
+        color:         white;
+    }
+    ul.NavBar > li > a {
+        text-decoration:    none;
+    }
+}
+
+ul.Content_Nav {
+    padding:           0;
+    border-bottom:     1px  solid  rgb(200, 200, 200);
+    padding-bottom:    0.5em;
+}
+.Content_Nav li {
+    display:    inline;
+}
+.Content_Nav li .Icon {
+    padding:    0  1em;
+}
+.Content_Nav li a {
+    display:            inline;
+    text-decoration:    none;
+    color:              black;
+}
+.Content_Nav .Sub_Label:before {
+    content:        "/";
+    color:          rgb(150, 150, 150);
+    margin:         0  0.5em;
+}
+
+img.Logo,  .Logo img  {
+    display:           inline-block;
+    vertical-align:    middle;
+    padding:           0.5em;
+    max-height:        100%;
+    max-width:         100%;
+}
+img.UserLogo {
+    max-height:        2.5em;
+    border:            3px  solid  white;
+    border-radius:     10px;
+    margin:            5px;
+}
+
+.Progress {
+    height: 20px;
+    margin: 1em;
+    overflow: hidden;
+    background-color: rgb(245, 245, 245);
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.Progress-Bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgb(66, 139, 202);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    transition: width .6s ease;
+}
+.Progress-Bar_striped {
+    background-image:    linear-gradient(45deg,
+        rgba(255, 255, 255, 0.15)  25%,
+        rgba(0, 0, 0, 0)           25%,
+        rgba(0, 0, 0, 0)           50%,
+        rgba(255, 255, 255, 0.15)  50%,
+        rgba(255, 255, 255, 0.15)  75%,
+        rgba(0, 0, 0, 0)           75%,
+        rgba(0, 0, 0, 0)
+    );
+    background-size:     40px  40px;
+}
+.Progress-Bar.active {
+     -o-animation:    Progress-Bar_stripes  2s  linear  infinite;
+-webkit-animation:    Progress-Bar_stripes  2s  linear  infinite;
+        animation:    Progress-Bar_stripes  2s  linear  infinite;
+}
+
+/* ---------- Panel Control ---------- */
+.Panel {
+    overflow:    hidden;
+    padding:     0.5em;
+}
+.Panel > .Head {
+    font-weight:       bold;
+    letter-spacing:    0.5em;
+    border-left:       3px  solid  black;
+    padding:           0.5em;
+    background:        white;
+    box-shadow:        1px  2px  3px  gray;
+    width:             99.5%;
+}
+.Panel > .Body {
+    padding:    0.5em;
+}
+
+/* ---------- Tab Control ---------- */
+.Tab > label {
+        display:        inline-block;
+        padding:        0.5em  1em;
+        line-height:    2.3em;
+        text-align:     center;
+        color:          rgb(118, 118, 119);
+        cursor:         pointer;
+        background:     rgb(230, 230, 230);
+   -moz-transition:     0.25s;
+     -o-transition:     0.25s;
+-webkit-transition:     0.25s;
+        transition:     0.25s;
+}
+.Tab > label.active {
+    background:     white  !important;
+    font-weight:    bold;
+}
+.Tab > label:hover {
+    background:    rgb(200, 200, 200)  !important;
+}
+.Tab > .Body,
+.Tab > div,    .Tab > section  {
+    padding:             1em;
+    overflow-x:          hidden;
+    overflow-y:          auto;
+    background-color:    white;
+    border-radius:       0  0  5px  5px;
+    height:              90%;
+}
+.Tab > input[type="radio"],
+.Tab > input[type="radio"] + * {
+    display:    none;
+}
+.Tab > input[type="radio"]:checked + * {
+    display:    block;
+}
+.Tab > input[type="radio"][checked] + * {
+    display:    block;
+}
+
+.Tab.Point .Grid-Column > .Head,
+.Tab.Button .Grid-Column > .Head,
+.Tab.Monitor .Grid-Column > .Head {
+    font-size:    2em;
+    color:        royalblue;
+}
+.Tab.Point .Grid-Column > .Head,
+.Tab.Monitor .Grid-Column > .Head {
+    font-size:    3em;
+}
+.Tab.Point .Grid-Column > ul,
+.Tab.Button .Grid-Column > ul,
+.Tab.Monitor .Grid-Column > ul {
+    list-style:    none;
+}
+/* ----- Button Mode ----- */
+.Tab.Button > label {
+    margin:           0  0.5em;
+    padding:          1.5em;
+    border:           1px  solid  lightgray;
+    border-radius:    0;
+    box-shadow:       1px  2px  3px  rgb(118, 118, 119);
+    background:       white;
+}
+/* ----- Monitor Mode ----- */
+.Tab.Monitor > label {
+        margin:           1em  1%;
+        padding:          0;
+        line-height:      normal;
+        font-size:        2em;
+        text-align:       left;
+        border-radius:    0;
+        display:          inline-block;
+        max-width:        30%;
+        background:       white;
+        border:           1px  solid  rgb(215, 215, 215);
+        box-shadow:       1px  2px  3px  rgb(200, 200, 200);
+   -moz-transition:       0.25s;
+     -o-transition:       0.25s;
+-webkit-transition:       0.25s;
+        transition:       0.25s;
+}
+.Tab.Monitor > label:hover {
+    background:      white  !important;
+    border-color:    rgb(14, 144, 210);
+    box-shadow:      inset  0  1px  1px  rgba(0, 0, 0, 0.075),
+                     0  0  8px  rgba(14, 144, 210, 0.6);
+}
+.Tab.Monitor > .Body,
+.Tab.Monitor > div,    .Tab.Monitor > section  {
+    background:    white;
+}
+/* ----- Point Mode ----- */
+.Tab.Point {
+    position:    relative;
+}
+.Tab.Point > label {
+    border-radius:    50%;
+    padding:          0.3em;
+    margin:           0  0.2em;
+    position:         relative;
+    z-index:          1;
+}
+.Tab.Point.Number > label {
+    padding:    0  0.8em;
+}
+.Tab.Point > .Body,
+.Tab.Point > div,    .Tab.Point > section  {
+    border-radius:       0;
+    background-color:    transparent;
+    background-size:     cover;
+    overflow:            hidden;
+    position:            relative;
+    z-index:             0;
+}
+
+
+/* ----------- Tree Control ---------- */
+.Tree {
+    margin:          0;
+    padding-left:    2em;
+    outline:         none;
+}
+.Tree li {
+    list-style:     none;
+    line-height:    2em;
+    position:       relative;
+}
+.Tree li:before {
+    content:          none;
+    position:         absolute;
+    border:           1px solid gray;
+    border-radius:    3px;
+    line-height:      1em;
+    width:            1em;
+    text-align:       center;
+    zoom:             0.5;
+    left:             -2em;
+    top:              0.7em;
+}
+.Tree li.opened:before {
+    content:    "-";
+}
+.Tree li.closed:before {
+    content:    "+";
+}
+.Tree li > *:hover,
+.Tree li:focus > *,
+.Tree li.active > * {
+    background-color:    lightgray;
+}
+.Tree li > ul:hover,
+.Tree li:focus > ul,
+.Tree li.active > ul {
+    background-color:    inherit;
+}
+
+
+/* ----------- Atom View ---------- */
+.Text_Column {
+        writing-mode:    tb-rl;
+-webkit-writing-mode:    vertical-rl;
+        writing-mode:    vertical-rl;
+       *writing-mode:    tb-rl;
+}
+.No_Select {
+   -moz-user-select: -moz-none;
+ -khtml-user-select:      none;
+-webkit-user-select:      none;
+     -o-user-select:      none;
+    -ms-user-select:      none;
+        user-select:      none;
+-webkit-touch-callout:    none;
+        cursor:           default;
+}
+.No_Select input,  .No_Select textarea  {
+   -moz-user-select:      initial;
+ -khtml-user-select:      initial;
+-webkit-user-select:      initial;
+     -o-user-select:      initial;
+    -ms-user-select:      initial;
+        user-select:      initial;
+-webkit-touch-callout:    initial;
+        cursor:           auto;
+}
+.No_Pointer {
+    pointer-events:    none;
+}
+.No_Pointer > * {
+    pointer-events:    auto;
+}
+
+/* ----- Colour ----- */
+.Black {
+    color:           rgb(53, 52, 57)  !important;
+    border-color:    rgb(53, 52, 57)  !important;
+}
+.Black_O {
+    background:      rgb(53, 52, 57)  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+.Red {
+    color:           rgb(245, 80, 80)  !important;
+    border-color:    rgb(245, 80, 80)  !important;
+}
+.Red_O {
+    background:      rgb(245, 80, 80)  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+.Green {
+    color:           rgb(88, 167, 0)  !important;
+    border-color:    rgb(88, 167, 0)  !important;
+}
+.Green_O {
+    background:      rgb(88, 167, 0)  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+.Blue {
+    color:           dodgerblue  !important;
+    border-color:    dodgerblue  !important;
+}
+.Blue_O {
+    background:      dodgerblue  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+.Gray {
+    color:           rgb(235, 235, 235)  !important;
+    border-color:    rgb(235, 235, 235)  !important;
+}
+.Gray_O {
+    background:      rgb(235, 235, 235)  !important;
+    color:           black  !important;
+    border-color:    transparent  !important;
+}
+.Orange_O {
+    background:      rgb(254, 178, 18)  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+.Purple {
+    color:           mediumpurple  !important;
+    border-color:    mediumpurple  !important;
+}
+.Purple_O {
+    background:      mediumpurple  !important;
+    color:           white  !important;
+    border-color:    transparent  !important;
+}
+
+/* ----- Shape ----- */
+.Round {
+    border-radius:    50%  !important;
+    display:          inline-block;
+    padding:          8px;
+    text-align:       center;
+}
+.Halo {
+    box-shadow:    0  0  25px  gray;
+}
+
+/* ----- Turning ----- */
+.Rotate-90 {
+   -moz-transform:    rotate(90deg);
+     -o-transform:    rotate(90deg);
+-webkit-transform:    rotate(90deg);
+        transform:    rotate(90deg);
+        filter:       progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+.Rotate-180 {
+   -moz-transform:    rotate(180deg);
+     -o-transform:    rotate(180deg);
+-webkit-transform:    rotate(180deg);
+        transform:    rotate(180deg);
+        filter:       progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+.Flip-Y {
+   -moz-transform:    scale(-1，1);
+     -o-transform:    scale(-1，1);
+-webkit-transform:    scale(-1，1);
+        transform:    scale(-1，1);
+        filter:       FlipH();
+}
+.Flip-X {
+   -moz-transform:    scale(1，-1);
+     -o-transform:    scale(1，-1);
+-webkit-transform:    scale(1，-1);
+        transform:    scale(1，-1);
+        filter:       FlipV();
+}
+.Reflect {
+-webkit-box-reflect:    below  0px  -webkit-gradient(
+            linear,
+            left top, left bottom,
+            from(transparent), to(rgba(250, 250, 250, 0.1))
+        );
+}
+
+/* ----- Background ----- */
+.Background-Image {
+    background-image:       url();
+    background-position:    center;
+    background-repeat:      no-repeat;
+    background-size:        contain;
+    background-color:       transparent;
+    min-height:             10em;
+    min-width:              15em;
+    color:                  white;
+    word-break:             break-all;
+}
+
+/* ----- Icon ----- */
+.Icon {
+        display:           inline-block;
+        vertical-align:    middle;
+        font-style:        normal;
+        font-size:         1.5em;
+        width:             2em;
+   -moz-transition:        0.25s;
+     -o-transition:        0.25s;
+-webkit-transition:        0.25s;
+        transition:        0.25s;
+}
+.Icon:hover {
+    background:    lightgray;
+}
+.Icon:before {
+    display:       inline-block;
+    width:         100%;
+    height:        100%;
+    text-align:    center;
+}
+.Icon.Star:before {
+    content:    "\2730";
+}
+.Icon.Cloud:before {
+    content:    "\2601";
+}
+.Icon.Heart:before {
+    content:    "\2661";
+}
+.Icon.Eye:before {
+    content:    "\1F440";
+}
+.Icon.Return:before {
+    content:    "\21e6";
+}
+.Icon.Item:before {
+    content:    "\2AFC";
+}
+.Icon.Add:before {
+    content:    "+";
+}
+.Icon.Remove:before {
+    content:    "-";
+}
+.Icon.Check:before {
+    content:    "\2713";
+}
+.Icon.Error:before {
+    content:    "\274C";
+}
+.Icon.Home:before {
+    content:    "\1F3E0";
+}
+.Icon.Pen:before {
+    content:    "\270F";
+}
+.Icon.Mail:before {
+    content:    "\2709";
+}
+.Icon.Search:before {
+    content:    "\1F50D";
+}
+.Icon.Screen:before {
+    content:    "\239A";
+}
+.Icon.Mobile:before {
+    content:    "\1F4F1";
+}
+
+/* ----- Border ----- */
+.Border-Column > * {
+    border-left:    1px  solid;
+}
+.Border-Column > *:first-child {
+    border-left:    none;
+}
+.Border-Column > *:only-child {
+    border-right:    1px  solid;
+}
+.Border-Row > * {
+    border-top:    1px  solid;
+}
+.Border-Row > *:first-child {
+    border-top:    none;
+}
+.Border-Row > *:only-child {
+    border-bottom:    1px  solid;
+}
+
+/* ----- Responsive Design ----- */
+@media (max-width:  540px) {
+    html {
+        scrollbar-face-color:          transparent;
+        scrollbar-shadow-color:        transparent;
+        scrollbar-highlight-color:     transparent;
+        scrollbar-3dlight-color:       transparent;
+        scrollbar-darkshadow-color:    transparent;
+        scrollbar-track-color:         transparent;
+        scrollbar-arrow-color:         transparent;
+    }
+    ::-webkit-scrollbar {
+        display:    none;
+    }
+    @-moz-document url-prefix("http://"), url-prefix("https://") {
+        scrollbar, thumb, scrollbarbutton {
+            display:    none  !important;
+        }
+    }
+    .No_Mobile {
+        display:    none  !important;
+    }
+}
+@media (min-width:  600px) {
+    body.Mobile {
+        max-width:    600px;
+        margin:       auto;
+    }
+}
+
+/* ----------- App Framework ---------- */
+.Shade:before {
+    content:       " ";
+    position:      fixed;
+    left:          0;
+    top:           0;
+    z-index:       2000000010;
+    width:         100%;
+    height:        100%;
+    background:    darkgray;
+}
+body .Session {
+    display:    none  !important;
+}
+body.Session .Session ~ * {
+    display:    none  !important;
+}
+body > .Dialog {
+    display:    none;
+}
