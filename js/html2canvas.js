@@ -1,7 +1,8 @@
 window.onload = function () {
   var jietu = document.getElementById('jietu')
+  var container = document.getElementById('container')
   jietu.addEventListener('click', function() {
-    html2canvas(document.body).then(function (canvas) {
+    html2canvas(container).then(function(canvas) {
       var preview = document.getElementById('preview')
       preview.style.display = 'flex'
       preview.appendChild(canvas)
