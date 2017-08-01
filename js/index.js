@@ -1,13 +1,22 @@
 define([
-    'jquery', 'members', 'member.animation', 'EasyWebUI', 'fancybox'
-],  function ($, members) {
+    'jquery', 'members', 'force-vector', 'EasyWebUI', 'EasyWebApp', 'fancybox'
+],  function ($, members, Force_Vector) {
 
 $(document).ready(function () {
+
 
     $('.row h1').scrollFixed();
 
 
-    if (self.screen.availWidth >= 900)
+    $('#cf-events > ul').view('ListView').render(
+        $.map(Array( 6 ),  function () {
+
+            return  { };
+        })
+    );
+
+    if (self.screen.availWidth >= 900) {
+
         $('#Skill').on(
             'mouseover',
             '.landing-skill-icon, .img-awesome-padding',
@@ -23,43 +32,26 @@ $(document).ready(function () {
                 $(this).removeClass('flip');
             }
         ).find('.col-xs-3 > :first-child').addClass('animated');
-    else
-        $('.members').append($.map(members.list,  function (_This_) {
-            return  "\n" +
-                '<div class="col-xs-6 col-sm-3">' +
-                    '<div class="thumbnail member">' +
-                        '<img src="' + _This_.imgurl + '">' +
-                        '<div class="caption text-center">' +
-                            '<h3>' + _This_.name + '</h3>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-        }).join(''));
+
+        $('.members').empty();
+
+        Force_Vector(
+            '.members',
+            document.documentElement.clientWidth * 0.5,
+            document.documentElement.clientHeight * 7 / 8,
+            members.list
+        );
+    } else
+        $('.members').view('ListView').render( members.list );
 
 
 /* -----  fancybox  ----- */
 
-    $('#cf-events').each(function(i){
-        $(this).find('img').each(function(){
-            if ($(this).parent().hasClass('fancybox')) return;
-
-            var alt = this.alt;
-
-            if (alt) $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-        });
-
-        $(this).find('.fancybox').each(function(){
-            $(this).attr('rel', 'article' + i);
-        });
-    });
-
     $('.fancybox').fancybox({
-        openEffect: "elastic",
-        closeEffect: "elastic",
-        helpers: {
-            title: {
-                type: 'inside'
-            }
+        openEffect:     'elastic',
+        closeEffect:    'elastic',
+        helpers:        {
+            title:    {type: 'inside'}
         }
     });
 
