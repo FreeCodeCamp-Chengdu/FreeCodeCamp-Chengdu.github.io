@@ -134,14 +134,18 @@ html, body {
     font-size: 16px;
     text-align: center;
 }
-
-#cf-events .img-responsive{
-
+#cf-events > ul {
+	margin:        0;
+    padding:       0;
+    list-style:    none;
+    text-align:    center;
 }
-
-.cf-events-image{
-    text-align: center;
-    display: block;
+#cf-events > ul > li {
+	display:    inline-block;
+    margin:     1em;
+}
+#cf-events img {
+	max-width:    18em;
 }
 
 /*cf-members*/
