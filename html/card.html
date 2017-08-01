@@ -1,0 +1,172 @@
+<!DocType html>
+<html lang="zh-CN"><head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+
+    <title>FreeCodeCamp 成都社区</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+           height: 100%; 
+        }
+        .container {
+            width: 100%;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .top {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 30%;
+            background: #eee;
+        }
+        .profile {
+            position: absolute;
+            left: 10%;
+        }
+        #qrcode{
+            position: absolute;
+            left: 40%;
+            width: 10%;
+        }
+        .bottom {
+            padding: 1%;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 70%;
+            background: #ccc;
+        }
+        .part {
+            height: 100%;
+            flex: 1;
+            padding: 2%;
+        }
+        .line{
+            width: 100%
+        }
+        .item{
+            width: 45%;
+            background: #ccc;
+            font-size: 128%;
+        }
+        
+        a:link {
+            color: #222;
+            text-decoration:none; 
+        }
+
+        /* visited link */
+        a:visited {
+            color: #2ab;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: #b4a;
+        }
+
+        /* selected link */
+        a:active {
+            color: #8f1;
+        }
+
+</style>
+<style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    #preview {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: rgba(0, 0, 0, .3)
+    }
+
+    #preview canvas {
+        height: 90%;
+    }
+    #jietu {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+    }
+</style>
+<script src="http://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script src="../js/Blob.js"></script>
+<script src="../js/canvas-toBlob.js"></script>
+<script src="../js/FileSaver.js"></script>
+<script src="../js/html2canvas.js"></script>
+</head><body>
+
+    <div id="container" class="container">
+        <div class="top">
+            <div class="profile">
+                <h1>姓名</h1> 
+                <p>Software engineer at sc</p>
+                <a href="https://www.github.com/freecodecamp"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/freecodecamp"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.twitter.com/freecodecamp"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+            </div>
+            <img id="qrcode" src="../img/join/wechat-qrcode.png" alt="join us"></img>
+        </div>
+        <div class="bottom">
+            <div class="part">
+                <h3>Github</h3>
+                <div class='line'>
+                    <label class="item">Repos:</label>
+                    <label class="item">42</label>
+                </div>
+                <div class='line'>
+                    <label class="item">Stars:</label>
+                    <label class="item">1024</label>
+                </div>
+                <div class='line'>
+                    <label class="item">Followers:</label>
+                    <label class="item">42</label>
+                </div>
+            </div>
+            <div class="part">
+                <h3>Great Repos</h3>
+                <div class='line'>
+                    <a href="https://www.github.com/freecodecamp" target="_blank">FreeCodeCamp</a>
+                </div>
+                <div class='line'>
+                    <a href="https://www.github.com/freecodecamp" target="_blank">FreeCodeCamp</a>
+                </div>
+                <div class='line'>
+                    <a href="https://www.github.com/freecodecamp" target="_blank">FreeCodeCamp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<a id="jietu">截图</a>
+<div id="preview">
+    <a id="download">download</a>
+</div>
+</html>
