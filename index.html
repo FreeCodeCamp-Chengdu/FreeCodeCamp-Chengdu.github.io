@@ -30,6 +30,7 @@
                 bootstrap:    '//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
                 fancybox:     '//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min',
                 d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
+                LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min',
                 members:      '../img/members/index'
             },
             shim:       {
@@ -136,88 +137,35 @@
 				</div>
 
 				<!--gallery-->
-				<div class="col-sm-12 full-content" id="cf-gallery" name="project">
+				<div class="col-sm-12" id="cf-gallery">
                     <h3 class="text-center">成员作品</h3>
                     <div class="row memberwork_content">
                         <div class="col-sm-4">
                             <div class="text-center">
                                 <div>
                                     <img class="memberwork_usr_portrait"
-                                         src="./img/gallery/gallery-1.jpg"/>
+                                         src="${this.avatar_url}"/>
                                 </div>
                                 <h6 class="usr_nickname">
-                                    Yasic
+                                    ${this.login}
                                 </h6>
                             </div>
-                            <ul class="list-group">
+                            <ul class="list-group" data-name="repos">
                                 <li class="list-group-item">
-                                    <div><a href="https://github.com/Yasic/QQBubbleView" target="blank">QQ Bubble View</a></div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div><a href="http://www.yasicyu.com/" target="blank">Yasic Yu的个人主页</a></div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <div>
-                                    <img class="memberwork_usr_portrait"
-                                         src="./img/gallery/gallery-2.jpg"/>
-                                </div>
-                                <h6 class="usr_nickname">
-                                    LuckyPandaLee
-                                </h6>
-                            </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div><a href="https://github.com/LuckyDogLee/weChatPublicAccount_aboutLaw" target="blank">法律资讯的微信公众号及其管理系统 </a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div><a href="http://luckydoglee.github.io/" target="blank">LuckyPandaLee的个人主页</a></div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!--<div class="col-sm-3">
-                            <div class="text-center">
-                                <div>
-                                    <img class="memberwork_usr_portrait"
-                                         src="./img/gallery/gallery-3.jpg"/>
-                                </div>
-                                <h6 class="usr_nickname">
-                                    RunningCoderLee
-                                </h6>
-                            </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div><a href="http://cnfeat.com/" target="blank">读立写生</a></div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div><a href="https://zhuanlan.zhihu.com/cnfeat" target="blank">知乎专栏</a></div>
-                                </li>
-                            </ul>
-                        </div>-->
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <div>
-                                    <img class="memberwork_usr_portrait"
-                                         src="./img/gallery/gallery-4.jpg"/>
-                                </div>
-                                <h6 class="usr_nickname">
-                                    赵小强
-                                </h6>
-                            </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div><a href="http://www.topvaluer.com" target="blank">赵小强的主页</a></div>
+                                    <a target="blank" href="${this.html_url}">
+                                        ${this.name}
+                                    </a>
+                                    <span class="pull-right">
+                                        ${this.passedTime}
+                                    </span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 					<div class="row">
-						<div class = "list-wait-tip leader text-center">Wait for you..</div>
+						<div class="list-wait-tip leader text-center">
+                            Waiting for you...
+                        </div>
 					</div>
 				</div>
 

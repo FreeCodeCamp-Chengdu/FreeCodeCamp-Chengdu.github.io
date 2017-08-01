@@ -1,6 +1,15 @@
 define([
-    'jquery', 'members', 'force-vector', 'EasyWebUI', 'EasyWebApp', 'fancybox'
-],  function ($, members, Force_Vector) {
+    'jquery', 'members', 'force-vector', 'LeanCloud', 'TimeKit',
+    'EasyWebUI', 'EasyWebApp', 'fancybox'
+],  function ($, members, Force_Vector, LeanCloud, TimeKit) {
+
+    LeanCloud.init({
+        appId:     '8H9ovR4htxgVoqdf0BO8Stac',
+        appKey:    'iNTx6f6blTD05YJFL0xuJR7U'
+    });
+
+    self.localStorage.setItem('debug', 'leancloud*');
+
 
 $(document).ready(function () {
 
@@ -45,7 +54,7 @@ $(document).ready(function () {
         $('.members').view('ListView').render( members.list );
 
 
-/* -----  fancybox  ----- */
+/* ---------- fancybox ---------- */
 
     $('.fancybox').fancybox({
         openEffect:     'elastic',
@@ -53,6 +62,57 @@ $(document).ready(function () {
         helpers:        {
             title:    {type: 'inside'}
         }
+    });
+
+/* ---------- 成员作品集 ---------- */
+
+    Promise.resolve(
+        LeanCloud.Cloud.run('github',  {URI: 'orgs/FreeCodeCamp-Chengdu/members'})
+    ).then(function () {
+
+        return  Promise.all($.map(arguments[0],  function () {
+
+            return  LeanCloud.Cloud.run('github', {
+                URI:    'users/' + arguments[0].login + '/repos'
+            });
+        }));
+    }).then(function () {
+
+        return  $.map(arguments[0],  function (_This_) {
+
+            var data = _This_[0].owner;
+
+            data.repos = $.map(_This_,  function (_This_) {
+
+                if (_This_.fork || !(
+                    _This_.forks_count +
+                    _This_.watchers_count +
+                    _This_.stargazers_count
+                ))
+                    return;
+
+                delete _This_.owner;
+
+                _This_.passedTime = TimeKit.passed(
+                    _This_.pushed_at = new Date( _This_.pushed_at )
+                );
+
+                return _This_;
+
+            }).sort(function (A, B) {
+
+                return  (new Date( B.pushed_at ) - new Date( A.pushed_at ))  ||
+                    (B.stargazers_count - A.stargazers_count)  ||
+                    (B.watchers_count - A.watchers_count)  ||
+                    (B.forks_count - A.forks_count);
+            });
+
+            return data;
+        });
+    }).then(function () {
+
+        $('#cf-gallery div').addClass('loaded')
+            .view('ListView').render( arguments[0] );
     });
 
 /* ---------- 滑动导航栏 ---------- */
