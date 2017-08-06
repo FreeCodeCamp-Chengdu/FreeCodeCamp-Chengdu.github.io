@@ -249,12 +249,13 @@
             });
         });
 
+        
         $('#qrcode').qrcode({
-          text: 'FCC',
+          text: 'https://github.com/' + user,
           height: 80,
           width: 80,
           //此处添加了个logo，可以随意替换链接
-          src: 'www.bing.com'
+          src: 'https://github.com/' + user
         });
 
         // 获取用户名
