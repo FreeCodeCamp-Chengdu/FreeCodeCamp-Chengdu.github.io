@@ -25,7 +25,7 @@ html, body {
 .row h1 img {
     max-width:    60%;
 }
-.row h1 i.fa {
+.row h1 i.iconfont {
     float:    right;
 }
 
@@ -48,31 +48,21 @@ html, body {
 
 
 /* icon标签处理 */
-#cf-intro .landing-skill-icon {
-    color: darkgreen;
-    font-size: 80px;
+#cf-intro > ul {
+	margin:        0;
+    padding:       0;
+    list-style:    none;
+    text-align:    center;
 }
-#cf-intro .font-awesome-padding {
-    margin-top: 20px;
-    margin-bottom: 15px;
-    text-align:center;
-}
-#cf-intro .img-awesome-padding{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align:center;
-}
-#cf-intro .icon-content{
-    text-align:center;
-}
-#cf-intro .icon-content:after {
+#cf-intro > ul:after {
     content:      " ";
     font-size:    0;
     display:      block;
     clear:        both;
 }
-#cf-intro .icon-content img{
-    width:80px;
+#cf-intro > ul i.iconfont {
+    font-size:    5em;
+    color:        darkgreen;
 }
 /* icon动画效果 */
 @keyframes flip {
@@ -249,6 +239,10 @@ html, body {
 #cf-gallery h3{
     margin:3em 0;
 }
+#cf-gallery .col-sm-4 > a {
+    display:       block;
+	text-align:    center;
+}
 #cf-gallery p{
     text-indent:2em;
     line-height:1.8;
@@ -298,64 +292,26 @@ html, body {
 }
 
 
-html, a {
-    color: #333;
-}
-
 .lead {
     text-indent: 2em;
 }
 
-.box {
-    padding-bottom: 2em;
-    min-height: 268px;
-    cursor: pointer;
-    border: 1px solid transparent;
+#cf-join > .row > a {
+    color:              darkgreen;
+    text-decoration:    none;
+    text-align:         center;
 }
-
-.box a {
-    color: #212121;
+#cf-join > .row i,  #cf-join > .row img  {
+    display:      inline-block;
+    font-size:    15rem;
+    width:        15rem;
 }
-
-.box:hover {
-    /*   color: #fff;
-      background-color: rgba(0, 100, 0, 0.9); */
-    border: 1px solid darkgreen;
+#cf-join > .row img {
+    margin:    1.5rem  0;
 }
-
-.box-image, .box-icon {
-    font-size: 10em;
-    margin: 0 auto;
-    text-align: center;
-    display: block;
-    color: darkgreen;
-}
-
-.box-icon:hover {
-    /*   color: #fff; */
-}
-
-.box-image {
-    height: 200px;
-    padding: 10px;
-}
-
-.box-image img {
-    width: 100%;
-    margin-top: -35px;
-}
-
 .box-title {
     font-size: 1.5em;
     text-align: center;
-    text-decoration: none;
-}
-
-.box-link {
-    text-decoration: none;
-}
-
-.box-link:hover, .box-link:active, .box-link:visited, .box-link:focus {
     text-decoration: none;
 }
 
