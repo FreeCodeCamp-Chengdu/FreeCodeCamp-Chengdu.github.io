@@ -1,0 +1,267 @@
+<!DocType html>
+<html lang="zh-CN">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <style>
+         body {
+            font-family: 'Roboto','Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-image: url('../img/material/bg1.jpg');
+            height: 100vh;
+        }
+        #card {
+          border: solid 1px #999;
+          position: relative;
+          width: 708px;
+          height: 415px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -207px;
+          margin-left: -350px;
+          background: hsla(0, 0%, 100%, 0.4);
+          overflow: hidden;
+          z-index:-1;
+          border-radius: 4px;
+          box-shadow: 3px 4px 3px rgba(177, 176, 176, 0.65);
+        }
+        #card::before{
+          content: '';
+          position: absolute;
+          top:0px;
+          left:0px;
+          right:0px;
+          bottom:0px;
+          background-image:url(./img/bg/mpj-2017.jpg);
+          background-size:100vw 100vh;
+          -webkit-filter: blur(6px);
+          -moz-filter: blur(6px);
+          -ms-filter: blur(6px);
+          -o-filter: blur(6px);
+          filter: blur(6px);
+          margin: -30px;
+        }
+        .info_left{
+            width: 280px;
+            height: 100%;
+            padding: 15px;
+            display: inline-block;
+            border-right: dotted 1px #aaa;
+            color: #666;
+        }
+        .avatar{
+            width: 160px;
+            border-radius: 4px;
+            display: block;
+            box-shadow: 0px 0px 8px #999;
+            /*margin: auto;*/
+        }
+        .info_left h5{
+            -webkit-margin-before: 1.2em!important;
+            -webkit-margin-after: 1.2em!important;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+        .info_left h5 i{
+            color: #000;
+        }
+        .name{
+            color: #333;
+            /*text-align: center;*/
+            display: block;
+            /*font-size: 1.17em;*/
+            font-weight: bold;
+        }
+        .info_right{
+            display: inline-block;
+            padding: 15px;
+            height: 100%;
+            position: absolute;
+            width: 370px;
+        }
+        .info_right p{
+            color: #333;
+            display: block;
+            box-shadow: 0px 0px 3px #999;
+            padding: 10px;
+        }
+        .info_right p em{
+            font-weight: bold;
+        }
+        .info_right img {
+            width: 80px;
+        }
+        .info_right #qrcode canvas{
+            padding: 10px;
+            box-shadow: 0px 0px 3px #999;
+        }
+        .languages{
+            display: inline-block;
+            vertical-align: top;
+            width: 250px;
+            margin-left: 10px;
+            color: #333;
+        }
+        .languages .label{
+            margin: 0px 5px 8px 0px;
+            padding: 5px 10px;
+            border: dotted 1px #999;
+            float: left;
+        }
+        .fcc{
+            text-align: right;
+            color: #999;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="card">
+            <div class="info_left">
+                <a :href="html_url" class="tilter">
+                    <img :src='avatar' class="avatar" />
+                </a>
+                <h3 class="name">{{ name }}</h3>
+                <h5><i class="fa fa-envelope-o"></i> {{ email || '暂无~'}}</h5>
+                <h5><i class="fa fa-map-marker"></i> {{ location || '暂无~'}}</h5>
+                <h5><i class="fa fa-building"></i> {{ company || '暂无~'}}</h5>
+                <h5><i class="fa fa-info-circle"></i> {{ bio || '这个家伙很懒~'}}</h5>
+            </div>
+            <div class="info_right">
+                <p> Stars: <em>{{ stars }}</em> 个</p>
+                <p> 存储库: <em>{{ public_repos }}</em> 个</p>
+                <p> 关注了: <em>{{ following }}</em> 人</p>
+                <p> 关注者: <em>{{ followers }}</em> 人</p>
+                <div>
+                    <!--<img src="../img/material/WechatIMG139.jpg" />-->
+                    <span id="qrcode"></span>
+                    <div class="languages">
+                        <span v-for="label in labels" class="label">{{label+''}}</span>
+                    </div>
+                </div>
+                <div class="fcc">
+                    - By freeCodeCamp成都社区
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script src="//cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+<script>
+        var user = getQueryString('user');
+        var app = new Vue({
+             el: '#app',
+             data: {
+                 name: '加载中...',
+                 email: '加载中...',
+                 avatar: '../img/gallery/gallery-1.jpg',
+                 html_url: '加载中...',
+                 location: '加载中...',
+                 company: '加载中...',
+                 bio: '加载中...',
+                 public_repos: 0,
+                 followers: 0,
+                 following: 0,
+                 stars: 0,
+                 labels: []
+             },
+             methods: {
+                update: function(json){
+                    this.name = json.name;
+                    this.avatar = json.avatar_url;
+                    this.email = json.email;
+                    this.html_url = json.html_url;
+                    this.location = json.location;
+                    this.company = json.company;
+                    this.bio = json.bio;
+                    this.public_repos = json.public_repos;
+                    this.followers = json.followers;
+                    this.following = json.following;
+                },
+                repos: function(stars, labels){
+                    this.stars = stars;
+                    this.labels = labels;
+                }
+             }
+         })
+        require.config({
+            baseUrl:    '../js/',
+            paths:      {
+                LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min'
+            }
+        });
+
+        require([
+            'LeanCloud'
+        ],  function (LC) {
+
+            LC.init({
+                appId:     '8H9ovR4htxgVoqdf0BO8Stac',
+                appKey:    'iNTx6f6blTD05YJFL0xuJR7U'
+            });
+
+            self.localStorage.setItem('debug', 'leancloud*');
+
+
+            Promise.resolve(
+                LC.Cloud.run('github',  {URI: 'users/'+ user})
+            ).then(function (json) {
+                app.update(json);
+            });
+
+            Promise.resolve(
+                LC.Cloud.run('github',  {URI: 'users/'+ user + '/repos'})
+            ).then(function (json) {
+                var language = [];
+                var languages = [];
+                var stars = 0;
+                json.map(function(repo, index){
+                    if(!repo.fork){
+                        if(repo.language && language.indexOf(repo.language) == -1){
+                            language.push(repo.language);
+                        };
+                        if(repo.language){
+                            if(languages[repo.language]){
+                                languages[repo.language] += 1;
+                            }else{
+                                languages[repo.language] = 1;
+                            }
+                        }
+                        stars += repo.stargazers_count;
+                    }
+                });
+                app.repos(stars, language);
+            });
+        });
+
+        $('#qrcode').qrcode({
+          text: 'FCC',
+          height: 80,
+          width: 80,
+          //此处添加了个logo，可以随意替换链接
+          src: 'www.bing.com'
+        });
+
+        // 获取用户名
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+</script>
+</html>
