@@ -163,7 +163,7 @@
 <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
 <script>
-        var user = getQueryString('user');
+        var user = getQueryString('user') || 'FreeCodeCamp-Chengdu';
         var app = new Vue({
              el: '#app',
              data: {
