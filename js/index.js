@@ -1,7 +1,7 @@
 define([
-    'jquery', 'members', 'force-vector', 'LeanCloud', 'TimeKit',
+    'jquery', 'LeanCloud', 'force-vector', 'TimeKit', 'skill', 'members',
     'EasyWebUI', 'EasyWebApp', 'fancybox'
-],  function ($, members, Force_Vector, LeanCloud, TimeKit) {
+],  function ($, LeanCloud, Force_Vector, TimeKit, skill, members) {
 
     LeanCloud.init({
         appId:     '8H9ovR4htxgVoqdf0BO8Stac',
@@ -17,6 +17,10 @@ $(document).ready(function () {
     $('.row h1').scrollFixed();
 
 
+    var $_Skill = $('#cf-intro > ul');
+
+    $_Skill.view('ListView').render( skill.list );
+
     $('#cf-events > ul').view('ListView').render(
         $.map(Array( 6 ),  function () {
 
@@ -26,21 +30,17 @@ $(document).ready(function () {
 
     if (self.screen.availWidth >= 900) {
 
-        $('#Skill').on(
-            'mouseover',
-            '.landing-skill-icon, .img-awesome-padding',
-            function () {
-                var $_This = $(this);
+        $_Skill.on('mouseover',  'li',  function () {
 
-                if (! $_This.hasClass('flip'))  $_This.addClass('flip');
-            }
-        ).on(
-            'animationend webkitAnimationEnd',
-            '.landing-skill-icon, .img-awesome-padding',
-            function () {
-                $(this).removeClass('flip');
-            }
-        ).find('.col-xs-3 > :first-child').addClass('animated');
+            var $_This = $(this);
+
+            if (! $_This.hasClass('flip'))  $_This.addClass('flip');
+
+        }).on('animationend webkitAnimationEnd',  'li',  function () {
+
+            $( this ).removeClass('flip');
+
+        }).find('.col-xs-3 > :first-child').addClass('animated');
 
         $('.members').empty();
 
@@ -156,7 +156,7 @@ $(document).ready(function () {
         });
     }
 
-    $('.row h1 i.fa').click( NavToggle );
+    $('.row h1 i.iconfont').click( NavToggle );
 
     if ( $.browser.phone )  return  $_NavBar.blur( NavToggle );
 

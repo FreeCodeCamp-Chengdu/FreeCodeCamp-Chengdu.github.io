@@ -13,14 +13,13 @@
           href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"/>
 	<link rel="stylesheet"
           href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet"
-          href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
-	<link rel="stylesheet"
-          href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet"
+          href="//at.alicdn.com/t/font_7081lzhl1hc15rk9.css" />
 	<link rel="stylesheet"
           href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css">
 	<link rel="stylesheet" href="css/index.css"/>
 
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
     <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
     <script>
         require.config({
@@ -31,6 +30,7 @@
                 fancybox:     '//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min',
                 d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
                 LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min',
+                skill:        '../img/intro/skill',
                 members:      '../img/members/index'
             },
             shim:       {
@@ -50,7 +50,7 @@
                     <img src="img/intro/fcc-logo.gif" alt="FCC_ChengDu"/>·成都
                 </span>
                 <span>
-                    <i class="fa fa-bars"></i>
+                    <i class="iconfont icon-bar"></i>
                 </span>
             </h1>
 			<div class="row">
@@ -62,40 +62,12 @@
                         FreeCodeCamp 是由 Quincy Larson 创办的开源社区，它致力于帮助人们利用零散时间学习编程，内容以前端和JS全栈为主。目前已经发展成为一个30万开发者的社区，通过游戏化的项目实战，来吸引大家学习编程，并在社区内给予实时的帮助。同时，为 NPO、NGO 组织给予技术支持。通过学习4个部分课程，你将获得 FCC 颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。
                     </p>
 					<h3 class="text-center">你将学到什么</h3>
-					<div class="icon-content" id="Skill">
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon ion-social-html5"></div>
-							<h4>HTML5</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon ion-social-css3"></div>
-							<h4>CSS3</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon ion-social-javascript"></div>
-							<h4>JavaScript</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon fa fa-database font-awesome-padding"></div>
-							<h4>Database</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon ion-social-github"></div>
-							<h4>Git &amp; GitHub</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<div class="landing-skill-icon ion-social-nodejs"></div>
-							<h4>Node.js</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<img class="img-awesome-padding" src="./img/intro/react.svg" alt="Dr. Norman's working"/>
-							<h4>React.js</h4>
-						</div>
-						<div class="col-xs-3 ">
-							<img class="img-awesome-padding" src="./img/intro/d3-logo.svg" alt="Dr. Norman's working"/>
-							<h4>D3.js</h4>
-						</div>
-					</div>
+					<ul>
+						<li class="col-xs-3">
+							<i class="iconfont icon-${this.icon}"></i>
+							<h4>${this.name}</h4>
+						</li>
+                    </ul>
 				</div>
 
 				<!--events-->
@@ -118,11 +90,6 @@
 				<div class="col-sm-12" id="cf-members">
                     <div class="member-panel-title text-center">
                         <h3> FreeCodeCamp-Chengdu 成员风采展 </h3>
-                        <!--<div class="members-city">
-                            <em> ——&nbsp;&nbsp;成都</em>
-                        </div>-->
-                        <div>
-                        </div>
                     </div>
                     <div class="members">
                         <div class="col-xs-6 col-sm-3">
@@ -141,7 +108,7 @@
                     <h3 class="text-center">成员作品</h3>
                     <div class="row memberwork_content">
                         <div class="col-sm-4">
-                            <div class="text-center">
+                            <a target="_blank" href="${this.html_url}">
                                 <div>
                                     <img class="memberwork_usr_portrait"
                                          src="${this.avatar_url}"/>
@@ -149,7 +116,7 @@
                                 <h6 class="usr_nickname">
                                     ${this.login}
                                 </h6>
-                            </div>
+                            </a>
                             <ul class="list-group" data-name="repos">
                                 <li class="list-group-item">
                                     <a target="blank" href="${this.html_url}">
@@ -175,34 +142,26 @@
 					<p class="lead">
                         不论你是技术大牛，还是前端菜鸟，亦或是对编程感兴趣的新人，如果你对我们成都线下交流活动感兴趣，现在就加入我们吧。很棒的是，线下交流，向大牛取经，这一切都是免费的！
                     </p>
-					<div class="row cf-join-image">
-						<div class="col-xs-6 col-md-4">
-							<div class="box" title="github FCC成都小组">
-								<a class="box-link" target="_blank" href="https://github.com/FreeCodeCamp-Chengdu">
-									<i class="ion-social-github box-icon"></i>
-									<div class="box-title">GitHub 组织</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<div class="box" title="Facebook FCC成都小组">
-								<a class="box-link" target="_blank" href="https://www.facebook.com/groups/free.code.camp.chengdu/">
-									<i class="ion-social-facebook box-icon"></i>
-									<div class="box-title">Facebook</div>
-								</a>
-							</div>
-
-						</div>
-						<div class="col-xs-6 col-md-4">
-                            <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=561b0bf9d066d15f7d8b06306443b1ace12de128b4deb15ba2ccb91269cdbc1f">
-                                <span class="box-image">
-                                    <img src="img/join/FCC-CDG_QQ.png"
-                                         alt="FreeCodeCamp 成都社区 QQ群"
-                                         title="点击、扫码皆可">
-                                </span>
-								<div class="box-title">QQ 群</div>
-                            </a>
-						</div>
+					<div class="row">
+						<a class="col-xs-6 col-md-4"
+                             title="github FCC成都小组" target="_blank" href="https://github.com/FreeCodeCamp-Chengdu">
+                            <i class="iconfont icon-github-square box-icon"></i>
+                            <div class="box-title">GitHub 组织</div>
+                        </a>
+						<a class="col-xs-6 col-md-4"
+                             title="Facebook FCC成都小组" target="_blank" href="https://www.facebook.com/groups/free.code.camp.chengdu/">
+                            <i class="iconfont icon-facebook box-icon"></i>
+                            <div class="box-title">Facebook</div>
+						</a>
+						<a class="col-xs-6 col-md-4" target="_blank"
+                             href="//shang.qq.com/wpa/qunwpa?idkey=561b0bf9d066d15f7d8b06306443b1ace12de128b4deb15ba2ccb91269cdbc1f">
+                            <span class="box-image">
+                                <img src="img/join/FCC-CDG_QQ.png"
+                                     alt="FreeCodeCamp 成都社区 QQ群"
+                                     title="点击、扫码皆可">
+                            </span>
+                            <div class="box-title">QQ 群</div>
+						</a>
 					</div>
 				</div>
 			</div>
