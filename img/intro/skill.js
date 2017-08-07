@@ -17,11 +17,11 @@ define({
             icon:    'jquery'
         },
         {
-            name:    'BootStrap',
+            name:    'Bootstrap',
             icon:    'bootstrap'
         },
         {
-            name:    'Vue',
+            name:    'Vue.js',
             icon:    'vuejs'
         },
         {
