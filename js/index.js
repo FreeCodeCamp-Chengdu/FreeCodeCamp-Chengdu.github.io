@@ -1,7 +1,7 @@
 define([
-    'jquery', 'LeanCloud', 'force-vector', 'TimeKit', 'skill', 'members',
+    'jquery', 'LeanCloud', 'TimeKit', 'skill',
     'EasyWebUI', 'EasyWebApp', 'fancybox'
-],  function ($, LeanCloud, Force_Vector, TimeKit, skill, members) {
+],  function ($, LeanCloud, TimeKit, skill) {
 
     LeanCloud.init({
         appId:     '8H9ovR4htxgVoqdf0BO8Stac',
@@ -13,8 +13,29 @@ define([
 
 $(document).ready(function () {
 
-
     $('.row h1').scrollFixed();
+
+
+/* ---------- 技能矩阵 ---------- */
+
+    var $_Alert = $('.row .alert');
+
+    $_Alert.on('click',  'button, a',  function () {
+
+        $_Alert.removeClass('in');
+
+    }).on('transitionend webkitTransitionEnd',  function () {
+
+        $_Alert.hide();
+    });
+
+    $.ajax('https://zh.wikipedia.org/', {
+        error:    function (XHR) {
+
+            if ((! XHR.status)  ||  XHR.status > 399)
+                $_Alert.show().addClass('in');
+        }
+    });
 
 
     var $_Skill = $('#cf-intro > ul');
@@ -28,33 +49,18 @@ $(document).ready(function () {
         })
     );
 
-    if (self.screen.availWidth >= 900) {
+    if (self.screen.availWidth >= 900)
+        $_Skill.on('mouseover',  'li > i',  function () {
 
-        $_Skill.on('mouseover',  'li',  function () {
+            if (! this.classList.contains('animated'))
+                $( this ).addClass('animated flip');
 
-            var $_This = $(this);
+        }).on('animationend webkitAnimationEnd',  'li > i',  function () {
 
-            if (! $_This.hasClass('flip'))  $_This.addClass('flip');
+            $( this ).removeClass('animated flip');
+        });
 
-        }).on('animationend webkitAnimationEnd',  'li',  function () {
-
-            $( this ).removeClass('flip');
-
-        }).find('.col-xs-3 > :first-child').addClass('animated');
-
-        $('.members').empty();
-
-        Force_Vector(
-            '.members',
-            document.documentElement.clientWidth * 0.5,
-            document.documentElement.clientHeight * 7 / 8,
-            members.list
-        );
-    } else
-        $('.members').view('ListView').render( members.list );
-
-
-/* ---------- fancybox ---------- */
+/* ---------- 活动集锦 ---------- */
 
     $('.fancybox').fancybox({
         openEffect:     'elastic',
@@ -136,7 +142,7 @@ $(document).ready(function () {
 
     /* ----- 显示 / 隐藏 ----- */
 
-    var $_Content = $('body > .container > .row > :first-child');
+    var $_Content = $('body > .row > :first-child');
 
     var Content_Width = $_Content.width();
 

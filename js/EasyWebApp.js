@@ -404,9 +404,9 @@ var InnerLink = (function ($, Observer) {
             do {
                 iPath = iNew || iPath;
 
-                iNew = iPath.replace(/[^\/]+\/\.\.\//g, '');
+                iNew = iPath.replace(/[^\.\/]+\/\.\.\//g, '');
 
-            } while (iNew != iPath);
+            } while (iNew  &&  (iNew !== iPath));
 
             return iNew;
         },
@@ -809,10 +809,8 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
 
             iURL = iURL.split('?');
 
-            if (
-                iBase  &&  iURL[0]  &&
-                (! $.urlDomain( iURL[0] ))  &&  (iURL[0].indexOf( iBase )  <  0)
-            ) {
+            if (iBase  &&  iURL[0]  &&  (! $.urlDomain( iURL[0] ))) {
+
                 iURL[0] = InnerLink.parsePath(iBase + iURL[0]);
 
                 iDOM.setAttribute(iKey, iURL.join('?'));
@@ -1444,7 +1442,7 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, DOMkit, InnerLink
 //                    >>>  EasyWebApp.js  <<<
 //
 //
-//      [Version]    v4.0  (2017-08-04)  Beta
+//      [Version]    v4.0  (2017-08-07)  Beta
 //
 //      [Require]    iQuery  ||  jQuery with jQueryKit
 //

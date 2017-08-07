@@ -10,11 +10,13 @@
 	<title>FreeCodeCamp 成都社区</title>
 
 	<link rel="stylesheet"
-          href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"/>
+          href="//cdn.bootcss.com/normalize/7.0.0/normalize.min.css"/>
 	<link rel="stylesheet"
           href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet"
           href="//at.alicdn.com/t/font_7081lzhl1hc15rk9.css" />
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" />
 	<link rel="stylesheet"
           href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css">
 	<link rel="stylesheet" href="css/index.css"/>
@@ -30,8 +32,7 @@
                 fancybox:     '//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min',
                 d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
                 LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min',
-                skill:        '../img/intro/skill',
-                members:      '../img/members/index'
+                skill:        '../img/intro/skill'
             },
             shim:       {
                 bootstrap:    ['jquery'],
@@ -41,8 +42,7 @@
 
         require(['index']);
     </script>
-</head><body>
-<div class="container">
+</head><body class="container">
 	<div class="row">
 		<div class="col-md-11 col-sm-12">
             <h1>
@@ -53,6 +53,22 @@
                     <i class="iconfont icon-bar"></i>
                 </span>
             </h1>
+            <div class="alert alert-danger alert-dismissible fade" role="alert">
+                <button type="button" class="close"
+                        data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>您正处于受限的上网环境！</h4>
+                <p>
+                    您当前的上网线路无法访问一些进阶资源，是否尝试科学上网？
+                </p>
+                <p>
+                    <a class="btn btn-danger" target="_blank"
+                       href="https://github.com/getlantern/lantern">
+                        科学上网
+                    </a>
+                </p>
+            </div>
 			<div class="row">
 
 				<!--introduction for fcc chengdu-->
@@ -65,7 +81,10 @@
 					<ul>
 						<li class="col-xs-3">
 							<i class="iconfont icon-${this.icon}"></i>
-							<h4>${this.name}</h4>
+							<h4><a target="_blank"
+                                   href="https://zh.wikipedia.org/wiki/${this.name.replace(' ', '')}">
+                                ${this.name}
+                            </a></h4>
 						</li>
                     </ul>
 				</div>
@@ -84,23 +103,6 @@
                             </a>
 						</li>
 					</ul>
-				</div>
-
-				<!--members-->
-				<div class="col-sm-12" id="cf-members">
-                    <div class="member-panel-title text-center">
-                        <h3> FreeCodeCamp-Chengdu 成员风采展 </h3>
-                    </div>
-                    <div class="members">
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="thumbnail member">
-                                <img src="${this.imgurl}" />
-                                <div class="caption text-center">
-                                    <h3>${this.name}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 				</div>
 
 				<!--gallery-->
@@ -166,14 +168,12 @@
 				</div>
 			</div>
 		</div>
-        <ul id="cf-navbar" tabindex="-1" class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked" id="cf-navbar" tabindex="-1">
             <li role="presentation"><a href="#cf-intro">FCC介绍</a></li>
             <li role="presentation"><a href="#cf-events">FCC成都</a></li>
-            <li role="presentation"><a href="#cf-members">成员风采</a></li>
             <li role="presentation"><a href="#cf-gallery">成员作品</a></li>
             <li role="presentation"><a href="#cf-join">加入我们</a></li>
             <li role="presentation"><a href="html/feature.html" target="_blank">Feature</a></li>
         </ul>
 	</div>
-</div>
 </body></html>
