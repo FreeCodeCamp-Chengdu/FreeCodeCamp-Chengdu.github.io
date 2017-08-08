@@ -15,7 +15,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-image: url('../img/material/bg1.jpg');
+            background-image: url('../img/material/bg2.jpg');
             height: 100vh;
             -webkit-background-size:100% 100%;  
             -moz-background-size:100% 100%;  
@@ -100,6 +100,7 @@
             padding: 10px;
         }
         .info_right p em{
+            margin-left: 5px;
             font-weight: bold;
         }
         .info_right img {
@@ -138,16 +139,16 @@
                     <img :src='avatar' class="avatar" />
                 </a>
                 <h3 class="name">{{ name }}</h3>
-                <h5><i class="fa fa-envelope-o"></i> {{ email || '暂无~'}}</h5>
-                <h5><i class="fa fa-map-marker"></i> {{ location || '暂无~'}}</h5>
-                <h5><i class="fa fa-building"></i> {{ company || '暂无~'}}</h5>
-                <h5><i class="fa fa-info-circle"></i> {{ bio || '这个家伙很懒~'}}</h5>
+                <h5>邮箱: {{ email || '暂无~'}}</h5>
+                <h5>地址: {{ location || '暂无~'}}</h5>
+                <h5>公司: {{ company || '暂无~'}}</h5>
+                <h5>描述: {{ bio || '这个家伙很懒~'}}</h5>
             </div>
             <div class="info_right">
-                <p> Stars: <em>{{ stars }}</em> 个</p>
-                <p> 存储库: <em>{{ public_repos }}</em> 个</p>
-                <p> 关注了: <em>{{ following }}</em> 人</p>
-                <p> 关注者: <em>{{ followers }}</em> 人</p>
+                <p> <span>获赞数:</span> <em>{{ stars || '...' }}</em> 个</p>
+                <p> <span>存储库:</span> <em>{{ public_repos || '...'}}</em> 个</p>
+                <p> <span>关注了:</span> <em>{{ following || '...'}}</em> 人</p>
+                <p> <span>关注者:</span> <em>{{ followers || '...'}}</em> 人</p>
                 <div>
                     <!--<img src="../img/material/WechatIMG139.jpg" />-->
                     <span id="qrcode"></span>
@@ -156,7 +157,7 @@
                     </div>
                 </div>
                 <div class="fcc">
-                    - By freeCodeCamp成都社区
+                    - By freeCodeCamp 成都社区
                 </div>
             </div>
         </div>
@@ -194,13 +195,13 @@
                     this.location = json.location;
                     this.company = json.company;
                     this.bio = json.bio;
-                    this.public_repos = json.public_repos;
                     this.followers = json.followers;
                     this.following = json.following;
                 },
-                repos: function(stars, labels){
+                repos: function(stars, labels, repos){
                     this.stars = stars;
                     this.labels = labels;
+                    this.public_repos = repos;
                 }
              }
          })
@@ -233,28 +234,21 @@
                 LC.Cloud.run('github',  {URI: 'users/'+ user + '/repos'})
             ).then(function (json) {
                 var language = [];
-                var languages = [];
                 var stars = 0;
+                var repos = 0;
                 json.map(function(repo, index){
                     if(!repo.fork){
+                        repos++; 
                         if(repo.language && language.indexOf(repo.language) == -1){
                             language.push(repo.language);
                         };
-                        if(repo.language){
-                            if(languages[repo.language]){
-                                languages[repo.language] += 1;
-                            }else{
-                                languages[repo.language] = 1;
-                            }
-                        }
                         stars += repo.stargazers_count;
                     }
                 });
-                app.repos(stars, language);
+                app.repos(stars, language, repos);
             });
         });
 
-        
         $('#qrcode').qrcode({
           text: 'https://github.com/' + user,
           height: 80,
