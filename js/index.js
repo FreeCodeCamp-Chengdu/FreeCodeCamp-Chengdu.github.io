@@ -1,15 +1,6 @@
 define([
-    'jquery', 'LeanCloud', 'TimeKit', 'skill',
-    'EasyWebUI', 'EasyWebApp', 'fancybox'
-],  function ($, LeanCloud, TimeKit, skill) {
-
-    LeanCloud.init({
-        appId:     '8H9ovR4htxgVoqdf0BO8Stac',
-        appKey:    'iNTx6f6blTD05YJFL0xuJR7U'
-    });
-
-    self.localStorage.setItem('debug', 'leancloud*');
-
+    'jquery', 'TimeKit', 'skill', 'EasyWebUI', 'EasyWebApp', 'fancybox'
+],  function ($, TimeKit, skill) {
 
 $(document).ready(function () {
 
@@ -29,13 +20,17 @@ $(document).ready(function () {
         $_Alert.hide();
     });
 
-    $.ajax('https://zh.wikipedia.org/', {
-        error:    function (XHR) {
+    var XHR = new (self.XDomainRequest || self.XMLHttpRequest)();
 
-            if ((! XHR.status)  ||  XHR.status > 399)
-                $_Alert.show().addClass('in');
-        }
-    });
+    XHR.open('GET', 'https://zh.wikipedia.org/');
+
+    XHR.onabort = XHR.ontimeout = XHR.onload = XHR.onerror = function () {
+
+        if ((! this.status)  ||  (this.status > 399))
+            $_Alert.show().addClass('in');
+    };
+
+    XHR.send();
 
 
     var $_Skill = $('#cf-intro > ul');
@@ -73,14 +68,14 @@ $(document).ready(function () {
 /* ---------- 成员作品集 ---------- */
 
     Promise.resolve(
-        LeanCloud.Cloud.run('github',  {URI: 'orgs/FreeCodeCamp-Chengdu/members'})
+        $.getJSON('//api.github.com/orgs/FreeCodeCamp-Chengdu/members')
     ).then(function () {
 
         return  Promise.all($.map(arguments[0],  function () {
 
-            return  LeanCloud.Cloud.run('github', {
-                URI:    'users/' + arguments[0].login + '/repos'
-            });
+            return $.getJSON(
+                '//api.github.com/users/' + arguments[0].login + '/repos'
+            );
         }));
     }).then(function () {
 
@@ -114,6 +109,10 @@ $(document).ready(function () {
             });
 
             return data;
+
+        }).sort(function (A, B) {
+
+            return  A.repos.length - B.repos.length;
         });
     }).then(function () {
 

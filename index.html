@@ -1,4 +1,4 @@
-<!DocType html>
+<!DocType HTML>
 <html lang="zh-CN"><head>
 
 	<meta charset="UTF-8">
@@ -20,18 +20,19 @@
 	<link rel="stylesheet"
           href="//cdn.bootcss.com/fancybox/2.1.7/css/jquery.fancybox.min.css">
 	<link rel="stylesheet" href="css/index.css"/>
-
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-    <script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+<!--[if lte IE 9]>
+    <script src="//cdn.bootcss.com/html5-history-api/4.2.8/history.min.js"></script>
+<![endif]-->
+    <script src="//cdn.bootcss.com/MutationObserver.js/0.3.2/mutationobserver.min.js"></script>
+    <script src="//cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
     <script>
         require.config({
             baseUrl:    'js/',
             paths:      {
-                jquery:       '//cdn.bootcss.com/jquery/1.12.4/jquery.min',
+                jquery:       '//cdn.bootcss.com/jquery/3.2.1/jquery.min',
                 bootstrap:    '//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min',
                 fancybox:     '//cdn.bootcss.com/fancybox/2.1.7/js/jquery.fancybox.min',
                 d3:           '//cdn.bootcss.com/d3/3.5.17/d3.min',
-                LeanCloud:    '//cdn1.lncld.net/static/js/3.0.2/av-min',
                 skill:        '../img/intro/skill'
             },
             shim:       {
@@ -75,15 +76,16 @@
 				<div class="col-sm-12" id="cf-intro">
 					<h3 class="text-center">什么是FreeCodeCamp</h3>
 					<p>
-                        <a href="线上学习平台:www.freecodecamp.cn">FreeCodeCamp</a> 是由 Quincy Larson 创办的开源社区，它致力于帮助人们利用零散时间学习编程，内容以前端和JS全栈为主。目前已经发展成为一个30万开发者的社区，通过游戏化的项目实战，来吸引大家学习编程，并在社区内给予实时的帮助。同时，为 NPO、NGO 组织给予技术支持。通过学习4个部分课程，你将获得 FCC 颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。
+                        <a target="_blank" href="//www.freecodecamp.cn" title="线上学习平台">FreeCodeCamp</a>
+                        是由 Quincy Larson 创办的开源社区，它致力于帮助人们利用零散时间学习编程，内容以前端和JS全栈为主。目前已经发展成为一个30万开发者的社区，通过游戏化的项目实战，来吸引大家学习编程，并在社区内给予实时的帮助。同时，为 NPO、NGO 组织给予技术支持。通过学习4个部分课程，你将获得 FCC 颁布的4个证书，分别是“前端开发证书”、“数据可视化证书”、“后端开发证书”、“全栈开发证书”。
                     </p>
 					<h3 class="text-center">你将学到什么</h3>
 					<ul>
 						<li class="col-xs-3 col-xs-fcc-2">
-							<i class="iconfont icon-${this.icon}"></i>
+							<i class="iconfont icon-${view.icon}"></i>
 							<h4><a target="_blank"
-                                   href="https://zh.wikipedia.org/wiki/${this.name.replace(' ', '')}">
-                                ${this.name}
+                                   href="https://zh.wikipedia.org/wiki/${view.name.replace(' ', '')}">
+                                ${view.name}
                             </a></h4>
 						</li>
                     </ul>
@@ -93,14 +95,14 @@
 				<div class="col-sm-12" id="cf-events">
 					<h3 class="text-center">FCC 成都</h3>
 					<p>
-                        FreeCodeCamp 成都社区致力于为成都本地 FCC 学员提供线下交流互动的平台，自2016年4月以来，FCC 成都学习小组一直有新鲜血液加入，同时在学员们积极筹划和参与下，丰富多彩的线下活动持续开展中...
+                        FreeCodeCamp 成都社区致力于为成都本地 FCC 学员提供线下交流互动的平台，自2016年4月以来，FCC 成都学习小组一直有新鲜血液加入，同时在学员们积极筹划和参与下，丰富多彩的线下活动持续开展中……
                         FCC成都社区 的线下活动形式主要为黑客马拉松、结对编程、个人分享、编程静修。线下活动一般以 Coffee & Code 的形式, 每两周举行一次, 让参与者在一个轻松愉悦的环境下学习、编程。另外，社区每一季度将举办一次黑客马拉松作为核心活动, 旨在鼓励大家创新,提升 对技术卓越的追求。
                     </p>
 					<ul>
 						<li>
                             <a class="fancybox" rel="article0"
-                               href="img/events/events-${this.__index__ + 1}.jpg">
-                                <img src="img/events/events-${this.__index__ + 1}.jpg" />
+                               href="img/events/events-${view.__index__ + 1}.jpg">
+                                <img src="img/events/events-${view.__index__ + 1}.jpg" />
                             </a>
 						</li>
 					</ul>
@@ -111,22 +113,23 @@
                     <h3 class="text-center">成员作品</h3>
                     <div class="row memberwork_content">
                         <div class="col-sm-4">
-                            <a target="_blank" href="${this.html_url}">
+                            <a target="_blank" href="${view.html_url}">
                                 <div>
                                     <img class="memberwork_usr_portrait"
-                                         src="${this.avatar_url}"/>
+                                         src="${view.avatar_url}"/>
                                 </div>
                                 <h6 class="usr_nickname">
-                                    ${this.login}
+                                    ${view.login}
                                 </h6>
                             </a>
                             <ul class="list-group" data-name="repos">
                                 <li class="list-group-item">
-                                    <a target="blank" href="${this.html_url}">
-                                        ${this.name}
+                                    <a target="blank"
+                                       href="${view.homepage || view.html_url}">
+                                        ${view.name}
                                     </a>
                                     <span class="pull-right">
-                                        ${this.passedTime}
+                                        ${view.passedTime}
                                     </span>
                                 </li>
                             </ul>
@@ -145,7 +148,7 @@
 					<p class="lead">
                         不论你是技术大牛，还是前端菜鸟，亦或是对编程感兴趣的新人，如果你对我们成都线下交流活动感兴趣，现在就加入我们吧。很棒的是，线下交流，向大牛取经，这一切都是免费的！
                     </p>
-					<div class="row">
+					<div class="row text-center">
 						<a class="col-xs-6 col-md-3"
                              title="github FCC成都小组" target="_blank" href="https://github.com/FreeCodeCamp-Chengdu">
                             <i class="iconfont icon-github-square box-icon"></i>
@@ -159,21 +162,19 @@
 						<a class="col-xs-6 col-md-3" target="_blank"
                              href="//shang.qq.com/wpa/qunwpa?idkey=561b0bf9d066d15f7d8b06306443b1ace12de128b4deb15ba2ccb91269cdbc1f">
                             <span class="box-image">
-                                <img src="img/join/fcc_qq.jpg"
+                                <img src="img/join/FCC-CDG_QQ.png"
                                      alt="FreeCodeCamp 成都社区 QQ群"
                                      title="点击、扫码皆可">
                             </span>
                             <div class="box-title">QQ 群</div>
 						</a>
-						<a class="col-xs-6 col-md-3" target="_blank"
-                             href="//shang.qq.com/wpa/qunwpa?idkey=561b0bf9d066d15f7d8b06306443b1ace12de128b4deb15ba2ccb91269cdbc1f">
+						<span class="col-xs-6 col-md-3">
                             <span class="box-image">
                                 <img src="img/join/fcc_wechart_jyz.jpg"
-                                     alt="FreeCodeCamp 成都社区 微信群"
-                                     title="点击、扫码皆可">
+                                     alt="FreeCodeCamp 成都社区 微信群">
                             </span>
                             <div class="box-title">微信群主</div>
-						</a>
+						</span>
 					</div>
 				</div>
 			</div>

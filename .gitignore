@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-### Example user template template
+
 ### Example user template
 
 # IntelliJ project files
@@ -7,6 +7,5 @@
 *.iml
 out
 gen
-.gitignore
 .idea/
-Would skip repository light/
+.DS_Store
