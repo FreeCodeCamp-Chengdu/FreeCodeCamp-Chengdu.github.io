@@ -744,7 +744,10 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
 
                         if ( iDOM.dataset.href ) {
 
-                            this.__child__.push( View.getSub( iDOM ) );
+                            iView = View.getSub( iDOM );
+
+                            if (this.__child__.indexOf( iView )  <  0)
+                                this.__child__.push( iView );
 
                             return null;
 
@@ -1045,6 +1048,7 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
                 );
         }
     }, {
+        indexOf:       Array.prototype.indexOf,
         signIn:        function (iNode) {
 
             for (var i = 0;  this[i];  i++)  if (this[i] == iNode)  return;
@@ -1105,9 +1109,12 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
                         case 'script':    return  DOMkit.fixScript( iNode );
                     }
 
-                if (iNode instanceof View)
-                    this.parsePlain( iNode.$_View[0] ).signIn( iNode );
-                else if ( !(tag in HTMLView.rawSelector))
+                if (iNode instanceof View) {
+
+                    if (this.indexOf( iNode )  <  0)
+                        this.parsePlain( iNode.$_View[0] ).signIn( iNode );
+
+                } else if ( !(tag in HTMLView.rawSelector))
                     this.parsePlain( iNode );
             });
         },
@@ -1487,11 +1494,18 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             return iView;
         },
+        loadChild:        function (view) {
+
+            return Promise.all($.map(
+                view.childOf(':visible'),  this.load.bind( this )
+            )).then(function () {
+
+                return view;
+            });
+        },
         loadComponent:    function (iLink, iHTML, iData) {
 
-            var JS_Load = iLink.one('load');
-
-            var iView = this.loadView(iLink, iHTML),  _This_ = this;
+            var JS_Load = iLink.one('load'),  iView = this.loadView(iLink, iHTML);
 
             return  JS_Load.then(function (iFactory) {
 
@@ -1499,15 +1513,10 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
                     iData,  iLink.data,  iLink.$_View[0].dataset,  iData
                 );
 
-                iView.render(
+                return iView.render(
                     iFactory  ?  (iFactory.call(iView, iData)  ||  iData)  :  iData
                 );
-            }).then(function () {
-
-                return Promise.all($.map(
-                    iView.childOf(':visible'),  _This_.load.bind(_This_)
-                ));
-            }).then(function () {  return iView;  });
+            }).then( this.loadChild.bind( this ) );
         },
         autoFocus:        function (global) {
 
@@ -1633,18 +1642,14 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
         },
         boot:             function () {
 
-            var $_View = $('[data-href]:not([data-href] *)').not(
-                    this.$_View.find('[data-href]')
-                ),
+            DOMkit.build(document.body, '');
+
+            var root = (new HTMLView('html')).parse().render( $.paramJSON() ),
                 _This_ = this;
 
-            DOMkit.build($_View.sameParents()[0], '');
-
-            return  Promise.all($.map($_View,  function () {
-
-                return  _This_.load( arguments[0] );
-
-            })).then(function () {
+            return  this[root.$_View[0].dataset.href ? 'load' : 'loadChild'](
+                root
+            ).then(function () {
 
                 var Init = _This_.getRoute();
 
@@ -1660,7 +1665,7 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 //                    >>>  EasyWebApp.js  <<<
 //
 //
-//      [Version]    v4.0  (2017-10-10)  stable
+//      [Version]    v4.0  (2017-10-17)  stable
 //
 //      [Require]    iQuery  ||  jQuery with jQueryKit
 //

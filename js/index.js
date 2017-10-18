@@ -1,13 +1,20 @@
-define([
-    'jquery', 'TimeKit', 'skill', 'EasyWebUI', 'EasyWebApp', 'fancybox'
-],  function ($, TimeKit, skill) {
+define(['jquery', 'EasyWebUI', 'EasyWebApp', 'FancyBox'],  function ($) {
+
+
+    $.ajaxPrefilter('json',  function (option, _, XHR) {
+
+        if (option.url.indexOf('api.github.com')  >  0)
+            XHR.setRequestHeader(
+                'Authorization',  'token 39ff883676bf43c5723e92701487a020ad1abfb2'
+            );
+    });
 
 $(document).ready(function () {
 
     $('.row h1').scrollFixed();
 
 
-/* ---------- 技能矩阵 ---------- */
+/* ---------- 温馨提示 ---------- */
 
     var $_Alert = $('.row .alert');
 
@@ -33,19 +40,10 @@ $(document).ready(function () {
     XHR.send();
 
 
-    var $_Skill = $('#cf-intro > ul');
-
-    $_Skill.view('ListView').render( skill.list );
-
-    $('#cf-events > ul').view('ListView').render(
-        $.map(Array( 6 ),  function () {
-
-            return  { };
-        })
-    );
+/* ---------- 技能矩阵 ---------- */
 
     if (self.screen.availWidth >= 900)
-        $_Skill.on('mouseover',  'li > i',  function () {
+        $('#cf-intro > ul').on('mouseover',  'li > i',  function () {
 
             if (! this.classList.contains('animated'))
                 $( this ).addClass('animated flip');
@@ -55,69 +53,42 @@ $(document).ready(function () {
             $( this ).removeClass('animated flip');
         });
 
+
+    var iWebApp = $('#EWA_box').iWebApp();
+
+    iWebApp.on({
+        type:    'ready',
+        src:     'index.json'
+    },  function () {
+
 /* ---------- 活动集锦 ---------- */
 
-    $('.fancybox').fancybox({
-        openEffect:     'elastic',
-        closeEffect:    'elastic',
-        helpers:        {
-            title:    {type: 'inside'}
-        }
-    });
+        $('.fancybox').fancybox({
+            openEffect:     'elastic',
+            closeEffect:    'elastic',
+            helpers:        {
+                title:    {type: 'inside'}
+            }
+        });
+    }).on({
+        type:    'ready',
+        src:     '/members'
+    },  function (event, view) {
 
 /* ---------- 成员作品集 ---------- */
 
-    Promise.resolve(
-        $.getJSON('//api.github.com/orgs/FreeCodeCamp-Chengdu/members')
-    ).then(function () {
+        Promise.all(Array.from(view,  function (item) {
 
-        return  Promise.all($.map(arguments[0],  function () {
+            return  iWebApp.load( item );
 
-            return $.getJSON(
-                '//api.github.com/users/' + arguments[0].login + '/repos'
-            );
-        }));
-    }).then(function () {
+        })).then(function () {
 
-        return  $.map(arguments[0],  function (_This_) {
+            view.sort(function (A, B) {
 
-            var data = _This_[0].owner;
+                return  A.repoCount - B.repoCount;
 
-            data.repos = $.map(_This_,  function (_This_) {
-
-                if (_This_.fork || !(
-                    _This_.forks_count +
-                    _This_.watchers_count +
-                    _This_.stargazers_count
-                ))
-                    return;
-
-                delete _This_.owner;
-
-                _This_.passedTime = TimeKit.passed(
-                    _This_.pushed_at = new Date( _This_.pushed_at )
-                );
-
-                return _This_;
-
-            }).sort(function (A, B) {
-
-                return  (new Date( B.pushed_at ) - new Date( A.pushed_at ))  ||
-                    (B.stargazers_count - A.stargazers_count)  ||
-                    (B.watchers_count - A.watchers_count)  ||
-                    (B.forks_count - A.forks_count);
-            });
-
-            return data;
-
-        }).sort(function (A, B) {
-
-            return  A.repos.length - B.repos.length;
+            }).$_View.addClass('loaded');
         });
-    }).then(function () {
-
-        $('#cf-gallery div').addClass('loaded')
-            .view('ListView').render( arguments[0] );
     });
 
 /* ---------- 滑动导航栏 ---------- */

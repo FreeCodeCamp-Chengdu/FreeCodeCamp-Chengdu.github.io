@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="loading.css" />
+
+<script>
+    require(['jquery', 'EasyWebApp'],  function ($, EWA) {
+
+        EWA.component(function () {
+
+            var VM = this;
+
+            var Load_Cover = this.$_View.children('div').on(
+                    'transitionend webkitTransitionEnd',  function () {
+
+                        if (! VM.count)  this.style.display = 'none';
+                    }
+                )[0];
+
+            $( document ).on('ajaxSend',  function () {
+
+                if (! VM.count)  Load_Cover.style.display = '';
+
+                VM.count++ ;
+
+            }).on('ajaxSuccess',  function () {
+
+                if (VM.count > 0)  VM.count-- ;
+            });
+
+            return  {count: 0};
+        });
+    });
+</script>
+
+<div class="loading ${view.count ? 'active' : ''}">
+    <div class="loader">
+        <div class="ball-spin-fade-loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="ball-scale-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="loading_content">loading...</div>
+    </div>
+</div>

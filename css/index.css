@@ -94,7 +94,7 @@ html, body {
 }
 #cf-events > ul > li {
 	display:    inline-block;
-    margin:     1em;
+    margin:     0.5em;
 }
 #cf-events img {
 	max-width:    18em;
@@ -147,6 +147,9 @@ html, body {
 }
 .memberwork_content.loaded:before {
     content:    none;
+}
+.memberwork_content > * {
+	margin-top:    0.5em;
 }
 
 /*cf-join*/
@@ -237,8 +240,9 @@ html, body {
     background-color: blue;
 }
 
-.list-wait-tip{
-    color: #4caf50;
-    font-family: Cousine;
-    font-size: 2em;
+.list-wait-tip {
+    color:          #4caf50;
+    font-family:    Cousine;
+    font-size:      2em;
+    margin:         1rem  auto;
 }
