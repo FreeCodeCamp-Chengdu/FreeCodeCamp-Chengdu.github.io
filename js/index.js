@@ -1,4 +1,4 @@
-define(['jquery', 'EasyWebUI', 'EasyWebApp', 'FancyBox'],  function ($) {
+define(['jquery', 'EasyWebUI', 'EasyWebApp'],  function ($) {
 
 
     $.ajaxPrefilter('json',  function (option, _, XHR) {
@@ -16,25 +16,13 @@ $(document).ready(function () {
 
 /* ---------- 温馨提示 ---------- */
 
-    var $_Alert = $('.row .alert');
-
-    $_Alert.on('click',  'button, a',  function () {
-
-        $_Alert.removeClass('in');
-
-    }).on('transitionend webkitTransitionEnd',  function () {
-
-        $_Alert.hide();
-    });
-
     var XHR = new (self.XDomainRequest || self.XMLHttpRequest)();
 
     XHR.open('GET', 'https://zh.wikipedia.org/');
 
-    XHR.onabort = XHR.ontimeout = XHR.onload = XHR.onerror = function () {
+    XHR.onload = function () {
 
-        if ((! this.status)  ||  (this.status > 399))
-            $_Alert.show().addClass('in');
+        if (this.status < 400)  $().alert('close');
     };
 
     XHR.send();
@@ -58,20 +46,6 @@ $(document).ready(function () {
 
     iWebApp.on({
         type:    'ready',
-        src:     'index.json'
-    },  function () {
-
-/* ---------- 活动集锦 ---------- */
-
-        $('.fancybox').fancybox({
-            openEffect:     'elastic',
-            closeEffect:    'elastic',
-            helpers:        {
-                title:    {type: 'inside'}
-            }
-        });
-    }).on({
-        type:    'ready',
         src:     '/members'
     },  function (event, view) {
 
@@ -86,8 +60,7 @@ $(document).ready(function () {
             view.sort(function (A, B) {
 
                 return  A.repoCount - B.repoCount;
-
-            }).$_View.addClass('loaded');
+            });
         });
     });
 
@@ -143,22 +116,25 @@ $(document).ready(function () {
 
     function NavLinkage() {
 
-        var Current_Section = this.document.elementFromPoint(
-                $_Content.offset().left + 10,  $( this ).height() / 2
+        var section = document.elementFromPoint(
+                $_Content.offset().left + parseFloat(
+                    $_Content.css('padding-left')
+                ),
+                $( this ).height() / 2
             );
 
-        if (! (Current_Section || '').id)
-            Current_Section = $( Current_Section ).parents('*[id]')[0];
+        if (section.parentNode !== $_Content[0])
+            section = $( section ).parentsUntil( $_Content ).slice(-1)[0];
 
-        if (! Current_Section)  return;
+        if (! section)  return;
 
         $_NavItem.removeClass('active');
 
-        $('a[href="#' + Current_Section.id + '"]').addClass('active');
+        $('a[href="#' + section.id + '"]').addClass('active');
     }
 
     NavLinkage();
 
-    $( self ).on('load scroll resize', NavLinkage);
+    $( self ).on('load scroll resize',  $.throttle( NavLinkage ));
 });
 });

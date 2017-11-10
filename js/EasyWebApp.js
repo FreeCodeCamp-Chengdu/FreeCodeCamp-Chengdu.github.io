@@ -15,8 +15,33 @@
 
 var base_Observer = (function ($) {
 
-    function Observer($_View, all_event) {
+    /**
+     * 多条件观察者
+     *
+     * @author  TechQuery
+     *
+     * @class   Observer
+     *
+     * @param   {jQueryAcceptable} $_View      - Container DOM of Observer
+     * @param   {boolean}          [all_event] - Register all kinds of
+     *                                           event handlers in HTML code
+     *
+     * @returns {Observer}         Return the last one if a Observer instance
+     *                             has been created on this element
+     */
 
+    function Observer($_View, all_event) {
+        /**
+         * 容器元素的 jQuery 包装
+         *
+         * @name     $_View
+         * @type     {jQuery}
+         *
+         * @memberof Observer
+         * @instance
+         *
+         * @readonly
+         */
         this.$_View = ($_View instanceof $)  ?  $_View  :  $( $_View );
 
         this.setPrivate('handle',  { });
@@ -81,7 +106,19 @@ var base_Observer = (function ($) {
 
         return  $.extend(iClass, {
             Bind_Event:       { },
-            registerEvent:    function () {
+            /**
+             * 注册子类事件类型
+             *
+             * @author    TechQuery
+             *
+             * @memberof  Observer
+             * @protected
+             *
+             * @param     {...string} name - Event Names
+             *
+             * @returns   {function}  Sub Class of Observer
+             */
+            registerEvent:    function (name) {
 
                 $.extend(iClass.Bind_Event,  $.makeSet.apply($, arguments));
 
@@ -99,6 +136,18 @@ var base_Observer = (function ($) {
 
                 return this;
             },
+            /**
+             * 从一个元素节点开始向上查找实例，并返回首个发现的实例
+             *
+             * @author   TechQuery
+             *
+             * @memberof Observer
+             *
+             * @param    {jQueryAcceptable} $_DOM        Search up from this Element
+             * @param    {boolean}          Check_Parent
+             *
+             * @returns  {Observer}         Observer instance
+             */
             instanceOf:       function ($_DOM, Check_Parent) {
 
                 var _Instance_,  element = $( $_DOM )[0];
@@ -116,45 +165,58 @@ var base_Observer = (function ($) {
     }
 
     return  basicMethod($.Class.extend(Observer, {
-        extend:      function (iConstructor, iStatic, iPrototype) {
+        /**
+         * 继承出一个观察者子类
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer
+         *
+         * @param    {function} constructor - Constructor of the Sub Class
+         * @param    {?object}  Static      - Static properties
+         * @param    {object}   [prototype] - Instance properties
+         *
+         * @returns  {function} The Sub Class
+         */
+        extend:      function (constructor, Static, prototype) {
 
             return basicMethod($.Class.extend.call(
-                this,  iConstructor,  iStatic,  iPrototype
+                this,  constructor,  Static,  prototype
             ));
         },
-        getEvent:    function (iEvent) {
+        getEvent:    function (event) {
 
             return $.extend(
                 { },
-                (typeof iEvent == 'string')  ?  {type: iEvent}  :  iEvent,
+                (typeof event == 'string')  ?  {type: event}  :  event,
                 arguments[1]
             );
         },
-        match:       function (iEvent, iHandle) {
+        match:       function (event, iHandle) {
             var iRegExp;
 
             for (var iKey in iHandle) {
 
-                iRegExp = iEvent[iKey] instanceof RegExp;
+                iRegExp = event[iKey] instanceof RegExp;
 
                 switch ($.Type( iHandle[iKey] )) {
                     case 'RegExp':
                         if ( iRegExp ) {
-                            if (iEvent[iKey].toString() != iHandle[iKey].toString())
+                            if (event[iKey].toString() != iHandle[iKey].toString())
                                 return;
                             break;
                         }
                     case 'String':    {
-                        if (! (iEvent[iKey] || '')[iRegExp ? 'test' : 'match'](
+                        if (! (event[iKey] || '')[iRegExp ? 'test' : 'match'](
                             iHandle[iKey]
                         ))
                             return;
                         break;
                     }
                     case 'Function':
-                        if (typeof iEvent[iKey] != 'function')  break;
+                        if (typeof event[iKey] != 'function')  break;
                     default:
-                        if (iEvent[iKey] !== iHandle[iKey])  return;
+                        if (event[iKey] !== iHandle[iKey])  return;
                 }
             }
 
@@ -165,40 +227,76 @@ var base_Observer = (function ($) {
 
             return  '[object ' + this.constructor.name + ']';
         },
-        valueOf:     function (iEvent, iKey) {
+        /**
+         * 查询事件
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer.prototype
+         *
+         * @param    {string}          [event] - Event Name
+         * @param    {string}          [key]   - Key of Event property
+         *
+         * @returns  {object|object[]} Event Handlers
+         */
+        valueOf:     function (event, key) {
 
-            if (! iEvent)  return  this.__handle__;
+            if (! event)  return  this.__handle__;
 
-            return  (! iKey)  ?  this.__handle__[iEvent]  :
-                $.map(this.__handle__[iEvent],  function () {
+            return  (! key)  ?  this.__handle__[event]  :
+                $.map(this.__handle__[event],  function () {
 
-                    return  arguments[0][ iKey ];
+                    return  arguments[0][ key ];
                 });
         },
-        on:          function (iEvent, iCallback) {
+        /**
+         * 注册一个事件回调
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer.prototype
+         *
+         * @param    {string|object} event    - An Event Name or Event Object
+         * @param    {function}      callback
+         *
+         * @returns  {Observer}      Current Observer
+         */
+        on:          function (event, callback) {
 
-            iEvent = Observer.getEvent(iEvent,  {handler: iCallback});
+            event = Observer.getEvent(event,  {handler: callback});
 
-            var iHandle = this.__handle__[iEvent.type] =
-                    this.__handle__[iEvent.type]  ||  [ ];
+            var iHandle = this.__handle__[event.type] =
+                    this.__handle__[event.type]  ||  [ ];
 
             for (var i = 0;  iHandle[i];  i++)
-                if ($.isEqual(iHandle[i], iEvent))  return this;
+                if ($.isEqual(iHandle[i], event))  return this;
 
-            iHandle.push( iEvent );
+            iHandle.push( event );
 
             return this;
         },
-        emit:        function (iEvent, iData) {
+        /**
+         * 触发一个事件
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer.prototype
+         *
+         * @param    {string|object} event  - An Event Name or Event Object
+         * @param    {*}             [data] - Additional Data for callbacks
+         *
+         * @returns  {*}             Data returned by last callback
+         */
+        emit:        function (event, iData) {
 
-            iEvent = Observer.getEvent( iEvent );
+            event = Observer.getEvent( event );
 
-            return  (this.__handle__[iEvent.type] || [ ]).reduce(
+            return  (this.__handle__[event.type] || [ ]).reduce(
                 (function (_Data_, iHandle) {
 
-                    if (! Observer.match(iEvent, iHandle))  return _Data_;
+                    if (! Observer.match(event, iHandle))  return _Data_;
 
-                    var iResult = iHandle.handler.call(this, iEvent, _Data_);
+                    var iResult = iHandle.handler.call(this, event, _Data_);
 
                     return  (iResult != null)  ?  iResult  :  _Data_;
 
@@ -206,26 +304,50 @@ var base_Observer = (function ($) {
                 iData
             );
         },
-        off:         function (iEvent, iCallback) {
+        /**
+         * 注销事件回调
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer.prototype
+         *
+         * @param    {string|object}  event      An Event Name or Event Object
+         * @param    {function}       [callback]
+         *
+         * @returns  {Observer}       Current Observer
+         */
+        off:         function (event, callback) {
 
-            iEvent = Observer.getEvent(iEvent,  {handler: iCallback});
+            event = Observer.getEvent(event,  {handler: callback});
 
-            this.__handle__[iEvent.type] = $.map(
-                this.__handle__[iEvent.type],  function (iHandle) {
+            this.__handle__[event.type] = $.map(
+                this.__handle__[event.type],  function (iHandle) {
 
-                    return  Observer.match(iEvent, iHandle)  ?  null  :  iHandle;
+                    return  Observer.match(event, iHandle)  ?  null  :  iHandle;
                 }
             );
 
             return this;
         },
+        /**
+         * 注册一个事件回调（一次性）
+         *
+         * @author   TechQuery
+         *
+         * @memberof Observer.prototype
+         *
+         * @param    {string|object}    event      An Event Name or Event Object
+         * @param    {function}         [callback]
+         *
+         * @returns  {Observer|Promise} Current Observer or Promise
+         */
         one:         function () {
 
             var _This_ = this,  iArgs = $.makeArray( arguments );
 
-            var iCallback = iArgs.slice(-1)[0];
+            var callback = iArgs.slice(-1)[0];
 
-            iCallback = (typeof iCallback == 'function')  &&  iArgs.pop();
+            callback = (typeof callback === 'function')  &&  iArgs.pop();
 
             var iPromise = new Promise(function (iResolve) {
 
@@ -233,13 +355,13 @@ var base_Observer = (function ($) {
 
                         _This_.off.apply(_This_,  iArgs.concat( once ));
 
-                        if ( iCallback )  return  iCallback.apply(this, arguments);
+                        if ( callback )  return  callback.apply(this, arguments);
 
                         iResolve( arguments[1] );
                     }));
                 });
 
-            return  iCallback ? this : iPromise;
+            return  callback ? this : iPromise;
         }
     }));
 })(jquery);
@@ -247,13 +369,23 @@ var base_Observer = (function ($) {
 
 var view_RenderNode = (function ($) {
 
-    function RenderNode(iNode) {
+    /**
+     * 渲染节点
+     *
+     * @author TechQuery
+     *
+     * @class  RenderNode
+     *
+     * @param  {Node} node - A Node within a template
+     */
+
+    function RenderNode(node) {
 
         $.extend(this, {
-            ownerNode:       iNode,
-            name:            iNode.nodeName,
-            raw:             iNode.nodeValue,
-            ownerElement:    iNode.parentNode || iNode.ownerElement,
+            ownerNode:       node,
+            name:            node.nodeName,
+            raw:             node.nodeValue,
+            ownerElement:    node.parentNode || node.ownerElement,
             type:            0,
             value:           null
         }).scan();
@@ -384,6 +516,15 @@ var view_RenderNode = (function ($) {
 
             iNode.nodeValue = iValue;
         },
+        /**
+         * 生成文本值
+         *
+         * @author   TechQuery
+         *
+         * @memberof RenderNode.prototype
+         *
+         * @returns  {string} Text Value of this template
+         */
         toString:    function () {
 
             return  this.value + '';
@@ -396,6 +537,19 @@ var view_RenderNode = (function ($) {
 
 
 var InnerLink = (function ($, Observer) {
+
+    /**
+     * 应用内链接
+     *
+     * @author  TechQuery
+     *
+     * @class   InnerLink
+     *
+     * @param   {jQueryAcceptable} $_View - HTMLElement of Inner Link
+     *
+     * @returns {InnerLink}        Return the last one if a InnerLink instance
+     *                             has been created on this element
+     */
 
     function InnerLink($_View) {
 
@@ -468,6 +622,15 @@ var InnerLink = (function ($, Observer) {
 
             return this;
         },
+        /**
+         * 生成 URI
+         *
+         * @author   TechQuery
+         *
+         * @memberof InnerLink.prototype
+         *
+         * @returns  {string} URI of this Inner Link
+         */
         toString:    function () {
 
             var iData = [$.param( this.data )];
@@ -569,6 +732,19 @@ var InnerLink = (function ($, Observer) {
 
 var base_DataScope = (function ($) {
 
+    /**
+     * 数据作用域
+     *
+     * @author  TechQuery
+     *
+     * @class   DataScope
+     * @extends Array
+     *
+     * @param   {object|object[]|DataScope} parent - Parent Scope
+     *
+     * @returns {DataScope}                 New Scope inherit from its Parent Scope
+     */
+
     function DataScope(parent) {
 
         return  (parent instanceof DataScope)  ?  Object.create( parent )  :  this;
@@ -583,7 +759,11 @@ var base_DataScope = (function ($) {
             var diff = { };
 
             for (var key in data)
-                if ((! this.hasOwnProperty( key ))  ||  (this[key] !== data[key]))
+                if (
+                    (data[ key ]  !=  null)  ||
+                    (! this.hasOwnProperty( key ))  ||
+                    (this[key] !== data[key])
+                )
                     this[ key ] = diff[ key ] = data[ key ];
 
             return diff;
@@ -613,6 +793,21 @@ var base_DataScope = (function ($) {
 
 var view_View = (function ($, Observer, DataScope, RenderNode) {
 
+    /**
+     * 视图抽象类
+     *
+     * @author  TechQuery
+     *
+     * @class   View
+     * @extends Observer
+     *
+     * @param   {jQueryAcceptable} $_View  - Container DOM of View
+     * @param   {object}               [scope] - Data object as a scope
+     *
+     * @returns {View}                 Return the last one if a View instance
+     *                                 has been created on this element
+     */
+
     function View($_View, scope) {
 
         var _This_ = Observer.call(
@@ -624,6 +819,17 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
             this.setPrivate({
                 id:          '',
                 name:        this.$_View[0].name || this.$_View[0].dataset.name,
+                /**
+                 * 视图数据作用域
+                 *
+                 * @name      __data__
+                 * @type      {DataScope}
+                 *
+                 * @memberof  View
+                 * @instance
+                 *
+                 * @protected
+                 */
                 data:        new DataScope( scope ),
                 parse:       0,
                 child:       [ ],
@@ -649,16 +855,29 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
                         (this.instanceOf( iDOM.parentNode )  ||  '').__data__
                     );
         },
-        extend:    function (constructor, static, prototype) {
+        /**
+         * 继承出一个视图子类
+         *
+         * @author   TechQuery
+         *
+         * @memberof View
+         *
+         * @param    {function} constructor - Constructor of the Sub Class
+         * @param    {?object}  Static      - Static properties
+         * @param    {object}   [prototype] - Instance properties
+         *
+         * @returns  {function} The Sub Class
+         */
+        extend:    function (constructor, Static, prototype) {
 
             Sub_Class.push( constructor );
 
-            static = static  ||  { };
+            Static = Static  ||  { };
 
-            static.is = static.is || $.noop;
+            Static.is = Static.is || $.noop;
 
             return $.Class.extend.call(
-                this,  constructor,  static,  prototype
+                this,  constructor,  Static,  prototype
             ).signSelector();
         }
     }, {
@@ -680,6 +899,17 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
                         iData[$.camelCase( this.attributeName.slice(5) )] = iNew;
                 });
 
+                /**
+                 * 自定义属性 更新事件
+                 *
+                 * @event    View#update
+                 *
+                 * @type     {object}
+                 *
+                 * @property {string}      type   - Event Name
+                 * @property {HTMLElement} target - View container
+                 */
+
                 if (_This_.__parse__  &&  (! $.isEmptyObject( iData )))
                     _This_.render( iData ).emit({
                         type:      'update',
@@ -698,6 +928,17 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
                 )
             });
         },
+        /**
+         * 挂载视图
+         *
+         * @author   TechQuery
+         *
+         * @memberof View.prototype
+         *
+         * @fires    View#attach
+         *
+         * @returns  {View} Current View
+         */
         attach:        function () {
 
             if (! this.$_View[0].id)
@@ -709,6 +950,17 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
 
             if ( this.$_View[0].dataset.href )  this.attrWatch();
 
+            /**
+             * 视图挂载完成事件
+             *
+             * @event    View#attach
+             *
+             * @type     {object}
+             *
+             * @property {string}      type   - Event Name
+             * @property {HTMLElement} target - View container
+             */
+
             this.emit({
                 type:      'attach',
                 target:    this.$_View.append( this.$_Content )[0]
@@ -716,6 +968,15 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
 
             return this;
         },
+        /**
+         * 卸载视图
+         *
+         * @author   TechQuery
+         *
+         * @memberof View.prototype
+         *
+         * @returns  {View} Current View
+         */
         detach:        function () {
 
             if ( this.$_View[0].id.match(/^View_\w+/) )  this.$_View[0].id = '';
@@ -732,7 +993,27 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
 
             return this;
         },
-        scan:          function (iParser) {
+        /**
+         * HTML 树解析器
+         *
+         * @callback View~parser
+         *
+         * @this     View
+         * @param    {HTMLElement|View} node - A Renderable Object
+         */
+        /**
+         * HTML 树扫描器
+         *
+         * @author    TechQuery
+         *
+         * @memberof  View.prototype
+         * @protected
+         *
+         * @param     {View~parser} parser - A callback to process HTMLElement
+         *
+         * @returns   {View}        Current View
+         */
+        scan:          function (parser) {
 
             var Sub_View = [ ];
 
@@ -771,22 +1052,34 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
                             return null;
                     }
 
-                    return  iParser.call(this, iDOM);
+                    return  parser.call(this, iDOM);
 
                 }).bind( this ));
 
             while (! iSearcher.next().done)  ;
 
             for (var i = 0;  this.__child__[i];  i++)
-                iParser.call(this,  this.__child__[i].$_View[0]);
+                parser.call(this,  this.__child__[i].$_View[0]);
 
             for (var i = 0;  Sub_View[i];  i++)
-                iParser.call(this, Sub_View[i]);
+                parser.call(this, Sub_View[i]);
 
             this.__parse__ = $.now();
 
             return this;
         },
+        /**
+         * 视图对象 属性监视
+         *
+         * @author   TechQuery
+         *
+         * @memberof View.prototype
+         *
+         * @param    {string} key       - Property Key
+         * @param    {object} [get_set] - Getter & Setter
+         *
+         * @returns  {View}   Current View
+         */
         watch:         function (key, get_set) {
 
             if (! (key in Object.getPrototypeOf( this )))
@@ -800,10 +1093,30 @@ var view_View = (function ($, Observer, DataScope, RenderNode) {
 
             return this;
         },
+        /**
+         * 获取视图上的数据
+         *
+         * @author   TechQuery
+         *
+         * @memberof View.prototype
+         *
+         * @returns  {object} Data of this View in plain object
+         */
         valueOf:       function () {
 
             return  this.__data__.valueOf();
         },
+        /**
+         * 获取子组件
+         *
+         * @author   TechQuery
+         *
+         * @memberof View.prototype
+         *
+         * @param    {string}  [$_Filter] - jQuery Selector
+         *
+         * @returns  {View[]}  Array of Child Component
+         */
         childOf:       function ($_Filter) {
 
             var children = this.__child__ || this;
@@ -951,18 +1264,27 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
 
             $_Root.find('slot[name]').each(function () {
 
-                $('[slot="' + this.getAttribute('name') + '"]',  root)
-                    .replaceAll( this );
+                var name = this.name || this.getAttribute('name');
+
+                var $_Slot = $('[slot="' + name + '"]',  root);
+
+                if ( $_Slot[0] )  $_Slot.replaceAll( this );
             });
+
+            var Default;
 
             $_Root.find('slot').each(function () {
 
-                if (! arguments[0])
-                    this.parentNode.replaceChild(
-                        $.buildFragment( root.childNodes ),  this
-                    );
-                else
-                    this.parentNode.removeChild( this );
+                var name = this.name || this.getAttribute('name');
+
+                this.parentNode.replaceChild(
+                    $.buildFragment(
+                        ((name || Default)  ?  this  :  root).childNodes
+                    ),
+                    this
+                );
+
+                Default = 1;
             });
         },
         build:        function (root, base, HTML) {
@@ -1017,9 +1339,24 @@ var view_DOMkit = (function ($, RenderNode, InnerLink) {
 
 var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
 
-    function HTMLView($_View, iScope) {
+    /**
+     * 普通视图类（对应 JSON 对象）
+     *
+     * @author  TechQuery
+     *
+     * @class   HTMLView
+     * @extends View
+     *
+     * @param   {jQueryAcceptable} $_View  - Container DOM of HTMLView
+     * @param   {object}               [scope] - Data object as a scope
+     *
+     * @returns {HTMLView}             Return the last one if a HTMLView instance
+     *                                 has been created on this element
+     */
 
-        var _This_ = View.call(this, $_View, iScope);
+    function HTMLView($_View, scope) {
+
+        var _This_ = View.call(this, $_View, scope);
 
         return  (_This_ !== this)  ?
             _This_ :
@@ -1084,6 +1421,15 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
 
             return this;
         },
+        /**
+         * HTML 模板解析
+         *
+         * @author   TechQuery
+         *
+         * @memberof HTMLView.prototype
+         *
+         * @returns  {HTMLView}  Current HTMLView
+         */
         parse:         function () {
 
             return  this.scan(function (iNode) {
@@ -1144,27 +1490,39 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
                 }
             );
         },
-        render:        function (iData, value) {
+        /**
+         * 渲染视图
+         *
+         * @author   TechQuery
+         *
+         * @memberof HTMLView.prototype
+         *
+         * @param    {string|object} data    - Property Key or Data Object
+         * @param    {*}             [value] - Property Value
+         *
+         * @returns  {HTMLView}      Current HTMLView
+         */
+        render:        function (data, value) {
 
             var _Data_ = { },  exclude;
 
-            if (iData instanceof Element) {
+            if (data instanceof Element) {
 
-                exclude = iData;
+                exclude = data;
 
-                iData = exclude.getAttribute('name');
+                data = exclude.getAttribute('name');
 
                 value = HTMLView.getValue( exclude );
             }
 
-            if (typeof iData.valueOf() === 'string') {
+            if (typeof data.valueOf() === 'string') {
 
-                _Data_[iData] = value;    iData = _Data_;
+                _Data_[data] = value;    data = _Data_;
             }
 
             _Data_ = this.__data__;
 
-            this.nodeOf(_Data_.commit( iData ),  exclude,  function (node) {
+            this.nodeOf(_Data_.commit( data ),  exclude,  function (node) {
 
                 if (node instanceof RenderNode)
                     node.render(this, _Data_);
@@ -1205,9 +1563,26 @@ var view_HTMLView = (function ($, View, DOMkit, RenderNode) {
 
 var view_ListView = (function ($, View, HTMLView, InnerLink) {
 
-    function ListView($_View, iScope) {
+    /**
+     * 迭代视图类（对应 JSON 数组）
+     *
+     * @description 默认匹配：设置了 `data-name` 属性的 `ul, ol, tbody, select, datalist` 元素
+     *
+     * @author  TechQuery
+     *
+     * @class   ListView
+     * @extends View
+     *
+     * @param   {jQueryAcceptable} $_View  - Container DOM of ListView
+     * @param   {object}           [scope] - Data object as a scope
+     *
+     * @returns {ListView}         Return the last one if a ListView instance
+     *                             has been created on this element
+     */
 
-        var _This_ = View.call(this, $_View, iScope);
+    function ListView($_View, scope) {
+
+        var _This_ = View.call(this, $_View, scope);
 
         if (_This_ !== this)  return _This_;
 
@@ -1221,6 +1596,15 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
         is:    $.expr[':'].list
     }, {
         splice:     Array.prototype.splice,
+        /**
+         * 清空视图
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @returns  {ListView} Current ListView
+         */
         clear:      function () {
 
             this.$_View.empty();
@@ -1229,7 +1613,20 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
 
             return this;
         },
-        insert:     function (iData, Index, iDelay) {
+        /**
+         * 插入一项
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @param    {object}   data      - Data of one Item
+         * @param    {number}   [index=0] - Index of Insert Point
+         * @param    {boolean}  [delay]   - Create one HTMLView, and not insert
+         *
+         * @returns  {HTMLView} Newly created Item
+         */
+        insert:     function (data, index, delay) {
 
             var Item = (new HTMLView(this.__HTML__, this.__data__)).parse();
 
@@ -1239,16 +1636,28 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
                     new InnerLink( this );
                 });
 
-            iData.__index__ = Index = Index || 0;
+            data.__index__ = index = index || 0;
 
-            this.splice(Index,  0,  Item.render( iData ));
+            this.splice(index,  0,  Item.render( data ));
 
-            this.__data__.splice(Index,  0,  Item.__data__);
+            this.__data__.splice(index,  0,  Item.__data__);
 
-            if (! iDelay)  Item.$_View.insertTo(this.$_View, Index);
+            if (! delay)  Item.$_View.insertTo(this.$_View, index);
 
             return Item;
         },
+        /**
+         * 渲染视图
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @param    {object[]} list    - ArrayLike Object of Data Object
+         * @param    {number}   [index] - Insert offset
+         *
+         * @returns  {ListView} Current ListView
+         */
         render:     function (list, index) {
 
             if (! (index != null))  this.clear();
@@ -1264,6 +1673,17 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
 
             return this;
         },
+        /**
+         * 根据 HTML 节点查询索引
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @param    {jQueryAcceptable} $_Item - An HTMLElement in one of the List
+         *
+         * @returns  {number}           Index of $_Item
+         */
         indexOf:    function ($_Item) {
 
             $_Item = ($_Item instanceof $)  ?  $_Item  :  $( $_Item );
@@ -1273,19 +1693,42 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
                     $_Item  :  $_Item.parentsUntil( this.$_View )
             ).slice( -1 ).index();
         },
-        remove:     function (Index) {
+        /**
+         * 删除一项
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @param    {number}   index - Index of Remove Point
+         *
+         * @returns  {HTMLView} Newly removed Item
+         */
+        remove:     function (index) {
 
             var Item = this.splice(
-                    $.isNumeric( Index )  ?  Index  :  this.indexOf( Index ),  1
+                    $.isNumeric( index )  ?  index  :  this.indexOf( index ),  1
                 )[0];
 
             Item.$_View.remove();
 
             return Item;
         },
-        sort:       function () {
+        /**
+         * 列表排序
+         *
+         * @author   TechQuery
+         *
+         * @memberof ListView.prototype
+         *
+         * @param    {function} callback - Same as the callback of
+         *                                 Array.prototype.sort()
+         *
+         * @returns  {ListView} Current ListView
+         */
+        sort:       function (callback) {
 
-            Array.prototype.sort.call(this, arguments[0]);
+            Array.prototype.sort.call(this, callback);
 
             this.$_View.append($.map(this,  function (Item) {
 
@@ -1295,13 +1738,6 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
             }));
 
             return this;
-        },
-        valueOf:    function () {
-
-            return  $.map(this,  function () {
-
-                return arguments[0].valueOf();
-            });
         }
     });
 
@@ -1311,6 +1747,21 @@ var view_ListView = (function ($, View, HTMLView, InnerLink) {
 
 
 var view_TreeView = (function ($, ListView) {
+
+    /**
+     * 树形视图类（对应 JSON 数组 + 对象）
+     *
+     * @author  TechQuery
+     *
+     * @class   TreeView
+     * @extends ListView
+     *
+     * @param   {jQueryAcceptable} $_View  - Container DOM of TreeView
+     * @param   {object}               [scope] - Data object as a scope
+     *
+     * @returns {TreeView}             Return the last one if a TreeView instance
+     *                                 has been created on this element
+     */
 
     function TreeView($_View, scope) {
 
@@ -1327,7 +1778,18 @@ var view_TreeView = (function ($, ListView) {
         if (_This_ !== this)  return _This_;
     }
 
-//  Tree Data Convert (Flat to 3D)
+    /**
+     * 平铺数据 转换为 立体数据
+     *
+     * @author   TechQuery
+     *
+     * @memberof TreeView
+     *
+     * @param    {object[]} list               Flat Data of a Tree
+     * @param    {string}   [child_key='list'] Key of a Tree Branch in HTML Template
+     *
+     * @returns  {object[]} 3D Data of a Tree
+     */
 
     TreeView.fromFlat = function (list, child_key) {
 
@@ -1359,6 +1821,19 @@ var view_TreeView = (function ($, ListView) {
 
 var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit, InnerLink) {
 
+    /**
+     * Web 应用（单例）构造函数
+     *
+     * @author  TechQuery
+     *
+     * @class   WebApp
+     * @extends Observer
+     *
+     * @param   {jQueryAcceptable}  Page_Box    Container DOM for Inner Page
+     * @param   {(string|URL)}      [API_Root]  The Root Path of Back-end API
+     *                                          formatted as Absolute URL
+     */
+
     function WebApp(Page_Box, API_Root) {
 
         if (this instanceof $)
@@ -1369,7 +1844,17 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
         if (_This_ !== this)  return _This_;
 
         Observer.call(this, Page_Box).pageRoot = new URL($.filePath() + '/');
-
+        /**
+         * 后端 API 根路径
+         *
+         * @name     apiRoot
+         * @type     {URL}
+         *
+         * @memberof WebApp
+         * @instance
+         *
+         * @readonly
+         */
         this.apiRoot = new URL(API_Root || '',  this.pageRoot);
 
         this.length = 0;
@@ -1397,6 +1882,16 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             return  (arguments[0] + '').replace(this.pageRoot, '').split('#')[0];
         },
+        /**
+         * 明文显示当前 SPA 内页的路由 URI
+         *
+         * @author    TechQuery
+         *
+         * @memberof  WebApp.prototype
+         *
+         * @returns   {string}  The full route URI of current Inner Page
+         *                      in plain text
+         */
         getRoute:         function () {
             try {
                 return self.atob(
@@ -1404,21 +1899,35 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
                 );
             } catch (error) { }
         },
-        _emit:            function (iType, iLink, iData) {
+        _emit:            function (type, link, data) {
 
-            var $_Target = ((iLink.target === 'page')  ?  this  :  iLink).$_View;
+            var $_Target = ((link.target === 'page')  ?  this  :  link).$_View;
 
-            var observer = (iType in iLink.__handle__)  ?
-                    iLink  :  View.instanceOf($_Target, false);
+            var observer = (type in link.__handle__)  ?
+                    link  :  View.instanceOf($_Target, false);
 
-            iLink = $.extend(iLink.valueOf(), {
-                type:      iType,
+            /**
+             * 基于链接路由的事件对象
+             *
+             * @typedef  {object}      RouterEvent
+             *
+             * @property {string}      type              Event Name
+             * @property {HTMLElement} target            Related Element
+             * @property {string}      [href]            HTML URI
+             * @property {string}      [src]             JSON URI
+             * @property {string}      [method="GET"]    HTTP Method of JSON URI
+             * @property {string}      [contentType]     MIME Type of request
+             * @property {string}      [charset="UTF-8"] CharSet of request
+             */
+
+            link = $.extend(link.valueOf(), {
+                type:      type,
                 target:    $_Target[0]
             });
 
-            iData = this.emit(iLink, iData)  ||  iData;
+            data = this.emit(link, data)  ||  data;
 
-            return  observer  ?  (observer.emit(iLink, iData)  ||  iData)  :  iData;
+            return  observer  ?  (observer.emit(link, data)  ||  data)  :  data;
         },
         emitRoute:        function (link) {
 
@@ -1428,71 +1937,86 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             var path = $.filePath( page )  ||  page,  $_Item;
 
-            if (
-                ($_Item = linkOf.call($_Nav, route))[0]  ||
-                ($_Item = linkOf.call($_Nav, page))[0]  ||
-                ($_Item = linkOf.call($_Nav, path, true))[0]
-            )
-                this._emit('route', link, $_Item);
+            ($_Item = linkOf.call($_Nav, route))[0]  ||
+            ($_Item = linkOf.call($_Nav, page))[0]  ||
+            ($_Item = linkOf.call($_Nav, path, true));
+
+            /**
+             * 路由切换事件
+             *
+             * @event WebApp#route
+             *
+             * @type  {RouterEvent}
+             */
+
+            this._emit('route', link, $_Item);
         },
         switchTo:         function (Index) {
 
             if (this.lastPage == Index)  return;
 
-            var iPage = View.instanceOf(this.$_View, false);
+            var page = View.instanceOf(this.$_View, false);
 
-            if ( iPage )  iPage.detach();
+            if ( page )  page.detach();
 
-            if (this.lastPage > -1)  this[ this.lastPage ].view = iPage;
+            if (this.lastPage > -1)  this[ this.lastPage ].view = page;
 
-            if (iPage = (this[ Index ]  ||  '').view) {
+            if (page = (this[ Index ]  ||  '').view) {
 
-                iPage.attach();
+                page.attach();
 
                 this.emitRoute( this[ Index ] );
 
-                return iPage;
+                return page;
             }
         },
-        setRoute:         function (iLink) {
+        setRoute:         function (link) {
 
             this.switchTo();
 
-            if (this[ this.lastPage ]  !=  (iLink + '')) {
+            if (this[ this.lastPage ]  !=  (link + '')) {
 
                 if (++this.lastPage != this.length)
                     this.splice(this.lastPage, Infinity);
 
                 self.history[
-                    ((this.getRoute() == iLink) ? 'replace' : 'push')  +  'State'
+                    ((this.getRoute() == link) ? 'replace' : 'push')  +  'State'
                 ](
                     {index: this.length},
-                    document.title = iLink.title,
-                    '#!'  +  self.btoa( this.getCID( iLink ) )
+                    document.title = link.title,
+                    '#!'  +  self.btoa( this.getCID( link ) )
                 );
 
-                this.emitRoute( this[ this.length++ ] = iLink );
+                this.emitRoute( this[ this.length++ ] = link );
             }
 
             return this;
         },
-        loadView:         function (iLink, iHTML) {
+        loadView:         function (link, HTML) {
 
-            var iTarget = (
-                    (iLink.target === 'page')  ?  this.setRoute( iLink )  :  iLink
+            var target = (
+                    (link.target === 'page')  ?  this.setRoute( link )  :  link
                 ).$_View[0];
 
-            if (iHTML = this._emit('template', iLink, iHTML))
-                DOMkit.build(iTarget, iLink, iHTML);
+            /**
+             * 视图模板 加载成功事件
+             *
+             * @event WebApp#template
+             *
+             * @type  {RouterEvent}
+             */
 
-            var iView = View.getSub( iTarget );
+            if (HTML = this._emit('template', link, HTML))
+                DOMkit.build(target, link, HTML);
 
-            if ( iView.parse )  iView.parse();
+            var view = View.getSub( target );
 
-            if (! $('script:not(head > *)', iTarget)[0])
-                iLink.emit('load');
+            if ( view.parse )  view.parse();
 
-            return iView;
+            if (! $('script:not(head > *)', target)[0])
+                link.emit('load');
+
+            return view;
         },
         loadChild:        function (view) {
 
@@ -1503,18 +2027,18 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
                 return view;
             });
         },
-        loadComponent:    function (iLink, iHTML, iData) {
+        loadComponent:    function (link, HTML, data) {
 
-            var JS_Load = iLink.one('load'),  iView = this.loadView(iLink, iHTML);
+            var JS_Load = link.one('load'),  view = this.loadView(link, HTML);
 
-            return  JS_Load.then(function (iFactory) {
+            return  JS_Load.then(function (factory) {
 
-                iData = $.extend(
-                    iData,  iLink.data,  iLink.$_View[0].dataset,  iData
+                data = $.extend(
+                    data,  link.data,  link.$_View[0].dataset,  data
                 );
 
-                return iView.render(
-                    iFactory  ?  (iFactory.call(iView, iData)  ||  iData)  :  iData
+                return view.render(
+                    factory  ?  (factory.call(view, data)  ||  data)  :  data
                 );
             }).then( this.loadChild.bind( this ) );
         },
@@ -1532,21 +2056,44 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
                 return  this.one({type: 'ready',  target: this.$_View[0]});
             }
         },
-        load:             function (iLink) {
+        /**
+         * 加载一个链接/视图的 DOM 元素或 SPA 对象
+         *
+         * @author    TechQuery
+         *
+         * @memberof  WebApp.prototype
+         *
+         * @param     {HTMLElement|View}  link - an HTML Element or SPA Object of
+         *                                       a Link or View
+         * @returns   {Promise}
+         *
+         * @fires     WebApp#request
+         * @fires     WebApp#data
+         * @fires     WebApp#ready
+         */
+        load:             function (link) {
 
-            if (! (iLink instanceof InnerLink))
-                iLink = new InnerLink(
-                    (iLink instanceof Observer)  ?  iLink.$_View[0]  :  iLink
+            if (! (link instanceof InnerLink))
+                link = new InnerLink(
+                    (link instanceof Observer)  ?  link.$_View[0]  :  link
                 );
 
             var _This_ = this;
 
-            return  iLink.load(function () {
+            return  link.load(function () {
 
                 if ((this.dataType || '').slice(0, 4)  ===  'json')
                     this.url = (new URL(this.url, _This_.apiRoot))  +  '';
 
-                _This_._emit('request', iLink, {
+                /**
+                 * AJAX 请求发起事件
+                 *
+                 * @event WebApp#request
+                 *
+                 * @type  {RouterEvent}
+                 */
+
+                _This_._emit('request', link, {
                     option:       this,
                     transport:    arguments[0]
                 });
@@ -1555,17 +2102,25 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             }).then(function () {
 
-                var iData = arguments[0][1];
+                var data = arguments[0][1];
 
-                if (iData != null) {
+                if (data != null) {
 
-                    iLink.header = iData.head;
+                    link.header = data.head;
 
-                    iData = _This_._emit('data', iLink, iData.body);
+                    /**
+                     * 链接 / 视图 数据加载成功事件
+                     *
+                     * @event WebApp#data
+                     *
+                     * @type  {RouterEvent}
+                     */
+
+                    data = _This_._emit('data', link, data.body);
                 }
 
-                if (iLink.target !== 'data')
-                    return  _This_.loadComponent(iLink, arguments[0][0], iData);
+                if (link.target !== 'data')
+                    return  _This_.loadComponent(link, arguments[0][0], data);
 
             }).then(function (view) {
 
@@ -1573,26 +2128,48 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
                 var promise = view.one('ready');
 
-                _This_._emit('ready', iLink, view);
+                /**
+                 * 视图加载完成事件
+                 *
+                 * @event WebApp#ready
+                 *
+                 * @type  {RouterEvent}
+                 */
 
-                if (iLink.target === 'page')
+                _This_._emit('ready', link, view);
+
+                if (link.target === 'page')
                     promise = _This_.autoFocus() || promise;
 
                 return promise;
             });
         },
-        loadPage:         function (iURI) {
+        /**
+         * 按 浏览历史索引 或 路由 URI 加载内页
+         *
+         * @author    TechQuery
+         *
+         * @memberof  WebApp.prototype
+         *
+         * @param     {number|string} [URI=0] - a History Index or Route URI
+         * @returns   {Promise}
+         *
+         * @listens   WebApp#ready
+         */
+        loadPage:         function (URI) {
 
-            iURI = iURI || 0;
+            URI = URI || 0;
 
-            if (isNaN( iURI ))
-                return  this.load( $('<a href="' + iURI + '" />')[0] );
+            if (isNaN( URI ))
+                return  this.load( $('<a href="' + URI + '" />')[0] );
 
-            var link = this[this.lastPage + iURI];
+            var link = this[+URI + this.lastPage];
 
             if ( link )  delete link.view;
 
-            self.history.go( iURI );
+            if (! URI)  return  this.load( link );
+
+            self.history.go( URI );
 
             return  this.one({type: 'ready',  target: this.$_View[0]});
         },
@@ -1600,13 +2177,13 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 
             var _This_ = this;
 
-            $('html').on('click submit',  InnerLink.HTML_Link,  function (iEvent) {
+            $('html').on('click submit',  InnerLink.HTML_Link,  function (event) {
                 if (
-                    ((this.tagName !== 'FORM')  ||  (iEvent.type === 'submit'))  &&
+                    ((this.tagName !== 'FORM')  ||  (event.type === 'submit'))  &&
                     ((this.target || '_self')  ===  '_self')  &&
                     _This_.getCID(this.href || this.action)
                 ) {
-                    iEvent.preventDefault();
+                    event.preventDefault();
 
                     _This_.load( this );
                 }
@@ -1661,57 +2238,137 @@ var WebApp = (function ($, Observer, View, HTMLView, ListView, TreeView, DOMkit,
 })(jquery, base_Observer, view_View, view_HTMLView, view_ListView, view_TreeView, view_DOMkit, InnerLink);
 
 
-//
-//                    >>>  EasyWebApp.js  <<<
-//
-//
-//      [Version]    v4.0  (2017-10-17)  stable
-//
-//      [Require]    iQuery  ||  jQuery with jQueryKit
-//
-//      [Usage]      A Light-weight SPA Engine with
-//                   jQuery Compatible API.
-//
-//
-//              (C)2015-2017    shiy2008@gmail.com
-//
-
+/**
+ * EasyWebApp.js - A Light-weight SPA Engine based on jQuery Compatible API
+ *
+ * @module    {function} WebApp
+ *
+ * @version   4.0 (2017-11-06) stable
+ *
+ * @requires  jquery
+ * @see       {@link http://jquery.com/ jQuery}
+ * @requires  jQueryKit
+ * @see       {@link https://techquery.github.io/iQuery.js iQuery}
+ *
+ * @copyright TechQuery <shiy2008@gmail.com> 2015-2017
+ */
 
 return  (function ($, WebApp, InnerLink) {
+
+    /**
+     * 承诺对象
+     *
+     * @typedef {Promise} Promise
+     *
+     * @see     {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}
+     */
+
+    /**
+     * URL 对象
+     *
+     * @typedef {URL} URL
+     *
+     * @see     {@link https://developer.mozilla.org/en-US/docs/Web/API/URL|URL}
+     */
+
+    /**
+     * DOM 树节点抽象类
+     *
+     * @typedef {Node} Node
+     *
+     * @see     {@link https://developer.mozilla.org/en-US/docs/Web/API/Node|Node}
+     */
+
+    /**
+     * HTML 元素标签抽象类
+     *
+     * @typedef {HTMLElement} HTMLElement
+     *
+     * @see     {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+     */
 
 /* ---------- AMD based Component API ---------- */
 
     var _require_ = self.require,  _link_;
 
-    self.require = $.extend(function () {
+    /**
+     * 增强的 require()
+     *
+     * @global
+     * @function require
+     *
+     * @param {string[]} dependency
+     * @param {function} [factory]
+     * @param {function} [fallback]
+     *
+     * @return {Promise}
+     *
+     * @see {@link https://github.com/amdjs/amdjs-api/wiki/require#requirearray-function-}
+     */
 
-        if (! document.currentScript)  return _require_.apply(this, arguments);
+    self.require = $.extend(function (dependency, factory, fallback) {
 
-        var iArgs = arguments,  iWebApp = new WebApp();
+        var script = document.currentScript, iWebApp = new WebApp();
 
-        var view = WebApp.View.instanceOf( document.currentScript );
+        return  new Promise(function (resolve, reject) {
 
-        var link = (view.$_View[0] === iWebApp.$_View[0])  ?
-                iWebApp[ iWebApp.lastPage ]  :
-                InnerLink.instanceOf( view.$_View );
+            var parameter = [
+                    dependency,
+                    (factory instanceof Function)  ?  factory  :  resolve,
+                    (fallback instanceof Function)  ?  fallback  :  reject
+                ];
 
-        _require_.call(this,  iArgs[0],  function () {
+            if (! script)
+                return _require_.apply(null, parameter);
 
-            _link_ = link;
+            var view = WebApp.View.instanceOf( script );
 
-            return  iArgs[1].apply(this, arguments);
+            var link = (view.$_View[0] === iWebApp.$_View[0])  ?
+                    iWebApp[ iWebApp.lastPage ]  :
+                    InnerLink.instanceOf( view.$_View );
+
+            _require_.call(this,  parameter[0],  function () {
+
+                _link_ = link;
+
+                return  parameter[1].apply(this, arguments);
+
+            },  parameter[2]);
         });
     },  _require_);
 
+    /**
+     * 组件工厂声明
+     *
+     * @author    TechQuery
+     *
+     * @memberof  WebApp
+     *
+     * @param     {function}  factory - The factory function of current
+     *                                  component & its data
+     * @returns   {function}  WebApp constructor
+     */
 
-    WebApp.component = function (iFactory) {
+    WebApp.component = function (factory) {
 
-        if (_link_)  _link_.emit('load', iFactory);
+        if (_link_)  _link_.emit('load', factory);
 
         return this;
     };
 
     $.extend(WebApp.prototype, {
+        /**
+         * 更新路由 URI 的参数数据
+         *
+         * @author    TechQuery
+         *
+         * @memberof  WebApp.prototype
+         *
+         * @param     {string|object}          key      String or
+         *                                              Key-Value Object
+         * @param     {number|boolean|string}  [value]
+         * @returns   {WebApp}
+         */
         setURLData:    function (key, value) {
 
             var URL = this.getRoute().split(/&?data=/);
@@ -1743,6 +2400,42 @@ return  (function ($, WebApp, InnerLink) {
 
 /* ---------- jQuery based Helper API ---------- */
 
+    /**
+     * jQuery 对象
+     *
+     * @typedef {jQuery} jQuery
+     *
+     * @see     {@link https://api.jquery.com/jQuery|jQuery}
+     */
+
+    /**
+     * jQuery 构造函数 第一参数接受的数据类型
+     *
+     * @typedef {(string|HTMLElement|HTMLElement[]|jQuery)} jQueryAcceptable
+     *
+     * @see     {@link https://api.jquery.com/jQuery|jQuery Acceptable}
+     */
+
+    /**
+     * jQuery 插件命名空间
+     *
+     * @external "jQuery.fn"
+     *
+     * @see      {@link http://learn.jquery.com/plugins/|jQuery Plugins}
+     */
+
+    /**
+     * 在 jQuery 对象首个元素上创建/获取视图对象
+     *
+     * @author    TechQuery
+     *
+     * @function  external:"jQuery.fn".view
+     *
+     * @param     {string}  [Class_Name] - String for creating,
+     *                                     or empty for getting
+     * @returns   {View}
+     */
+
     $.fn.view = function (Class_Name) {
 
         if (! this[0])  return;
@@ -1751,6 +2444,18 @@ return  (function ($, WebApp, InnerLink) {
             (new WebApp[Class_Name](this[0], arguments[1]))  :
             WebApp.View.instanceOf(this[0], false);
     };
+
+    /**
+     * 在 jQuery 对象首个元素上创建/获取 Web 应用对象
+     *
+     * @author   TechQuery
+     *
+     * @function external:"jQuery.fn".iWebApp
+     *
+     * @param    {(string|URL)}  [API_Root] - The Root Path of Back-end API
+     *                                        formatted as Absolute URL
+     * @returns  {WebApp}
+     */
 
     return  $.fn.iWebApp = WebApp;
 

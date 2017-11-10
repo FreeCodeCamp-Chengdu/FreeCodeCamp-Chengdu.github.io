@@ -5,14 +5,22 @@
 
         EWA.component(function () {
 
-            var VM = this;
+            var VM = this, fallback;
 
             var Load_Cover = this.$_View.children('div').on(
-                    'transitionend webkitTransitionEnd',  function () {
-
-                        if (! VM.count)  this.style.display = 'none';
-                    }
+                    'transitionend webkitTransitionEnd',  hide
                 )[0];
+
+            function hide() {
+
+                if (! VM.count)  Load_Cover.style.display = 'none';
+
+                if (fallback != null)  clearTimeout( fallback );
+            }
+
+            var duration = parseFloat(
+                    $( Load_Cover ).css('transition-duration')
+                );
 
             $( document ).on('ajaxSend',  function () {
 
@@ -22,7 +30,8 @@
 
             }).on('ajaxSuccess',  function () {
 
-                if (VM.count > 0)  VM.count-- ;
+                if ((VM.count > 0)  &&  (--VM.count === 0))
+                    fallback = $.wait(duration, hide);
             });
 
             return  {count: 0};
