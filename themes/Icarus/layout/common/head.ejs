@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<title><%= page_title() %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<%- meta(page) %>
+
+<% if (has_config('open_graph')) { %>
+    <% const og_options = {
+        twitter_id: get_config('open_graph.twitter_id'),
+        twitter_site: get_config('open_graph.twitter_site'),
+        google_plus: get_config('open_graph.google_plus'),
+        fb_admins: get_config('open_graph.fb_admins'),
+        fb_app_id: get_config('open_graph.fb_app_id')
+    };
+    if (has_thumbnail(page)) {
+        og_options['image'] = get_thumbnail(page);
+    } %>
+    <%- open_graph(og_options) %>
+<% } %>
+
+<% if (has_config('canonical_url')) { %>
+<link rel="canonical" href="<%- get_config('canonical_url') %>" />
+<% } %>
+
+<% if (has_config('rss')) { %>
+<link rel="alternative" href="<%- get_config('rss') %>" title="<%= get_config('title') %>" type="application/atom+xml">
+<% } %>
+
+<% if (has_config('favicon')) { %>
+<link rel="icon" href="<%- url_for(get_config('favicon')) %>">
+<% } %>
+
+<%- _css(cdn('bulma', '0.7.2', 'css/bulma.css')) %>
+<%- _css(iconcdn()) %>
+<%- _css(fontcdn('Ubuntu:400,600|Source+Code+Pro')) %>
+<%- _css(cdn('highlight.js', '9.12.0', 'styles/' + get_config('article.highlight') + '.css')) %>
+
+<% if (has_config('plugins')) { %>
+    <% for (let plugin in get_config('plugins')) { %>
+    <%- partial('plugin/' + plugin, { head: true, plugin: get_config('plugins')[plugin] }) %>
+    <% } %>
+<% } %>
+
+<%- _css('css/style') %>
