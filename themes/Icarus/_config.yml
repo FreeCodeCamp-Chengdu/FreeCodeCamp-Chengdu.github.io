@@ -139,6 +139,8 @@ widgets:
         # Links to be shown in the links widget
         links:
             freeCodeCamp: https://www.freecodecamp.org/
+            FCC 中文论坛: https://chinese.freecodecamp.org/forum/
+            活动图片集: http://cdfcc.lofter.com/
     -
         # Widget name
         type: category
