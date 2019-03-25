@@ -12,9 +12,19 @@ tags:
   - GitHub
   - Wiki
 toc: true
+
+# Activity meta
 start: 2019-03-24 20:00
 end: 2019-03-24 22:00
 description: "freeCodeCamp 成都社区 在线工作坊 #1"
+mentors:
+  - TechQuery
+  - too
+  - Akagilnc
+  - demongodYY
+workers:
+  - jiangyuzhen
+  - alicaiting
 ---
 
 freeCodeCamp 成都社区 在线工作坊 #1
@@ -90,7 +100,7 @@ Windows 7 / 8 / 10（及同代 Windows Server）
 
 ### 2. 安装包管理器
 
-![图片](https://uploader.shimo.im/f/m55mGjqznVky6RjN.png!thumbnail)
+![](https://oscimg.oschina.net/oscnet/9a098d1d1d95b3c0b84f7bde1d8046222c4.jpg)
 
 （复制、粘贴以下命令）
 ```powershell

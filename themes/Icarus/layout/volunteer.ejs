@@ -1,0 +1,21 @@
+<%
+  const keyMap = {
+    mentors:  '导师',
+    workers:  '义工'
+  };
+%>
+
+<main class="card has-text-centered">
+  <% for (let type in keyMap) { %>
+    <section class="card-content content">
+      <h2><%= keyMap[type] %>榜</h2>
+      <%-
+        partial('widget/member', {
+          posts:  site.posts,
+          base:   site.data.volunteer,
+          type
+        })
+      %>
+    </section>
+  <% } %>
+</main>
