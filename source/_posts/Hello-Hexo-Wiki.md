@@ -1,7 +1,10 @@
 ---
 title: Hello Hexo-Wiki !
 date: 2019-03-25 21:21:12
+categories:
+  - Open-Source
 tags:
+  - Web
   - Hexo
   - Wiki
 ---
