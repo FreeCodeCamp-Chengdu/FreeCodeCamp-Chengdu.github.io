@@ -23,11 +23,13 @@ open_graph:
 navbar:
     # Navigation bar menu links
     menu:
-        Home: /
-        Archives: /archives
-        Categories: /categories
-        Tags: /tags
-        About: /about
+        活动日历: /activity
+        精彩瞬间: http://cdfcc.lofter.com/
+        真知灼见: /categories
+        时空隧道: /archives
+        知识碎片: /tags
+        兄弟伙: https://china.freecodecamp.one/?city=chengdu
+        关于: /about
     # Navigation bar links to be shown on the right
     links:
         Fork on GitHub:
@@ -133,6 +135,11 @@ widgets:
         position: left
     -
         # Widget name
+        type: recent_posts
+        # Where should the widget be placed, left or right
+        position: left
+    -
+        # Widget name
         type: links
         # Where should the widget be placed, left or right
         position: left
@@ -140,32 +147,6 @@ widgets:
         links:
             freeCodeCamp: https://www.freecodecamp.org/
             FCC 中文论坛: https://chinese.freecodecamp.org/forum/
-            活动图片集: http://cdfcc.lofter.com/
-    -
-        # Widget name
-        type: category
-        # Where should the widget be placed, left or right
-        position: left
-    -
-        # Widget name
-        type: tagcloud
-        # Where should the widget be placed, left or right
-        position: left
-    -
-        # Widget name
-        type: recent_posts
-        # Where should the widget be placed, left or right
-        position: right
-    -
-        # Widget name
-        type: archive
-        # Where should the widget be placed, left or right
-        position: right
-    -
-        # Widget name
-        type: tag
-        # Where should the widget be placed, left or right
-        position: right
 # Other plugin settings
 plugins:
     # Enable page animations

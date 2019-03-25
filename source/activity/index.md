@@ -1,0 +1,4 @@
+---
+type: calendar
+layout: calendar
+---
