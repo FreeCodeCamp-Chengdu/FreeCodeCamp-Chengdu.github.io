@@ -85,6 +85,10 @@ deploy:
 permalink_pinyin:
   enable: true
 
+feed:
+  type: atom
+  icon: images/FCC-CDC-v1.png
+
 pwa:
   manifest:
     path: /manifest.json

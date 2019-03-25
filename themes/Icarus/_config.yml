@@ -1,11 +1,11 @@
 # Version of the Icarus theme that is currently used
 version: 2.3.0
 # Path or URL to the website's icon
-favicon: /images/FCC-CDC-v1.png
+favicon: images/FCC-CDC-v1.png
 # Path or URL to RSS atom.xml
-rss:
+rss: atom.xml
 # Path or URL to the website's logo to be shown on the left of the navigation bar or footer
-logo: /images/FCC-CDC-v1.png
+logo: images/FCC-CDC-v1.png
 # Open Graph metadata
 # https://hexo.io/docs/helpers.html#open-graph
 open_graph:
@@ -78,18 +78,6 @@ donate:
         type: wechat
         # Qrcode image URL
         qrcode: ''
-    -
-        # Donation entry name
-        type: paypal
-        # Paypal business ID or email address
-        business: ''
-        # Currency code
-        currency_code: USD
-    -
-        # Donation entry name
-        type: patreon
-        # URL to the Patreon page
-        url: ''
 # Share plugin settings
 # http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Share-Plugins
 share:
@@ -123,7 +111,7 @@ widgets:
         # Author's current location to be shown in the profile widget
         location: ChengDu, SiChuan, China
         # Path or URL to the avatar to be shown in the profile widget
-        avatar: /images/FCC-CDC-v1.png
+        avatar: images/FCC-CDC-v1.png
         # Email address for the Gravatar to be shown in the profile widget
         gravatar:
         # Whether to show avatar image rounded or square
@@ -137,7 +125,7 @@ widgets:
                 url: https://github.com/FreeCodeCamp-Chengdu
             RSS:
                 icon: fas fa-rss
-                url: /
+                url: atom.xml
     -
         # Widget name
         type: toc
