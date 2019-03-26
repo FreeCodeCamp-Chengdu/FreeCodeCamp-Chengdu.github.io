@@ -100,7 +100,7 @@ Windows 7 / 8 / 10（及同代 Windows Server）
 
 ### 2. 安装包管理器
 
-![图片](PowerShell-1.png)
+![](PowerShell-1.png)
 
 （复制、粘贴以下命令）
 ```powershell
@@ -128,11 +128,11 @@ Mac OS X 10.10 及以上版本
  - 在 SpotLight 里输入“终端”后回车
  - 或从 LaunchPad 里点击“终端”图标
 
-![图片](terminal.png)
+![](terminal.png)
 
 打开的界面如下，可以在这个提示符后面输入命令执行
 
-![图片](terminal-console.png)
+![](terminal-console.png)
 
 ### 2. 安装 Command Line Tools
 
@@ -140,15 +140,15 @@ Mac OS X 10.10 及以上版本
 ```shell
 xcode-select --install
 ```
-![图片](xcode-install-command.png)
+![](xcode-install-command.png)
 
 弹出类似这样的窗口
 
-![图片](xcode-install.png)
+![](xcode-install.png)
 
 点击 “安装” （也就是 Install），会出来如下界面，耐心等待下载安装的完成
 
-![图片](xcode-downloading.png)
+![](xcode-downloading.png)
 
 ### 3. 安装包管理器
 
@@ -159,22 +159,22 @@ xcode-select --install
 
 界面如下
 
-![图片](brew-install.png)
+![](brew-install.png)
 
 回车执行之后显示类似如下输出（安装过程中需要回车确认执行安装，有可能还需要输入用户的电脑密码）
-![图片](brew-install-confirm.png)
+![](brew-install-confirm.png)
 
 如没有报错，看到 Installation successful 字样即表示安装成功！
-![图片](console-succes.png)
+![](console-succes.png)
 
 注意：安装非常慢、超时等可能与国内网络条件有关，需要参考 [macOS安装Homebrew](https://blog.csdn.net/zzq900503/article/details/80404314) 使用国内镜像源安装。（如下图的报错）
-![图片](brew-error2.png)
+![](brew-error2.png)
 
 如下图的安装失败则需要参考 [Mac上安装homebrew的心酸历程](https://blog.csdn.net/sinat_41756672/article/details/80534031) 执行 git 的配置命令：
 ```shell
 git config --global http.postBuffer 524288000
 ```
-![图片](brew-error2.png)
+![](brew-error2.png)
 
 ### 4. 安装必备软件
 
