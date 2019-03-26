@@ -1,5 +1,5 @@
 ---
-type: calendar
-layout: calendar
+type: activity
+layout: activity
 title: Activity
 ---

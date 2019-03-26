@@ -18,12 +18,12 @@
 <script type="application/json">
 <%-
   JSON.stringify(
-    site.posts.map(post => {
-      if (post.categories.data.some(item => RegExp(item.name, 'i').test(path)))
+    posts.map(post => {
+      if (post.categories.data.some(item => RegExp(item.name, 'i').test(type)))
         return {
           title:  post.title,
           detail: post.description,
-          url:    post.path,
+          url:    '/' + post.path,
           start:  post.start,
           end:    post.end
         };
