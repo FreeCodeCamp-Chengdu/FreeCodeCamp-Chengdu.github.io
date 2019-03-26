@@ -26,7 +26,6 @@ navbar:
         活动: /activity
         相册: http://cdfcc.lofter.com/
         博文: /categories
-        史记: /archives
         大会: https://web-conf.tk/
         社群: /volunteer
         关于: /about
@@ -133,6 +132,15 @@ widgets:
                 url: atom.xml
     -
         # Widget name
+        type: links
+        # Where should the widget be placed, left or right
+        position: left
+        # Links to be shown in the links widget
+        links:
+            freeCodeCamp: https://www.freecodecamp.org/
+            FCC 中文论坛: https://chinese.freecodecamp.org/forum/
+    -
+        # Widget name
         type: toc
         # Where should the widget be placed, left or right
         position: left
@@ -142,14 +150,11 @@ widgets:
         # Where should the widget be placed, left or right
         position: left
     -
-        # Widget name
-        type: links
-        # Where should the widget be placed, left or right
+        type: archive
         position: left
-        # Links to be shown in the links widget
-        links:
-            freeCodeCamp: https://www.freecodecamp.org/
-            FCC 中文论坛: https://chinese.freecodecamp.org/forum/
+    -
+        type: tag
+        position: left
 # Other plugin settings
 plugins:
     # Enable page animations

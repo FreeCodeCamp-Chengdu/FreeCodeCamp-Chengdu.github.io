@@ -1,8 +1,9 @@
 <style>
-  .flex-box > a {
+  .flow-box > a {
+    margin: 0.25rem;
     position: relative;
   }
-  .flex-box > a.count::before {
+  .flow-box > a.count::before {
     content: attr(data-count);
     position: absolute;
     top: 0;
@@ -14,19 +15,20 @@
     height: 1.5rem;
     border-radius: 50%;
   }
-  .flex-box img {
+  .flow-box img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
   }
 </style>
 
-<div class="flex-box has-text-centered">
+<div class="flow-box">
   <% list.forEach(({name, title, URL, count, logo}) => { %>
     <a title="<%= name %>" href="<%= URL %>"
-      class="<%= count ? 'count' : '' %>" data-count="<%= count %>">
+      class="has-text-centered <%= count ? 'count' : '' %>"
+      data-count="<%= count %>">
       <img class="image has-mb-6" src="<%= logo %>">
-      <p><%= title %></p>
+      <div><%= title %></div>
     </a>
   <% }) %>
 </div>

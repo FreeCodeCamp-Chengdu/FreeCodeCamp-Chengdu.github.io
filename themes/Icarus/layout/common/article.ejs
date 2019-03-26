@@ -48,8 +48,12 @@
             <%- index && post.excerpt ? post.excerpt : post.content %>
         </div>
         <%-
-          (page.categories && (page.categories.data[0].name === 'Activity'))  ?
-            include('../widget/team', {
+          page.address &&
+          partial('../widget/single_map', {city: '', address: page.address})
+        %>
+        <%-
+          (page.mentors || page.workers)  ?
+            partial('../widget/team', {
               keyMap:  {
                 mentors:  '导师',
                 workers:  '义工'

@@ -3,9 +3,11 @@ title: 发起活动
 donate: false
 ---
 
-> [【提交入口】](https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/new/hexo/source/_posts/Activity/)
+<a class="button is-link is-rounded" target="_blank" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/new/hexo/source/_posts/Activity/">添加活动</a>
 
-Front-matter 规范：
+<a class="button is-link is-rounded" target="_blank" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/edit/hexo/source/_data/volunteer.yml">添加人员</a>
+
+【Front-matter 规范】（点右下角按钮复制模板）
 
 ```yaml
 title:  # 活动主题（翻译成英文后设为本文件的文件名）
@@ -19,9 +21,10 @@ tags:
 toc: true
 
 # Activity meta
+description:  # 活动简介
 start:  # 活动开始时间
 end:    # 活动结束时间
-description:  # 活动简介
+address:  # 线下活动地址（市州、区县、路街、楼栋）
 mentors:
   # 讲师、教练们的 GitHub 账号
 workers:
