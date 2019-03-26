@@ -1,18 +1,24 @@
-TechQuery:
-  name: 水歌
-  logo: https://tech-query.me/image/WebCell-0.png
-too:
-  name: Too
-  logo: https://avatars3.githubusercontent.com/u/171673
-Akagilnc:
-  name: Akagilnc
-  logo: https://avatars0.githubusercontent.com/u/12123308
-demongodYY:
-  name: demongodYY
-  logo: https://avatars3.githubusercontent.com/u/17036920
-jiangyuzhen:
-  name: Jane.zhen
-  logo: https://avatars0.githubusercontent.com/u/19619540
-alicaiting:
-  name: caiting
-  logo: https://avatars3.githubusercontent.com/u/18660893
+- name: TechQuery
+  title: 水歌
+  URL: https://tech-query.me/
+  logo: https://avatars1.githubusercontent.com/u/35015022?s=100
+- name: too
+  title: Too
+  URL: https://too.github.io/
+  logo: https://avatars3.githubusercontent.com/u/171673?s=100
+- name: Akagilnc
+  title: Akagilnc
+  URL: https://github.com/Akagilnc
+  logo: https://avatars0.githubusercontent.com/u/12123308?s=100
+- name: demongodYY
+  title: demongodYY
+  URL: https://github.com/demongodYY
+  logo: https://avatars3.githubusercontent.com/u/17036920?s=100
+- name: jiangyuzhen
+  title: Jane.zhen
+  URL: https://github.com/jiangyuzhen
+  logo: https://avatars0.githubusercontent.com/u/19619540?s=100
+- name: alicaiting
+  title: caiting
+  URL: https://github.com/alicaiting
+  logo: https://avatars3.githubusercontent.com/u/18660893?s=100

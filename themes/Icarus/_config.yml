@@ -23,19 +23,18 @@ open_graph:
 navbar:
     # Navigation bar menu links
     menu:
-        活动日历: /activity
-        精彩瞬间: http://cdfcc.lofter.com/
-        真知灼见: /categories
-        时空隧道: /archives
-        知识碎片: /tags
-        Web 大会: https://web-conf.tk/
-        社群伙伴: /volunteer
+        活动: /activity
+        相册: http://cdfcc.lofter.com/
+        博文: /categories
+        史记: /archives
+        大会: https://web-conf.tk/
+        社群: /volunteer
         关于: /about
     # Navigation bar links to be shown on the right
     links:
-        Fork on GitHub:
-            icon: fab fa-github
-            url: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io
+        投稿:
+            icon: fas fa-user-edit
+            url: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/new/hexo/source/_posts
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section

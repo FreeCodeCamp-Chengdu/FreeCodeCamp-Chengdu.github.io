@@ -47,6 +47,19 @@
         <div class="content">
             <%- index && post.excerpt ? post.excerpt : post.content %>
         </div>
+        <%-
+          (page.categories && (page.categories.data[0].name === 'Activity'))  ?
+            include('../widget/team', {
+              keyMap:  {
+                mentors:  '导师',
+                workers:  '义工'
+              },
+              data:    site.data.volunteer,
+              count:   false,
+              post:    page
+            })  :
+            ''
+        %>
         <% if (!index && post.tags && post.tags.length) { %>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">

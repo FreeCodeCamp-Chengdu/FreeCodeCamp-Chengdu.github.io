@@ -1,0 +1,40 @@
+<%
+  function findMember(name) {
+
+    return  data.find(item => item.name === name);
+  }
+
+  function countMember(posts, type) {
+
+    const data = { };
+
+    posts.forEach(post => {
+
+      for (let name  of  (post[type] || '')) {
+
+        const member = findMember( name );
+
+        if (! member)  continue;
+
+        data[name] = data[name] || Object.assign({ }, member);
+
+        data[name].count = data[name].count ? ++data[name].count : 1;
+      }
+    });
+
+    return  Object.values( data ).sort((A, B)  =>  B.count - A.count);
+  }
+%>
+
+<% for (let type in keyMap) { %>
+  <section class="card-content content">
+    <h2><%= keyMap[type] %></h2>
+    <%-
+      partial('widget/member', {
+        list:  count ?
+          countMember(posts, type) :
+          Array.from(new Set( post[type] ),  name => findMember(name))
+      })
+    %>
+  </section>
+<% } %>
