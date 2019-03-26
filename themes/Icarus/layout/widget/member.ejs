@@ -1,0 +1,50 @@
+<style>
+  .flex-box {
+    display: flex;
+    justify-content: space-around;
+  }
+  .flex-box > a {
+    position: relative;
+  }
+  .flex-box > a::before {
+    content: attr(data-count);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: red;
+    color: white;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+  }
+  .flex-box img {
+    border-radius: 50%;
+  }
+</style>
+
+<%
+  var data = { };
+
+  posts.forEach(post => {
+
+    for (let name  of  (post[type] || ''))
+      if ( base[name] ) {
+
+        data[name] = data[name] || Object.assign({ }, base[name]);
+
+        data[name].count = data[name].count ? ++data[name].count : 1;
+      }
+  });
+
+  data = Object.entries( data ).sort((A, B)  =>  B[1].count - A[1].count);
+%>
+
+<div class="flex-box">
+  <% data.forEach(([ID, {count, logo, name}]) => { %>
+    <a title="<%= ID %>" href="https://github.com/<%= ID %>" data-count="<%= count %>">
+      <img class="image is-128x128 has-mb-6" src="<%= logo %>">
+      <p class="has-text-centered"><%= name %></p>
+    </a>
+  <% }) %>
+</div>
