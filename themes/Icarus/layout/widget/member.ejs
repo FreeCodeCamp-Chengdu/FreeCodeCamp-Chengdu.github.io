@@ -22,8 +22,8 @@
 </style>
 
 <div class="flex-box has-text-centered">
-  <% list.forEach(({title, URL, count, logo}) => { %>
-    <a title="<%= title %>" href="<%= URL %>"
+  <% list.forEach(({name, title, URL, count, logo}) => { %>
+    <a title="<%= name %>" href="<%= URL %>"
       class="<%= count ? 'count' : '' %>" data-count="<%= count %>">
       <img class="image has-mb-6" src="<%= logo %>">
       <p><%= title %></p>
