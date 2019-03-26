@@ -132,9 +132,14 @@ widgets:
                 url: atom.xml
     -
         # Widget name
-        type: links
+        type: recent_posts
         # Where should the widget be placed, left or right
         position: left
+    -
+        # Widget name
+        type: links
+        # Where should the widget be placed, left or right
+        position: right
         # Links to be shown in the links widget
         links:
             freeCodeCamp: https://www.freecodecamp.org/
@@ -143,18 +148,13 @@ widgets:
         # Widget name
         type: toc
         # Where should the widget be placed, left or right
-        position: left
-    -
-        # Widget name
-        type: recent_posts
-        # Where should the widget be placed, left or right
-        position: left
+        position: right
     -
         type: archive
-        position: left
+        position: right
     -
         type: tag
-        position: left
+        position: right
 # Other plugin settings
 plugins:
     # Enable page animations

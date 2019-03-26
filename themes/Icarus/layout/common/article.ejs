@@ -47,23 +47,6 @@
         <div class="content">
             <%- index && post.excerpt ? post.excerpt : post.content %>
         </div>
-        <%-
-          page.address &&
-          partial('../widget/single_map', {city: '', address: page.address})
-        %>
-        <%-
-          (page.mentors || page.workers)  ?
-            partial('../widget/team', {
-              keyMap:  {
-                mentors:  '导师',
-                workers:  '义工'
-              },
-              data:    site.data.volunteer,
-              count:   false,
-              post:    page
-            })  :
-            ''
-        %>
         <% if (!index && post.tags && post.tags.length) { %>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
@@ -92,6 +75,8 @@
         <% } %>
     </div>
 </div>
+
+<%- partial('widget/activity', { post }) %>
 
 <% const services = has_config('donate') ? get_config('donate') : []; %>
 <% if (!index && services.length > 0) { %>

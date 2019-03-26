@@ -1,0 +1,29 @@
+<%
+function activityOf({address, mentors, workers}) {
+
+  if ( address ) { %>
+    <h3>活动场地</h3>
+<%- partial('../widget/marker_map', { addresses: [address] }) %><%
+  } %>
+<%-
+  (mentors || workers)  ?
+    partial('../widget/team', {
+      keyMap:  {
+        mentors:  '导师',
+        workers:  '义工'
+      },
+      data:    site.data.volunteer,
+      count:   false,
+      post:    {mentors, workers}
+    })  :
+    '' %><%
+}
+
+if (post.categories  &&  (post.categories.data[0].name === 'Activity')) { %>
+  <aside class="card">
+    <div class="card-content content">
+      <h2>活动简讯</h2>
+      <%- activityOf( post ) %>
+    </div>
+  </aside><%
+} %>

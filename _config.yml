@@ -128,3 +128,6 @@ pwa:
       - pattern: "!!js/regexp /cnzz\\.com/"
         strategy: networkOnly
   priority: 5
+
+amap:
+  key: 8325164e247e15eea68b59e89200988b

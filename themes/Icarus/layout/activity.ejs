@@ -1,12 +1,21 @@
-<h2 class="flex-box has-text-centered" style="margin-bottom: 3rem">
+<h2 class="flex-box has-text-centered">
   社区活动
   <a class="btn btn-primary" href="new">
     发起活动
   </a>
 </h2>
+<hr>
+<h3>日历</h3>
 <%-
   partial('widget/calendar', {
     posts:  site.posts,
     type:   page.type
+  })
+%>
+<hr>
+<h3>地图</h3>
+<%-
+  partial('widget/marker_map', {
+    addresses:  site.posts.map(post => post.address).filter( Boolean )
   })
 %>

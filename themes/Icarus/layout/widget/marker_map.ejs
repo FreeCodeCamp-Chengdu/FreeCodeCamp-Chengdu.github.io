@@ -1,0 +1,40 @@
+<template><%= JSON.stringify( addresses ) %></template>
+
+<div class="embed-box"></div>
+
+<script src="//webapi.amap.com/maps?v=1.4.13&key=<%= config.amap.key %>&plugin=AMap.Geocoder"></script>
+<script>
+(function (box) {
+
+  var addresses = JSON.parse( box.previousElementSibling.innerHTML.trim() );
+
+  var map = new AMap.Map(box, {resizeEnable: true}),
+    coder = new AMap.Geocoder();
+
+  function getCoords(addresses) {
+
+    return new Promise(function (resolve, reject) {
+
+      coder.getLocation(addresses,  function (status, result) {
+
+        if (status === 'error')
+          reject( result );
+        else if (status === 'complete')
+          resolve( result );
+      });
+    });
+  }
+
+  getCoords( addresses ).then(function (data) {
+
+    if (! data.geocodes[0])  return;
+
+    var markers = data.geocodes.map(function (item) {
+
+      return  new AMap.Marker({position: item.location});
+    });
+
+    map.add( markers ),  map.setFitView( markers );
+  });
+})( document.currentScript.previousElementSibling.previousElementSibling );
+</script>

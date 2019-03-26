@@ -27,15 +27,13 @@
 %>
 
 <% for (let type in keyMap) if (count || post[type]) { %>
-  <section class="card-content content">
-    <h2><%= keyMap[type] %></h2>
-    <%-
-      partial('widget/members', {
-        list:  count ?
-          countMember(posts, type) :
-          Array.from(new Set( post[type] ),  name => findMember(name))
-            .filter( Boolean )
-      })
-    %>
-  </section>
+  <h3><%= keyMap[type] %></h3>
+  <%-
+    partial('widget/members', {
+      list:  count ?
+        countMember(posts, type) :
+        Array.from(new Set( post[type] ),  name => findMember(name))
+          .filter( Boolean )
+    })
+  %>
 <% } %>

@@ -1,7 +1,14 @@
 {
   "name": "@fcc-cdc/ows",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "private": true,
+  "keywords": [
+    "wiki"
+  ],
+  "author": "shiy2008@gmail.com",
+  "directories": {
+    "doc": "source/_post/"
+  },
   "hexo": {
     "version": "3.8.0"
   },
@@ -21,16 +28,9 @@
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3"
   },
-  "keywords": [
-    "wiki"
-  ],
-  "directories": {
-    "doc": "source/_post/"
-  },
   "scripts": {
     "start": "hexo clean  &&  hexo server",
     "deploy": "hexo clean  &&  hexo deploy",
     "build": "hexo clean  &&  hexo generate"
-  },
-  "author": "shiy007@qq.com"
+  }
 }
