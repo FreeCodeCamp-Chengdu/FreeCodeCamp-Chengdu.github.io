@@ -1,5 +1,6 @@
-title:  # 编程道场-结对活动	
-date:  # 2017-12-10
+---
+title: 编程道场之结对活动
+date:  2017-12-10
 categories:
   - Activity
   - Workshop
@@ -11,7 +12,7 @@ tags:
 toc: true
 
 # Activity meta
-start:  2017-12-10 14:30
+start:  2017-12-10 14:00
 end:    2017-12-10 18:00
 description:  个人分享 + 结对编程。现场用 cyber-dojo.org 网站进行演示，使用了比较简单易懂的 Word Wrap 题目。在疑似结对争吵中，两个人演示了结对编程基本的样子；如何做最简单的测试驱动开发；互相交换角色
 mentors:
@@ -22,7 +23,9 @@ workers:
   - jiangyuzhen
 ---
 
-Too 用了半个小时左右对本次活动内容和安排进行说明，由于考虑到这次到场的小伙伴对敏捷开发和结对编程都比较陌生，所以尝试说得比较详细，对相关术语也尽量解释清楚。为了方便大家建立更直观的印象，Too 和书香一起现场用 cyber-dojo.org 网站进行了演示，使用了比较简单易懂的 Word Wrap 题目。在疑似结对争吵中，两个人演示了结对编程基本的样子；如何做最简单的测试驱动开发；互相交换角色等。这部分时间没控制好超出了计划。
+什么是 Coding Dojo？
+Coding Dojo 是一个集体学习活动。一些程序员（通常是15-20人）在一起编程解决一个程序问题。一边编程，一边互相学习。
+每个人可以从 Coding Dojo 中学到：解决问题的思路、编程技巧、面向对象设计、演进式设计、结对编程、测试驱动开发、持续集成等等。
 <!-- More -->
 
 # 流水帐
@@ -57,11 +60,11 @@ Too 用了半个小时左右对本次活动内容和安排进行说明，由于�
  [Python Web开发：测试驱动方法 (豆瓣)](https://book.douban.com/subject/26640135/) / [Praise for Test-Driven Development with Python](http://www.obeythetestinggoat.com/book/praise.harry.html)
 * 要学习SOLID设计原则, 可以阅读"Agile Software Development, Principles, Patterns, and Practices", 或 "Agile Principles, Patterns, and Practices in C#”. 
 
-* 要学习如何能为其他程序员提供编写整洁代码的反馈，可以阅读Robert C. Martin所著“Clean Code”
+* 要学习如何能为其他程序员提供编写整洁代码的反馈，可以阅读 Robert C. Martin 所著 “Clean Code”
 
-* 要学习如果能够识别代码腐臭来做重构，可以阅读Martin Fowler所著“Refactoring”
+* 要学习如果能够识别代码腐臭来做重构，可以阅读 Martin Fowler 所著 “Refactoring”
 
-* 要学习如何将难以测试的遗留代码改造为便于测试的情形来编写测试，可以阅读Michael Feathers所著“Working Effectively with Legacy Code”
+* 要学习如何将难以测试的遗留代码改造为便于测试的情形来编写测试，可以阅读 Michael Feathers 所著 “Working Effectively with Legacy Code”
 
 * [结对编程的正确姿势，你会了吗？ – ThoughtWorks洞见](http://insights.thoughtworks.cn/pair-programming/)
 
