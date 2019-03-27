@@ -19,7 +19,11 @@ function activityOf({address, mentors, workers}) {
     '' %><%
 }
 
-if (post.categories  &&  (post.categories.data[0].name === 'Activity')) { %>
+if (
+  (path.replace(/index\.html$/, '') === post.path)  &&
+  post.categories  &&
+  (post.categories.data[0].name === 'Activity')
+) { %>
   <aside class="card">
     <div class="card-content content">
       <h2>活动简讯</h2>
