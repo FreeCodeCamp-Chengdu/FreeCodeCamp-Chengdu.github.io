@@ -1,9 +1,15 @@
 <%
-function activityOf({address, mentors, workers}) {
+function activityOf({address, title, permalink, mentors, workers}) {
 
   if ( address ) { %>
     <h3>活动场地</h3>
-<%- partial('../widget/marker_map', { addresses: [address] }) %><%
+    <%-
+      partial('../widget/marker_map', {
+        markers: [{
+          title, URL: permalink, address
+        }]
+      })
+    %><%
   } %>
 <%-
   (mentors || workers)  ?

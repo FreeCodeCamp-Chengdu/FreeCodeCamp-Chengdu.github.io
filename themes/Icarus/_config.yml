@@ -33,7 +33,7 @@ navbar:
     links:
         投稿:
             icon: fas fa-user-edit
-            url: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io/new/hexo/source/_posts
+            url: https://github.com/FreeCodeCamp-Chengdu/Wiki/new/master/_posts/
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section

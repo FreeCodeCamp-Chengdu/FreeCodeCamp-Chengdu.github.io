@@ -16,6 +16,8 @@
 <h3>地图</h3>
 <%-
   partial('widget/marker_map', {
-    addresses:  site.posts.map(post => post.address).filter( Boolean )
+    markers: site.posts.map(
+      ({title, permalink, address})  =>  (address && {title, URL: permalink, address})
+    ).filter( Boolean )
   })
 %>

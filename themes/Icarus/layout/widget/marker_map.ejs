@@ -1,15 +1,51 @@
-<template><%= JSON.stringify( addresses ) %></template>
+<script src="https://cdn.jsdelivr.net/npm/@babel/polyfill/dist/polyfill.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CIntersectionObserver"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/dom-renderer"></script>
+<script src="//webapi.amap.com/maps?v=1.4.13&key=<%= config.amap.key %>&plugin=AMap.Geocoder,AMap.AdvancedInfoWindow"></script>
+
+<template><%= JSON.stringify( markers ) %></template>
+<template>
+  <div style="padding: 0.5rem 0.5rem 0 0.5rem">
+    <h4>
+      <a href="${view.URL}">${view.title}</a>
+    </h4>
+    <p>${view.address}</p>
+  </div>
+</template>
 <div class="embed-box"></div>
 
-<script src="//webapi.amap.com/maps?v=1.4.13&key=<%= config.amap.key %>&plugin=AMap.Geocoder"></script>
 <script>
-(function (box) {
+(function (main) {
 
-  var addresses = JSON.parse( box.previousElementSibling.innerHTML.trim() );
+  var box = document.currentScript.previousElementSibling;
+
+  self.addEventListener('load',  function () {
+
+    new IntersectionObserver(function (entry, observer) {
+
+      observer.disconnect();
+
+      main(
+        self['dom-renderer'].default,
+        box,
+        box.previousElementSibling,
+        box.previousElementSibling.previousElementSibling
+      );
+    }).observe( box );
+  });
+})(function (View, box, template, list) {
+
+  list = JSON.parse( list.innerHTML.trim() );
 
   var map = new AMap.Map(box, {resizeEnable: true}),
-    coder = new AMap.Geocoder();
+    coder = new AMap.Geocoder(),
+    dialog = new AMap.AdvancedInfoWindow({
+      offset: new AMap.Pixel(0, -30),
+      showShadow: true,
+      closeWhenClickMap: true
+    }),
+    template = new View( template.innerHTML );
 
   function getCoords(addresses) {
 
@@ -25,16 +61,30 @@
     });
   }
 
-  getCoords( addresses ).then(function (data) {
+  getCoords(
+    list.map(function (item) {  return item.address;  })
+  ).then(function (data) {
 
     if (! data.geocodes[0])  return;
 
-    var markers = data.geocodes.map(function (item) {
+    var markers = data.geocodes.map(function (item, index) {
 
-      return  new AMap.Marker({position: item.location});
+      var marker = new AMap.Marker({position: item.location});
+
+      marker.on('click',  function () {
+
+        template.render( list[index] ).then(function () {
+
+          dialog.setContent(template + '');
+
+          dialog.open(map, item.location);
+        });
+      });
+
+      return marker;
     });
 
     map.add( markers ),  map.setFitView( markers );
   });
-})( document.currentScript.previousElementSibling.previousElementSibling );
+});
 </script>
