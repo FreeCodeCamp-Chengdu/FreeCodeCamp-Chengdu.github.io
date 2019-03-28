@@ -1,15 +1,17 @@
 <main class="card">
   <div class="card-content content">
-  <%-
-    partial('widget/team', {
-      keyMap:  {
-        mentors:  '导师',
-        workers:  '义工'
-      },
-      data:    site.data.volunteer,
-      count:   true,
-      posts:   site.posts
-    })
-  %>
+    <h2><%= page.title %></h2>
+    <%-
+      partial('widget/team', {
+        keyMap:  {
+          mentors:  '导师',
+          workers:  '义工',
+          authors:  '博客'
+        },
+        data:    site.data.volunteer,
+        count:   true,
+        posts:   site.posts
+      })
+    %>
   </div>
 </main>

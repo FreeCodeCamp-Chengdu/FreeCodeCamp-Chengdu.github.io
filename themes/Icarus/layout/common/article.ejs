@@ -47,6 +47,23 @@
         <div class="content">
             <%- index && post.excerpt ? post.excerpt : post.content %>
         </div>
+        <% if (
+          post.authors  &&
+          (path.replace(/index\.html$/, '') === post.path)
+        ) { %>
+          <div class="content">
+          <%-
+            partial('../widget/team', {
+              keyMap:  {
+                authors:  '作者'
+              },
+              data:    site.data.volunteer,
+              count:   false,
+              post:    {authors: post.authors}
+            })
+          %>
+          </div>
+        <% } %>
         <% if (!index && post.tags && post.tags.length) { %>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">

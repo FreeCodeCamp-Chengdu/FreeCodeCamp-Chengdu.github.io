@@ -28,7 +28,7 @@ function activityOf({address, title, permalink, mentors, workers}) {
 if (
   (path.replace(/index\.html$/, '') === post.path)  &&
   post.categories  &&
-  (post.categories.data[0].name === 'Activity')
+  ((post.categories.data[0] || '').name === 'Activity')
 ) { %>
   <aside class="card">
     <div class="card-content content">

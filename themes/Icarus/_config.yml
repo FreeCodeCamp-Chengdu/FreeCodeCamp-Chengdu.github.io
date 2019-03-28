@@ -28,12 +28,12 @@ navbar:
         博文: /categories
         大会: https://web-conf.tk/
         社群: /volunteer
-        关于: /about
+        关于: /categories/Profile/
     # Navigation bar links to be shown on the right
     links:
         投稿:
             icon: fas fa-user-edit
-            url: https://github.com/FreeCodeCamp-Chengdu/Wiki/new/master/_posts/
+            url: /write/
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section
@@ -142,8 +142,10 @@ widgets:
         position: right
         # Links to be shown in the links widget
         links:
-            freeCodeCamp: https://www.freecodecamp.org/
-            FCC 中文论坛: https://chinese.freecodecamp.org/forum/
+            活动 PPT: https://github.com/FreeCodeCamp-Chengdu/Activity_PPT
+            技术周刊: https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly
+            国际总部: https://www.freecodecamp.org/
+            中文论坛: https://chinese.freecodecamp.org/forum/
     -
         # Widget name
         type: toc

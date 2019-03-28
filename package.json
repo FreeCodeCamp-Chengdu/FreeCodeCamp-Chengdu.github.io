@@ -29,8 +29,21 @@
     "hexo-server": "^0.3.3"
   },
   "scripts": {
+    "format": "prettier --write \"{,!(node_modules|.git|scaffolds|themes|public|.deploy_git)/**/}*.{html,md,css,less,js,json,yml,yaml}\"",
     "start": "hexo clean  &&  hexo server",
-    "deploy": "hexo clean  &&  hexo deploy",
-    "build": "hexo clean  &&  hexo generate"
+    "deploy": "npm run format  &&  hexo clean  &&  hexo deploy",
+    "build": "npm run format  &&  hexo clean  &&  hexo generate"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build  &&  git add ."
+    }
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "prettier": "^1.16.4"
+  },
+  "prettier": {
+    "tabWidth": 2
   }
 }
