@@ -85,6 +85,9 @@ deploy:
 permalink_pinyin:
   enable: true
 
+auto_category:
+  enable: true
+
 feed:
   type: atom
   icon: images/FCC-CDC-v1.png

@@ -19,6 +19,8 @@
         data[name] = data[name] || Object.assign({ }, member);
 
         data[name].count = data[name].count ? ++data[name].count : 1;
+
+        (data[name].posts = data[name].posts || [ ]).push( post );
       }
     });
 

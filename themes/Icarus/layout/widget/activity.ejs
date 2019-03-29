@@ -1,6 +1,14 @@
 <%
-function activityOf({address, title, permalink, mentors, workers}) {
-
+function activityOf({
+  permalink, title, description, start, end, address, mentors, workers
+}) {
+  const event = eventOf(title, description, start, end, address);
+%>
+  <a class="button is-link" download="<%= title %>.ics"
+    href="<%= toDataURI(event + '', 'text/calendar') %>">
+    添加日历
+  </a>
+<%
   if ( address ) { %>
     <h3>活动场地</h3>
     <%-

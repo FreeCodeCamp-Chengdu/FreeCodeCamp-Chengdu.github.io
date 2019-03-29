@@ -12,6 +12,7 @@ require('../includes/helpers/layout')(hexo);
 require('../includes/helpers/override')(hexo);
 require('../includes/helpers/page')(hexo);
 require('../includes/helpers/site')(hexo);
+require('../includes/helpers/data')(hexo);
 
 // Debug helper
 hexo.extend.helper.register('console', function () {

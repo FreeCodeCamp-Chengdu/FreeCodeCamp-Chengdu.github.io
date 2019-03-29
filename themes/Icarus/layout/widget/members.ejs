@@ -1,9 +1,16 @@
 <style>
-  .flow-box > a {
+  ol.flow-box {
+    margin-left: 0;
+  }
+  ol.flow-box > li {
     margin: 0.25rem;
     position: relative;
   }
-  .flow-box > a.count::before {
+  ol.flow-box > li > a {
+    display: block;
+    position: relative;
+  }
+  ol.flow-box > li > a.count::before {
     content: attr(data-count);
     position: absolute;
     top: 0;
@@ -15,20 +22,60 @@
     height: 1.5rem;
     border-radius: 50%;
   }
-  .flow-box img {
+  ol.flow-box img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
   }
+  ol.flow-box > li > .card {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 2;
+    max-width: inherit;
+    white-space: nowrap;
+    text-align: left;
+    display: none;
+  }
+  ol.flow-box > li .card-content {
+    margin: 0 0 0 1rem;
+  }
 </style>
 
-<div class="flow-box">
-  <% list.forEach(({name, title, URL, count, logo}) => { %>
-    <a title="<%= name %>" href="<%= URL %>"
-      class="has-text-centered <%= count ? 'count' : '' %>"
-      data-count="<%= count %>">
-      <img class="image has-mb-6" src="<%= logo %>">
-      <div><%= title %></div>
-    </a>
+<ol class="flow-box">
+  <% list.forEach(({name, title, URL, count, logo, posts}) => { %>
+    <li>
+      <a title="<%= name %>" href="<%= URL %>"
+        class="has-text-centered <%= count ? 'count' : '' %>"
+        data-count="<%= count %>">
+
+        <img class="image has-mb-6" src="<%= logo %>">
+
+        <div><%= title %></div>
+      </a>
+
+      <% if ( posts ) { %>
+        <div class="card">
+          <ol class="card-content">
+            <% posts.forEach(({ title, permalink }) => { %>
+              <li>
+                <a href="<%= permalink %>"><%= title %></a>
+              </li>
+            <% }) %>
+          </ol>
+        </div>
+      <% } %>
+    </li>
   <% }) %>
-</div>
+</ol>
+
+<script>
+  $( document.currentScript ).prev().on('mouseenter',  'li',  function () {
+
+    $('.card', this).show('fast');
+
+  }).on('mouseleave',  'li',  function () {
+
+    $('.card', this).hide('fast');
+  });
+</script>
