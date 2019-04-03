@@ -10,6 +10,9 @@ iframe, .embed-box {
   align-items: center;
 }
 
+.flow-box {
+  display: block;
+}
 .flow-box > * {
   display: inline-block;
   vertical-align: top;

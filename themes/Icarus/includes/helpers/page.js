@@ -86,11 +86,18 @@ module.exports = function (hexo) {
         if (!allowThumbnail) {
             return false;
         }
-        return post.hasOwnProperty('thumbnail') && post.thumbnail;
+        return post.hasOwnProperty('thumbnail') ? post.thumbnail : (
+          post.hasOwnProperty('photos') && post.photos[0]
+        );
     });
 
     hexo.extend.helper.register('get_thumbnail', function (post) {
         const hasThumbnail = hexo.extend.helper.get('has_thumbnail').bind(this)(post);
-        return this.url_for(hasThumbnail ? post.thumbnail : 'images/thumbnail.svg');
+
+        return this.url_for(
+          hasThumbnail ?
+            (post.thumbnail || (post.path + post.photos[0])) :
+            'images/thumbnail.svg'
+        );
     });
 }

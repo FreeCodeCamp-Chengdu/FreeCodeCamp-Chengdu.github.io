@@ -43,10 +43,19 @@
             <% } else { %>
                 <%= post.title %>
             <% } %>
+
+            <% if ( post.slidehtml ) { %>
+              <a class="fab fa-slideshare" style="float: right"
+                title="幻灯片模式" target="_blank"
+                href="<%= url_for(post.link ? post.link : post.path) %>slide.html"></a>
+            <% } %>
         </h1>
         <div class="content">
             <%- index && post.excerpt ? post.excerpt : post.content %>
         </div>
+
+        <hr>
+
         <% if (
           post.authors  &&
           (path.replace(/index\.html$/, '') === post.path)
@@ -64,6 +73,14 @@
           %>
           </div>
         <% } %>
+
+        <% if ( (post.photos || '')[0] ) { %>
+          <div class="content">
+            <h3>精彩瞬间</h3>
+            <%- partial('../widget/gallery', {images: post.photos}) %>
+          </div>
+        <% } %>
+
         <% if (!index && post.tags && post.tags.length) { %>
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">

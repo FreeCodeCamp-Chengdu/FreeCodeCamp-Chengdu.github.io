@@ -65,7 +65,8 @@ search:
 # http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Comment-Plugins
 comment:
     # Name of the comment plugin
-    type:
+    type: disqus
+    shortname: fcc-cdc
 # Donation entries
 # http://ppoffice.github.io/hexo-theme-icarus/categories/Donation/
 donate:
@@ -73,12 +74,12 @@ donate:
         # Donation entry name
         type: alipay
         # Qrcode image URL
-        qrcode: ''
-    -
+        qrcode: images/FCC-CDC-Alipay.jpg
+    #-
         # Donation entry name
-        type: wechat
+        #type: wechat
         # Qrcode image URL
-        qrcode: ''
+        #qrcode: ''
 # Share plugin settings
 # http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Share-Plugins
 share:
@@ -176,12 +177,7 @@ plugins:
     # http://ppoffice.github.io/hexo-theme-icarus/Plugins/General/site-analytics-plugin/#Google-Analytics
     google-analytics:
         # Google Analytics tracking id
-        tracking_id:
-    # Baidu Analytics plugin settings
-    # http://ppoffice.github.io/hexo-theme-icarus/Plugins/General/site-analytics-plugin/#Baidu-Analytics
-    baidu-analytics:
-        # Baidu Analytics tracking id
-        tracking_id:
+        tracking_id: UA-137453538-1
     # Hotjar user feedback plugin
     # http://ppoffice.github.io/hexo-theme-icarus/Plugins/General/site-analytics-plugin/#Hotjar
     hotjar:
