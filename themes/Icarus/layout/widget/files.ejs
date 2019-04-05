@@ -1,0 +1,10 @@
+<% files.forEach(file => { %>
+  <li>
+    <a target="_blank" href="<%= (path + encodeURI( file )) %>">
+
+      <i class="fas fa-2x fa-file-<%= (file_type( file ) || 'alt') %>"></i>
+
+      <span><%= file.split('/').slice(-1)[0] %></span>
+    </a>
+  </li>
+<% }) %>

@@ -1,47 +1,40 @@
 <%
-function activityOf({
+const {
   permalink, title, description, start, end, address, mentors, workers
-}) {
-  const event = eventOf(title, description, start, end, address);
+} = post;
+
+const event = eventOf(title, description, start, end, address);
 %>
+<h2 class="flex-box" style="justify-content: space-between">
+  活动简讯
   <a class="button is-link" download="<%= title %>.ics"
     href="<%= toDataURI(event + '', 'text/calendar') %>">
     添加日历
   </a>
+</h2>
+<ul>
+  <li>时间：<%= full_date( start ) %> ~ <%= full_date( end ) %></li>
+  <li>地点：<%= address %></li>
+</ul>
 <%
-  if ( address ) { %>
-    <h3>活动场地</h3>
-    <%-
-      partial('../widget/marker_map', {
-        markers: [{
-          title, URL: permalink, address
-        }]
-      })
-    %><%
-  } %>
-<%-
-  (mentors || workers)  ?
-    partial('../widget/team', {
-      keyMap:  {
-        mentors:  '导师',
-        workers:  '义工'
-      },
-      data:    site.data.volunteer,
-      count:   false,
-      post:    {mentors, workers}
-    })  :
-    '' %><%
+if ( address ) { %>
+  <%-
+  partial('../widget/marker_map', {
+      markers: [{
+        title, URL: permalink, address
+      }]
+    })
+  %><%
 }
 
-if (
-  (path.replace(/index\.html$/, '') === post.path)  &&
-  post.categories  &&
-  ((post.categories.data[0] || '').name === 'Activity')
-) { %>
-  <aside class="card">
-    <div class="card-content content">
-      <h2>活动简讯</h2>
-      <%- activityOf( post ) %>
-    </div>
-  </aside><%
+if (mentors || workers) { %>
+  <%- partial('../widget/team', {
+    keyMap:  {
+      mentors:  '导师',
+      workers:  '义工'
+    },
+    data:    site.data.volunteer,
+    count:   false,
+    post:    {mentors, workers}
+  }) %><%
 } %>
