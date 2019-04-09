@@ -71,11 +71,13 @@ git push
 
 4. [博文资源](themes/Icarus/layout/widget/post_media.ejs)
 
-5. [博文日历](themes/Icarus/layout/widget/calendar.ejs)
+5. [活动列表](themes/Icarus/layout/widget/activity_list.ejs)
 
-6. [多点地图](themes/Icarus/layout/widget/marker_map.ejs)
+6. [活动日历](themes/Icarus/layout/widget/calendar.ejs)
 
-7. [活动简讯](themes/Icarus/layout/widget/activity.ejs)
+7. [多点地图](themes/Icarus/layout/widget/marker_map.ejs)
+
+8. [活动简讯](themes/Icarus/layout/widget/activity.ejs)
 
 ### 页面布局
 

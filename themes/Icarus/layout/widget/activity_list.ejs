@@ -1,0 +1,37 @@
+<style>
+  .activity-item {
+    margin: 1rem 0;
+  }
+  .activity-item > :nth-child(n+2) {
+    padding-left: 1rem;
+  }
+  .activity-item .flex-box {
+    justify-content: space-between;
+  }
+  .activity-item .flex-box > :last-child {
+    white-space: pre;
+    text-align: center;
+  }
+</style>
+
+<% posts.filter(
+  post => has_category(post, 'Activity')
+).slice(0, 5).forEach(post => { %>
+  <a class="table-row activity-item" href="<%= post.permalink %>">
+    <div class="image is-64x64">
+        <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
+    </div>
+    <div>
+      <div class="flex-box">
+        <div>
+          <h4><%= post.title %></h4>
+          <%= post.description %>
+        </div>
+        <div>
+          <%= date( post.start ) %>
+          <%= time( post.start ) %>
+        </div>
+      </div>
+    </div>
+  </a>
+<% }) %>

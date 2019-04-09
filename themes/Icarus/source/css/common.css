@@ -17,3 +17,12 @@ iframe, .embed-box {
   display: inline-block;
   vertical-align: top;
 }
+
+.table-row {
+  display: table;
+  width: 100%;
+}
+.table-row > * {
+  display: table-cell;
+  vertical-align: middle;
+}

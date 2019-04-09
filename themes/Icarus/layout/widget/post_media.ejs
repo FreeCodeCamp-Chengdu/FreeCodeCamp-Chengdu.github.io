@@ -24,7 +24,7 @@ if ( authors ) { %>
   </div><%
 }
 
-if ( photos ) { %>
+if ( photos[0] ) { %>
   <div class="content">
     <h3>精彩瞬间</h3>
     <%- partial('../widget/gallery', {images: photos}) %>

@@ -1,23 +1,32 @@
-<h2 class="flex-box has-text-centered">
-  <%= page.title %>
-  <a class="btn btn-primary" href="launch">
-    发起活动
-  </a>
-</h2>
-<hr>
-<h3>日历</h3>
-<%-
-  partial('widget/calendar', {
-    posts:  site.posts,
-    type:   page.type
-  })
-%>
-<hr>
-<h3>地图</h3>
-<%-
-  partial('widget/marker_map', {
-    markers: site.posts.map(
-      ({title, permalink, address})  =>  (address && {title, URL: permalink, address})
-    ).filter( Boolean )
-  })
-%>
+<main class="card">
+  <div class="card-content content">
+    <div class="flex-box">
+      <h2 style="margin: 0">
+        <%= page.title %>
+      </h2>
+      <a class="button is-link is-rounded" href="launch">
+        发起活动
+      </a>
+    </div>
+
+    <h3>近期活动</h3>
+    <%- partial('widget/activity_list', {
+      posts: site.posts.sort('-date')
+    }) %>
+    <div style="text-align: center">
+      <a class="button is-rounded" href="<%= url_for('categories/Activity/') %>">
+        查看所有
+      </a>
+    </div>
+    <hr>
+
+    <h3>FCC 成都社区的足迹</h3>
+    <%-
+      partial('widget/marker_map', {
+        markers: site.posts.map(
+          ({title, permalink, address})  =>  (address && {title, URL: permalink, address})
+        ).filter( Boolean )
+      })
+    %>
+  </div>
+</main>
