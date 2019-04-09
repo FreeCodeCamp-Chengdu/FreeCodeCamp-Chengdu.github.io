@@ -17,7 +17,7 @@
 <% posts.filter(
   post => has_category(post, 'Activity')
 ).slice(0, 5).forEach(post => { %>
-  <a class="table-row activity-item" href="<%= post.permalink %>">
+  <a class="table-row activity-item" href="<%= url_for( post.path ) %>">
     <div class="image is-64x64">
         <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
     </div>

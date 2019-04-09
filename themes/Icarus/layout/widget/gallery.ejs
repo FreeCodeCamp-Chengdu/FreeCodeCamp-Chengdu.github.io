@@ -1,5 +1,12 @@
-<div class="justified-gallery">
-  <% images.forEach(photo => { %>
-    <img src="<%= encodeURI( photo ) %>">
-  <% }) %>
+<div class="justified-gallery"><%
+  posts.forEach(({photos, path, title}) => {
+
+    if (! photos[0]) return;
+
+    for (let file of photos) { %>
+      <a class="gallery-item" href="<%= url_for(path + file) %>">
+        <img src="<%= url_for(path + file) %>" alt="<%= title %>">
+      </a><%
+    }
+  }) %>
 </div>

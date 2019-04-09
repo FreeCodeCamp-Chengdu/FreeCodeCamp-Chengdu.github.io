@@ -122,6 +122,8 @@ pwa:
     routes:
       - pattern: "!!js/regexp /\\//"
         strategy: networkFirst
+      - pattern: "!!js/regexp /\\/css\\/common.css$/"
+        strategy: networkFirst
       - pattern: "!!js/regexp /.*\\.(css|js|jpg|jpeg|png|gif|webp)$/"
         strategy: cacheFirst
       - pattern: "!!js/regexp /google.*\\.com/"
