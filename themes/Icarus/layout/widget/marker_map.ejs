@@ -2,6 +2,7 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CIntersectionObserver"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/dom-renderer"></script>
+<script src="https://cdn.jsdelivr.net/npm/web-cell"></script>
 <script src="//webapi.amap.com/maps?v=1.4.14&key=<%= config.amap.key %>&plugin=AMap.Geocoder,AMap.AdvancedInfoWindow"></script>
 
 <template><%= JSON.stringify( markers ) %></template>
@@ -28,13 +29,14 @@
 
       main(
         self['dom-renderer'].default,
+        self['web-cell'].unique,
         box,
         box.previousElementSibling,
         box.previousElementSibling.previousElementSibling
       );
     }).observe( box );
   });
-})(function (View, box, template, list) {
+})(function (View, unique, box, template, list) {
 
   list = JSON.parse( list.innerHTML.trim() );
 
@@ -62,7 +64,7 @@
   }
 
   getCoords(
-    list.map(function (item) {  return item.address;  })
+    unique( list.map(function (item) {  return item.address;  }) )
   ).then(function (data) {
 
     if (! data.geocodes[0])  return;

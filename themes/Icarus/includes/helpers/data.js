@@ -8,13 +8,16 @@ const { VEvent } = require('icalendar'),
     pptx: 'powerpoint'
   };
 
+function has_category(post, name) {
+
+  return Array.from(
+    (post.categories || '').data,  ({ name }) => name
+  ).includes( name )
+}
 
 module.exports = function (hexo) {
 
-  hexo.extend.helper.register('has_category',  (post, name) =>
-
-    Array.from((post.categories || '').data,  ({ name }) => name).includes( name )
-  );
+  hexo.extend.helper.register('has_category', has_category);
 
   hexo.extend.helper.register('file_type',  path => {
 
@@ -48,4 +51,19 @@ module.exports = function (hexo) {
       return event;
     }
   );
+
+  const url_for = hexo.extend.helper.get('url_for');
+
+  hexo.extend.helper.register('sponsor_list',  function (posts) {
+
+    return posts.map(({categories, source, title, path, thumbnail, website}) =>
+
+      has_category({ categories }, 'Sponsor')  &&  {
+        name:  source.match( /([^/\\]+)\.\w+$/i )[1],
+        title,
+        logo:  url_for.call(this, path + thumbnail),
+        URL:   website
+      }
+    ).filter(Boolean)
+  });
 };

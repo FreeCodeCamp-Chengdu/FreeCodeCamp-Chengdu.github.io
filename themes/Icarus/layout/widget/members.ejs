@@ -57,9 +57,9 @@
       <% if ( posts ) { %>
         <div class="card">
           <ol class="card-content">
-            <% posts.forEach(({ title, permalink }) => { %>
+            <% posts.forEach(({ title, path }) => { %>
               <li>
-                <a href="<%= permalink %>"><%= title %></a>
+                <a href="<%= url_for(path) %>"><%= title %></a>
               </li>
             <% }) %>
           </ol>

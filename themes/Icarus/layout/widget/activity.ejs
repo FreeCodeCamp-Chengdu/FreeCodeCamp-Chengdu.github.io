@@ -1,6 +1,6 @@
 <%
 const {
-  permalink, title, description, start, end, address, mentors, workers
+  permalink, title, description, start, end, address, mentors, workers, sponsors
 } = post;
 
 const event = eventOf(title, description, start, end, address);
@@ -14,21 +14,20 @@ const event = eventOf(title, description, start, end, address);
 </h2>
 <ul>
   <li>时间：<%= full_date( start ) %> ~ <%= full_date( end ) %></li>
-  <li>地点：<%= address %></li>
-</ul>
-<%
-if ( address ) { %>
-  <%-
-  partial('../widget/marker_map', {
-      markers: [{
-        title, URL: permalink, address
-      }]
-    })
-  %><%
+  <% if ( address ) { %>
+    <li>地点：<%= address %></li>
+  <% } %>
+</ul><%
+if ( address ) { %><%-
+  partial('./marker_map', {
+    markers: [{
+      title, URL: permalink, address
+    }]
+  }) %><%
 }
 
-if (mentors || workers) { %>
-  <%- partial('../widget/team', {
+if (mentors || workers) { %><%-
+  partial('./team', {
     keyMap:  {
       mentors:  '导师',
       workers:  '义工'
@@ -36,5 +35,16 @@ if (mentors || workers) { %>
     data:    site.data.volunteer,
     count:   false,
     post:    {mentors, workers}
+  }) %><%
+}
+
+if ( sponsors ) { %><%-
+  partial('./team', {
+    keyMap: {
+      sponsors: '赞助'
+    },
+    data:   sponsor_list(site.posts),
+    count:  false,
+    posts:  { sponsors }
   }) %><%
 } %>

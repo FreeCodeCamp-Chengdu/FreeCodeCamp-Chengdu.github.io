@@ -27,7 +27,7 @@ navbar:
         相册: http://cdfcc.lofter.com/
         博文: /categories
         大会: https://web-conf.tk/
-        社群: /volunteer
+        社群: /community
         关于: /categories/Profile/
     # Navigation bar links to be shown on the right
     links:
@@ -122,20 +122,31 @@ widgets:
         follow_link: https://github.com/FreeCodeCamp-Chengdu
         # Links to be shown on the bottom of the profile widget
         social_links:
-            微博:
-                icon: fab fa-weibo
-                url: https://weibo.com/u/6165665516
-            GitHub:
-                icon: fab fa-github
-                url: https://github.com/FreeCodeCamp-Chengdu
             RSS:
                 icon: fas fa-rss
                 url: atom.xml
+            GitHub:
+                icon: fab fa-github
+                url: https://github.com/FreeCodeCamp-Chengdu
+            微博:
+                icon: fab fa-weibo
+                url: https://weibo.com/u/6165665516
+            微信服务号:
+                icon: fab fa-weixin
+                url: contact/#微信服务号
+            QQ 群:
+                icon: fab fa-qq
+                url: contact/#QQ-群
     -
         # Widget name
         type: recent_posts
         # Where should the widget be placed, left or right
         position: left
+    -
+        # Widget name
+        type: toc
+        # Where should the widget be placed, left or right
+        position: right
     -
         # Widget name
         type: links
@@ -147,11 +158,6 @@ widgets:
             技术周刊: https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly
             国际总部: https://www.freecodecamp.org/
             中文论坛: https://chinese.freecodecamp.org/forum/
-    -
-        # Widget name
-        type: toc
-        # Where should the widget be placed, left or right
-        position: right
     -
         type: archive
         position: right
@@ -170,7 +176,7 @@ plugins:
     outdated-browser: true
     # Enable the MathJax plugin
     # http://ppoffice.github.io/hexo-theme-icarus/Plugins/General/mathjax-plugin/
-    mathjax: true
+    mathjax: false
     # Show the back to top button on mobile devices
     back-to-top: true
     # Google Analytics plugin settings

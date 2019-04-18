@@ -96,7 +96,7 @@ module.exports = function (hexo) {
 
         return this.url_for(
           hasThumbnail ?
-            (post.thumbnail || (post.path + post.photos[0])) :
+             post.path + (post.thumbnail || post.photos[0]) :
             'images/thumbnail.svg'
         );
     });

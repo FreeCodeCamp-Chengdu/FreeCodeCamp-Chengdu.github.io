@@ -9,6 +9,8 @@ cache:
   directories:
     - node_modules
 
+before_install:
+  - export TZ=${TIME_ZONE}
 install:
   - npm install
   - cd ${FOLDER_SOURCE}

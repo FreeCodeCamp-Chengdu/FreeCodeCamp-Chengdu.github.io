@@ -13,5 +13,15 @@
         posts:   site.posts
       })
     %>
+    <%-
+      partial('widget/team', {
+        keyMap: {
+          sponsors: '赞助'
+        },
+        data:   sponsor_list(site.posts),
+        count:  true,
+        posts:  site.posts
+      })
+    %>
   </div>
 </main>

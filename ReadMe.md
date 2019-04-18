@@ -83,14 +83,14 @@ git push
 
 1. [活动时空](themes/Icarus/layout/activity.ejs)
 
-2. [社群伙伴](themes/Icarus/layout/volunteer.ejs)
+2. [社群伙伴](themes/Icarus/layout/community.ejs)
 
 ### 工具函数
 
-1. [博文分类判断](themes/Icarus/includes/helpers/data.js#L14)
+1. [博文分类判断](themes/Icarus/includes/helpers/data.js#L11)
 
-2. [获取文件类型](themes/Icarus/includes/helpers/data.js#L19)
+2. [获取文件类型](themes/Icarus/includes/helpers/data.js#L22)
 
-3. [DataURI 生成](themes/Icarus/includes/helpers/data.js#L30)
+3. [DataURI 生成](themes/Icarus/includes/helpers/data.js#L33)
 
-4. [iCalendar 事件](themes/Icarus/includes/helpers/data.js#L36)
+4. [iCalendar 事件](themes/Icarus/includes/helpers/data.js#L38)
