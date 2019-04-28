@@ -56,13 +56,13 @@ module.exports = function (hexo) {
 
   hexo.extend.helper.register('sponsor_list',  function (posts) {
 
-    return posts.map(({categories, source, title, path, thumbnail, website}) =>
+    return posts.map(({categories, source, title, path, thumbnail}) =>
 
       has_category({ categories }, 'Sponsor')  &&  {
         name:  source.match( /([^/\\]+)\.\w+$/i )[1],
         title,
         logo:  url_for.call(this, path + thumbnail),
-        URL:   website
+        URL:   url_for.call(this, path)
       }
     ).filter(Boolean)
   });

@@ -1,16 +1,23 @@
 <%
 const {
-  permalink, title, description, start, end, address, mentors, workers, sponsors
+  permalink, title, description, start, end, address, links, mentors, workers, sponsors
 } = post;
 
 const event = eventOf(title, description, start, end, address);
 %>
 <h2 class="flex-box" style="justify-content: space-between">
   活动简讯
-  <a class="button is-link" download="<%= title %>.ics"
-    href="<%= toDataURI(event + '', 'text/calendar') %>">
-    添加日历
-  </a>
+  <span>
+    <a class="button is-link" download="<%= title %>.ics"
+      href="<%= toDataURI(event + '', 'text/calendar') %>">
+      添加日历
+    </a>
+    <% for (let key in links) { %>
+      <a class="button is-link" target="_blank" href="<%= links[key] %>">
+        <%= key %>
+      </a>
+    <% } %>
+  </span>
 </h2>
 <ul>
   <li>时间：<%= full_date( start ) %> ~ <%= full_date( end ) %></li>

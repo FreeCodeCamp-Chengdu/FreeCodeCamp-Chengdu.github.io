@@ -1,0 +1,21 @@
+<main class="card">
+  <div class="card-content content">
+
+    <h1><%= page.title %></h1>
+    <p>
+      <a class="button is-link is-rounded" target="_blank"
+        href="https://github.com/FreeCodeCamp-Chengdu/Wiki/new/master/_posts/Activity/">添加活动</a>
+
+      <a class="button is-link is-rounded" target="_blank"
+        href="https://github.com/FreeCodeCamp-Chengdu/Wiki/edit/master/_data/volunteer.yml">添加人员</a>
+    </p>
+    <form target="_blank" method="POST" action="https://fcc-cdc.leanapp.cn/form?source=JinShuJu">
+      <p>
+        <label>https://jinshuju.net/f/<input type="text" name="id" required></label>
+      </p>
+      <button type="submit" class="button is-link is-rounded">添加表单</button>
+    </form>
+
+    <%- page.content %>
+  </div>
+</main>
