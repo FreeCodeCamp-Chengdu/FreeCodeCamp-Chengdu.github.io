@@ -31,19 +31,16 @@ navbar:
         关于: /categories/Profile/
     # Navigation bar links to be shown on the right
     links:
-        投稿:
-            icon: fas fa-user-edit
-            url: /write/
+        登录:
+            icon: fas fa-sign-in-alt
+            url: https://fcc-cd.leanapp.cn/signIn/
 # Footer section link settings
 footer:
     # Links to be shown on the right of the footer section
     links:
         Creative Commons:
             icon: fab fa-creative-commons
-            url: 'https://creativecommons.org/'
-        Attribution 4.0 International:
-            icon: fab fa-creative-commons-by
-            url: 'https://creativecommons.org/licenses/by/4.0/'
+            url: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh
         Fork on GitHub:
             icon: fab fa-github
             url: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io

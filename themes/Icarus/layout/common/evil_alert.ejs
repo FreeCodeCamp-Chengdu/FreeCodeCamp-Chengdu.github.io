@@ -1,0 +1,14 @@
+<%- _js(cdn('ua-parser-js', '0.7.19', 'dist/ua-parser.min.js')) %>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
