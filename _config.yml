@@ -90,7 +90,7 @@ auto_category:
 
 feed:
   type: atom
-  icon: images/FCC-CDC-v1.png
+  icon: images/FCC-CDC-v1-1.png
 
 pwa:
   manifest:
@@ -108,9 +108,12 @@ pwa:
       theme_color: rgba(0,0,0,0.5)
       background_color: transparent
       icons:
-        - src: images/FCC-CDC-v1.png
+        - src: images/FCC-CDC-v1-1.png
           type: image/png
           sizes: 180x180
+        - src: images/FCC-CDC-v1-0.png
+          type: image/png
+          sizes: 1056x697
   serviceWorker:
     path: /sw.js
     preload:

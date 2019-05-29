@@ -40,6 +40,16 @@
   ol.flow-box > li .card-content {
     margin: 0 0 0 1rem;
   }
+  ol.flow-box > li > a {
+    width: 6rem;
+  }
+  ol.flow-box > li .image {
+    width: 100%;
+    height: 6rem;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+  }
 </style>
 
 <ol class="flow-box">
@@ -49,7 +59,7 @@
         class="has-text-centered <%= count ? 'count' : '' %>"
         data-count="<%= count %>">
 
-        <img class="image has-mb-6" src="<%= logo %>">
+        <div class="image has-mb-6" style="background-image: url(<%= logo %>)"></div>
 
         <div><%= title %></div>
       </a>

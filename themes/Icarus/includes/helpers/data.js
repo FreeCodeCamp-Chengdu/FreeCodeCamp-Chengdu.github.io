@@ -54,11 +54,11 @@ module.exports = function (hexo) {
 
   const url_for = hexo.extend.helper.get('url_for');
 
-  hexo.extend.helper.register('sponsor_list',  function (posts) {
+  hexo.extend.helper.register('partner_list',  function (posts) {
 
     return posts.map(({categories, source, title, path, thumbnail}) =>
 
-      has_category({ categories }, 'Sponsor')  &&  {
+      has_category({ categories }, 'Partner')  &&  {
         name:  source.match( /([^/\\]+)\.\w+$/i )[1],
         title,
         logo:  url_for.call(this, path + thumbnail),

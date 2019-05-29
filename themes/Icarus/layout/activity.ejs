@@ -24,7 +24,8 @@
     <%-
       partial('widget/marker_map', {
         markers: site.posts.map(
-          ({title, permalink, address})  =>  (address && {title, URL: permalink, address})
+          ({title, permalink, start, address}) =>
+            (start && address && {title, URL: permalink, address})
         ).filter( Boolean )
       })
     %>

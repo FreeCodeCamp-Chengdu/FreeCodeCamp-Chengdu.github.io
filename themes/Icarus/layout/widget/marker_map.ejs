@@ -38,7 +38,10 @@
   });
 })(function (View, unique, box, template, list) {
 
-  list = JSON.parse( list.innerHTML.trim() );
+  list = unique(JSON.parse( list.innerHTML.trim() ), function (A, B) {
+
+    return A.address !== B.address;
+  });
 
   var map = new AMap.Map(box, {resizeEnable: true}),
     coder = new AMap.Geocoder(),
@@ -64,7 +67,7 @@
   }
 
   getCoords(
-    unique( list.map(function (item) {  return item.address;  }) )
+    list.map(function (item) {  return item.address;  })
   ).then(function (data) {
 
     if (! data.geocodes[0])  return;

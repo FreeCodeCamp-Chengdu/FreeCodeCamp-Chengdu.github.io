@@ -1,11 +1,11 @@
 # Version of the Icarus theme that is currently used
 version: 2.3.0
 # Path or URL to the website's icon
-favicon: images/FCC-CDC-v1.png
+favicon: images/FCC-CDC-v1-1.png
 # Path or URL to RSS atom.xml
 rss: atom.xml
 # Path or URL to the website's logo to be shown on the left of the navigation bar or footer
-logo: images/FCC-CDC-v1.png
+logo: images/FCC-CDC-v1-0.png
 # Open Graph metadata
 # https://hexo.io/docs/helpers.html#open-graph
 open_graph:
@@ -110,7 +110,7 @@ widgets:
         # Author's current location to be shown in the profile widget
         location: ChengDu, SiChuan, China
         # Path or URL to the avatar to be shown in the profile widget
-        avatar: images/FCC-CDC-v1.png
+        avatar: images/FCC-CDC-v1-0.png
         # Email address for the Gravatar to be shown in the profile widget
         gravatar:
         # Whether to show avatar image rounded or square

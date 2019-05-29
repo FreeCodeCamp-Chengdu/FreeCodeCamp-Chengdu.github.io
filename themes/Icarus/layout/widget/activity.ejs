@@ -1,6 +1,6 @@
 <%
 const {
-  permalink, title, description, start, end, address, links, mentors, workers, sponsors
+  permalink, title, description, start, end, address, links, mentors, workers, partners
 } = post;
 
 const event = eventOf(title, description, start, end, address);
@@ -45,13 +45,13 @@ if (mentors || workers) { %><%-
   }) %><%
 }
 
-if ( sponsors ) { %><%-
+if ( partners ) { %><%-
   partial('./team', {
     keyMap: {
-      sponsors: '赞助'
+      partners: '合作伙伴'
     },
-    data:   sponsor_list(site.posts),
+    data:   partner_list(site.posts),
     count:  false,
-    posts:  { sponsors }
+    posts:  { partners }
   }) %><%
 } %>
