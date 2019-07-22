@@ -1,5 +1,15 @@
 <%
-const { files, path, authors, photos } = post;
+const { original, files, path, authors, photos } = post;
+
+if ( original ) { %>
+  <blockquote>
+    <p>
+      原文链接：<a target="_blank" href="<%= original %>">
+        <%= original %>
+      </a>
+    </p>
+  </blockquote><%
+}
 
 if ( files ) { %>
   <hr>

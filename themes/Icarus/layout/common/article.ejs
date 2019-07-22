@@ -57,7 +57,9 @@
         <hr>
 
         <% if (is_post()) { %>
+          <aside class="content">
           <%- partial('widget/post_media', { post }) %>
+          </aside>
         <% } %>
 
         <% if (!index && post.tags && post.tags.length) { %>
