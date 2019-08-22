@@ -1,3 +1,5 @@
+const { resolve } = require('url');
+
 /**
 * Helper functions for page/post.
 *
@@ -96,7 +98,7 @@ module.exports = function (hexo) {
 
         return this.url_for(
           hasThumbnail ?
-             post.path + (post.thumbnail || post.photos[0]) :
+            resolve(post.path, post.thumbnail || post.photos[0]) :
             'images/thumbnail.svg'
         );
     });

@@ -22,8 +22,8 @@
     "hexo-generator-index": "^0.2.1",
     "hexo-generator-slidehtml": "0.0.62",
     "hexo-generator-tag": "^0.2.0",
-    "hexo-migrator-web": "^0.4.5",
-    "hexo-permalink-pinyin": "^1.0.0",
+    "hexo-migrator-web": "^0.4.7",
+    "hexo-permalink-pinyin": "^1.1.0",
     "hexo-pwa": "^0.1.3",
     "hexo-reference": "^1.0.4",
     "hexo-renderer-ejs": "^0.3.1",
@@ -44,7 +44,7 @@
     }
   },
   "devDependencies": {
-    "husky": "^3.0.1",
+    "husky": "^3.0.4",
     "prettier": "^1.18.2"
   },
   "prettier": {

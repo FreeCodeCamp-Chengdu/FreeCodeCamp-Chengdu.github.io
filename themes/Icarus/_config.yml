@@ -41,6 +41,9 @@ footer:
         Creative Commons:
             icon: fab fa-creative-commons
             url: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh
+        Code of Conduct:
+            icon: fas fa-balance-scale
+            url: /profile/code-of-conduct/
         Fork on GitHub:
             icon: fab fa-github
             url: https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io
