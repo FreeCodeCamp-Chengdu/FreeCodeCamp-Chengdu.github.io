@@ -26,3 +26,7 @@ iframe, .embed-box {
   display: table-cell;
   vertical-align: middle;
 }
+
+.content img {
+  max-height: 80vh;
+}
