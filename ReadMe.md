@@ -31,6 +31,8 @@ npm install  &&  npm start
 cd ~/Desktop/FCC-CDC/OWS/
 
 hexo new "My Post title"
+# 或
+# hexo new activity "New activity title"
 
 cd source/
 

@@ -12,7 +12,6 @@ if ( original ) { %>
 }
 
 if ( files ) { %>
-  <hr>
   <h2>资料下载</h2>
   <ol>
     <%- partial('./files', {path, files}) %>
@@ -36,7 +35,7 @@ if ( authors ) { %>
 
 if ( photos[0] ) { %>
   <div class="content">
-    <h3>精彩瞬间</h3>
+    <h2>精彩瞬间</h2>
     <%- partial('../widget/gallery', {posts: [post]}) %>
   </div><%
 }
