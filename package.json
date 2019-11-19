@@ -15,10 +15,10 @@
   "dependencies": {
     "hexo": "^4.0.0",
     "hexo-auto-category": "^0.2.0",
-    "hexo-deployer-git": "^2.0.0",
+    "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
-    "hexo-generator-feed": "^2.0.0",
+    "hexo-generator-feed": "^2.1.1",
     "hexo-generator-index": "^1.0.0",
     "hexo-generator-slidehtml": "0.0.62",
     "hexo-generator-tag": "^1.0.0",
@@ -30,7 +30,8 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
-    "icalendar": "^0.7.1"
+    "icalendar": "^0.7.1",
+    "object-assign": "^4.1.1"
   },
   "scripts": {
     "format": "prettier --write \"{,!(node_modules|.git|scaffolds|themes|public|.deploy_git)/**/}*.{html,md,css,less,js,json,yml,yaml}\"",
@@ -44,8 +45,8 @@
     }
   },
   "devDependencies": {
-    "husky": "^3.0.9",
-    "prettier": "^1.18.2"
+    "husky": "^3.1.0",
+    "prettier": "^1.19.1"
   },
   "prettier": {
     "tabWidth": 2
