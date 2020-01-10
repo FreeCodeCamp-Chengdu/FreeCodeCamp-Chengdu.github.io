@@ -10,19 +10,20 @@ cache:
     - node_modules
 
 before_install:
-  - export TZ=${TIME_ZONE}
+  - export TZ=Asia/Chongqing
 install:
   - npm install
-  - cd ${FOLDER_SOURCE}
+  - cd source/
   - rm $(ls -F | grep [^/]$)
-  - echo ${DOMAIN} > CNAME
   - cd ..
 script:
   - npm run build
-  - cd ${FOLDER_TARGET}
-  - git init
-  - git config user.name ${UID}
-  - git config user.email ${EMAIL}
-  - git add .
-  - git commit -m "${MESSAGE}"
-  - git push --force --quiet https://${TOKEN}@${GIT_URI}.git master:${BRANCH}
+deploy:
+  provider: pages
+  on:
+    branch: master
+  skip_cleanup: true
+  local_dir: public
+  fqdn: ${DOMAIN}
+  target_branch: master
+  token: ${TOKEN}
