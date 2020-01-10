@@ -21,9 +21,9 @@ script:
 deploy:
   provider: pages
   on:
-    branch: master
+    branch: hexo
   skip_cleanup: true
-  local_dir: public
+  local_dir: public/
   fqdn: ${DOMAIN}
   target_branch: master
   token: ${TOKEN}
