@@ -24,6 +24,6 @@ deploy:
     branch: hexo
   skip_cleanup: true
   local_dir: public/
-  fqdn: ${DOMAIN}
+  fqdn: fcc-cd.dev
   target_branch: master
   token: ${TOKEN}

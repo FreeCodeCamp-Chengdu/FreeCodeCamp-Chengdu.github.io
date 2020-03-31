@@ -13,7 +13,7 @@ timezone: Asia/Chongqing
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://fcc-cd.tk/
+url: https://fcc-cd.dev/
 root: /
 permalink: :title/
 permalink_defaults:
@@ -98,7 +98,7 @@ pwa:
     body:
       name: freeCodeCamp 成都社区
       short_name: FCC 成都
-      start_url: https://fcc-cd.tk/
+      start_url: https://fcc-cd.dev/
       description: freeCodeCamp 成都社区 官方网站
       scope: /
       display: standalone
