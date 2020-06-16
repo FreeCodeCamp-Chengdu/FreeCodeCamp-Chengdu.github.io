@@ -30,3 +30,13 @@ iframe, .embed-box {
 .content img {
   max-height: 80vh;
 }
+
+.token.number {
+  background-color: transparent;
+  border-radius: 0;
+  font-size: inherit;
+  height: auto;
+  min-width: auto;
+  margin-right: auto;
+  padding: 0;
+}

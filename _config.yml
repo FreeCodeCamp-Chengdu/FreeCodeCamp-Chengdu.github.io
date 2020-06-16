@@ -39,10 +39,10 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
-  auto_detect: true
-  tab_replace: true
+  enable: false
+prism_plugin:
+  mode: preprocess
+  theme: okaidia
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
