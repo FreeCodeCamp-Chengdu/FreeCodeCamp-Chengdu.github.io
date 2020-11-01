@@ -46,8 +46,8 @@
     }
   },
   "devDependencies": {
-    "husky": "^4.2.5",
-    "prettier": "^2.0.5"
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2"
   },
   "prettier": {
     "trailingComma": "none",
