@@ -1,0 +1,42 @@
+iframe, .embed-box {
+  display: block;
+  width: 100%;
+  height: 80vh;
+}
+
+.flex-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flow-box {
+  display: block;
+}
+.flow-box > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.table-row {
+  display: table;
+  width: 100%;
+}
+.table-row > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.content img {
+  max-height: 80vh;
+}
+
+.token.number {
+  background-color: transparent;
+  border-radius: 0;
+  font-size: inherit;
+  height: auto;
+  min-width: auto;
+  margin-right: auto;
+  padding: 0;
+}

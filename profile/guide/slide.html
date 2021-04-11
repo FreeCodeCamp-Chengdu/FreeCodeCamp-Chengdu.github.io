@@ -1,0 +1,429 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>社区参与指南</title>
+
+        <link rel="stylesheet" href="https://cdn.bootcss.com/reveal.js/3.4.1/css/reveal.min.css">
+        
+        <!-- theme -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            var theme ='black';
+            switch (theme){
+                case 'black':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/black.min.css';
+                    break;
+                case 'beige':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/beige.min.css';
+                    break;
+                case 'blood':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/blood.min.css';
+                    break;
+                case 'league':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/league.min.css';
+                    break;
+                case 'moon':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/moon.min.css';
+                    break;
+                case 'night':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/night.min.css';
+                    break;
+                case 'serif':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/serif.min.css';
+                    break;
+                case 'sky':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/sky.min.css';
+                    break;
+                case 'solarized':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/solarized.min.css';
+                    break;
+                case 'white':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/white.min.css';
+                    break;
+                default:
+            }
+            
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/reveal.js/3.4.1/lib/css/zenburn.min.css">
+        <link href="https://cdn.bootcss.com/reveal.js/3.4.1/css/print/paper.min.css" rel="stylesheet">
+        <!-- Printing and PDF exports -->
+        
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown
+                         data-separator="^\n---\n"
+                         data-separator-vertical="^\n--\n"
+                         data-separator-notes="^Note:">
+                    <script type="text/template">社区参与指南
+
+
+> 《公益技术社区的术与道》
+
+---
+
+## 术
+
+---
+
+### 线下技术社区的优势
+
+主要在于**线下技术活动**
+
+---
+
+### 线下技术社区的成就
+
+主要以**一次次活动**来体现
+
+---
+
+### 个人、公司对社区的贡献
+
+也主要以**一次次活动**为单位
+
+<!-- more -->
+
+---
+
+### 一个活动是怎样的？
+
+首先体现在它的**宣传文案**上
+
+---
+
+### 一篇宣传文案
+
+可以是一篇**博客文章**
+
+```yaml
+title: # 文章主题（翻译成英文后设为本文件的文件名）
+date: # 开篇日期
+updated: # 修订日期
+categories:
+  # 分类名应为一个首字母大写的英文单词
+  # 每级分类对应一级目录，写在本文件的文件名前面
+tags:
+  # 与内容相关的更多标签
+authors:
+  # 原作者们的 GitHub 账号
+original: # 文章出处链接
+toc: true
+thumbnail: # 封面图片
+```
+
+---
+
+### 一篇博客文章
+
+又可以附带**自定义元数据**
+
+```yaml
+title: # 活动主题（翻译成英文后设为本文件的文件名）
+date: # 发起日期
+categories:
+  - Activity
+  # 二级分类：Salon、Workshop 或 Conference
+tags:
+  # online 或 offline
+  # 与内容相关的更多标签
+toc: true
+
+# Activity meta
+description: # 活动简介
+start: # 活动开始时间
+end: # 活动结束时间
+address: # 线下活动地址（市州、区县、路街、楼栋）
+links:
+  报名: # https://jinshuju.net/f/xxxxxx
+mentors:
+  # 讲师、教练们的 GitHub 账号
+workers:
+  # 组织者、志愿者们的 GitHub 账号
+partners:
+  # 合办方、场地方、赞助方
+```
+
+---
+
+### 一次活动的反馈
+
+可直接在活动博文下方进行
+
+- 建议：社会化评论框
+- 捐助：支付二维码
+
+---
+
+### 一次活动的总结
+
+文字可以就近写在同一篇文章中
+
+现场照片、演示文稿也可放在同级同名文件夹，并用附加元数据关联
+
+```yaml
+photos:
+  -  # 第一张为活动封面图
+  -  # 第二张开始为活动结束后上传的现场照片
+files:
+  -  # 活动结束后上传的 PDF、PPT 等非纯文本文件
+```
+
+---
+
+### 一场演讲的演示文稿
+
+也可以是一篇博文
+
+```yaml
+title: Hello World
+slidehtml: true
+```
+
+---
+
+### 社区贡献统计
+
+基于现代**静态网站生成器**的二次开发能力实现
+
+https://fcc-cd.dev/activity/
+
+https://fcc-cd.dev/community/
+
+---
+
+## 道
+
+---
+
+### 团队的运作模式
+
+负责人**自上而下**的领导
+
+---
+
+### 社区的运作模式
+
+社群**自下而上**的生长
+
+---
+
+### 开源软件运动
+
+**现代社群**的最成功探索
+
+---
+
+### 类 GitHub 平台
+
+**技术型社区**的最佳协作工具
+
+---
+
+#### 版本控制
+
+记录成长点滴，杜绝胡乱删改
+
+---
+
+#### 开源
+
+政务透明、财务公开
+
+---
+
+#### Issue, Milestone & Project
+
+任务安排、缺陷管理、进度跟踪
+
+---
+
+#### Fork & Pull request
+
+人人皆可发起、参与活动
+
+---
+
+### 公益技术社区
+
+就成了一个**开源文档项目**
+
+---
+
+开源运动的一切**最佳实践**、**基础设施**
+
+皆可为**线下社群**所用
+
+---
+
+#### 文献翻译、工具开发
+
+不但本身可以**开源项目**的模式运作
+
+也可同时做成**工作坊**活动
+
+- https://github.com/freeCodeCamp/news-translation/blob/master/Contributing.md
+
+- https://fcc-cd.dev/activity/workshop/hexo-web-app/
+
+- https://fcc-cd.dev/activity/workshop/nodejs-web-crawler/
+
+---
+
+## 战
+
+---
+
+### 安装基础软件
+
+#### Windows
+
+```powershell
+choco install nodejs-lts git
+```
+
+#### Mac OS X
+
+```shell
+brew install node
+```
+
+---
+
+### 创建网站项目
+
+```shell
+npm init hexo-wiki ~/Desktop/FCC \
+    --theme NexT \
+    --plugins hexo-generator-slidehtml \
+    --remote https://github.com/FCC/FCC.github.io.git
+```
+
+---
+
+### 配置更新服务
+
+```yaml
+branches:
+  only:
+    - hexo
+
+language: node_js
+node_js:
+  - lts/*
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - export TZ=${TIME_ZONE}
+install:
+  - npm install
+script:
+  - npm run build
+  - cd ${FOLDER}
+  - git init
+  - git config user.name ${UID}
+  - git config user.email ${EMAIL}
+  - git add .
+  - git commit -m "${MESSAGE}"
+  - git push --force --quiet https://${TOKEN}@${GIT_URI}.git master:${BRANCH}
+```
+
+---
+
+Enjoy your Community!
+</script>
+                </section>
+            </div>
+        </div>
+
+        <script src="https://cdn.bootcss.com/reveal.js/3.4.1/lib/js/head.min.js"></script>
+        <script src="https://cdn.bootcss.com/reveal.js/3.4.1/js/reveal.min.js"></script>
+
+        <script>
+// More info https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+  history: true,
+  // 是否在右下角展示控制条
+  controls: true,
+  // 是否显示演示的进度条
+  progress: true,
+  // 是否显示当前幻灯片的页数编号，也可以使用代码 “slideNumber: 'c/t'” ，表示当前页/总页数。
+  slideNumber: false,
+  // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+  history: false,
+  // 是否启用键盘快捷键来导航
+  keyboard: true,
+  // 是否启用幻灯片的概览模式，可使用 "Esc" 或 "o" 键来切换概览模式
+  overview: true,
+  // 是否将幻灯片垂直居中
+  center: true,
+  // 是否在触屏设备上启用触摸滑动切换
+  touch: true,
+  // 是否循环演示
+  loop: false,
+  // 是否将演示的方向变成 RTL，即从右往左
+  rtl: false,
+  // 是否每次演示的时候，随机幻灯片的顺序
+  shuffle: false,
+  // 全局开启和关闭碎片。
+  fragments: true,
+  // 标识演示文稿是否在嵌入模式中运行，即包含在屏幕的有限部分中的
+  embedded: false,
+  // 标识当问号键被点击的时候是否应该显示一个帮助的覆盖层
+  help: true,
+  // 标识演讲者备注标志是否让所有观看者可见
+  showNotes: false,
+  // 两个幻灯片之间自动切换的时间间隔（毫秒）
+  // 当设置成 0 的时候则禁止自动切换
+  // 该值可以被幻灯片上的 “data-autoslide” 属性覆盖
+  autoSlide: 0,
+  // 当遇到用户输入的时候停止自动切换
+  autoSlideStoppable: true,
+  // 当自动滑动时，使用此方法进行导航。
+  autoSlideMethod: Reveal.navigateNext,
+  // 是否启用通过鼠标滚轮来导航幻灯片
+  mouseWheel: false,
+  // 是否在移动设备上隐藏地址栏
+  hideAddressBar: true,
+  // 是否在一个弹出的 iframe 中打开幻灯片中的链接
+  previewLinks: false,
+  // 切换过渡效果
+  transition: 'default', // none/fade/slide/convex/concave/zoom
+  // 过渡速度
+  transitionSpeed: 'default', // default/fast/slow
+  // 全屏幻灯片背景的过渡效果
+  backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+  // 加载除当前可见的幻灯片之外的幻灯片数量
+  viewDistance: 3,
+  // 视差背景图片
+  parallaxBackgroundImage: '',
+  // e.g. 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'
+  // 视差背景尺寸
+  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+  // 移动视差背景（水平和垂直）滑动变化的数量, 例如 100
+  // - 除了指定自动计算
+  // - 设置为 0 时，禁止沿轴运动
+  parallaxBackgroundHorizontal: null,
+  parallaxBackgroundVertical: null,
+  // More info https://github.com/hakimel/reveal.js#dependencies
+  dependencies: [
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/markdown/marked.js' },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/markdown/markdown.min.js' },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/notes/notes.min.js', async: true },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+  ]
+});
+        </script>
+    </body>
+</html>

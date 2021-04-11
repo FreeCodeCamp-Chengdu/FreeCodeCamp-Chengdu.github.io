@@ -1,0 +1,337 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>双手编写未来</title>
+
+        <link rel="stylesheet" href="https://cdn.bootcss.com/reveal.js/3.4.1/css/reveal.min.css">
+        
+        <!-- theme -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            var theme ='black';
+            switch (theme){
+                case 'black':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/black.min.css';
+                    break;
+                case 'beige':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/beige.min.css';
+                    break;
+                case 'blood':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/blood.min.css';
+                    break;
+                case 'league':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/league.min.css';
+                    break;
+                case 'moon':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/moon.min.css';
+                    break;
+                case 'night':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/night.min.css';
+                    break;
+                case 'serif':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/serif.min.css';
+                    break;
+                case 'sky':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/sky.min.css';
+                    break;
+                case 'solarized':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/solarized.min.css';
+                    break;
+                case 'white':
+                    link.href = 'https://cdn.bootcss.com/reveal.js/3.4.1/css/theme/white.min.css';
+                    break;
+                default:
+            }
+            
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/reveal.js/3.4.1/lib/css/zenburn.min.css">
+        <link href="https://cdn.bootcss.com/reveal.js/3.4.1/css/print/paper.min.css" rel="stylesheet">
+        <!-- Printing and PDF exports -->
+        
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown
+                         data-separator="^\n---\n"
+                         data-separator-vertical="^\n--\n"
+                         data-separator-notes="^Note:">
+                    <script type="text/template">双手编写未来
+
+
+![](/images/FCC-CDC-v1-1.png)
+
+<small>
+**freeCodeCamp 成都社区** 走进 **成都七中育才学校**
+</small>
+
+---
+
+## “编程”是什么？
+
+编写“程序”
+
+---
+
+### “程序”又是什么？
+
+做一件事的**流程** —— 算法
+
+---
+
+流程所需材料的**规格** —— 数据结构
+
+---
+
+程序是一种“说明文”
+
+程序 = 数据结构 + 算法
+
+<!-- more -->
+
+---
+
+### 为何要编程？
+
+阐述想法，做“甩手掌柜”，让机器帮我们做事
+
+---
+
+### 程序“代码”又是什么？
+
+代码 = 英文单词<sup><small>（逻辑）</small></sup>+ 代数符号<sup><small>（计算）</small></sup>
+
+---
+
+### 为何代码能处理事物？
+
+计算机代码是种**形式语言**、**符号系统**
+
+能转化为**数学计算**
+
+---
+
+**数学公式**可以描述万事万物
+
+---
+
+![艾达·拜伦](./Ada_Lovelace_portrait.jpg)
+
+[艾达·拜伦][1] (1815 ~ 1852)
+
+全球公认第一位程序员
+
+[1]: https://www.wikiwand.com/zh-cn/%E6%84%9B%E9%81%94%C2%B7%E5%8B%92%E8%8A%99%E8%95%BE%E7%B5%B2
+
+---
+
+### 计算机科学的半边天
+
+多个里程碑都由女性铸就
+
+---
+
+![ENIAC](./Two_women_operating_ENIAC.gif)
+
+6 位女性共同为全球第一台公开的电子计算机编程
+
+---
+
+![葛瑞斯·霍普](./Grace_Hopper_and_UNIVAC.jpg)
+
+[葛瑞斯·霍普][2] (1906 ~ 1992)
+
+程序编译器之母，发现了史上第一个 Bug
+
+[2]: https://www.wikiwand.com/zh/%E8%91%9B%E9%BA%97%E7%B5%B2%C2%B7%E9%9C%8D%E6%99%AE
+
+---
+
+[玛格丽特·汉密尔顿][3] (1936 ~ )
+
+软件工程之母
+
+![玛格丽特·汉密尔顿](./Margaret_Hamilton_restoration.jpg)
+
+[3]: https://www.wikiwand.com/zh/%E8%91%9B%E9%BA%97%E7%B5%B2%C2%B7%E9%9C%8D%E6%99%AE
+
+---
+
+[海蒂·拉玛][4] (1914 ~ 2000)
+
+移动数字通信之母
+
+![海蒂·拉玛](./Hedy_Lamarr_in_a_1940_MGM_publicity_still.jpg)
+
+[4]: https://www.wikiwand.com/zh-hans/%E6%B5%B7%E8%92%82%C2%B7%E6%8B%89%E7%8E%9B
+
+---
+
+1980 年代开始，计算机科学领域女性锐减
+
+![计算机科学性别变化](./CS-gender.jpg)
+
+---
+
+性别
+
+只影响思维视角，不影响智力
+
+不要妄自菲薄！
+
+---
+
+## 第一份代码
+
+选一门直观、通俗的编程语言入门
+
+---
+
+比如 **标记型语言** HTML
+
+[![](./Web-starter.png)](https://codepen.io/tech_query/pen/vwGEJV)
+
+---
+
+再选一个开箱即用的框架和模板
+
+<iframe
+    width="100%" height="500"
+    loading="lazy" lazyload="1"
+    src="https://code.z01.com/v4/examples/"
+></iframe>
+
+---
+
+### Talk is cheap, show me your Code!
+
+[李纳斯·托沃茨][5] (1969 ~ )
+
+![](./Linus_Torvalds.jpeg)
+
+[5]: https://www.wikiwand.com/zh/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9
+
+---
+
+## 一刻钟学一课
+
+全球最大的**公益编程学习平台** freeCodeCamp
+
+[![](./FCC-learning.png)](https://learn.freecodecamp.one/)
+
+---
+
+### 中文社区
+
+[![](./FCC-China.png)](https://www.freecodecamp.one/volunteer)
+
+---
+
+### 成都社区
+
+[![](./FCC-ChengDu.png)](https://china.freecodecamp.one/?city=chengdu)
+
+---
+
+#### QQ 群
+
+[![](/images/FCC-CDC-QRC-QQG.png "点击加群")](https://jq.qq.com/?_wv=1027&k=54DSeNz)
+
+---
+
+#### 微信服务号
+
+![](/images/FCC-CDC-QRC-WMP.jpg)
+</script>
+                </section>
+            </div>
+        </div>
+
+        <script src="https://cdn.bootcss.com/reveal.js/3.4.1/lib/js/head.min.js"></script>
+        <script src="https://cdn.bootcss.com/reveal.js/3.4.1/js/reveal.min.js"></script>
+
+        <script>
+// More info https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+  history: true,
+  // 是否在右下角展示控制条
+  controls: true,
+  // 是否显示演示的进度条
+  progress: true,
+  // 是否显示当前幻灯片的页数编号，也可以使用代码 “slideNumber: 'c/t'” ，表示当前页/总页数。
+  slideNumber: false,
+  // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+  history: false,
+  // 是否启用键盘快捷键来导航
+  keyboard: true,
+  // 是否启用幻灯片的概览模式，可使用 "Esc" 或 "o" 键来切换概览模式
+  overview: true,
+  // 是否将幻灯片垂直居中
+  center: true,
+  // 是否在触屏设备上启用触摸滑动切换
+  touch: true,
+  // 是否循环演示
+  loop: false,
+  // 是否将演示的方向变成 RTL，即从右往左
+  rtl: false,
+  // 是否每次演示的时候，随机幻灯片的顺序
+  shuffle: false,
+  // 全局开启和关闭碎片。
+  fragments: true,
+  // 标识演示文稿是否在嵌入模式中运行，即包含在屏幕的有限部分中的
+  embedded: false,
+  // 标识当问号键被点击的时候是否应该显示一个帮助的覆盖层
+  help: true,
+  // 标识演讲者备注标志是否让所有观看者可见
+  showNotes: false,
+  // 两个幻灯片之间自动切换的时间间隔（毫秒）
+  // 当设置成 0 的时候则禁止自动切换
+  // 该值可以被幻灯片上的 “data-autoslide” 属性覆盖
+  autoSlide: 0,
+  // 当遇到用户输入的时候停止自动切换
+  autoSlideStoppable: true,
+  // 当自动滑动时，使用此方法进行导航。
+  autoSlideMethod: Reveal.navigateNext,
+  // 是否启用通过鼠标滚轮来导航幻灯片
+  mouseWheel: false,
+  // 是否在移动设备上隐藏地址栏
+  hideAddressBar: true,
+  // 是否在一个弹出的 iframe 中打开幻灯片中的链接
+  previewLinks: false,
+  // 切换过渡效果
+  transition: 'default', // none/fade/slide/convex/concave/zoom
+  // 过渡速度
+  transitionSpeed: 'default', // default/fast/slow
+  // 全屏幻灯片背景的过渡效果
+  backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+  // 加载除当前可见的幻灯片之外的幻灯片数量
+  viewDistance: 3,
+  // 视差背景图片
+  parallaxBackgroundImage: '',
+  // e.g. 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'
+  // 视差背景尺寸
+  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+  // 移动视差背景（水平和垂直）滑动变化的数量, 例如 100
+  // - 除了指定自动计算
+  // - 设置为 0 时，禁止沿轴运动
+  parallaxBackgroundHorizontal: null,
+  parallaxBackgroundVertical: null,
+  // More info https://github.com/hakimel/reveal.js#dependencies
+  dependencies: [
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/markdown/marked.js' },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/markdown/markdown.min.js' },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/notes/notes.min.js', async: true },
+    { src: 'https://cdn.bootcss.com/reveal.js/3.4.1/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+  ]
+});
+        </script>
+    </body>
+</html>
