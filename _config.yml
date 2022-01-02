@@ -92,6 +92,9 @@ feed:
   type: atom
   icon: images/FCC-CDC-v1-1.png
 
+slidehtml:
+  titleMerge: true
+
 pwa:
   manifest:
     path: /manifest.json

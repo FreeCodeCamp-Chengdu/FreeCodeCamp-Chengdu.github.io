@@ -13,9 +13,9 @@
     "version": "4.2.1"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "1.0.0-rc.10",
     "hexo": "^4.2.1",
-    "hexo-auto-category": "^0.2.0",
+    "hexo-auto-category": "^0.2.1",
     "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -23,7 +23,7 @@
     "hexo-generator-index": "^1.0.0",
     "hexo-generator-slidehtml": "0.0.62",
     "hexo-generator-tag": "^1.0.0",
-    "hexo-migrator-web": "^1.0.3",
+    "hexo-migrator-web": "^1.0.4",
     "hexo-permalink-pinyin": "^1.1.0",
     "hexo-prism-plugin": "^2.3.0",
     "hexo-reference": "^1.0.4",
@@ -34,20 +34,18 @@
     "icalendar": "^0.7.1",
     "object-assign": "^4.1.1"
   },
-  "scripts": {
-    "format": "prettier --write \"{,!(node_modules|.git|scaffolds|themes|public|.deploy_git)/**/}*.{html,md,css,less,js,json,yml,yaml}\"",
-    "start": "hexo clean  &&  hexo server",
-    "deploy": "npm run format  &&  hexo clean  &&  hexo deploy",
-    "build": "npm run format  &&  hexo clean  &&  hexo generate"
+  "lint-staged": {
+    "*.{html,md,css,less,js,json,yml,yaml}": "prettier --write"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build  &&  git add ."
-    }
+  "scripts": {
+    "prepare": "husky install",
+    "start": "hexo clean  &&  hexo server",
+    "deploy": "hexo clean  &&  hexo deploy",
+    "build": "hexo clean  &&  hexo generate"
   },
   "devDependencies": {
-    "husky": "^4.3.0",
-    "prettier": "^2.1.2"
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1"
   },
   "prettier": {
     "trailingComma": "none",
