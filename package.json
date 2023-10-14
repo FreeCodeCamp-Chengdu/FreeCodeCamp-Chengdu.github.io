@@ -13,17 +13,17 @@
     "version": "4.2.1"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "hexo": "^4.2.1",
-    "hexo-auto-category": "^0.2.1",
+    "hexo-auto-category": "^0.2.2",
     "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-feed": "^2.2.0",
     "hexo-generator-index": "^1.0.0",
-    "hexo-generator-slidehtml": "0.0.62",
+    "hexo-generator-slidehtml": "0.0.64",
     "hexo-generator-tag": "^1.0.0",
-    "hexo-migrator-web": "^1.1.0",
+    "hexo-migrator-web": "^1.2.1",
     "hexo-permalink-pinyin": "^1.1.0",
     "hexo-prism-plugin": "^2.3.0",
     "hexo-reference": "^1.0.4",
@@ -31,21 +31,22 @@
     "hexo-renderer-marked": "^2.0.0",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
-    "icalendar": "^0.7.1",
-    "object-assign": "^4.1.1"
+    "icalendar": "^0.7.1"
   },
   "lint-staged": {
     "*.{html,md,css,less,js,json,yml,yaml}": "prettier --write"
   },
   "scripts": {
     "prepare": "husky install",
+    "test": "lint-staged",
     "start": "hexo clean  &&  hexo server",
     "deploy": "hexo clean  &&  hexo deploy",
     "build": "hexo clean  &&  hexo generate"
   },
   "devDependencies": {
-    "husky": "^7.0.4",
-    "prettier": "^2.5.1"
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
   },
   "prettier": {
     "trailingComma": "none",

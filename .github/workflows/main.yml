@@ -7,17 +7,20 @@ jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 14
-          cache: yarn
-      - name: Install & build
-        run: yarn  &&  yarn build
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+      - name: Install & Build
+        run: pnpm i  &&  pnpm build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
