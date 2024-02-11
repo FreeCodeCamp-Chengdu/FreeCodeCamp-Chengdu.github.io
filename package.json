@@ -37,16 +37,17 @@
     "*.{html,md,css,less,js,json,yml,yaml}": "prettier --write"
   },
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "lint-staged",
+    "crawl": "hexo migrate web",
     "start": "hexo clean  &&  hexo server",
     "deploy": "hexo clean  &&  hexo deploy",
     "build": "hexo clean  &&  hexo generate"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "prettier": "^3.0.3"
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
   },
   "prettier": {
     "trailingComma": "none",
