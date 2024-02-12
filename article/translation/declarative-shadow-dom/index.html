@@ -1,0 +1,3048 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>Declarative Shadow DOM - FCC 成都社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    
+    <meta name="description" content="A new way to implement and use Shadow DOM directly in HTML. Published on Friday, February 17, 2023 Translated to: Español, Português  Jason Miller Jason is a Web DevRel focused on speed and the JS eco">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Declarative Shadow DOM">
+<meta property="og:url" content="https://fcc-cd.dev/article/translation/declarative-shadow-dom/index.html">
+<meta property="og:site_name" content="FCC 成都社区">
+<meta property="og:description" content="A new way to implement and use Shadow DOM directly in HTML. Published on Friday, February 17, 2023 Translated to: Español, Português  Jason Miller Jason is a Web DevRel focused on speed and the JS eco">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wd.imgix.net/image/admin/bPCYfhUgxdCpXhKAWc9X.jpg?auto=format">
+<meta property="og:image" content="https://wd.imgix.net/image/admin/t7E3inN3orEPpDUXSkXR.jpg?auto=format">
+<meta property="article:published_time" content="2024-02-12T08:48:54.809Z">
+<meta property="article:modified_time" content="2024-02-12T08:48:54.809Z">
+<meta property="article:author" content="freeCodeCamp ChengDu community">
+<meta property="article:tag" content="FCC freeCodeCamp 成都 社区 官方 网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wd.imgix.net/image/admin/bPCYfhUgxdCpXhKAWc9X.jpg?auto=format">
+
+
+
+
+
+<link rel="alternative" href="atom.xml" title="Declarative Shadow DOM" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/FCC-CDC-v1-1.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137453538-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137453538-1');
+</script>
+
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/common.css">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.19/dist/ua-parser.min.js"></script>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/FCC-CDC-v1-0.png" alt="Declarative Shadow DOM" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/activity">活动</a>
+                
+                <a class="navbar-item"
+                href="http://cdfcc.lofter.com/">相册</a>
+                
+                <a class="navbar-item"
+                href="/categories">博文</a>
+                
+                <a class="navbar-item"
+                href="https://web-conf.dev/">大会</a>
+                
+                <a class="navbar-item"
+                href="/community">社群</a>
+                
+                <a class="navbar-item"
+                href="/categories/Profile/">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="登录" href="https://fcc-cd.leanapp.cn/signIn/">
+                        
+                        <i class="fas fa-sign-in-alt"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 分钟 读完 (大约 2410 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Declarative Shadow DOM
+            
+
+            
+        </h1>
+        <div class="content">
+            <html><head><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="FCC 成都社区" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css"></head><body><p>A new way to implement and use Shadow DOM directly in HTML.</p>
+<p>Published on Friday, February 17, 2023</p>
+<p>Translated to: <a href="/es/articles/declarative-shadow-dom/">Español</a>, <a href="/pt/articles/declarative-shadow-dom/">Português</a></p>
+<p><a href="/authors/developit/"><img src="https://wd.imgix.net/image/admin/bPCYfhUgxdCpXhKAWc9X.jpg?auto=format" alt="Jason Miller"></a></p>
+<p><a href="/authors/developit/">Jason Miller</a></p>
+<p>Jason is a Web DevRel focused on speed and the JS ecosystem.</p>
+<p><a href="https://jasonformat.com" target="_blank" rel="noopener">Website</a> <a href="https://twitter.com/_developit" target="_blank" rel="noopener">Twitter</a> <a href="https://github.com/developit" target="_blank" rel="noopener">GitHub</a></p>
+<p><a href="/authors/masonfreed/"><img src="https://wd.imgix.net/image/admin/t7E3inN3orEPpDUXSkXR.jpg?auto=format" alt="Mason Freed"></a></p>
+<p><a href="/authors/masonfreed/">Mason Freed</a></p>
+<p>Developer on the Chrome team</p>
+<p><a href="https://twitter.com/Mfreed777" target="_blank" rel="noopener">Twitter</a> <a href="https://github.com/mfreed7" target="_blank" rel="noopener">GitHub</a></p>
+<p>Table of contents</p>
+<ul>
+<li><a href="#building-a-declarative-shadow-root">Building a Declarative Shadow Root</a></li>
+<li><a href="#component-hydration">Component hydration</a></li>
+<li><a href="#one-shadow-per-root">One shadow per root</a></li>
+<li><a href="#streaming-is-cool">Streaming is cool</a></li>
+<li><a href="#parser-only">Parser-only</a></li>
+<li><a href="#server-rendering-with-style">Server-rendering with style</a></li>
+<li><a href="#avoiding-the-flash-of-unstyled-content">Avoiding the flash of unstyled content</a></li>
+<li><a href="#feature-detection-and-browser-support">Feature detection and browser support</a></li>
+<li><a href="#polyfill">Polyfill</a></li>
+<li><a href="#further-reading">Further reading</a></li>
+</ul>
+<p>Declarative Shadow DOM is a web platform feature, <a href="https://github.com/whatwg/html/pull/5465" target="_blank" rel="noopener">currently in the standardization process</a>. It is enabled by default in Chrome version 111.</p>
+<p>Declarative Shadow DOM has been available since Chrome 90 and Edge 91, but it used an older non-standard attribute called <code>shadowroot</code> instead of the standardized <code>shadowrootmode</code> attribute.</p>
+<a id="more"></a>
+
+<p><a href="https://web.dev/articles/shadowdom-v1" target="_blank" rel="noopener">Shadow DOM</a> is one of the three Web Components standards, rounded out by <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_templates_and_slots" target="_blank" rel="noopener">HTML templates</a> and <a href="https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements" target="_blank" rel="noopener">Custom Elements</a>. Shadow DOM provides a way to scope CSS styles to a specific DOM subtree and isolate that subtree from the rest of the document. The <code>&lt;slot&gt;</code> element gives us a way to control where the children of a Custom Element should be inserted within its Shadow Tree. These features combined enable a system for building self-contained, reusable components that integrate seamlessly into existing applications just like a built-in HTML element.</p>
+<p>Until now, the only way to use Shadow DOM was to construct a shadow root using JavaScript:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> host <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"host"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> shadowRoot <span class="token operator">=</span> host<span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token punctuation">:</span> <span class="token string">"open"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+shadowRoot<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">"&lt;h1&gt;Hello Shadow DOM&lt;/h1&gt;"</span><span class="token punctuation">;</span></code></pre>
+<p>An imperative API like this works fine for client-side rendering: the same JavaScript modules that define our Custom Elements also create their Shadow Roots and set their content. However, many web applications need to render content server-side or to static HTML at build time. This can be an important part of delivering a reasonable experience to visitors who may not be capable of running JavaScript.</p>
+<p>The justifications for <a href="https://web.dev/articles/rendering-on-the-web" target="_blank" rel="noopener">Server-Side Rendering</a> (SSR) vary from project to project. Some websites must provide fully functional server-rendered HTML in order to meet accessibility guidelines, others choose to deliver a baseline no-JavaScript experience as a way to guarantee good performance on slow connections or devices.</p>
+<p>Historically, it has been difficult to use Shadow DOM in combination with Server-Side Rendering because there was no built-in way to express Shadow Roots in the server-generated HTML. There are also performance implications when attaching Shadow Roots to DOM elements that have already been rendered without them. This can cause layout shifting after the page has loaded, or temporarily show a flash of unstyled content (“FOUC”) while loading the Shadow Root’s stylesheets.</p>
+<p><a href="https://github.com/mfreed7/declarative-shadow-dom/blob/master/README.md" target="_blank" rel="noopener">Declarative Shadow DOM</a> (DSD) removes this limitation, bringing Shadow DOM to the server.</p>
+<h2 id="Building-a-Declarative-Shadow-Root"><a href="#Building-a-Declarative-Shadow-Root" class="headerlink" title="# Building a Declarative Shadow Root"></a><a href="#building-a-declarative-shadow-root">#</a> Building a Declarative Shadow Root</h2><p>A Declarative Shadow Root is a <code>&lt;template&gt;</code> element with a <code>shadowrootmode</code> attribute:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>host-element</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Light content<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>host-element</span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p>A template element with the <code>shadowrootmode</code> attribute is detected by the HTML parser and immediately applied as the shadow root of its parent element. Loading the pure HTML markup from the above sample results in the following DOM tree:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>host-element</span><span class="token punctuation">&gt;</span></span>
+    #shadow-root (open)
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">&gt;</span></span>
+        ↳
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Light content<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>host-element</span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p>This code sample is following the Chrome DevTools Elements panel’s conventions for displaying Shadow DOM content. For example, the ↳ character represents slotted Light DOM content.</p>
+<p>This gives us the benefits of Shadow DOM’s encapsulation and slot projection in static HTML. No JavaScript is needed to produce the entire tree, including the Shadow Root.</p>
+<h2 id="Component-hydration"><a href="#Component-hydration" class="headerlink" title="# Component hydration"></a><a href="#component-hydration">#</a> Component hydration</h2><p>Declarative Shadow DOM can be used on its own as a way to encapsulate styles or customize child placement, but it’s most powerful when used with Custom Elements. Components built using Custom Elements get automatically upgraded from static HTML. With the introduction of Declarative Shadow DOM, it’s now possible for a Custom Element to have a shadow root before it gets upgraded.</p>
+<p>A Custom Element being upgraded from HTML that includes a Declarative Shadow Root will already have that shadow root attached. This means the element will have a shadowRoot property already available when it is instantiated, without your code explicitly creating one. It’s best to check <code>this.shadowRoot</code> for any existing shadow root in your element’s constructor. If there is already a value, the HTML for this component includes a Declarative Shadow Root. If the value is null, there was no Declarative Shadow Root present in the HTML or the browser doesn’t support Declarative Shadow DOM.</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu-toggle</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    Open Menu<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu-toggle</span>
+<span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+    <span class="token keyword">class</span> <span class="token class-name">MenuToggle</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>      <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// Detect whether we have SSR content already:      if (this.shadowRoot) {        // A Declarative Shadow Root exists!        // wire up event listeners, references, etc.:        const button = this.shadowRoot.firstElementChild;        button.addEventListener('click', toggle);      } else {        // A Declarative Shadow Root doesn't exist.        // Create a new shadow root and populate it:        const shadow = this.attachShadow({mode: 'open'});        shadow.innerHTML = `&lt;button&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/button&gt;`;        shadow.firstChild.addEventListener('click', toggle);      }    }  }  customElements.define('menu-toggle', MenuToggle);</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Custom Elements have been around for a while, and until now there was no reason to check for an existing shadow root before creating one using <code>attachShadow()</code>. Declarative Shadow DOM includes a small change that allows existing components to work despite this: calling the <code>attachShadow()</code> method on an element with an existing <strong>Declarative</strong> Shadow Root will <strong>not</strong> throw an error. Instead, the Declarative Shadow Root is emptied and returned. This allows older components not built for Declarative Shadow DOM to continue working, since declarative roots are preserved until an imperative replacement is created.</p>
+<p>For newly-created Custom Elements, a new <a href="https://github.com/WICG/webcomponents/issues/871" target="_blank" rel="noopener"><code>ElementInternals.shadowRoot</code></a> property provides an explicit way to get a reference to an element’s existing Declarative Shadow Root, both open and closed. This can be used to check for and use any Declarative Shadow Root, while still falling back to <code>attachShadow()</code> in cases where one was not provided.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">MenuToggle</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">const</span> internals <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">attachInternals</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// check for a Declarative Shadow Root:    let shadow = internals.shadowRoot;    if (!shadow) {      // there wasn't one. create a new Shadow Root:      shadow = this.attachShadow({        mode: 'open'      });      shadow.innerHTML = `&lt;button&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/button&gt;`;    }    // in either case, wire up our event listener:    shadow.firstChild.addEventListener('click', toggle);  }}customElements.define('menu-toggle', MenuToggle);</span></code></pre>
+<h2 id="One-shadow-per-root"><a href="#One-shadow-per-root" class="headerlink" title="# One shadow per root"></a><a href="#one-shadow-per-root">#</a> One shadow per root</h2><p>A Declarative Shadow Root is only associated with its parent element. This means shadow roots are always colocated with their associated element. This design decision ensures shadow roots are streamable like the rest of an HTML document. It’s also convenient for authoring and generation, since adding a shadow root to an element does not require maintaining a registry of existing shadow roots.</p>
+<p>The tradeoff of associating shadow roots with their parent element is that it is not possible for multiple elements to be initialized from the same Declarative Shadow Root <code>&lt;template&gt;</code>. However, this is unlikely to matter in most cases where Declarative Shadow DOM is used, since the contents of each shadow root are seldom identical. While server-rendered HTML often contains repeated element structures, their content generally differs–for example, slight variations in text, or attributes. Because the contents of a serialized Declarative Shadow Root are entirely static, upgrading multiple elements from a single Declarative Shadow Root would only work if the elements happened to be identical. Finally, the impact of repeated similar shadow roots on network transfer size is relatively small due to the effects of compression.</p>
+<p>In the future, it might be possible to revisit shared shadow roots. If the DOM gains support for <a href="https://github.com/WICG/webcomponents/blob/gh-pages/proposals/Template-Instantiation.md" target="_blank" rel="noopener">built-in templating</a>, Declarative Shadow Roots could be treated as templates that are instantiated in order to construct the shadow root for a given element. The current Declarative Shadow DOM design allows for this possibility to exist in the future by limiting shadow root association to a single element.</p>
+<h2 id="Streaming-is-cool"><a href="#Streaming-is-cool" class="headerlink" title="# Streaming is cool"></a><a href="#streaming-is-cool">#</a> Streaming is cool</h2><p>Associating Declarative Shadow Roots directly with their parent element simplifies the process of upgrading and attaching them to that element. Declarative Shadow Roots are detected during HTML parsing, and attached immediately when their <strong>opening</strong> <code>&lt;template&gt;</code> tag is encountered. Parsed HTML within the <code>&lt;template&gt;</code> is parsed directly into the shadow root, so it can be “streamed”: rendered as it is received.</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>el<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+        el<span class="token punctuation">.</span>shadowRoot<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// null</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> <span class="token comment" spellcheck="true">&lt;!-- shadow realm --&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+        el<span class="token punctuation">.</span>shadowRoot<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ShadowRoot</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="Parser-only"><a href="#Parser-only" class="headerlink" title="# Parser-only"></a><a href="#parser-only">#</a> Parser-only</h2><p>Declarative Shadow DOM is a feature of the HTML parser. This means that a Declarative Shadow Root will only be parsed and attached for <code>&lt;template&gt;</code> tags with a <code>shadowrootmode</code> attribute that are present during HTML parsing. In other words, Declarative Shadow Roots can be constructed during initial HTML parsing:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>some-element</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        shadow root content for some-element
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>some-element</span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p>Setting the <code>shadowrootmode</code> attribute of a <code>&lt;template&gt;</code> element does nothing, and the template remains an ordinary template element:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> template <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"template"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+template<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"shadowrootmode"</span><span class="token punctuation">,</span> <span class="token string">"open"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// this does nothingdiv.appendChild(template);div.shadowRoot; // null</span></code></pre>
+<p>To avoid some important security considerations, Declarative Shadow Roots also can’t be created using fragment parsing APIs like <code>innerHTML</code> or <code>insertAdjacentHTML()</code>. The only way to parse HTML with Declarative Shadow Roots applied is to pass a new <code>includeShadowRoots</code> option to <code>DOMParser</code>:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
+    <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token template-string"><span class="token string">`    &lt;div&gt;      &lt;template shadowrootmode="open"&gt;&lt;/template&gt;    &lt;/div&gt;  `</span></span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> div <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    div<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> html<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// No shadow root here  const fragment = new DOMParser().parseFromString(html, 'text/html', {    includeShadowRoots: true  }); // Shadow root here</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre>
+<h2 id="Server-rendering-with-style"><a href="#Server-rendering-with-style" class="headerlink" title="# Server-rendering with style"></a><a href="#server-rendering-with-style">#</a> Server-rendering with style</h2><p>Inline and external stylesheets are fully supported inside Declarative Shadow Roots using the standard <code>&lt;style&gt;</code> and <code>&lt;link&gt;</code> tags:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nineties-button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+            <span class="token selector">button </span><span class="token punctuation">{</span>
+                <span class="token property">color</span><span class="token punctuation">:</span> seagreen<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/comicsans.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    I'm Blue<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nineties-button</span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p>Styles specified this way are also highly optimized: if the same stylesheet is present in multiple Declarative Shadow Roots, it is only loaded and parsed once. The browser uses a single backing <code>CSSStyleSheet</code> that is shared by all of the shadow roots, eliminating duplicate memory overhead.</p>
+<p><a href="https://web.dev/articles/constructable-stylesheets" target="_blank" rel="noopener">Constructable Stylesheets</a> are not supported in Declarative Shadow DOM. This is because there is currently no way to serialize constructable stylesheets in HTML, and no way to refer to them when populating <code>adoptedStyleSheets</code>.</p>
+<h2 id="Avoiding-the-flash-of-unstyled-content"><a href="#Avoiding-the-flash-of-unstyled-content" class="headerlink" title="# Avoiding the flash of unstyled content"></a><a href="#avoiding-the-flash-of-unstyled-content">#</a> Avoiding the flash of unstyled content</h2><p>One potential issue in browsers that do not yet support Declarative Shadow DOM is avoiding “flash of unstyled content” (FOUC), where the raw contents are shown for Custom Elements that have not yet been upgraded. Prior to Declarative Shadow DOM, one common technique for avoiding FOUC was to apply a <code>display:none</code> style rule to Custom Elements that haven’t been loaded yet, since these have not had their shadow root attached and populated. In this way, content is not displayed until it is “ready”:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+    <span class="token selector">x-foo<span class="token pseudo-class">:not(:defined)</span> &gt; * </span><span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>With the introduction of Declarative Shadow DOM, Custom Elements can be rendered or authored in HTML such that their shadow content is in-place and ready before the client-side component implementation is loaded:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>x-foo</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">shadowrootmode</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>open<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+            <span class="token selector">h2 </span><span class="token punctuation">{</span>
+                <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>shadow content<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>x-foo</span>
+<span class="token punctuation">&gt;</span></span></code></pre>
+<p>In this case, the <code>display:none</code> “FOUC” rule would prevent the declarative shadow root’s content from showing. However, removing that rule would cause browsers without Declarative Shadow DOM support to show incorrect or unstyled content until the Declarative Shadow DOM <a href="https://web.dev/declarative-shadow-dom/#polyfill" target="_blank" rel="noopener">polyfill</a> loads and converts the shadow root template into a real shadow root.</p>
+<p>Fortunately, this can be solved in CSS by modifying the FOUC style rule. In browsers that support Declarative Shadow DOM, the <code>&lt;template shadowrootmode&gt;</code> element is immediately converted into a shadow root, leaving no <code>&lt;template&gt;</code> element in the DOM tree. Browsers that don’t support Declarative Shadow DOM preserve the <code>&lt;template&gt;</code> element, which we can use to prevent FOUC:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+    <span class="token selector">x-foo<span class="token pseudo-class">:not(:defined)</span> &gt; template<span class="token attribute">[shadowrootmode]</span> ~ * </span><span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Instead of hiding the not-yet-defined Custom Element, the revised “FOUC” rule hides its <em>children</em> when they follow a <code>&lt;template shadowrootmode&gt;</code> element. Once the Custom Element is defined, the rule no longer matches. The rule is ignored in browsers that support Declarative Shadow DOM because the <code>&lt;template shadowrootmode&gt;</code> child is removed during HTML parsing.</p>
+<h2 id="Feature-detection-and-browser-support"><a href="#Feature-detection-and-browser-support" class="headerlink" title="# Feature detection and browser support"></a><a href="#feature-detection-and-browser-support">#</a> Feature detection and browser support</h2><p>Declarative Shadow DOM has been available since Chrome 90 and Edge 91, but it used an older non-standard attribute called <code>shadowroot</code> instead of the standardized <code>shadowrootmode</code> attribute. The newer <code>shadowrootmode</code> attribute and streaming behavior is available in Chrome 111 and Edge Xyz.</p>
+<p>As a new web platform API, Declarative Shadow DOM does not yet have widespread support across all browsers. Browser support can be detected by checking for the existence of a <code>shadowRootMode</code> property on the prototype of <code>HTMLTemplateElement</code>:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">supportsDeclarativeShadowDOM</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> HTMLTemplateElement<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span><span class="token string">"shadowRootMode"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="Polyfill"><a href="#Polyfill" class="headerlink" title="# Polyfill"></a><a href="#polyfill">#</a> Polyfill</h2><p>Building a simplified polyfill for Declarative Shadow DOM is relatively straightforward, since a polyfill doesn’t need to perfectly replicate the timing semantics or parser-only characteristics that a browser implementation concerns itself with. To polyfill Declarative Shadow DOM, we can scan the DOM to find all <code>&lt;template shadowrootmode&gt;</code> elements, then convert them to attached Shadow Roots on their parent element. This process can be done once the document is ready, or triggered by more specific events like Custom Element lifecycles.</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">attachShadowRoots</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    root<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"template[shadowrootmode]"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>template<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> mode <span class="token operator">=</span> template<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">"shadowrootmode"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> shadowRoot <span class="token operator">=</span> template<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        shadowRoot<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>template<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        template<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">attachShadowRoots</span><span class="token punctuation">(</span>shadowRoot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Further-reading"><a href="#Further-reading" class="headerlink" title="# Further reading"></a><a href="#further-reading">#</a> Further reading</h2><ul>
+<li><a href="https://chromestatus.com/feature/5161240576393216" target="_blank" rel="noopener">Chromestatus for Streaming Declarative Shadow DOM</a></li>
+<li><a href="https://github.com/whatwg/html/pull/5465" target="_blank" rel="noopener">HTML Spec Pull Request</a></li>
+</ul>
+<p><a href="/tags/dom/">DOM</a> <a href="/tags/html/">HTML</a> <a href="/tags/javascript/">JavaScript</a> <a href="/tags/rendering/">Rendering</a></p>
+<p>Published on Friday, February 17, 2023 • <a href="https://github.com/GoogleChrome/developer.chrome.com/blob/main/site/en/articles/declarative-shadow-dom/index.md" target="_blank" rel="noopener">Improve article</a></p>
+</body></html>
+        </div>
+
+        <hr>
+
+        
+          <aside class="content">
+          
+
+          </aside>
+        
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/FCC-CDC-Alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/">
+                <span class="level-item">Django vs Flask: Which is the Best Python Web Framework?</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://fcc-cd.dev/article/translation/declarative-shadow-dom/';
+        this.page.identifier = 'article/translation/declarative-shadow-dom/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'fcc-cdc' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+<style>
+  .image.is-128x128 {
+    height: auto;
+  }
+</style>
+
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/FCC-CDC-v1-0.png" alt="freeCodeCamp 成都社区">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        freeCodeCamp 成都社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        公益编程技术社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ChengDu, SiChuan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        96
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        89
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/FreeCodeCamp-Chengdu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="GitHub" href="https://github.com/FreeCodeCamp-Chengdu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微博" href="https://weibo.com/u/6165665516">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微信服务号" href="/contact/#%E5%BE%AE%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%B7">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="QQ 群" href="/contact/#QQ-%E7%BE%A4">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/article/translation/declarative-shadow-dom/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Declarative Shadow DOM">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/declarative-shadow-dom/" class="has-link-black-ter is-size-6">Declarative Shadow DOM</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Django vs Flask: Which is the Best Python Web Framework?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="has-link-black-ter is-size-6">Django vs Flask: Which is the Best Python Web Framework?</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/quickstart.html/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Regular Expressions Quick Start">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/quickstart.html/" class="has-link-black-ter is-size-6">Regular Expressions Quick Start</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/packaging-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="An unbiased evaluation of environment management and packaging tools">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/packaging-tools/" class="has-link-black-ter is-size-6">An unbiased evaluation of environment management and packaging tools</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/some-miscellaneous-git-facts/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Julia Evans">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/some-miscellaneous-git-facts/" class="has-link-black-ter is-size-6">Julia Evans</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/FCC-CDC-v1-0.png" alt="Declarative Shadow DOM" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2024 Declarative Shadow DOM&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Code of Conduct" href="/profile/code-of-conduct/">
+                        
+                        <i class="fas fa-balance-scale"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Fork on GitHub" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

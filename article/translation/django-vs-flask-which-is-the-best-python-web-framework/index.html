@@ -1,0 +1,3168 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>Django vs Flask: Which is the Best Python Web Framework? - FCC 成都社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    
+    <meta name="description" content="Denis Mashutin OverviewEven if you are new to web development, you probably already know that there are two main web frameworks in the Python world: Django and Flask. According to the Python Develope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django vs Flask: Which is the Best Python Web Framework?">
+<meta property="og:url" content="https://fcc-cd.dev/article/translation/django-vs-flask-which-is-the-best-python-web-framework/index.html">
+<meta property="og:site_name" content="FCC 成都社区">
+<meta property="og:description" content="Denis Mashutin OverviewEven if you are new to web development, you probably already know that there are two main web frameworks in the Python world: Django and Flask. According to the Python Develope">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2022/09/photo_2022-08-23_18-09-02-200x200.jpg">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/web-frameworks.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-vs-jinja2-template.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/template-engines-django.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-ckeditor-rich-text-editor-field.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-hello-world.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-vs-flask-restful.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-backends.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-contrib-apps.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/test-frameworks-django.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/monolithic-vs-microservice-1.png">
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-structure-tool-window.png">
+<meta property="article:published_time" content="2024-02-12T08:48:54.809Z">
+<meta property="article:modified_time" content="2024-02-12T08:48:54.809Z">
+<meta property="article:author" content="freeCodeCamp ChengDu community">
+<meta property="article:tag" content="FCC freeCodeCamp 成都 社区 官方 网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.jetbrains.com/wp-content/uploads/2022/09/photo_2022-08-23_18-09-02-200x200.jpg">
+
+
+
+
+
+<link rel="alternative" href="atom.xml" title="Django vs Flask: Which is the Best Python Web Framework?" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/FCC-CDC-v1-1.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137453538-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137453538-1');
+</script>
+
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/common.css">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.19/dist/ua-parser.min.js"></script>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/FCC-CDC-v1-0.png" alt="Django vs Flask: Which is the Best Python Web Framework?" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/activity">活动</a>
+                
+                <a class="navbar-item"
+                href="http://cdfcc.lofter.com/">相册</a>
+                
+                <a class="navbar-item"
+                href="/categories">博文</a>
+                
+                <a class="navbar-item"
+                href="https://web-conf.dev/">大会</a>
+                
+                <a class="navbar-item"
+                href="/community">社群</a>
+                
+                <a class="navbar-item"
+                href="/categories/Profile/">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="登录" href="https://fcc-cd.leanapp.cn/signIn/">
+                        
+                        <i class="fas fa-sign-in-alt"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    27 分钟 读完 (大约 3995 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Django vs Flask: Which is the Best Python Web Framework?
+            
+
+            
+        </h1>
+        <div class="content">
+            <html><head><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="FCC 成都社区" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css"></head><body><p><img src="https://blog.jetbrains.com/wp-content/uploads/2022/09/photo_2022-08-23_18-09-02-200x200.jpg" alt="Denis Mashutin"></p>
+<p><a href="https://blog.jetbrains.com/author/denis-mashutin-jetbrains-com" target="_blank" rel="noopener">Denis Mashutin</a></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Even if you are new to web development, you probably already know that there are two main web frameworks in the Python world: Django and Flask. According to the <a href="https://lp.jetbrains.com/python-developers-survey-2022/#FrameworksLibraries" target="_blank" rel="noopener">Python Developers Survey 2022</a> conducted by JetBrains, 39% of developers reported using either or both.</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/web-frameworks.png" alt="Web frameworks by popularity among Python developers"></p>
+<p>Whether you are a beginner thinking of what to learn to get your first job in web development, a developer looking for a framework to build a web application on, or a team lead considering various technologies for an upcoming project, this article should help you make the right choice.</p>
+<p>Before diving deep, let’s take a look at the basic principles and “philosophies” of Django and Flask:</p>
+<ul>
+<li>Flask is a microframework, while Django is an “all-inclusive” one. This means that you have more flexibility in choosing the tools you want to use in Flask, whereas Django has more essential features available out of the box.</li>
+<li>Django enforces certain requirements on the project layout, but for a good cause, as this encourages developers to create applications with a clean and pragmatic design. Flask provides more freedom, though this may result in longer onboarding times for new team members.</li>
+<li>Flask and Django are both free and open source.</li>
+<li>Both frameworks have a large community, detailed documentation, and receive regular updates.</li>
+</ul>
+<p>Now that we’ve covered the essentials, let’s compare Flask vs Django by looking at the various aspects and challenges of using each framework for web development.</p>
+<a id="more"></a>
+
+<h2 id="Templating-system-Django-templates-vs-Jinja2-templates"><a href="#Templating-system-Django-templates-vs-Jinja2-templates" class="headerlink" title="Templating system: Django templates vs Jinja2 templates"></a>Templating system: Django templates vs Jinja2 templates</h2><p>If we only had to work with static HTML pages, that would be very easy, but most of today’s web applications include dynamic content. This is why we need a templating system.</p>
+<p>Django has a built-in template engine, while Flask is fully compatible with Jinja2 templates.</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-vs-jinja2-template.png" alt="Django template vs. Jinja2 template"></p>
+<p>Jinja2 was influenced by the Django template language. That’s why their syntax looks pretty similar. For example, both use double curly braces (<code>\{\{ \}\}</code>) for variables and curly braces with percent signs (<code>\{\% \%\}</code>) for logical elements, like loops and conditional statements.</p>
+<p>At the same time, there are significant differences. Let’s look at these in more detail.</p>
+<h3 id="Compatibility"><a href="#Compatibility" class="headerlink" title="Compatibility"></a>Compatibility</h3><p>Django templates are tightly integrated with the Django framework. Some of their features, like template inheritance and template tags, are Django-specific.</p>
+<p>Jinja2 is an independent template engine, compatible with various frameworks, including Django and Flask. That’s right: Although Django templates are the default choice for Django apps, you can use Jinja2 with Django, too! However, only 14% of Django developers do so, according to the <a href="https://lp.jetbrains.com/django-developer-survey-2022/" target="_blank" rel="noopener">Django Developers Survey 2022</a>:</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/template-engines-django.png" alt="Template engines used by Django developers"></p>
+<p>PyCharm has time-saving features for both template engines. For example, you can use gutter icons to <a href="https://www.jetbrains.com/help/pycharm/navigating-between-templates-and-views.html" target="_blank" rel="noopener">navigate from templates to views, and vice versa</a> – all in one click.</p>
+<h3 id="Flexibility-and-complexity"><a href="#Flexibility-and-complexity" class="headerlink" title="Flexibility and complexity"></a>Flexibility and complexity</h3><p>Jinja2 has a more complex syntax, while Django templates are less flexible and more restricted. There’s hardly any difference for basic applications, but you may face some limitations if you need to perform advanced operations in your templates.</p>
+<p>For example, Jinja2 lets you define macros, which are reusable blocks of code:</p>
+<p>Other examples of more flexible syntax in Jinja2 include:</p>
+<ul>
+<li>Mathematical operations.</li>
+<li>Built-in filters for string formatting and manipulation.</li>
+<li>The ability to assign variables.</li>
+</ul>
+<p>The functionality of Django templates has been intentionally restricted, but for good reasons, including:</p>
+<ul>
+<li>Separating application logic from representation.</li>
+<li>Security: Prohibiting arbitrary code execution in templates helps to prevent injection attacks.</li>
+<li>Keeping templates accessible for non-programmers, such as designers.</li>
+</ul>
+<p>Both template engines allow you to create custom tags and filters. If you’re using PyCharm, you can benefit from its <a href="https://www.jetbrains.com/help/pycharm/custom-template-tags.html" target="_blank" rel="noopener">support for custom template tags</a>.</p>
+<h3 id="Extensions-and-customizations"><a href="#Extensions-and-customizations" class="headerlink" title="Extensions and customizations"></a>Extensions and customizations</h3><p>Many limitations in Django templates can be compensated by using additional libraries. However, it’s important to remember that any extra dependency may negatively affect your application’s performance and security. Here are some popular extensions for Django templates:</p>
+<ol>
+<li><a href="https://django-crispy-forms.readthedocs.io/en/latest/" target="_blank" rel="noopener">django-crispy-forms</a>: introduces the <code>|crispy</code> filter and the <code>\{\% crispy \%\}</code> tag to let you format Django forms easily and beautifully.</li>
+<li><a href="https://pypi.org/project/django-widget-tweaks/" target="_blank" rel="noopener">django-widget-tweaks</a>: adds the <code>\{\% render_field \%\}</code> tag for customizing form fields by using an HTML-like syntax and a bunch of template filters for tweaking form fields and CSS classes.</li>
+<li><a href="https://django-ckeditor.readthedocs.io/en/latest/" target="_blank" rel="noopener">django-ckeditor</a>: provides a WYSIWYG rich text editor so that your application’s users can add their own content as formatted text.</li>
+</ol>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-ckeditor-rich-text-editor-field.png" alt="WYSIWYG rich text editor"></p>
+<p>In Jinja2, you can also import extensions for the sake of customization or even more sophisticated logic. For example, <a href="https://jinja.palletsprojects.com/en/3.0.x/extensions/#loop-controls" target="_blank" rel="noopener">Loop Controls</a> adds support for <code>break</code> and <code>continue</code> in loops. The following loop will stop after processing 10 users from the <code>users</code> list:</p>
+<p>The <a href="https://jinja.palletsprojects.com/en/3.0.x/extensions/#debug-extension" target="_blank" rel="noopener">Debug Extension</a> lets you use the <code>\{\% debug \%\}</code> tag in Jinja2 templates to explore the context without setting up a debugger.</p>
+<p>By the way, PyCharm lets you <a href="https://www.jetbrains.com/help/pycharm/debugging-django-template-tutorial.html" target="_blank" rel="noopener">debug Django templates without any extra tags</a>. Another great feature is the <a href="https://www.jetbrains.com/help/pycharm/live-preview-of-django-templates.html" target="_blank" rel="noopener">real-time preview of Django templates</a>. The IDE renders templates as you edit them, so that you don’t need to switch to your browser.</p>
+<h2 id="URL-dispatcher"><a href="#URL-dispatcher" class="headerlink" title="URL dispatcher"></a>URL dispatcher</h2><p>URL dispatcher redirects incoming requests to specific views depending on the requested URL. Flask and Django handle this in different ways.</p>
+<h3 id="Routing"><a href="#Routing" class="headerlink" title="Routing"></a>Routing</h3><p>In Flask, routing is done by adding decorators to functions. Basically, here is how you create the application logic in Flask:</p>
+<ol>
+<li>Describe the desired behavior in a Python function.</li>
+<li>Decorate the function with <code>@app.route</code>.</li>
+<li>Specify the URL pattern in the parameter of the decorator (for example, <code>@app.route(‘/’)</code>).</li>
+</ol>
+<p>It’s as simple as that. Here’s the full code of a “Hello world” application in Flask:</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+@app<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">return</span> <span class="token string">'Hello World!'</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+app<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>Django uses dedicated Python files (usually, <strong>urls.py</strong>) in order to match the requested URL with the corresponding view (piece of application logic). Views are written separately in <strong>views.py</strong>. To show a page with “Hello World!”, your application must include the following files:</p>
+<ul>
+<li><strong>views.py</strong>: The app logic goes here.</li>
+<li><strong>urls.py</strong>: The routing is done here.</li>
+<li><strong>project’s urls.py</strong>: As Django is designed to have multiple applications in one project, you also need to include the URLs of the application in the project’s <strong>urls.py</strong> file.</li>
+</ul>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-hello-world.png" alt="‘Hello World!’ in Django"></p>
+<p>To launch the “Hello World” application in Django, you also need to perform a few preliminary steps:</p>
+<ol>
+<li>Create a project.</li>
+<li>Create an app.</li>
+<li>Launch the Django server.</li>
+</ol>
+<p>Thankfully, if you are working in PyCharm, all that is <a href="https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-django-project.html#create-project" target="_blank" rel="noopener">done automatically</a>. For more information about creating Django projects in PyCharm, follow our <a href="https://blog.jetbrains.com/pycharm/2023/04/create-a-django-app-in-pycharm/" target="_blank" rel="noopener">Django app tutorial</a>.</p>
+<p>So, here is where Flask’s minimalistic approach shines. Its routing system is simple and intuitive, which perfectly fits small projects, especially learning ones. You can create your first Flask app in a matter of minutes, or use PyCharm’s <a href="https://www.jetbrains.com/help/pycharm/creating-flask-project.html" target="_blank" rel="noopener">Flask project template</a>, which includes a sample “Hello World” application.</p>
+<p>In complex cases, Django will be able to offer more powerful and flexible routing. To compensate for Django’s challenging routing system, PyCharm features a dedicated <a href="https://www.jetbrains.com/help/pycharm/endpoints-tool-window.html" target="_blank" rel="noopener">Endpoints tool window</a>.</p>
+<h3 id="Handling-URL-parameters"><a href="#Handling-URL-parameters" class="headerlink" title="Handling URL parameters"></a>Handling URL parameters</h3><p>URL parameters are variable parts of the URL that are used to send additional information to the application. Both Flask and Django support positional and named parameters, as well as type converters.</p>
+<p>One advantage of Django is that it allows using regular expressions in URL patterns with the help of the <code>re_path()</code> function:</p>
+<pre class=" language-python"><code class="language-python">urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+re_path<span class="token punctuation">(</span>r<span class="token string">'^user/(?P&lt;username&gt;\\w{0,50})/$'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>user_details<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre>
+<p>If you add such a pattern to your Django application, you’ll be able to request a URL, like <code>/user/john/</code>. The application will call the <code>user_details</code> function passing “<code>john</code>” as a parameter.</p>
+<h3 id="Compliance-with-RESTful-principles"><a href="#Compliance-with-RESTful-principles" class="headerlink" title="Compliance with RESTful principles"></a>Compliance with RESTful principles</h3><p>REST (Representational State Transfer) is an architectural style for web applications and services. Building web applications in accordance with REST principles is considered a best practice.</p>
+<p>Flask enforces REST principles by design. It allows you to define routes for different HTTP methods separately.</p>
+<p>In Django, views are associated with URL patterns regardless of the HTTP verb (GET, POST, PUT, DELETE, etc.). The subsequent differentiation is provided by the view, which is usually a class with the respective methods (<code>get()</code>, <code>post()</code>, <code>put()</code>, <code>delete()</code>, etc.):</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-vs-flask-restful.png" alt="Flask vs. Django: handling HTTP methods"></p>
+<p>This doesn’t mean that you can’t create a RESTful API in Django. <a href="https://www.django-rest-framework.org/" target="_blank" rel="noopener">Django REST framework</a> is a package for developing web APIs that provides generic class-based views, a browsable API, serializers, and many other useful features. To build your first API in Django, follow our <a href="https://blog.jetbrains.com/pycharm/2023/09/building-apis-with-django-rest-framework/" target="_blank" rel="noopener">DRF tutorial</a>.</p>
+<h2 id="Working-with-databases"><a href="#Working-with-databases" class="headerlink" title="Working with databases"></a>Working with databases</h2><p>Most web applications deal with data. Data is stored in databases, which are provided by different vendors. Let’s look at database support in Django and Flask.</p>
+<p>Django has built-in Object Relational Mapping (ORM). ORM allows manipulating data in databases like objects in code. Django’s ORM supports PostgreSQL, MariaDB, MySQL, Oracle, and SQLite. Here’s what Django developers tend to choose, according to the <a href="https://lp.jetbrains.com/django-developer-survey-2022/" target="_blank" rel="noopener">Django Developers Survey 2022</a>:</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-backends.png" alt="Databases most used by Django developers"></p>
+<p>If you are going to store data in non-relational databases, like MongoDB or Redis, keep in mind that there is no native support for them in Django. According to the above survey, only 6% of developers use databases that are not officially supported by Django.</p>
+<p>Another feature that facilitates database management in Django applications is the migration system. Django creates migrations automatically based on the changes you make to the application code, and then applies them to the connected database. Migrations are database-agnostic, can be put under version control, and allow for convenient rollbacks.</p>
+<p>To work with migrations, the built-in <strong>manage.py</strong> utility is used. It provides a set of commands for managing migrations. PyCharm has a convenient <a href="https://www.jetbrains.com/help/pycharm/running-manage-py.html" target="_blank" rel="noopener">manage.py console</a> with code completion, which makes operations with migrations easier.</p>
+<p>What can Flask offer? Nothing is built in, but virtually anything can be implemented. You can, for example, use SQLAlchemy, Flask-Peewee, or Flask-Pony for ORM, or store your data in NoSQL databases with Flask-PyMongo, Flask-Cassandra, or Flask-Redis.</p>
+<h2 id="Authentication-and-authorization"><a href="#Authentication-and-authorization" class="headerlink" title="Authentication and authorization"></a>Authentication and authorization</h2><p>Authentication means controlling who can access your web application, while authorization means providing specific permissions to those with access.</p>
+<p>Django’s built-in authentication system handles both. It supports both users and user groups, and provides tools for granting and checking permissions. There are also a bunch of third-party packages for advanced authentication capabilities, including SSO, LDAP, and two-factor authentication.</p>
+<p>Django also comes with an admin interface. The built-in admin app provides a ready-to-use interface for content management. After registering your models in <strong>admin.py</strong>, you’ll be able to perform CRUD (create, read, update, delete) operations on them.</p>
+<p>A vast majority of developers who took part in the <a href="https://lp.jetbrains.com/django-developer-survey-2022/" target="_blank" rel="noopener">Django Developers Survey</a> find <strong>admin</strong> and <strong>auth</strong> very useful:</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-contrib-apps.png" alt="Most useful Django contrib apps"></p>
+<p>To enable the admin app, add it to the list of installed apps in <strong>settings.py</strong> and provide a route for <em>‘</em><code>admin/</code><em>’</em> in <strong>urls.py</strong>. In PyCharm, Django admin is enabled by default and no additional steps are required. Just make sure that the <strong>Enable django admin</strong> checkbox is selected when <a href="https://helpserver.labs.jb.gg/help/pycharm/creating-and-running-your-first-django-project.html#create-project" target="_blank" rel="noopener">creating your Django project</a>.</p>
+<p>Being inherently lightweight, Flask doesn’t offer any authentication or authorization features out of the box. However, there are extensions that can be integrated into your Flask application and work well together. For example, Flask-Admin provides an admin interface combined with ORM support, while Flask-Login and Flask-Security add the essential authentication features.</p>
+<p>The downside of such an approach is that these extensions are not part of Flask and have their own release cycles, which may result in backward compatibility issues.</p>
+<h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><p>Testing is an integral part of professional web development. Let’s see what the most popular web frameworks have to offer us for testing our web applications.</p>
+<p>Both Django and Flask have built-in testing support compatible with the native Python’s unittest module. They also provide a test client for sending HTTP requests to the application.</p>
+<p>One of the few differences lies in handling the databases during testing. If your tests involve database operations, Django will create separate test databases for them. In Flask, developers need to manually ensure that their production database is not affected by tests. Third-party extensions, like Flask-SQLAlchemy, can help with that.</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/test-frameworks-django.png" alt="Test frameworks most used by Django developers"></p>
+<p>If you would like to benefit from advanced features of specialized testing libraries, such as <em>pytest</em>, you can use <a href="https://pytest-flask.readthedocs.io/en/latest/" target="_blank" rel="noopener">pytest-flask</a> or <a href="https://pytest-django.readthedocs.io/en/latest/" target="_blank" rel="noopener">pytest-django</a>.</p>
+<p>To test the API of your web service or application, try PyCharm’s <a href="https://www.jetbrains.com/help/pycharm/http-client-in-product-code-editor.html" target="_blank" rel="noopener">HTTP Client</a>. It lets you create and execute HTTP requests right in the code editor.</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>As you may already know, there are two main styles in software architecture: the monolithic one and microservices.</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/monolithic-vs-microservice-1.png" alt="Monolith with Django vs Microservices with Flask"></p>
+<p>Monolithic applications are ‘normal’ applications: They have a single codebase written in one programming language, are built and deployed as a single unit, and often have unified data storage.</p>
+<p>Microservices architecture, on the other hand, involves developing a suite of small applications, where each unit is responsible for one thing and communicates with the others by means of an API. Every microservice has its own database, is deployed and scaled independently, and fails independently, without putting down the whole system.</p>
+<p>Django encourages creating projects with several apps, where each app takes over a specific function. That might sound very similar to microservices, but it’s not. There’s still a single codebase and often a single database.</p>
+<p>If you choose to develop with Django in PyCharm, you’ll always have access to a bird’s-eye view of the whole project structure in the <a href="https://www.jetbrains.com/help/pycharm/2023.3/django-structure-tool-window.html" target="_blank" rel="noopener">Django Structure tool window</a>:</p>
+<p><img src="https://blog.jetbrains.com/wp-content/uploads/2023/11/django-structure-tool-window.png" alt="Django Structure tool window"></p>
+<p>Flask, the microframework, seems to be a perfect choice for microservices. With Flask, you can easily create a bunch of lightweight apps, empowering each with only the tools and extensions it requires. Full compliance with RESTful principles will also be a great help in establishing stateless connections between the microservices.</p>
+<p>Django can be used in exactly the same way, although in this case the components of the system will be not so compact because of Django’s “batteries included” philosophy. But as long as you can use any stack for each particular microservice, you might as well develop a Django one when you need some Django-specific capabilities.</p>
+<h2 id="Learning-curve"><a href="#Learning-curve" class="headerlink" title="Learning curve"></a>Learning curve</h2><p>Django is a complete framework, which results in a more challenging learning curve. On the other hand, you don’t need to learn anything besides Django. Everything a newbie usually needs, like ORM, authentication, authorization, and more, is already available in the main package, which comes with extensive documentation.</p>
+<p>A Flask application can be created in seconds by writing just a few lines of code in a single file. So, if you are looking for a quick start, Flask may be a better choice. However, you have to be ready to explore extensions and other packages if you decide to develop your project further.</p>
+<p>At the same time, Django projects tend to have more concise and consistent architecture. This results in shorter onboarding times when developers join already running projects.</p>
+<p>From a team lead’s perspective, it’s also very important to take into account the needs and capabilities of your team.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h3 id="At-the-end-of-the-day-should-you-use-Flask-or-Django"><a href="#At-the-end-of-the-day-should-you-use-Flask-or-Django" class="headerlink" title="At the end of the day, should you use Flask or Django?"></a>At the end of the day, should you use Flask or Django?</h3><p>It’s really difficult to say which Python web framework is better, let alone the best.</p>
+<p>Both Django and Flask are equally suitable for many different tasks, but there are also so many aspects in which they differ. Every developer will make their own decision as to which framework to use, taking into account their skills, goals, and the nature of the projects they’re working on.</p>
+<p>The table below summarizes all the points made in the article:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Django</th>
+<th>Flask</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Templates</strong></td>
+<td>Django template language:</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>Django-specific</li>
+<li>Syntax is restricted to encourage best practices</li>
+<li>Readable by non-programmers</li>
+<li>Extensions are available</li>
+</ul>
+<p>| Jinja2:</p>
+<ul>
+<li>Compatible with many web frameworks</li>
+<li>Syntax allows performing operations in the template</li>
+<li>Extensions are available</li>
+</ul>
+<p>|<br>| <strong>URLs</strong> |</p>
+<ul>
+<li>Routing is more complicated but extremely powerful</li>
+<li>Regexes can be used to capture URL parameters</li>
+<li>Not fully RESTful-compliant</li>
+</ul>
+<p>|</p>
+<ul>
+<li>Simplified routing, perfect for a quick start</li>
+<li>Routes and logic are written in one file</li>
+<li>RESTful-compliant</li>
+</ul>
+<p>|<br>| <strong>Databases</strong> |</p>
+<ul>
+<li>Built-in ORMs</li>
+<li>Difficult to use unsupported databases</li>
+</ul>
+<p>|</p>
+<ul>
+<li>ORM support via extensions</li>
+<li>NoSQL databases can be used</li>
+</ul>
+<p>|<br>| <strong>Authentication and authorization</strong> | Built-in apps:</p>
+<ul>
+<li>Django auth</li>
+<li>Django admin</li>
+</ul>
+<p>| Extensions:</p>
+<ul>
+<li>Flask-Admin</li>
+<li>Flask-Login</li>
+<li>Flask-Security</li>
+</ul>
+<p>|<br>| <strong>Testing</strong> |</p>
+<ul>
+<li>Built-in test features and client</li>
+<li>pytest-django</li>
+<li>Automatic test isolation in databases</li>
+</ul>
+<p>|</p>
+<ul>
+<li>Built-in test features and client</li>
+<li>pytest-flask</li>
+<li>Database operations during testing to be handled manually or with extensions</li>
+</ul>
+<p>|<br>| <strong>Architecture</strong> |</p>
+<ul>
+<li>Used mostly for monolithic applications</li>
+<li>One app is responsible for one thing</li>
+<li>Can also be used for microservices</li>
+</ul>
+<p>| Perfect for microservices:</p>
+<ul>
+<li>Compact size</li>
+<li>Easily extendable</li>
+<li>RESTful-compliant</li>
+</ul>
+<p>|<br>| <strong>Learning curve</strong> |</p>
+<ul>
+<li>Challenging learning curve</li>
+<li>Consistent architecture facilitates late onboarding</li>
+</ul>
+<p>|</p>
+<ul>
+<li>The first app can be created in no time</li>
+<li>Perfect first framework for learning</li>
+</ul>
+<p>|</p>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><h4 id="Which-is-better-Django-or-Flask"><a href="#Which-is-better-Django-or-Flask" class="headerlink" title="Which is better: Django or Flask?"></a>Which is better: Django or Flask?</h4><p>Both Django and Flask are modern, well-supported, and regularly updated frameworks. None of them is ‘better’, but you can choose which framework better suits your needs based on how complex your application or service will be, its architecture, the skills of your team members, etc.</p>
+<p>If you are choosing your very first web framework for learning, you may want to start with Flask. It will be easier for you to learn Django afterwards.</p>
+<h4 id="Should-I-learn-Django-or-Flask-for-a-job"><a href="#Should-I-learn-Django-or-Flask-for-a-job" class="headerlink" title="Should I learn Django or Flask for a job?"></a>Should I learn Django or Flask for a job?</h4><p>Both frameworks are very popular, and you definitely need to know at least one of them to work in web development. However, learning both will help you land a job faster.</p>
+<h4 id="Is-Django-still-relevant-in-2023"><a href="#Is-Django-still-relevant-in-2023" class="headerlink" title="Is Django still relevant in 2023?"></a>Is Django still relevant in 2023?</h4><p>Yes. According to the <a href="https://lp.jetbrains.com/python-developers-survey-2022/#FrameworksLibraries" target="_blank" rel="noopener">Python Developers Survey 2022</a>, Django was used by 39% of Python developers. The preliminary results of the Developer Ecosystem Survey 2023 show that Django’s popularity remains high at 40%.</p>
+<h4 id="Is-Flask-easier-than-Django"><a href="#Is-Flask-easier-than-Django" class="headerlink" title="Is Flask easier than Django?"></a>Is Flask easier than Django?</h4><p>Yes, from a learner’s perspective, Flask is a more accessible framework. A basic Flask application can be created in a single file in no time, whereas writing a “Hello World” in Django requires creating a few files and other preliminary steps.</p>
+<p>At the same time, Django is a self-contained and well-documented framework, which means that you can use it to build a full-fledged project without having to choose and incorporate any extensions.</p>
+<h4 id="Is-the-Django-framework-the-same-as-the-Flask-framework"><a href="#Is-the-Django-framework-the-same-as-the-Flask-framework" class="headerlink" title="Is the Django framework the same as the Flask framework?"></a>Is the Django framework the same as the Flask framework?</h4><p>While both Django and Flask are popular choices for web development with Python, they are different in many aspects and each suits different use cases.</p>
+<p>Django is generally used for larger, more complex projects that can benefit from its “batteries included” approach and numerous built-in features.</p>
+<p>Flask is a good choice for simple applications or microservices. It’s a minimalistic framework that offers developers the flexibility to add the functionality they need.</p>
+<h4 id="Can-you-use-Flask-with-Django"><a href="#Can-you-use-Flask-with-Django" class="headerlink" title="Can you use Flask with Django?"></a>Can you use Flask with Django?</h4><p>Mixing Django and Flask in one application doesn’t make much sense, although it is technically possible. They have overlapping functionalities and often handle similar tasks in a different way. Bringing both Flask and Django into one project will cause unnecessary confusion and complexity.</p>
+<p>However, combining Flask and Django can be justified in specific cases, for example, as you migrate your project from one framework to another. Another case is microservices that may require specific features, or be developed by teams with different skill sets.</p>
+<h3 id="Useful-links"><a href="#Useful-links" class="headerlink" title="Useful links"></a>Useful links</h3><h4 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h4><ul>
+<li><a href="https://docs.djangoproject.com/en/4.2/" target="_blank" rel="noopener">Django documentation</a></li>
+<li><a href="https://flask.palletsprojects.com/en/3.0.x/" target="_blank" rel="noopener">Flask documentation</a></li>
+<li><a href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank" rel="noopener">Jinja documentation</a></li>
+<li><a href="https://www.jetbrains.com/help/pycharm/django-support7.html" target="_blank" rel="noopener">Django support in PyCharm</a></li>
+<li><a href="https://www.jetbrains.com/help/pycharm/flask.html" target="_blank" rel="noopener">Flask support in PyCharm</a></li>
+</ul>
+<h4 id="Tutorials"><a href="#Tutorials" class="headerlink" title="Tutorials"></a>Tutorials</h4><ul>
+<li>“<a href="https://blog.jetbrains.com/pycharm/2023/04/create-a-django-app-in-pycharm/" target="_blank" rel="noopener">Create a Django App in PyCharm” tutorial</a></li>
+<li>“<a href="https://blog.jetbrains.com/pycharm/2023/09/building-apis-with-django-rest-framework/" target="_blank" rel="noopener">Building APIs With Django REST Framework” tutorial</a></li>
+</ul>
+<h4 id="Videos"><a href="#Videos" class="headerlink" title="Videos"></a>Videos</h4><ul>
+<li>“<a href="https://www.youtube.com/watch?v=rzyGVScRuxU" target="_blank" rel="noopener">Create a Simple Django Web Application” video tutorial</a></li>
+<li>“<a href="https://www.youtube.com/playlist?list=PLCTHcU1KoD9-nMZNBUT9Gq1JGCkcpMD_y" target="_blank" rel="noopener">Django with PyCharm” playlist</a></li>
+</ul>
+<p><a href="/pycharm/tag/django/">django</a> <a href="/pycharm/tag/flask/">Flask</a> <a href="/pycharm/tag/frameworks/">frameworks</a> <a href="/pycharm/tag/python/">Python</a></p>
+<ul>
+<li>Share</li>
+<li><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fblog.jetbrains.com%2Fpycharm%2F2023%2F11%2Fdjango-vs-flask-which-is-the-best-python-web-framework%2F?facebook_en_US" target="_blank" rel="noopener"><em>Facebook</em></a></li>
+<li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fblog.jetbrains.com%2Fpycharm%2F2023%2F11%2Fdjango-vs-flask-which-is-the-best-python-web-framework%2F&amp;text=https%3A%2F%2Fblog.jetbrains.com%2Fpycharm%2F2023%2F11%2Fdjango-vs-flask-which-is-the-best-python-web-framework%2F&amp;via=pycharm?twitter_en_US" target="_blank" rel="noopener">Twitter</a></li>
+<li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.jetbrains.com%2Fpycharm%2F2023%2F11%2Fdjango-vs-flask-which-is-the-best-python-web-framework%2F?linkedin_en_US" target="_blank" rel="noopener"><em>Linkedin</em></a></li>
+</ul>
+<p><a href="https://blog.jetbrains.com/pycharm/2023/11/2023-2-4/" target="_blank" rel="noopener"><em>Prev post</em> PyCharm 2023.2.4 Is Out!</a></p>
+</body></html>
+        </div>
+
+        <hr>
+
+        
+          <aside class="content">
+          
+
+          </aside>
+        
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/FCC-CDC-Alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/article/translation/declarative-shadow-dom/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Declarative Shadow DOM</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/article/translation/quickstart.html/">
+                <span class="level-item">Regular Expressions Quick Start</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://fcc-cd.dev/article/translation/django-vs-flask-which-is-the-best-python-web-framework/';
+        this.page.identifier = 'article/translation/django-vs-flask-which-is-the-best-python-web-framework/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'fcc-cdc' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+<style>
+  .image.is-128x128 {
+    height: auto;
+  }
+</style>
+
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/FCC-CDC-v1-0.png" alt="freeCodeCamp 成都社区">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        freeCodeCamp 成都社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        公益编程技术社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ChengDu, SiChuan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        96
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        89
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/FreeCodeCamp-Chengdu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="GitHub" href="https://github.com/FreeCodeCamp-Chengdu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微博" href="https://weibo.com/u/6165665516">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微信服务号" href="/contact/#%E5%BE%AE%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%B7">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="QQ 群" href="/contact/#QQ-%E7%BE%A4">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/article/translation/declarative-shadow-dom/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Declarative Shadow DOM">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/declarative-shadow-dom/" class="has-link-black-ter is-size-6">Declarative Shadow DOM</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Django vs Flask: Which is the Best Python Web Framework?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="has-link-black-ter is-size-6">Django vs Flask: Which is the Best Python Web Framework?</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/quickstart.html/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Regular Expressions Quick Start">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/quickstart.html/" class="has-link-black-ter is-size-6">Regular Expressions Quick Start</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/packaging-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="An unbiased evaluation of environment management and packaging tools">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/packaging-tools/" class="has-link-black-ter is-size-6">An unbiased evaluation of environment management and packaging tools</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/some-miscellaneous-git-facts/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Julia Evans">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/some-miscellaneous-git-facts/" class="has-link-black-ter is-size-6">Julia Evans</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/FCC-CDC-v1-0.png" alt="Django vs Flask: Which is the Best Python Web Framework?" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2024 Denis Mashutin&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Code of Conduct" href="/profile/code-of-conduct/">
+                        
+                        <i class="fas fa-balance-scale"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Fork on GitHub" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

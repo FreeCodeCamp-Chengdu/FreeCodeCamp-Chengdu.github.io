@@ -1,0 +1,3122 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know - FCC 成都社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    
+    <meta name="description" content="A list of useful, not-obvious hacks to get the most out of your browser’s1 debugger. Assumes an intermediate-level-or-higher understanding of the developer tools.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know">
+<meta property="og:url" content="https://fcc-cd.dev/article/translation/browser-debugging-tricks/index.html">
+<meta property="og:site_name" content="FCC 成都社区">
+<meta property="og:description" content="A list of useful, not-obvious hacks to get the most out of your browser’s1 debugger. Assumes an intermediate-level-or-higher understanding of the developer tools.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-console-log.2d18d3e4.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconsole-table-in-watch.03919d55.png&amp;w=1080&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-DOM-mutation-chrome.27f07619.png&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconsole-trace-find-stack.d107e89c.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-parameter-override.375af5d5.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconsole-time-performance-profile.9b494665.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-argument-length.eedb2e1c.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-arity-check.70c0a60c.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fnever-pause-here.a4010ee4.png&amp;w=640&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fnever-pause-here-result.32dc71c3.png&amp;w=750&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-gated.d32764ce.png&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-gated-enable-from-breakpoint.1c568b6e.png&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/firefox.583d9a58.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Felusive-element.495b0945.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Felusive-element-inspected.f5f036b4.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fmonitor-focus.b9692b99.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/edge.c22c90ce.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252FgetEventListeners.4ae6f43e.png&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252FmonitorEvents.a03f9e53.gif&amp;w=1920&amp;q=75">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/chrome.2d2a19fd.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/firefox.583d9a58.svg">
+<meta property="og:image" content="https://fcc-cd.dev/_next/static/media/edge.c22c90ce.svg">
+<meta property="article:published_time" content="2024-02-12T08:48:54.805Z">
+<meta property="article:modified_time" content="2024-02-12T08:48:54.805Z">
+<meta property="article:author" content="freeCodeCamp ChengDu community">
+<meta property="article:tag" content="FCC freeCodeCamp 成都 社区 官方 网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fcc-cd.dev/_next/image?url=%252F_next%252Fstatic%252Fmedia%252Fconditional-breakpoint-console-log.2d18d3e4.gif&amp;w=1920&amp;q=75">
+
+
+
+
+
+<link rel="alternative" href="atom.xml" title="67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/FCC-CDC-v1-1.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137453538-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137453538-1');
+</script>
+
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/common.css">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.19/dist/ua-parser.min.js"></script>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/FCC-CDC-v1-0.png" alt="67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/activity">活动</a>
+                
+                <a class="navbar-item"
+                href="http://cdfcc.lofter.com/">相册</a>
+                
+                <a class="navbar-item"
+                href="/categories">博文</a>
+                
+                <a class="navbar-item"
+                href="https://web-conf.dev/">大会</a>
+                
+                <a class="navbar-item"
+                href="/community">社群</a>
+                
+                <a class="navbar-item"
+                href="/categories/Profile/">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="登录" href="https://fcc-cd.leanapp.cn/signIn/">
+                        
+                        <i class="fas fa-sign-in-alt"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2024-02-12T08:48:54.805Z">2024-02-12</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 分钟 读完 (大约 2548 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know
+            
+
+            
+        </h1>
+        <div class="content">
+            <html><head><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="FCC 成都社区" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css"></head><body><p>A list of useful, not-obvious hacks to get the most out of your browser’s<a href="#user-content-fn-1">1</a> debugger. Assumes an intermediate-level-or-higher understanding of the developer tools.</p>
+<a id="more"></a>
+
+<h2 id="Advanced-Conditional-Breakpoints"><a href="#Advanced-Conditional-Breakpoints" class="headerlink" title="Advanced Conditional Breakpoints"></a><a href="#advanced-conditional-breakpoints">Advanced Conditional Breakpoints</a></h2><p>By using expressions that have side effects in places you wouldn’t expect, we can squeeze more functionality out of basic features like conditional breakpoints.</p>
+<h3 id="Logpoints-Tracepoints"><a href="#Logpoints-Tracepoints" class="headerlink" title="Logpoints / Tracepoints"></a><a href="#logpoints--tracepoints">Logpoints / Tracepoints</a></h3><p>For example, we can <code>console.log</code> in breakpoints. Logpoints are breakpoints that log to the console without pausing execution. While Microsoft Edge has had logpoints built-in for a while and Chrome just added them in v73, Firefox does not. But, we can use conditional breakpoints to simulate them in any browser.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-console-log.2d18d3e4.gif&amp;w=1920&amp;q=75" alt="Conditional Breakpoint - console.log"></p>
+<p>Use <code>console.count</code> instead of <code>console.log</code> if you also want a running count of how many times the line is executed.</p>
+<p>UPDATE (May 2020): All the major browsers now directly support logpoints/tracepoints (<a href="https://developers.google.com/web/updates/2019/01/devtools#logpoints" target="_blank" rel="noopener">Chrome Logpoints</a>, <a href="https://docs.microsoft.com/en-us/microsoft-edge/devtools-guide/debugger#breakpoints" target="_blank" rel="noopener">Edge Tracepoints</a>, <a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger/Set_a_logpoint" target="_blank" rel="noopener">Firefox Logpoints</a>)</p>
+<h4 id="Watch-Pane"><a href="#Watch-Pane" class="headerlink" title="Watch Pane"></a><a href="#watch-pane">Watch Pane</a></h4><p>You can also use <code>console.log</code> in the watch pane. For example, to dump a snapshot of <code>localStorage</code> everytime your application pauses in the debugger, you can create a <code>console.table(localStorage)</code> watch:</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconsole-table-in-watch.03919d55.png&amp;w=1080&amp;q=75" alt="console.table in watch pane"></p>
+<p>Or to execute an expression after DOM mutation, set a DOM mutation breakpoint (in the Element Inspector): <img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-DOM-mutation-chrome.27f07619.png&amp;w=1920&amp;q=75" alt="DOM Mutation Breakpoint"></p>
+<p>And then add your watch expression, e.g. to record a snapshot of the DOM: <code>(window.doms = window.doms || []).push(document.documentElement.outerHTML)</code>. Now, after any DOM subtree modification, the debugger will pause execution and the new DOM snapshot will be at the end of the <code>window.doms</code> array. (There is no way to create a DOM mutation breakpoint that doesn’t pause execution.)</p>
+<h4 id="Tracing-Callstacks"><a href="#Tracing-Callstacks" class="headerlink" title="Tracing Callstacks"></a><a href="#tracing-callstacks">Tracing Callstacks</a></h4><p>Let’s say you have a function that shows a loading spinner and a function that hides it, but somewhere in your code you’re calling the show method without a matching hide call. How can you find the source of the unpaired show call? Use <code>console.trace</code> in a conditional breakpoint in the show method, run your code, find the last stack trace for the show method and click the caller to go to the code:</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconsole-trace-find-stack.d107e89c.gif&amp;w=1920&amp;q=75" alt="console.trace in conditional breakpoint"></p>
+<h3 id="Changing-Program-Behavior"><a href="#Changing-Program-Behavior" class="headerlink" title="Changing Program Behavior"></a><a href="#changing-program-behavior">Changing Program Behavior</a></h3><p>By using expressions that have side effects on program behavior, we can change program behavior on the fly, right in the browser.</p>
+<p>For example, you can override the param to the <code>getPerson</code> function, <code>id</code>. Since <code>id=1</code> evaluates to true, this conditional breakpoint would pause the debugger. To prevent that, append <code>, false</code> to the expression.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-parameter-override.375af5d5.gif&amp;w=1920&amp;q=75" alt="Conditional Breakpoint - parameter override"></p>
+<h3 id="Quick-and-Dirty-Performance-Profiling"><a href="#Quick-and-Dirty-Performance-Profiling" class="headerlink" title="Quick and Dirty Performance Profiling"></a><a href="#quick-and-dirty-performance-profiling">Quick and Dirty Performance Profiling</a></h3><p>You shouldn’t muddy your performance profiling with things like conditional breakpoint evaluation time, but if you want a quick and dirty measurement of how long something takes to run, you can use the console timing API in conditional breakpoints. In your starting point set a breakpoint with the condition <code>console.time('label')</code> and at the end point set a breakpoint with the condition <code>console.timeEnd('label')</code>. Everytime the thing you’re measuring runs, the browser will log to the console how long it takes.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconsole-time-performance-profile.9b494665.gif&amp;w=1920&amp;q=75" alt="Conditional Breakpoint - performance profile"></p>
+<h3 id="Using-Function-Arity"><a href="#Using-Function-Arity" class="headerlink" title="Using Function Arity"></a><a href="#using-function-arity">Using Function Arity</a></h3><h4 id="Break-on-Number-of-Arguments"><a href="#Break-on-Number-of-Arguments" class="headerlink" title="Break on Number of Arguments"></a><a href="#break-on-number-of-arguments">Break on Number of Arguments</a></h4><p>Only pause when the current function is called with 3 arguments: <code>arguments.callee.length === 3</code></p>
+<p>Useful when you have an overloaded function that has optional parameters.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-argument-length.eedb2e1c.gif&amp;w=1920&amp;q=75" alt="Conditional Breakpoint - argument length"></p>
+<h4 id="Break-on-Function-Arity-Mismatch"><a href="#Break-on-Function-Arity-Mismatch" class="headerlink" title="Break on Function Arity Mismatch"></a><a href="#break-on-function-arity-mismatch">Break on Function Arity Mismatch</a></h4><p>Only pause when the current function is called with the wrong number of arguments: <code>(arguments.callee.length) != arguments.length</code></p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-arity-check.70c0a60c.gif&amp;w=1920&amp;q=75" alt="Conditional Breakpoint - arity check"></p>
+<p>Useful when finding bugs in function call sites.</p>
+<h3 id="Using-Time"><a href="#Using-Time" class="headerlink" title="Using Time"></a><a href="#using-time">Using Time</a></h3><h4 id="Skip-Page-Load"><a href="#Skip-Page-Load" class="headerlink" title="Skip Page Load"></a><a href="#skip-page-load">Skip Page Load</a></h4><p>Don’t pause until 5 seconds after page load: <code>performance.now() &gt; 5000</code></p>
+<p>Useful when you want to set a breakpoint but you’re only interested in pausing execution after initial page load.</p>
+<h4 id="Skip-N-Seconds"><a href="#Skip-N-Seconds" class="headerlink" title="Skip N Seconds"></a><a href="#skip-n-seconds">Skip N Seconds</a></h4><p>Don’t pause execution if the breakpoint is hit in the next 5 seconds, but pause anytime after: <code>window.baseline = window.baseline || Date.now(), (Date.now() - window.baseline) &gt; 5000</code></p>
+<p>Reset the counter from the console anytime you’d like: <code>window.baseline = Date.now()</code></p>
+<h3 id="Using-CSS"><a href="#Using-CSS" class="headerlink" title="Using CSS"></a><a href="#using-css">Using CSS</a></h3><p>Pause based on computed CSS values, e.g. only pause execution when the document body has a red background color: <code>window.getComputedStyle(document.body).backgroundColor === "rgb(255,0,0)"</code></p>
+<h3 id="Even-Calls-Only"><a href="#Even-Calls-Only" class="headerlink" title="Even Calls Only"></a><a href="#even-calls-only">Even Calls Only</a></h3><p>Only pause every other time the line is executed: <code>window.counter = window.counter || 0, window.counter % 2 === 0</code></p>
+<h3 id="Break-on-Sample"><a href="#Break-on-Sample" class="headerlink" title="Break on Sample"></a><a href="#break-on-sample">Break on Sample</a></h3><p>Only break on a random sample of executions of the line, e.g. only break 1 out of every 10 times the line is executed: <code>Math.random() &lt; 0.1</code></p>
+<h3 id="Never-Pause-Here"><a href="#Never-Pause-Here" class="headerlink" title="Never Pause Here"></a><a href="#never-pause-here">Never Pause Here</a></h3><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"></p>
+<p>When you right-click the gutter and select “Never Pause Here,” Chrome creates a conditional breakpoint that is <code>false</code> and never passes. This makes it so that the debugger will never pause on this line.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnever-pause-here.a4010ee4.png&amp;w=640&amp;q=75" alt="Never Pause Here"> <img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnever-pause-here-result.32dc71c3.png&amp;w=750&amp;q=75" alt="Never Pause Here Result"></p>
+<p>Useful when you want to exempt a line from XHR breakpoints, ignore an exception that is being thrown, etc.</p>
+<h3 id="Automatic-Instance-IDs"><a href="#Automatic-Instance-IDs" class="headerlink" title="Automatic Instance IDs"></a><a href="#automatic-instance-ids">Automatic Instance IDs</a></h3><p>Automatically assign a unique ID to every instance of a class by setting this conditional breakpoint in the constructor: <code>(window.instances = window.instances || []).push(this)</code></p>
+<p>Then to retrieve the unique ID: <code>window.instances.indexOf(instance)</code> (e.g. <code>window.instances.indexOf(this)</code> when in a class method)</p>
+<h3 id="Programmatically-Toggle"><a href="#Programmatically-Toggle" class="headerlink" title="Programmatically Toggle"></a><a href="#programmatically-toggle">Programmatically Toggle</a></h3><p>Use a global boolean to gate one or more conditional breakpoints:</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-gated.d32764ce.png&amp;w=1920&amp;q=75" alt="Boolean gate"></p>
+<p>Then programmatically toggle the boolean, e.g.</p>
+<ul>
+<li><p>manually, from the console</p>
+<pre class=" language-javascript"><code class="language-javascript">window<span class="token punctuation">.</span>enableBreakpoints <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript">window<span class="token punctuation">.</span>enableBreakpoints <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></code></pre>
+</li>
+<li><p>from other breakpoints <img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fconditional-breakpoint-gated-enable-from-breakpoint.1c568b6e.png&amp;w=1920&amp;q=75" alt="Boolean gate - enable from other breakpoint"></p>
+</li>
+<li><p>from a timer on the console</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>enableBreakpoints <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>enableBreakpoints <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+</li>
+<li><p>etc</p>
+</li>
+</ul>
+<h2 id="monitor-class-Calls"><a href="#monitor-class-Calls" class="headerlink" title="monitor() class Calls"></a><a href="#monitor-class-calls">monitor() class Calls</a></h2><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"></p>
+<p>You can use Chrome’s <code>monitor</code> command line method to easily trace all calls to class methods. E.g. given a class <code>Dog</code></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Dog</span> <span class="token punctuation">{</span><span class="token number">2</span>  <span class="token function">bark</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token number">3</span>    <span class="token comment" spellcheck="true">/* ... */</span><span class="token number">4</span>  <span class="token punctuation">}</span><span class="token number">5</span><span class="token punctuation">}</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Dog</span> <span class="token punctuation">{</span><span class="token number">2</span>  <span class="token function">bark</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token number">3</span>    <span class="token comment" spellcheck="true">/* ... */</span><span class="token number">4</span>  <span class="token punctuation">}</span><span class="token number">5</span><span class="token punctuation">}</span></code></pre>
+<p>If we want to know all calls made to all instances of <code>Dog</code>, paste this into the command line:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> p <span class="token operator">=</span> Dog<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">monitor</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> p <span class="token operator">=</span> Dog<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">monitor</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>and you’ll get output in the console:</p>
+<pre><code>&gt; function bark called with arguments: 2</code></pre><pre><code>&gt; function bark called with arguments: 2</code></pre><p>You can use <code>debug</code> instead of <code>monitor</code> if you want to pause execution on any method calls (instead of just logging to the console).</p>
+<h3 id="From-a-Specific-Instance"><a href="#From-a-Specific-Instance" class="headerlink" title="From a Specific Instance"></a><a href="#from-a-specific-instance">From a Specific Instance</a></h3><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"></p>
+<p>If you don’t know the class but you have an instance:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> p <span class="token operator">=</span> instance<span class="token punctuation">.</span>constructor<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">monitor</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> p <span class="token operator">=</span> instance<span class="token punctuation">.</span>constructor<span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">monitor</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Useful when you’d like to write a function that does this for any instance of any class (instead of just <code>Dog</code>)</p>
+<h2 id="Call-and-Debug-a-Function"><a href="#Call-and-Debug-a-Function" class="headerlink" title="Call and Debug a Function"></a><a href="#call-and-debug-a-function">Call and Debug a Function</a></h2><p>Before calling the function you want to debug in the console, call <code>debugger</code>. E.g. given:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* ... */</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* ... */</span>
+<span class="token punctuation">}</span></code></pre>
+<p>From your console:</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">debugger</span><span class="token punctuation">;</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">debugger</span><span class="token punctuation">;</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>And then “Step into next function call” to debug the implementation of <code>fn</code>.</p>
+<p>Useful when you don’t feel like finding the definition of <code>fn</code> and adding a breakpoint manually or if <code>fn</code> is dynamically bound to a function and you don’t know where the source is.</p>
+<p>In Chrome you can also optionally call <code>debug(fn)</code> on the command line and the debugger will pause execution inside <code>fn</code> every time it is called.</p>
+<h2 id="Pause-Execution-on-URL-Change"><a href="#Pause-Execution-on-URL-Change" class="headerlink" title="Pause Execution on URL Change"></a><a href="#pause-execution-on-url-change">Pause Execution on URL Change</a></h2><p>To pause execution before a single-page application modifies the URL (i.e. some routing event happens):</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> dbg <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">debugger</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+history<span class="token punctuation">.</span>pushState <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+history<span class="token punctuation">.</span>replaceState <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>onhashchange <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>onpopstate <span class="token operator">=</span> dbg<span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> dbg <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">debugger</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+history<span class="token punctuation">.</span>pushState <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+history<span class="token punctuation">.</span>replaceState <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>onhashchange <span class="token operator">=</span> dbg<span class="token punctuation">;</span>
+window<span class="token punctuation">.</span>onpopstate <span class="token operator">=</span> dbg<span class="token punctuation">;</span></code></pre>
+<p>Creating a version of <code>dbg</code> that pauses execution without breaking navigation is an exercise left up to the reader.</p>
+<p>Also, note that this doesn’t handle when code calls <code>window.location.replace/assign</code> directly because the page will immediately unload after the assignment, so there is nothing to debug. If you still want to see the source of these redirects (and debug your state at the time of redirect), in Chrome you can <code>debug</code> the relevant methods:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">debug</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>replace<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">debug</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>assign<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">debug</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>replace<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">debug</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>assign<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Debugging-Property-Reads"><a href="#Debugging-Property-Reads" class="headerlink" title="Debugging Property Reads"></a><a href="#debugging-property-reads">Debugging Property Reads</a></h2><p>If you have an object and want to know whenever a property is read on it, use an object getter with a <code>debugger</code> call. For example, convert <code>{configOption: true}</code> to <code>{get configOption() { debugger; return true; }}</code> (either in the original source code or using a conditional breakpoint).</p>
+<p>Useful when you’re passing in some configuration options to something and you’d like to see how they get used.</p>
+<h2 id="Use-copy"><a href="#Use-copy" class="headerlink" title="Use copy()"></a><a href="#use-copy">Use copy()</a></h2><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome">)<img src="/_next/static/media/firefox.583d9a58.svg" alt="Firefox"></p>
+<p>You can copy interesting information out of the browser directly to your clipboard without any string truncation using the <code>copy()</code> console API. Some interesting things you might want to copy:</p>
+<ul>
+<li>Snapshot of the current DOM: <code>copy(document.documentElement.outerHTML)</code></li>
+<li>Metadata about resources (e.g. images): <code>copy(performance.getEntriesByType("resource"))</code></li>
+<li>A large JSON blob, formatted: <code>copy(JSON.parse(blob))</code></li>
+<li>A dump of your localStorage: <code>copy(localStorage)</code></li>
+<li>Etc.</li>
+</ul>
+<h2 id="Debugging-HTML-CSS"><a href="#Debugging-HTML-CSS" class="headerlink" title="Debugging HTML/CSS"></a><a href="#debugging-htmlcss">Debugging HTML/CSS</a></h2><p>The JS console can be helpful when diagnosing problems with your HTML/CSS.</p>
+<h3 id="Inspect-the-DOM-with-JS-Disabled"><a href="#Inspect-the-DOM-with-JS-Disabled" class="headerlink" title="Inspect the DOM with JS Disabled"></a><a href="#inspect-the-dom-with-js-disabled">Inspect the DOM with JS Disabled</a></h3><p>When in the DOM inspector press ctrl+\ (Chrome/Windows) to pause JS execution at any time. This allows you to inspect a snapshot of the DOM without worrying about JS mutating the DOM or events (e.g. mouseover) causing the DOM to change from underneath you.</p>
+<h3 id="Inspect-an-Elusive-Element"><a href="#Inspect-an-Elusive-Element" class="headerlink" title="Inspect an Elusive Element"></a><a href="#inspect-an-elusive-element">Inspect an Elusive Element</a></h3><p>Let’s say you want to inspect a DOM element that only conditionally appears. Inspecting said element requires moving your mouse to it, but when you try to, it disappears:</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Felusive-element.495b0945.gif&amp;w=1920&amp;q=75" alt="Elusive element"></p>
+<p>To inspect the element you can paste this into your console: <code>setTimeout(function() { debugger; }, 5000);</code>. This gives you 5 seconds to trigger the UI, and then once the 5 second timer is up, JS execution will pause and nothing will make your element disappear. You are free to move your mouse to the dev tools without losing the element:</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Felusive-element-inspected.f5f036b4.gif&amp;w=1920&amp;q=75" alt="Elusive element - inspected"></p>
+<p>While JS execution is paused you can inspect the element, edit its CSS, execute commands in the JS console, etc.</p>
+<p>Useful when inspecting DOM that is dependent on specific cursor position, focus, etc.</p>
+<h3 id="Record-Snapshots-of-the-DOM"><a href="#Record-Snapshots-of-the-DOM" class="headerlink" title="Record Snapshots of the DOM"></a><a href="#record-snapshots-of-the-dom">Record Snapshots of the DOM</a></h3><p>To grab a copy of the DOM in its current state:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">copy</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">copy</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>To record a snapshot of the DOM every second:</p>
+<pre class=" language-javascript"><code class="language-javascript">doms <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> domStr <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">;</span>
+    doms<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>domStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript">doms <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> domStr <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">;</span>
+    doms<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>domStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Or just dump it to the console:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> domStr <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"snapshotting DOM: "</span><span class="token punctuation">,</span> domStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> domStr <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>outerHTML<span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"snapshotting DOM: "</span><span class="token punctuation">,</span> domStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Monitor-Focused-Element"><a href="#Monitor-Focused-Element" class="headerlink" title="Monitor Focused Element"></a><a href="#monitor-focused-element">Monitor Focused Element</a></h3><pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> last <span class="token operator">=</span> document<span class="token punctuation">.</span>activeElement<span class="token punctuation">;</span>
+    <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>activeElement <span class="token operator">!==</span> last<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            last <span class="token operator">=</span> document<span class="token punctuation">.</span>activeElement<span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Focus changed to: "</span><span class="token punctuation">,</span> last<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> last <span class="token operator">=</span> document<span class="token punctuation">.</span>activeElement<span class="token punctuation">;</span>
+    <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>activeElement <span class="token operator">!==</span> last<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            last <span class="token operator">=</span> document<span class="token punctuation">.</span>activeElement<span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Focus changed to: "</span><span class="token punctuation">,</span> last<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmonitor-focus.b9692b99.gif&amp;w=1920&amp;q=75" alt="Monitor focused element"></p>
+<h3 id="Find-Bold-Elements"><a href="#Find-Bold-Elements" class="headerlink" title="Find Bold Elements"></a><a href="#find-bold-elements">Find Bold Elements</a></h3><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> isBold <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> w <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">getComputedStyle</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span>fontWeight<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> w <span class="token operator">===</span> <span class="token string">"bold"</span> <span class="token operator">||</span> w <span class="token operator">===</span> <span class="token string">"700"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>isBold<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> isBold <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> w <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">getComputedStyle</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span>fontWeight<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> w <span class="token operator">===</span> <span class="token string">"bold"</span> <span class="token operator">||</span> w <span class="token operator">===</span> <span class="token string">"700"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>isBold<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h4 id="Just-Descendants"><a href="#Just-Descendants" class="headerlink" title="Just Descendants"></a><a href="#just-descendants">Just Descendants</a></h4><p>Or just descendants of the element currently selected in the inspector:</p>
+<pre class=" language-javascript"><code class="language-javascript">Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>$<span class="token number">0</span><span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>isBold<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript">Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>$<span class="token number">0</span><span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>isBold<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Reference-Currently-Selected-Element"><a href="#Reference-Currently-Selected-Element" class="headerlink" title="Reference Currently Selected Element"></a><a href="#reference-currently-selected-element">Reference Currently Selected Element</a></h3><p><code>$0</code> in the console is an automatic reference to the currently selected element in the element inspector.</p>
+<h4 id="Previous-Elements"><a href="#Previous-Elements" class="headerlink" title="Previous Elements"></a><a href="#previous-elements">Previous Elements</a></h4><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome">)<img src="/_next/static/media/edge.c22c90ce.svg" alt="Edge"></p>
+<p>In Chrome and Edge you can access the element you last inspected with <code>$1</code>, the element before that with <code>$2</code>, etc.</p>
+<h4 id="Get-Event-Listeners"><a href="#Get-Event-Listeners" class="headerlink" title="Get Event Listeners"></a><a href="#get-event-listeners">Get Event Listeners</a></h4><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"></p>
+<p>In Chrome you can inspect the event listeners of the currently selected element: <code>getEventListeners($0)</code>, e.g.</p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FgetEventListeners.4ae6f43e.png&amp;w=1920&amp;q=75" alt="getEventListeners"></p>
+<h3 id="Monitor-Events-for-Element"><a href="#Monitor-Events-for-Element" class="headerlink" title="Monitor Events for Element"></a><a href="#monitor-events-for-element">Monitor Events for Element</a></h3><p><img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"></p>
+<p>Debug all events for selected element: <code>monitorEvents($0)</code></p>
+<p>Debug specific events for selected element: <code>monitorEvents($0, ["control", "key"])</code></p>
+<p><img src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FmonitorEvents.a03f9e53.gif&amp;w=1920&amp;q=75" alt="monitorEvents"></p>
+<h2 id="Footnotes"><a href="#Footnotes" class="headerlink" title="Footnotes"></a><a href="#footnote-label">Footnotes</a></h2><ol>
+<li>Tips are supported in Chrome, Firefox, and Edge unless the browser logos say otherwise: <img src="/_next/static/media/chrome.2d2a19fd.svg" alt="Chrome"> <img src="/_next/static/media/firefox.583d9a58.svg" alt="Firefox"> <img src="/_next/static/media/edge.c22c90ce.svg" alt="Edge"> <a href="#user-content-fnref-1">↩</a></li>
+</ol>
+</body></html>
+        </div>
+
+        <hr>
+
+        
+          <aside class="content">
+          
+
+          </aside>
+        
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/FCC-CDC-Alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/article/translation/remote-swe/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">A Video Game that Pays: Lessons Learned from Working Remotely</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/article/translation/ai-powered-todo-app/">
+                <span class="level-item">Ivan Tolkunov</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://fcc-cd.dev/article/translation/browser-debugging-tricks/';
+        this.page.identifier = 'article/translation/browser-debugging-tricks/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'fcc-cdc' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+<style>
+  .image.is-128x128 {
+    height: auto;
+  }
+</style>
+
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/FCC-CDC-v1-0.png" alt="freeCodeCamp 成都社区">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        freeCodeCamp 成都社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        公益编程技术社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ChengDu, SiChuan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        96
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        89
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/FreeCodeCamp-Chengdu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="GitHub" href="https://github.com/FreeCodeCamp-Chengdu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微博" href="https://weibo.com/u/6165665516">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微信服务号" href="/contact/#%E5%BE%AE%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%B7">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="QQ 群" href="/contact/#QQ-%E7%BE%A4">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/article/translation/declarative-shadow-dom/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Declarative Shadow DOM">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/declarative-shadow-dom/" class="has-link-black-ter is-size-6">Declarative Shadow DOM</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Django vs Flask: Which is the Best Python Web Framework?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/django-vs-flask-which-is-the-best-python-web-framework/" class="has-link-black-ter is-size-6">Django vs Flask: Which is the Best Python Web Framework?</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/quickstart.html/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Regular Expressions Quick Start">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/quickstart.html/" class="has-link-black-ter is-size-6">Regular Expressions Quick Start</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/packaging-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="An unbiased evaluation of environment management and packaging tools">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/packaging-tools/" class="has-link-black-ter is-size-6">An unbiased evaluation of environment management and packaging tools</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/article/translation/some-miscellaneous-git-facts/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Julia Evans">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2024-02-12T08:48:54.809Z">2024-02-12</time></div>
+                    <a href="/article/translation/some-miscellaneous-git-facts/" class="has-link-black-ter is-size-6">Julia Evans</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">18</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/FCC-CDC-v1-0.png" alt="67 Weird Debugging Tricks Your Browser Doesn&#39;t Want You to Know" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2024 freeCodeCamp ChengDu community&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Code of Conduct" href="/profile/code-of-conduct/">
+                        
+                        <i class="fas fa-balance-scale"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Fork on GitHub" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
