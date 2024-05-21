@@ -21,7 +21,7 @@
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-feed": "^2.2.0",
     "hexo-generator-index": "^1.0.0",
-    "hexo-generator-slidehtml": "0.0.64",
+    "hexo-generator-slidehtml": "^0.0.64",
     "hexo-generator-tag": "^1.0.0",
     "hexo-migrator-web": "^1.2.1",
     "hexo-permalink-pinyin": "^1.1.0",
@@ -45,7 +45,7 @@
     "build": "hexo clean  &&  hexo generate"
   },
   "devDependencies": {
-    "husky": "^9.0.10",
+    "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5"
   },

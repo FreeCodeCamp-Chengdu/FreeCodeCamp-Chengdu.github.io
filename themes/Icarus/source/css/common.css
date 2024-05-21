@@ -1,4 +1,5 @@
-iframe, .embed-box {
+iframe,
+.embed-box {
   display: block;
   width: 100%;
   height: 80vh;
@@ -18,6 +19,11 @@ iframe, .embed-box {
   vertical-align: top;
 }
 
+th[align="center"],
+td[align="center"] {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
 .table-row {
   display: table;
   width: 100%;
