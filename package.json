@@ -13,7 +13,7 @@
     "version": "4.2.1"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
+    "cheerio": "^1.0.0",
     "hexo": "^4.2.1",
     "hexo-auto-category": "^0.2.2",
     "hexo-deployer-git": "^2.1.0",
@@ -23,7 +23,7 @@
     "hexo-generator-index": "^1.0.0",
     "hexo-generator-slidehtml": "^0.0.64",
     "hexo-generator-tag": "^1.0.0",
-    "hexo-migrator-web": "^1.2.1",
+    "hexo-migrator-web": "^1.2.2",
     "hexo-permalink-pinyin": "^1.1.0",
     "hexo-prism-plugin": "^2.3.0",
     "hexo-reference": "^1.0.4",
@@ -45,9 +45,9 @@
     "build": "hexo clean  &&  hexo generate"
   },
   "devDependencies": {
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2"
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2"
   },
   "prettier": {
     "trailingComma": "none",
