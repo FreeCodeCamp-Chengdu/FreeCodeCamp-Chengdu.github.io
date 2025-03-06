@@ -1,7 +1,6 @@
-# Lark-Next-Bootstrap-ts
+# freeCodeCamp 成都社区 官方网站
 
-[Lark][0] project scaffold based on [TypeScript][2], [React][1], [Next.js][3], [Bootstrap][4] & [Workbox][5]. And this project bootstrapped with [`create-next-app`][6].
-
+[![Anti 996 LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)][1]
 [![CI & CD](https://github.com/idea2app/Lark-Next-Bootstrap-ts/actions/workflows/main.yml/badge.svg)][7]
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)][8]
@@ -27,10 +26,56 @@
    - Global: https://notfound.org/
    - Chinese: https://www.dnpw.org/cn/pa-notfound.html
 
-## User cases
+## 参与开发
 
-1. https://github.com/kaiyuanshe/kaiyuanshe.github.io
-2. https://github.com/idea2app/idea2app.github.io
+请务必先做好[数据子库的准备][6]！
+
+### 安装
+
+```shell
+# 若网速慢，可启用以下环境变量
+# GIT_LFS_SKIP_SMUDGE=1
+
+git clone --recurse-submodules \
+  https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io.git \
+  ~/Desktop/FCC-CDC/OWS/
+
+cd ~/Desktop/FCC-CDC/OWS/
+
+npm i pnpm -g
+pnpm i  &&  pnpm dev
+```
+
+### 写作
+
+```shell
+cd ~/Desktop/FCC-CDC/OWS/pages/article/Wiki
+
+git checkout master  # 确保子模块在 master 分支，否则提交推送后会丢失
+
+touch _post/My-Post-title.md
+code _post/My-Post-title.md  # 用你喜欢的文本编辑器写作
+
+git add .
+git commit -m "[add] A new Post"
+git push
+```
+
+### 开发
+
+```shell
+cd ~/Desktop/FCC-CDC/OWS/
+
+git submodule update --remote  # 程序开发后要同步文章目录
+git checkout -b feature/My-Feature
+
+touch pages/my-page.tsx
+code pages/my-page.tsx  # 用你喜欢的 IDE 开发
+
+git add .
+git commit -m "[add] A new Feature"
+git push -u origin feature/My-Feature
+```
 
 ## Best practice
 
@@ -102,13 +147,12 @@ pnpm pack-image
 pnpm container
 ```
 
-[0]: https://www.larksuite.com/
-[1]: https://react.dev/
+[1]: https://github.com/996icu/996.ICU/blob/master/LICENSE
 [2]: https://www.typescriptlang.org/
 [3]: https://nextjs.org/
 [4]: https://getbootstrap.com/
 [5]: https://developers.google.com/web/tools/workbox
-[6]: https://github.com/vercel/next.js/tree/canary/packages/create-next-app
+[6]: https://github.com/FreeCodeCamp-Chengdu/Wiki/#%E6%9C%AC%E6%9C%BA%E7%BC%96%E8%BE%91
 [7]: https://github.com/idea2app/Lark-Next-Bootstrap-ts/actions/workflows/main.yml
 [8]: https://codespaces.new/idea2app/Lark-Next-Bootstrap-ts
 [9]: https://gitpod.io/?autostart=true#https://github.com/idea2app/Lark-Next-Bootstrap-ts

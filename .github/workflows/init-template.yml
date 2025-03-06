@@ -25,7 +25,7 @@ jobs:
 
       - if: github.repository != format('{0}/{1}', env.TEMPLATE_OWNER, env.TEMPLATE_NAME)
         run: |
-          sh .github/workflows/replace-repository-name.sh \
+          sh .github/scripts/replace-repository-name.sh \
             ${{ env.TEMPLATE_OWNER }} ${{ env.TEMPLATE_NAME }} \
             ${{ env.REPOSITORY_OWNER }} ${{ env.REPOSITORY_NAME }}
           git checkout -- .github/workflows/init-template.yml

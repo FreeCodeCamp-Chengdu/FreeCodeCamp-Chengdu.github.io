@@ -1,0 +1,3 @@
+[submodule "pages/article/Wiki"]
+	path = pages/article/Wiki
+	url = https://github.com/FreeCodeCamp-Chengdu/Wiki
