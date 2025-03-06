@@ -1,0 +1,42 @@
+name: Lark notification
+
+# https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows
+on:
+  push:
+  issues:
+  pull_request:
+  discussion:
+  issue_comment:
+  discussion_comment:
+  release:
+    types:
+      - published
+
+jobs:
+  send-Lark-message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Event Message serialization
+        id: message
+        run: |
+          YAML=$(echo '${{ toJSON(github) }}' | deno --allow-all .github/scripts/transform-message.ts)
+          {
+            echo 'content<<EOF'
+            echo $YAML
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+
+      - name: Send message to Lark
+        if: ${{ contains(steps.message.outputs.content, ':') }}
+        uses: foxundermoon/feishu-action@v2
+        with:
+          url: ${{ secrets.LARK_CHATBOT_HOOK_URL }}
+          msg_type: post
+          content: |
+            ${{ steps.message.outputs.content }}

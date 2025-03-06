@@ -1,0 +1,9 @@
+README.md
+node_modules/
+.eslintrc.json
+.next/
+.vercel/
+start.sh
+.husky/
+.github/
+.vscode/

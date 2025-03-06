@@ -1,0 +1,97 @@
+{
+  "name": "@idea2app/lark-next-bootstrap-ts",
+  "version": "2.1.0",
+  "description": "Lark project scaffold based on TypeScript, React, Next.js, Bootstrap & Workbox.",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15.2.1",
+    "@sentry/nextjs": "^9.4.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "core-js": "^3.41.0",
+    "file-type": "^20.4.0",
+    "idea-react": "^2.0.0-rc.8",
+    "koajax": "^3.1.1",
+    "less": "^4.2.2",
+    "less-loader": "^12.2.0",
+    "lodash": "^4.17.21",
+    "marked": "^15.0.7",
+    "mime": "^4.0.6",
+    "mobx": "^6.13.6",
+    "mobx-github": "^0.3.5",
+    "mobx-i18n": "^0.6.0",
+    "mobx-lark": "^2.0.0",
+    "mobx-react": "^9.2.0",
+    "mobx-restful": "^2.1.0",
+    "mobx-restful-table": "^2.0.1",
+    "next": "^15.2.1",
+    "next-pwa": "~5.6.0",
+    "next-ssr-middleware": "^0.8.9",
+    "next-with-less": "^3.0.1",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
+    "react-dom": "^19.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx-frontmatter": "^5.0.0",
+    "undici": "^7.4.0",
+    "web-utility": "^4.4.3",
+    "webpack": "^5.98.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/plugin-transform-typescript": "^7.26.8",
+    "@babel/preset-react": "^7.26.3",
+    "@eslint/compat": "^1.2.7",
+    "@eslint/eslintrc": "^3.3.0",
+    "@eslint/js": "^9.21.0",
+    "@softonus/prettier-plugin-duplicate-remover": "^1.1.2",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/lodash": "^4.17.16",
+    "@types/next-pwa": "^5.6.9",
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.10",
+    "eslint": "^9.21.0",
+    "eslint-config-next": "^15.2.1",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-css-order": "^2.1.2",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.26.0"
+  },
+  "resolutions": {
+    "next": "$next"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "plugins": [
+      "prettier-plugin-css-order",
+      "@softonus/prettier-plugin-duplicate-remover"
+    ]
+  },
+  "lint-staged": {
+    "*.{html,md,less,json,yml,js,mjs,ts,tsx}": "prettier --write",
+    "*.{js,mjs,ts,tsx}": "eslint --fix"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint  &&  tsc --noEmit",
+    "test": "lint-staged  &&  npm run lint",
+    "pack-image": "docker build -t idea2app/lark-next-bootstrap-ts:latest .",
+    "container": "docker rm -f lark-next-bootstrap-ts  &&  docker run --name lark-next-bootstrap-ts -p 3000:3000 -d idea2app/lark-next-bootstrap-ts:latest"
+  }
+}

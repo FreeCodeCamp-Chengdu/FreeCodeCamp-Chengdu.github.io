@@ -1,0 +1,70 @@
+# reference:
+#   1. https://github.com/docker/build-push-action/blob/master/docs/advanced/push-multi-registries.md
+#   2. https://github.com/docker/build-push-action/blob/master/docs/advanced/share-image-jobs.md
+
+name: Deploy to Production environment
+on:
+  push:
+    tags:
+      - v*
+env:
+  ARTIFACT_PATH: /tmp/artifact.tar
+  BOX_NAME: ${{ github.event.repository.name }}
+  BOX_URL: ${{ github.repository }}
+
+jobs:
+  deploy_docker_image:
+    name: Deploy Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject Environment variables
+        run: |
+          echo "BOX_NAME=${BOX_NAME@L}" >> "${GITHUB_ENV}"
+          echo "BOX_URL=${BOX_URL@L}" >> "${GITHUB_ENV}"
+          cat > .env.local <<EOF
+          ${{ secrets.ENV_FILE }}
+          EOF
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          tags: ${{ env.BOX_URL }}:latest
+          outputs: type=docker,dest=${{ env.ARTIFACT_PATH }}
+
+      - name: Pick Docker Compose
+        run: |
+          mkdir ./build
+          mv ${{ env.ARTIFACT_PATH }} ./docker-compose.yml ./start.sh ./build
+
+      - name: Transport Image
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          source: ./build/*.*
+          target: /tmp/${{ env.BOX_NAME }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.SSH_KEY }}
+          strip_components: 1
+
+      - name: Run Image
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.SSH_KEY }}
+          command: |
+            mkdir -p ~/${{ env.BOX_NAME }} 
+            cd /tmp/${{ env.BOX_NAME }}
+            mv docker-compose.yml start.sh ~/${{ env.BOX_NAME }}
+            cd ~/${{ env.BOX_NAME }}
+            chmod +x start.sh
+            echo '${{ secrets.SSH_KEY }}' | sudo -S ./start.sh /tmp/${{ env.BOX_NAME }}/${{ env.ARTIFACT_PATH }}

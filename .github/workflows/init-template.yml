@@ -1,0 +1,35 @@
+name: Template Repository initialization
+on:
+  push:
+    branches:
+      - main
+env:
+  TEMPLATE_OWNER: idea2app
+  TEMPLATE_NAME: Lark-Next-Bootstrap-ts
+  REPOSITORY_OWNER: ${{ github.repository_owner }}
+  REPOSITORY_NAME: ${{ github.event.repository.name }}
+
+jobs:
+  replace-repository-name:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: transform Repository variables to lower case
+        run: |
+          echo "REPOSITORY_OWNER=${REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
+          echo "REPOSITORY_NAME=${REPOSITORY_NAME@L}" >> "${GITHUB_ENV}"
+
+      - if: github.repository != format('{0}/{1}', env.TEMPLATE_OWNER, env.TEMPLATE_NAME)
+        run: |
+          sh .github/workflows/replace-repository-name.sh \
+            ${{ env.TEMPLATE_OWNER }} ${{ env.TEMPLATE_NAME }} \
+            ${{ env.REPOSITORY_OWNER }} ${{ env.REPOSITORY_NAME }}
+          git checkout -- .github/workflows/init-template.yml
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '[fix] replace Repository Name'

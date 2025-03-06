@@ -1,0 +1,60 @@
+name: CI & CD
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  Build-and-Deploy:
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
+
+      - name: Deploy to Vercel
+        id: vercel-deployment
+        uses: amondnet/vercel-action@v25
+        if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: ${{ github.ref == 'refs/heads/main' && ' --prod' || '' }}
+
+      - name: Lark notification
+        uses: foxundermoon/feishu-action@v2
+        with:
+          url: ${{ secrets.LARK_CHATBOT_HOOK_URL }}
+          msg_type: post
+          content: |
+            post:
+              en_us:
+                title: "Vercel Preview Environment"
+                content:
+                  - - tag: text
+                      text: "Git Repository: "
+                    - tag: a
+                      text: ${{ github.server_url }}/${{ github.repository }}
+                      href: ${{ github.server_url }}/${{ github.repository }}
+                  - - tag: text
+                      text: "Code Branch: "
+                    - tag: a
+                      text: ${{ github.ref }}
+                      href: ${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}
+                  - - tag: text
+                      text: "Commit Author: "
+                    - tag: a
+                      text: ${{ github.actor }}
+                      href: ${{ github.server_url }}/${{ github.actor }}
+                  - - tag: text
+                      text: "Preview Link: "
+                    - tag: a
+                      text: ${{ steps.vercel-deployment.outputs.preview-url }}
+                      href: ${{ steps.vercel-deployment.outputs.preview-url }}

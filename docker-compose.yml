@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  idea2app:
+
+services:
+  lark-next-bootstrap-ts:
+    image: idea2app/lark-next-bootstrap-ts
+    networks:
+      - idea2app
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:3000/ || exit 1']
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    labels:
+      - 'autoheal=true'
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 500M
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+
+  autoheal:
+    image: willfarrell/autoheal:1.2.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+  caddy:
+    depends_on:
+      - lark-next-bootstrap-ts
+    image: caddy
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - idea2app
+    command: caddy reverse-proxy --from your.domain.com --to lark-next-bootstrap-ts:3000

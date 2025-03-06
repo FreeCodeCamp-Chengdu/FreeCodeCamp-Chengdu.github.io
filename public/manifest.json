@@ -1,0 +1,20 @@
+{
+  "name": "Lark-Next-Bootstrap-ts scaffold",
+  "short_name": "Next.ts demo",
+  "start_url": ".",
+  "description": "Lark project scaffold based on TypeScript, React, Next.js, Bootstrap & Workbox.",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "en-US",
+  "dir": "ltr",
+  "theme_color": "rgba(0,0,0,0.5)",
+  "background_color": "transparent",
+  "icons": [
+    {
+      "src": "typescript.png",
+      "type": "image/png",
+      "sizes": "280x280"
+    }
+  ]
+}
