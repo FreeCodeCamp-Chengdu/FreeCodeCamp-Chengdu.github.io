@@ -16,7 +16,7 @@ export const getServerSideProps = compose(
   cache(),
   translator(i18n),
   async () => {
-    const list = await new RepositoryModel('idea2app').getList();
+    const list = await new RepositoryModel('freecodecamp-chengdu').getList();
 
     return { props: JSON.parse(JSON.stringify({ list })) };
   },
