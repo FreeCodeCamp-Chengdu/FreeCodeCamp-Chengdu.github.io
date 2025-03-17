@@ -1,6 +1,13 @@
 import { IDType } from 'mobx-restful';
 
 export default {
+  about: '關於',
+  about_us: '關於我們',
+  our_mission: '我們的使命',
+  our_team: '我們的團隊',
+  activity: '活動',
+  community_description: '讓更多人享受程式設計的樂趣',
+  community: '社群',
   welcome_to: '歡迎使用',
   get_started_by_editing: '開始你的專案吧，編輯',
   upstream_projects: '上游專案',
