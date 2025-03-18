@@ -67,7 +67,7 @@ export default class PaginationPage extends Component {
           columns={this.columns}
           store={repositoryStore}
           translator={i18n}
-          onCheck={console.log}
+          onCheck={console.info}
         />
       </Container>
     );

@@ -21,5 +21,6 @@ export default proxyLark((URI, data) => {
 
     filterData(record.fields);
   }
+
   return data;
 });

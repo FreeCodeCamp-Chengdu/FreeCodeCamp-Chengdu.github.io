@@ -1,61 +1,33 @@
 import { observer } from 'mobx-react';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import { FC } from 'react';
 
 import { MDXLayout } from '../../components/Layout/MDXLayout';
 import { i18n } from '../../models/Translation';
+import { ArticleMeta, pageListOf, traverseTree } from '../api/core';
 
-interface ArticleMeta {
-  name: string;
-  path?: string;
-  subs: ArticleMeta[];
-}
+export const getStaticProps = async () => {
+  const tree = await Array.fromAsync(pageListOf('/article'));
+  const list = tree.map(root => [...traverseTree(root, 'subs')]).flat();
 
-const MDX_pattern = /\.mdx?$/;
-
-export const getStaticProps: GetStaticProps<{
-  list: ArticleMeta[];
-}> = async () => {
-  const { readdirSync } = await import('fs');
-
-  const pageListOf = (path: string, prefix = 'pages'): ArticleMeta[] =>
-    readdirSync(prefix + path, { withFileTypes: true })
-      .map(node => {
-        let { name, path } = node;
-
-        if (name.startsWith('.')) return;
-
-        const isMDX = MDX_pattern.test(name);
-
-        name = name.replace(MDX_pattern, '');
-        path = `${path}/${name}`.replace(new RegExp(`^${prefix}`), '');
-
-        if (node.isFile()) return isMDX && { name, path };
-
-        if (!node.isDirectory()) return;
-
-        const subs = pageListOf(path, prefix);
-
-        return subs[0] && { name, subs };
-      })
-      .filter(Boolean) as ArticleMeta[];
-
-  try {
-    const list = pageListOf('/article');
-
-    return { props: { list } };
-  } catch {
-    return { props: { list: [] } };
-  }
+  return { props: { tree, list } };
 };
 
 const renderTree = (list: ArticleMeta[]) => (
   <ol>
-    {list.map(({ name, path, subs }) => (
+    {list.map(({ name, path, meta, subs }) => (
       <li key={name}>
         {path ? (
-          <a className="h4" href={path}>
-            {name}
+          <a
+            className="h4 d-flex justify-content-between align-items-center"
+            href={path}
+          >
+            {name}{' '}
+            {meta && (
+              <time className="fs-6" dateTime={meta.updated || meta.date}>
+                {meta.updated || meta.date}
+              </time>
+            )}
           </a>
         ) : (
           <details>
@@ -69,9 +41,9 @@ const renderTree = (list: ArticleMeta[]) => (
 );
 
 const ArticleIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> =
-  observer(({ list }) => (
-    <MDXLayout className="" title={i18n.t('article')}>
-      {renderTree(list)}
+  observer(({ tree, list: { length } }) => (
+    <MDXLayout className="" title={`${i18n.t('article')} (${length})`}>
+      {renderTree(tree)}
     </MDXLayout>
   ));
 
