@@ -1,71 +1,48 @@
 import { observer } from 'mobx-react';
 import { compose, translator } from 'next-ssr-middleware';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Button,Card, Col, Container, Row } from 'react-bootstrap';
 
-import { GitCard } from '../components/Git/Card';
+import { CommunityStats } from '../components/Home/CommunityStats';
+import { LatestBlogs } from '../components/Home/LatestBlogs';
+import { Sponsors } from '../components/Home/Sponsors';
+import { UpcomingEvents } from '../components/Home/UpcomingEvents';
 import { PageHead } from '../components/Layout/PageHead';
 import { i18n, t } from '../models/Translation';
 import styles from '../styles/Home.module.less';
-import { framework, mainNav } from './api/home';
 
 export const getServerSideProps = compose(translator(i18n));
 
 const HomePage = observer(() => (
   <Container as="main" className={styles.main}>
-    <PageHead />
+    <PageHead title="Home" />
 
-    <h1 className={`m-0 text-center ${styles.title}`}>
-      {t('welcome_to')}
-      <a className="text-primary mx-2" href="https://nextjs.org">
-        Next.js!
-      </a>
-    </h1>
+    <Row className={styles.heroSection}>
+      <Col xs={12} md={7} className={styles.textSection}>
+        <h1 className="fw-bold">freeCodeCamp 成都社区</h1>
+        <br />
+        <p className="fs-5 text-muted">
+          一个友好的技术社区，致力于交流、学习和互助，帮助成都的开发者和技术爱好者提升个人技术能力。
+        </p>
+        <div className="mt-4">
+          <Button variant="primary" size="lg" className="me-3" href="#">
+            加入社区
+          </Button>
+          <Button variant="outline-primary" size="lg" href="#">
+            查看活动
+          </Button>
+        </div>
+      </Col>
 
-    <p className={`text-center fs-4 ${styles.description}`}>
-      {t('get_started_by_editing')}
-      <code className={`mx-2 rounded-3 bg-light ${styles.code}`}>
-        pages/index.tsx
-      </code>
-    </p>
-
-    <Row className="g-4" xs={1} sm={2} md={4}>
-      {mainNav().map(({ link, title, summary }) => (
-        <Col key={link}>
-          <Card
-            className={`h-100 rounded-3 border ${styles.card}`}
-            tabIndex={-1}
-          >
-            <Card.Body>
-              <Card.Title as="h2" className="fs-4 mb-3">
-                <a href={link} className="stretched-link">
-                  {title} &rarr;
-                </a>
-              </Card.Title>
-              <Card.Text className="fs-5">{summary}</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
+      {/* <Col xs={12} md={5} className={styles.imageSection}></Col> */}
     </Row>
 
-    <h2 className="my-4 text-center">{t('upstream_projects')}</h2>
-    <Row className="g-4" xs={1} sm={2} md={3}>
-      {framework.map(
-        ({ title, languages, tags, summary, link, repository }) => (
-          <Col key={title}>
-            <GitCard
-              className={`h-100 ${styles.card}`}
-              full_name={title}
-              html_url={repository}
-              homepage={link}
-              languages={languages}
-              topics={tags}
-              description={summary}
-            />
-          </Col>
-        ),
-      )}
-    </Row>
+    <UpcomingEvents />
+
+    <LatestBlogs />
+
+    <CommunityStats />
+
+    <Sponsors />
   </Container>
 ));
 

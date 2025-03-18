@@ -20,18 +20,11 @@ export const MainNavigator: FC = observer(() => (
         <Nav className="me-auto">
           <Nav.Link href="/article">{t('article')}</Nav.Link>
 
-          <Nav.Link href="/component">{t('component')}</Nav.Link>
+          <Nav.Link href="/activity">{t('activity')}</Nav.Link>
 
-          <Nav.Link href="/pagination">{t('pagination')}</Nav.Link>
+          <Nav.Link href="/community">{t('community')}</Nav.Link>
 
-          <Nav.Link href="/scroll-list">{t('scroll_list')}</Nav.Link>
-
-          <Nav.Link
-            target="_blank"
-            href="https://github.com/freecodecamp-chengdu/freecodecamp-chengdu.github.io"
-          >
-            {t('source_code')}
-          </Nav.Link>
+          <Nav.Link href="/about">{t('about')}</Nav.Link>
         </Nav>
 
         <LanguageMenu />
