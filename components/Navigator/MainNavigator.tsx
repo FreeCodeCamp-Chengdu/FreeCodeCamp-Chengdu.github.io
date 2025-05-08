@@ -25,6 +25,10 @@ export const MainNavigator: FC = observer(() => (
           <Nav.Link href="/community">{t('community')}</Nav.Link>
 
           <Nav.Link href="/about">{t('about')}</Nav.Link>
+
+          <Nav.Link target="_blank" href="https://github.com/freecodecamp-chengdu/freecodecamp-chengdu.github.io">
+            {t('source_code')}
+          </Nav.Link>
         </Nav>
 
         <LanguageMenu />
