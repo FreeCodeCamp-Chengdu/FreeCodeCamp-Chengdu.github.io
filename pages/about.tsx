@@ -21,6 +21,7 @@ const AboutPage = observer(() => (
         freeCodeCamp（简称 FCC）是由美国人 Quincy Larson 发起的开源项目，截止 2018-02-03，在 Github 上获得 29+万 Star（教育类排名第一）。有长达 1600 小时的课程， 并且是基于浏览器、课程免费、证书免费、结合了游戏化闯关的乐趣。FCC 是一个在 160 多个国家和 2000 多个城市的拥有与 1000k+ 开发者的社区。
       </p>
       <p className="fs-5 lh-lg">
+        {/* cspell:disable-next-line */}
         2016 年 4 月，由 DevEco （晋剑 + Miya）将 FCC 引入中国，并举办了 2000+ 开发者参与的在线全民编程活动，到目前为止，已成功举办了 100+ 场 Coffee & Code / 编程黑客松 / 编程静修日等活动。在 FCC China ， 有 20+% 的女性加入到了社区学习、提升编程能力。
       </p>
     </section>

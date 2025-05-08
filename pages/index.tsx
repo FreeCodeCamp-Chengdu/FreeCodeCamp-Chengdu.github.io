@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import { compose, translator } from 'next-ssr-middleware';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { CommunityStats } from '../components/Home/CommunityStats';
@@ -7,7 +6,6 @@ import { LatestBlogs } from '../components/Home/LatestBlogs';
 import { Sponsors } from '../components/Home/Sponsors';
 import { UpcomingEvents } from '../components/Home/UpcomingEvents';
 import { PageHead } from '../components/Layout/PageHead';
-import { i18n, t } from '../models/Translation';
 import { ArticleMeta, pageListOf, traverseTree } from './api/core';
 import styles from '../styles/Home.module.less';
 
@@ -19,21 +17,17 @@ interface HomePageProps {
 
 export const getStaticProps = async () => {
   try {
-    console.log('Starting to fetch data...');
+    console.info('Starting to fetch data...');
     const [articles, activities, partners] = await Promise.all([
       Array.fromAsync(pageListOf('/article/Wiki/_posts/Article/Translation')),
       Array.fromAsync(pageListOf('/article/Wiki/_posts/Activity')),
       Array.fromAsync(pageListOf('/article/Wiki/_posts/Partner'))
     ]);
 
-    console.log('Raw articles:', articles);
-    console.log('Raw activities:', activities);
-    console.log('Raw partners:', partners);
-
     const latestArticles = articles
       // .map(root => {
       //   let message = [...traverseTree(root, 'subs')];
-      //   console.log('123:', root);
+      //   console.info('123:', root);
       //   return message;
       // })
       .flat()
@@ -45,12 +39,13 @@ export const getStaticProps = async () => {
       })
       .slice(0, 3);
     
-    console.log('Processed latestArticles:', latestArticles);
+    console.info('Processed latestArticles:', latestArticles);
 
     const upcomingEvents = activities
       .map(root => {
         let message = [...traverseTree(root, 'subs')]
-        console.log('aabbcc:', message);
+        /* cspell:disable-next-line */
+        console.info('aabbcc:', message);
         return message;
       })
       .flat()
@@ -66,7 +61,7 @@ export const getStaticProps = async () => {
       })
       .slice(0, 3);
 
-    console.log('Processed upcomingEvents:', upcomingEvents);
+    console.info('Processed upcomingEvents:', upcomingEvents);
 
     const sponsors = partners
       // .map(root => [...traverseTree(root, 'subs')])
@@ -74,7 +69,7 @@ export const getStaticProps = async () => {
       .filter((sponsor): sponsor is ArticleMeta => 'meta' in sponsor)
       .slice(0, 3);
 
-    console.log('Processed sponsors:', sponsors);
+    console.info('Processed sponsors:', sponsors);
 
     return { 
       props: { latestArticles, upcomingEvents, sponsors },
