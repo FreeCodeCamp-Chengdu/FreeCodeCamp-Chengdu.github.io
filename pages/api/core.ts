@@ -56,15 +56,11 @@ export interface ArticleMeta {
 const MDX_pattern = /\.mdx?$/;
 
 export async function frontMatterOf(path: string) {
-  try {
-    const { readFile } = await import('fs/promises');
-    const file = await readFile(path, 'utf-8');
-    const [, frontMatter] = file.match(/^---[\r\n]([\s\S]+?[\r\n])---/) || [];
-    return frontMatter ? parse(frontMatter) : null;
-  } catch (error) {
-    console.error(`Error reading front matter from ${path}:`, error);
-    return null;
-  }
+  const { readFile } = await import('fs/promises');
+  const file = await readFile(path, 'utf-8');
+  const [, frontMatter] = file.match(/^---[\r\n]([\s\S]+?[\r\n])---/) || [];
+
+  return frontMatter ? parse(frontMatter) : null;
 }
 
 export async function* pageListOf(
@@ -94,7 +90,10 @@ export async function* pageListOf(
             if (meta) article.meta = meta;
             yield article;
           } catch (error) {
-            console.error(`Error reading front matter for ${node.path}/${node.name}:`, error);
+            console.error(
+              `Error reading front matter for ${node.path}/${node.name}:`,
+              error,
+            );
           }
         }
       } else if (node.isDirectory()) {

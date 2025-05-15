@@ -1,11 +1,15 @@
+:root {
+  --fcc-primary: #0a0a23;
+  --fcc-secondary: #1b1b32;
+  --fcc-accent: #f1be32;
+  --fcc-light: #f5f6f7;
+}
+
 html,
 body {
   margin: 0;
-  background-image: linear-gradient(
-    150deg,
-    #028dfa 60%,
-    #0ee6e6 100%
-  ) !important;
+  background: linear-gradient(135deg, #028dfa 0%, #ffffff 50%, #0ee6e6 100%);
+  background-attachment: fixed;
   padding: 0;
   font-family:
     -apple-system,
@@ -21,6 +25,12 @@ body {
     sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -28,6 +38,106 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+main {
+  flex: 1;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  background: linear-gradient(135deg, #028dfa 0%, #ffffff 50%, #0ee6e6 100%);
+  padding: 5rem 0;
+  width: 100%;
+  min-height: 80vh;
+  color: var(--fcc-primary);
+}
+
+.section-wrapper {
+  margin: 0;
+  padding: 3rem 0;
+  width: 100%;
+}
+
+.section-wrapper-white {
+  background-color: white;
+}
+
+.section-wrapper-gray {
+  background-color: rgb(248, 249, 250);
+}
+
+.hero-dark-text {
+  color: var(--fcc-primary);
+}
+
+.accent-text {
+  color: #0a0a23;
+  font-weight: bold;
+}
+
+.btn-primary {
+  border-color: #028dfa;
+  background-color: #028dfa;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  border-color: #0275d8;
+  background-color: #0275d8;
+  color: white;
+}
+
+.btn-outline-primary {
+  border-color: #028dfa;
+  color: #028dfa;
+}
+
+.btn-outline-primary:hover {
+  background-color: #028dfa;
+  color: white;
+}
+
+.card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.section-heading {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+.section-heading::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--fcc-accent);
+  width: 50px;
+  height: 3px;
+  content: '';
+}
+
+.section-heading.text-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Responsive adjustments for navbar buttons */
+@media (max-width: 991.98px) {
+  .navbar .btn {
+    margin-top: 0.5rem;
+  }
 }
 
 [contenteditable='true'],
@@ -49,6 +159,87 @@ div:has(.next-error-h1) {
 }
 
 :root {
-  --bs-primary: #000000;
-  --bs-primary-rgb: 2, 141, 250;
+  --bs-primary: var(--fcc-accent);
+  --bs-primary-rgb: 241, 190, 50;
+}
+
+/* Custom navbar styling */
+.navbar.bg-light {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white !important;
+  padding-top: 0.425rem !important;
+  padding-bottom: 0.425rem !important;
+  min-height: auto !important;
+}
+
+.navbar .nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
+  color: #000000 !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.navbar .nav-link:hover {
+  color: #028dfa !important;
+}
+
+.navbar .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  background-color: #028dfa;
+  width: 0;
+  height: 2px;
+  content: '';
+}
+
+.navbar .nav-link:hover::after {
+  width: 80%;
+}
+
+.navbar .nav-link.active {
+  color: #028dfa !important;
+}
+
+.navbar .nav-link.active::after {
+  width: 80%;
+}
+
+.navbar .navbar-brand {
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
+  color: #000000 !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Language menu styling */
+.dropdown-toggle.btn {
+  border-color: #dee2e6 !important;
+  padding: 0.25rem 0.5rem !important;
+  min-width: 100px;
+  color: #000000 !important;
+  font-size: 0.9rem !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  background-color: white !important;
+  min-width: 100px;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: #000000 !important;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f8f9fa;
 }

@@ -10,7 +10,7 @@ const LanguageMenu = dynamic(import('./LanguageMenu'), { ssr: false });
 const Name = process.env.NEXT_PUBLIC_SITE_NAME || '';
 
 export const MainNavigator: FC = observer(() => (
-  <Navbar bg="primary" variant="dark" fixed="top" expand="sm" collapseOnSelect>
+  <Navbar bg="light" variant="light" fixed="top" expand="sm" collapseOnSelect>
     <Container>
       <Navbar.Brand href="/">{Name}</Navbar.Brand>
 
@@ -26,7 +26,10 @@ export const MainNavigator: FC = observer(() => (
 
           <Nav.Link href="/about">{t('about')}</Nav.Link>
 
-          <Nav.Link target="_blank" href="https://github.com/freecodecamp-chengdu/freecodecamp-chengdu.github.io">
+          <Nav.Link
+            target="_blank"
+            href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io"
+          >
             {t('source_code')}
           </Nav.Link>
         </Nav>

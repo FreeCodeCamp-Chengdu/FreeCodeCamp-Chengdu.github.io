@@ -6,7 +6,7 @@ import { enableStaticRendering, observer } from 'mobx-react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { FC } from 'react';
-import { Image } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 
 import { MDXLayout } from '../components/Layout/MDXLayout';
 import { MainNavigator } from '../components/Navigator/MainNavigator';
@@ -39,23 +39,32 @@ const AppShell: FC<AppProps> = observer(({ Component, pageProps, router }) => (
         <Component {...pageProps} />
       </MDXLayout>
     ) : (
-      <div className="mt-5">
+      <div>
         <Component {...pageProps} />
       </div>
     )}
 
-    <footer className="flex-fill d-flex justify-content-center align-items-center border-top py-4">
-      <a
-        className="flex-fill d-flex justify-content-center align-items-center"
-        href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t('powered_by')}
-        <span className="mx-2">
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </span>
-      </a>
+    <footer className="section-wrapper border-top py-4">
+      <Container>
+        <div className="d-flex justify-content-center align-items-center">
+          <a
+            className="d-flex justify-content-center align-items-center"
+            href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('powered_by')}
+            <span className="mx-2">
+              <Image
+                src="/vercel.svg"
+                alt="Vercel Logo"
+                width={72}
+                height={16}
+              />
+            </span>
+          </a>
+        </div>
+      </Container>
     </footer>
   </>
 ));
