@@ -39,31 +39,22 @@ const AppShell: FC<AppProps> = observer(({ Component, pageProps, router }) => (
         <Component {...pageProps} />
       </MDXLayout>
     ) : (
-      <div>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     )}
 
     <footer className="section-wrapper border-top py-4">
-      <Container>
-        <div className="d-flex justify-content-center align-items-center">
-          <a
-            className="d-flex justify-content-center align-items-center"
-            href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('powered_by')}
-            <span className="mx-2">
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                width={72}
-                height={16}
-              />
-            </span>
-          </a>
-        </div>
+      <Container className="d-flex justify-content-center align-items-center">
+        <a
+          className="d-flex justify-content-center align-items-center"
+          href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t('powered_by')}
+          <span className="mx-2">
+            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+          </span>
+        </a>
       </Container>
     </footer>
   </>

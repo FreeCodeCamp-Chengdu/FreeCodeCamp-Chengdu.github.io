@@ -3,21 +3,16 @@ import { FC } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 import { ArticleMeta } from '../../pages/api/core';
+import { SectionTitle } from './SectionTitle';
 
 interface UpcomingEventsProps {
   events: ArticleMeta[];
 }
 
 export const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => (
-  <div className="py-5 bg-white">
+  <div className="py-5 bg-white w-100 m-0">
     <Container>
-      <h2 className="text-center mb-4 text-dark">近期活动</h2>
-      <div className="d-flex justify-content-center mb-4">
-        <div
-          className="border-bottom border-warning"
-          style={{ width: '60px', borderBottomWidth: '3px !important' }}
-         />
-      </div>
+      <SectionTitle title="近期活动" />
       <Row className="g-4" xs={1} sm={2} md={3}>
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
