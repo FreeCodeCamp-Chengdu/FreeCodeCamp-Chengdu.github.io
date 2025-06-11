@@ -24,7 +24,9 @@ export const MainNavigator: FC = observer(() => (
 
           <Nav.Link href="/community">{t('community')}</Nav.Link>
 
-          <Nav.Link href="/about">{t('about')}</Nav.Link>
+          <Nav.Link href="/article/Wiki/_posts/Profile/about">
+            {t('about')}
+          </Nav.Link>
 
           <Nav.Link
             target="_blank"

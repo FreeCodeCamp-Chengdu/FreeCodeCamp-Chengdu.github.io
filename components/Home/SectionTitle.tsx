@@ -1,12 +1,8 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-interface SectionTitleProps {
-  title: string;
-}
-
-export const SectionTitle: FC<SectionTitleProps> = ({ title }) => (
+export const SectionTitle: FC<PropsWithChildren> = ({ children }) => (
   <>
-    <h2 className="text-center mb-4 text-dark">{title}</h2>
+    <h2 className="text-center mb-4 text-dark">{children}</h2>
     <div className="d-flex justify-content-center mb-4">
       <div className="border-bottom border-warning w-25" />
     </div>

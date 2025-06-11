@@ -2,6 +2,7 @@ import NextMDX from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
 import CopyPlugin from 'copy-webpack-plugin';
 import { readdirSync, statSync } from 'fs';
+import type { NextConfig } from 'next';
 import setPWA from 'next-pwa';
 // @ts-expect-error no official types
 import withLess from 'next-with-less';
@@ -58,6 +59,7 @@ const nextConfig = withPWA(
               ],
             }),
           );
+
         return config;
       },
       rewrites: async () => ({

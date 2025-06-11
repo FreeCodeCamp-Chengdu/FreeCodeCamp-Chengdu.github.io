@@ -21,7 +21,6 @@ interface HomePageProps {
 }
 
 export const getStaticProps = async () => {
-  console.info('Starting to fetch data...');
   const [articles, activities, partners] = await Promise.all([
     Array.fromAsync(pageListOf('/article/Wiki/_posts/Article')),
     Array.fromAsync(pageListOf('/article/Wiki/_posts/Activity')),
@@ -31,7 +30,6 @@ export const getStaticProps = async () => {
   const latestArticles = articles
     .map(root => {
       const message = [...traverseTree(root, 'subs')];
-      console.info('123:', root);
 
       return message;
     })
@@ -45,8 +43,6 @@ export const getStaticProps = async () => {
     })
     .slice(0, 3);
 
-  console.info('Processed latestArticles:', latestArticles);
-
   const upcomingEvents = activities
     .map(root => [...traverseTree(root, 'subs')])
     .flat()
@@ -59,14 +55,10 @@ export const getStaticProps = async () => {
     })
     .slice(0, 3);
 
-  console.info('Processed upcomingEvents:', upcomingEvents);
-
   const sponsors = partners
     .flat()
     .filter((sponsor): sponsor is ArticleMeta => 'meta' in sponsor)
     .slice(0, 6);
-
-  console.info('Processed sponsors:', sponsors);
 
   return {
     props: { latestArticles, upcomingEvents, sponsors },

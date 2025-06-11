@@ -11,7 +11,7 @@ interface SponsorsProps {
 export const Sponsors: FC<SponsorsProps> = ({ sponsors }) => (
   <div className="py-5 w-100 m-0 bg-light">
     <Container>
-      <SectionTitle title="赞助商" />
+      <SectionTitle>赞助商</SectionTitle>
       <Row className="g-4" xs={1} sm={2} md={3}>
         {sponsors.map(({ name, meta }) => (
           <Col key={name}>

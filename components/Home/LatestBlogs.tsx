@@ -11,7 +11,7 @@ interface LatestBlogsProps {
 export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
   <div className="py-5 w-100 m-0 bg-light">
     <Container>
-      <SectionTitle title="最新文章" />
+      <SectionTitle>最新文章</SectionTitle>
       <Row className="g-4" xs={1} sm={2} md={3}>
         {articles.map(({ name, meta, path }) => (
           <Col key={name}>

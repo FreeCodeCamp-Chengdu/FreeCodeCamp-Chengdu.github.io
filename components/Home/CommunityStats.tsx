@@ -4,7 +4,7 @@ import { SectionTitle } from './SectionTitle';
 export const CommunityStats = () => (
   <div className="py-5 bg-white w-100 m-0">
     <Container className="text-center">
-      <SectionTitle title="社区数据" />
+      <SectionTitle>社区数据</SectionTitle>
       <Row className="justify-content-center">
         {[
           { number: '1000+', label: '社区成员' },

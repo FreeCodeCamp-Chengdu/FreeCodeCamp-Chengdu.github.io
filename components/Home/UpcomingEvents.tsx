@@ -12,7 +12,7 @@ interface UpcomingEventsProps {
 export const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => (
   <div className="py-5 bg-white w-100 m-0">
     <Container>
-      <SectionTitle title="近期活动" />
+      <SectionTitle>近期活动</SectionTitle>
       <Row className="g-4" xs={1} sm={2} md={3}>
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
@@ -20,10 +20,10 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => (
               <Card.Body>
                 <Card.Title className="text-dark">{name}</Card.Title>
                 <Card.Text className="text-dark">
-                  时间: {meta?.start || 'void 0'}
+                  时间: {meta?.start || 'N/A'}
                 </Card.Text>
                 <Card.Text className="text-dark">
-                  地点: {meta?.address || 'void 0'}
+                  地点: {meta?.address || 'N/A'}
                 </Card.Text>
 
                 <Link href={path || '#'} className="btn btn-primary">
