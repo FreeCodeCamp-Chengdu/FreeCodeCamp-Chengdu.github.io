@@ -57,10 +57,12 @@ const MDX_pattern = /\.mdx?$/;
 
 export async function frontMatterOf(path: string) {
   const { readFile } = await import('fs/promises');
+
   const file = await readFile(path, 'utf-8');
+
   const [, frontMatter] = file.match(/^---[\r\n]([\s\S]+?[\r\n])---/) || [];
 
-  return frontMatter ? parse(frontMatter) : null;
+  return frontMatter && parse(frontMatter);
 }
 
 export async function* pageListOf(
@@ -69,42 +71,37 @@ export async function* pageListOf(
 ): AsyncGenerator<ArticleMeta> {
   const { readdir } = await import('fs/promises');
 
-  try {
-    const list = await readdir(prefix + path, { withFileTypes: true });
+  const list = await readdir(prefix + path, { withFileTypes: true });
 
-    for (const node of list) {
-      let { name, path } = node;
+  for (const node of list) {
+    let { name, path } = node;
 
-      if (name.startsWith('.')) continue;
+    if (name.startsWith('.')) continue;
 
-      const isMDX = MDX_pattern.test(name);
+    const isMDX = MDX_pattern.test(name);
 
-      name = name.replace(MDX_pattern, '');
-      path = `${path}/${name}`.replace(new RegExp(`^${prefix}`), '');
+    name = name.replace(MDX_pattern, '');
+    path = `${path}/${name}`.replace(new RegExp(`^${prefix}`), '');
 
-      if (node.isFile()) {
-        if (isMDX) {
-          const article: ArticleMeta = { name, path, subs: [] };
-          try {
-            const meta = await frontMatterOf(`${node.path}/${node.name}`);
-            if (meta) article.meta = meta;
-            yield article;
-          } catch (error) {
-            console.error(
-              `Error reading front matter for ${node.path}/${node.name}:`,
-              error,
-            );
-          }
-        }
-      } else if (node.isDirectory()) {
-        const subs = await Array.fromAsync(pageListOf(path, prefix));
-        if (subs.length > 0) {
-          yield { name, subs };
-        }
+    if (node.isFile() && isMDX) {
+      const article: ArticleMeta = { name, path, subs: [] };
+      try {
+        const meta = await frontMatterOf(`${node.path}/${node.name}`);
+
+        if (meta) article.meta = meta;
+      } catch (error) {
+        console.error(
+          `Error reading front matter for ${node.path}/${node.name}:`,
+          error,
+        );
       }
+      yield article;
     }
-  } catch (error) {
-    console.error(`Error reading directory ${prefix + path}:`, error);
+    if (!node.isDirectory()) continue;
+
+    const subs = await Array.fromAsync(pageListOf(path, prefix));
+
+    if (subs.length) yield { name, subs };
   }
 }
 

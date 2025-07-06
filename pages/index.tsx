@@ -28,11 +28,7 @@ export const getStaticProps = async () => {
   ]);
 
   const latestArticles = articles
-    .map(root => {
-      const message = [...traverseTree(root, 'subs')];
-
-      return message;
-    })
+    .map(root => [...traverseTree(root, 'subs')])
     .flat()
     .filter((article): article is ArticleMeta => 'meta' in article)
     .sort((a, b) => {
@@ -70,6 +66,7 @@ const HomePage = observer(
   ({ latestArticles, upcomingEvents, sponsors, error }: HomePageProps) => (
     <main className="min-vh-100">
       <PageHead title="Home" />
+
       <div className={styles.hero}>
         <Container>
           <Row className="d-flex align-items-center">

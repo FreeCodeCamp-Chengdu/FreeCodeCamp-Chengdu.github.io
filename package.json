@@ -75,6 +75,11 @@
   "resolutions": {
     "next": "$next"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all",
@@ -97,12 +102,5 @@
     "test": "lint-staged  &&  npm run lint",
     "pack-image": "docker build -t freecodecamp-chengdu/freecodecamp-chengdu.github.io:latest .",
     "container": "docker rm -f freecodecamp-chengdu.github.io  &&  docker run --name freecodecamp-chengdu.github.io -p 3000:3000 -d freecodecamp-chengdu/freecodecamp-chengdu.github.io:latest"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@sentry/cli",
-      "core-js",
-      "sharp"
-    ]
   }
 }
