@@ -1,7 +1,14 @@
 import { IDType } from 'mobx-restful';
 
 export default {
-  welcome_to: '欢迎使用',
+  about: '关于',
+  about_us: '关于我们',
+  our_mission: '我们的使命',
+  our_team: '我们的团队',
+  activity: '活动',
+  community_description: '让更多人享受编程的乐趣',
+  community: '社区',
+  welcome_to: '欢迎来到',
   get_started_by_editing: '开始你的项目吧，编辑',
   upstream_projects: '上游项目',
   home_page: '主页',

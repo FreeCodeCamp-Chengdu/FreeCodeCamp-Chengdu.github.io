@@ -1,6 +1,13 @@
 import { IDType } from 'mobx-restful';
 
 export default {
+  about: 'About',
+  about_us: 'About US',
+  our_team: 'Our Team',
+  our_mission: 'Our Mission',
+  activity: 'Activity',
+  community_description: 'Let more people enjoy the fun of programming',
+  community: 'Community',
   welcome_to: 'Welcome to',
   get_started_by_editing: 'Get started by editing',
   upstream_projects: 'Upstream projects',

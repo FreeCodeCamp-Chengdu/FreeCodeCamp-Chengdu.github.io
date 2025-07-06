@@ -83,24 +83,25 @@ export async function* pageListOf(
     name = name.replace(MDX_pattern, '');
     path = `${path}/${name}`.replace(new RegExp(`^${prefix}`), '');
 
-    if (node.isFile())
-      if (isMDX) {
-        const article: ArticleMeta = { name, path, subs: [] };
-        try {
-          const meta = await frontMatterOf(`${node.path}/${node.name}`);
+    if (node.isFile() && isMDX) {
+      const article: ArticleMeta = { name, path, subs: [] };
+      try {
+        const meta = await frontMatterOf(`${node.path}/${node.name}`);
 
-          if (meta) article.meta = meta;
-        } catch (error) {
-          console.error(error);
-        }
-        yield article;
-      } else continue;
-
+        if (meta) article.meta = meta;
+      } catch (error) {
+        console.error(
+          `Error reading front matter for ${node.path}/${node.name}:`,
+          error,
+        );
+      }
+      yield article;
+    }
     if (!node.isDirectory()) continue;
 
     const subs = await Array.fromAsync(pageListOf(path, prefix));
 
-    if (subs[0]) yield { name, subs };
+    if (subs.length) yield { name, subs };
   }
 }
 

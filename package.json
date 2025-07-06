@@ -75,6 +75,11 @@
   "resolutions": {
     "next": "$next"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all",

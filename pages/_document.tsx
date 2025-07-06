@@ -15,11 +15,11 @@ export default function Document() {
         />
         <link
           rel="stylesheet"
-          href="https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
         />
       </Head>
 
-      <body>
+      <body className="d-flex flex-column min-vh-100">
         <Main />
         <NextScript />
       </body>

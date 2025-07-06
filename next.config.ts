@@ -58,6 +58,7 @@ const nextConfig = withPWA(
               ],
             }),
           );
+
         return config;
       },
       rewrites: async () => ({
