@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import {
   Button,
   Form,
@@ -9,7 +9,7 @@ import {
   InputGroupProps,
 } from 'react-bootstrap';
 
-import { t } from '../../models/Translation';
+import { I18nContext } from '../../models/Translation';
 import styles from './SearchBar.module.less';
 
 export interface SearchBarProps
@@ -27,24 +27,30 @@ export const SearchBar: FC<SearchBarProps> = observer(
     action = '/search',
     size,
     name = 'keywords',
-    placeholder = t('keywords'),
+    placeholder,
     expanded = true,
     defaultValue,
     value,
     onChange,
     ...props
-  }) => (
-    <Form {...{ action, ...props }}>
-      <InputGroup size={size}>
-        <Form.Control
-          className={expanded ? '' : styles.input}
-          type="search"
-          {...{ name, placeholder, defaultValue, value, onChange }}
-        />
-        <Button type="submit" variant="light">
-          🔍
-        </Button>
-      </InputGroup>
-    </Form>
-  ),
+  }) => {
+    const { t } = useContext(I18nContext);
+
+    placeholder ??= t('keywords');
+
+    return (
+      <Form {...{ action, ...props }}>
+        <InputGroup size={size}>
+          <Form.Control
+            className={expanded ? '' : styles.input}
+            type="search"
+            {...{ name, placeholder, defaultValue, value, onChange }}
+          />
+          <Button type="submit" variant="light">
+            🔍
+          </Button>
+        </InputGroup>
+      </Form>
+    );
+  },
 );

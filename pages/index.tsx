@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { FC } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 
@@ -62,8 +63,8 @@ export const getStaticProps = async () => {
   };
 };
 
-const HomePage = observer(
-  ({ latestArticles, upcomingEvents, sponsors, error }: HomePageProps) => (
+const HomePage: FC<HomePageProps> = observer(
+  ({ latestArticles, upcomingEvents, sponsors }) => (
     <main className="min-vh-100">
       <PageHead title="Home" />
 

@@ -5,9 +5,8 @@ import {
   errorLogger,
   RouteProps,
   router,
-  translator,
 } from 'next-ssr-middleware';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Container, Nav } from 'react-bootstrap';
 import { buildURLData } from 'web-utility';
 
@@ -15,7 +14,7 @@ import { CardPage, CardPageProps } from '../../../components/Layout/CardPage';
 import { PageHead } from '../../../components/Layout/PageHead';
 import { SearchBar } from '../../../components/Navigator/SearchBar';
 import systemStore, { SearchPageMeta } from '../../../models/System';
-import { i18n, t } from '../../../models/Translation';
+import { I18nContext } from '../../../models/Translation';
 
 type SearchModelPageProps = RouteProps<{ model: string }> & SearchPageMeta;
 
@@ -26,7 +25,6 @@ export const getServerSideProps = compose<
   cache(),
   router,
   errorLogger,
-  translator(i18n),
   async ({ params, query: { keywords = '', page = '1' } }) => {
     const Model = systemStore.searchMap[params!.model];
 
@@ -52,9 +50,10 @@ const SearchCardMap: Record<string, CardPageProps['Card']> = {};
 
 const SearchModelPage: FC<SearchModelPageProps> = observer(
   ({ route: { params, query }, ...pageMeta }) => {
-    const nameMap = SearchNameMap(),
+    const { t } = useContext(I18nContext),
       { model } = params!,
-      { keywords = '' } = query;
+      { keywords = '' } = query,
+      nameMap = SearchNameMap();
     const name = nameMap[model],
       Card = SearchCardMap[model];
     const title = `${keywords} - ${name} ${t('search_results')}`;
