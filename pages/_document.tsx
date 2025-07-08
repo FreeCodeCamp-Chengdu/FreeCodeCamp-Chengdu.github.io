@@ -1,28 +1,52 @@
-import { Head, Html, Main, NextScript } from 'next/document';
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
 
-export default function Document() {
-  return (
-    <Html>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
+import { LanguageCode, parseSSRContext } from '../models/Translation';
 
-        <link rel="manifest" href="/manifest.json" />
-        <script src="https://polyfill.web-cell.dev/feature/PWAManifest.js" />
+interface CustomDocumentProps {
+  language: LanguageCode;
+  colorScheme: 'light' | 'dark';
+}
 
-        <link
-          rel="stylesheet"
-          href="https://bootswatch.com/5/quartz/bootstrap.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
-        />
-      </Head>
+export default class CustomDocument extends Document<CustomDocumentProps> {
+  static async getInitialProps(context: DocumentContext) {
+    return {
+      ...(await Document.getInitialProps(context)),
+      ...parseSSRContext<CustomDocumentProps>(context, ['language']),
+    };
+  }
 
-      <body className="d-flex flex-column min-vh-100">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+  render() {
+    const { language, colorScheme } = this.props;
+
+    return (
+      <Html lang={language} data-bs-theme={colorScheme}>
+        <Head>
+          <link rel="icon" href="/favicon.ico" />
+
+          <link rel="manifest" href="/manifest.json" />
+          <script src="https://polyfill.web-cell.dev/feature/PWAManifest.js" />
+
+          <link
+            rel="stylesheet"
+            href="https://bootswatch.com/5/quartz/bootstrap.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+          />
+        </Head>
+
+        <body className="d-flex flex-column min-vh-100">
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }

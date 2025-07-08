@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import type { FC, PropsWithChildren } from 'react';
 
+import { Name, Summary } from '../../models/configuration';
+
 export type PageHeadProps = PropsWithChildren<{
   title?: string;
   description?: string;
 }>;
-
-const Name = process.env.NEXT_PUBLIC_SITE_NAME,
-  Summary = process.env.NEXT_PUBLIC_SITE_SUMMARY;
 
 export const PageHead: FC<PageHeadProps> = ({
   title,
@@ -15,7 +14,7 @@ export const PageHead: FC<PageHeadProps> = ({
   children,
 }) => (
   <Head>
-    <title>{`${title}${title && ' - '}${Name}`}</title>
+    <title>{`${title ? `${title} - ` : ''}${Name}`}</title>
 
     {description && <meta name="description" content={description} />}
 

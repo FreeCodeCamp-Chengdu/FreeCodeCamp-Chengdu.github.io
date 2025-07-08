@@ -1,26 +1,43 @@
 import { LarkPageData, TableRecord, TableRecordData } from 'mobx-lark';
 import { DataObject } from 'mobx-restful';
+import { createKoaRouter } from 'next-ssr-middleware';
 
-import { proxyLark } from '../../core';
+import { withSafeKoaRouter } from '../../../core';
+import { proxyLark, proxyLarkAll } from '../../core';
+
+export const config = { api: { bodyParser: false } };
+
+const router = createKoaRouter(import.meta.url);
 
 function filterData(fields: DataObject) {
   for (const key of Object.keys(fields))
     if (!/^\w+$/.test(key)) delete fields[key];
 }
 
-export default proxyLark((URI, data) => {
-  const [path] = URI.split('?');
+router.get('/apps/:app/tables/:table/records/:record', async context => {
+  const { status, body } =
+    await proxyLark<TableRecordData<DataObject>>(context);
 
-  if (path.endsWith('/records')) {
-    const list =
-      (data as LarkPageData<TableRecord<DataObject>>).data!.items || [];
+  const { fields } = body!.data!.record;
 
-    for (const { fields } of list) filterData(fields);
-  } else if (path.split('/').at(-2) === 'records') {
-    const { record } = (data as TableRecordData<DataObject>).data!;
+  filterData(fields);
 
-    filterData(record.fields);
-  }
-
-  return data;
+  context.status = status;
+  context.body = body;
 });
+
+router.get('/apps/:app/tables/:table/records', async context => {
+  const { status, body } =
+    await proxyLark<LarkPageData<TableRecord<DataObject>>>(context);
+
+  const list = body!.data!.items || [];
+
+  for (const { fields } of list) filterData(fields);
+
+  context.status = status;
+  context.body = body;
+});
+
+router.all('/(.*)', proxyLarkAll);
+
+export default withSafeKoaRouter(router);
