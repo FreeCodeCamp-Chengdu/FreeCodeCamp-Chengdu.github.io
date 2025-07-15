@@ -1,10 +1,4 @@
-import Document, {
-  DocumentContext,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 
 import { LanguageCode, parseSSRContext } from '../models/Translation';
 
@@ -34,7 +28,7 @@ export default class CustomDocument extends Document<CustomDocumentProps> {
 
           <link
             rel="stylesheet"
-            href="https://bootswatch.com/5/quartz/bootstrap.min.css"
+            href="https://unpkg.com/bootstrap@5.3.6/dist/css/bootstrap.min.css"
           />
           <link
             rel="stylesheet"
