@@ -9,7 +9,7 @@ export const getServerSideProps = compose(githubOAuth);
 
 export default function EditorPage() {
   return (
-    <Container>
+    <Container className="mt-5 pt-4">
       <PageHead title="Git Pager" />
       <h1>Git Pager</h1>
 

@@ -10,12 +10,7 @@ import { Container, Image } from 'react-bootstrap';
 import { MDXLayout } from '../components/Layout/MDXLayout';
 import { MainNavigator } from '../components/Navigator/MainNavigator';
 import { isServer } from '../models/configuration';
-import {
-  createI18nStore,
-  I18nContext,
-  I18nProps,
-  loadSSRLanguage,
-} from '../models/Translation';
+import { createI18nStore, I18nContext, I18nProps, loadSSRLanguage } from '../models/Translation';
 
 configure({ enforceActions: 'never' });
 
@@ -46,6 +41,7 @@ export default class CustomApp extends App<I18nProps> {
   render() {
     const { Component, pageProps, router } = this.props,
       { t } = this.i18nStore;
+    const { asPath } = router;
 
     return (
       <I18nContext.Provider value={this.i18nStore}>
@@ -55,8 +51,8 @@ export default class CustomApp extends App<I18nProps> {
 
         <MainNavigator />
 
-        {router.asPath.startsWith('/article/') ? (
-          <MDXLayout title={router.asPath.split('/').at(-1)}>
+        {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
+          <MDXLayout title={asPath.split('/').at(-1)}>
             <Component {...pageProps} />
           </MDXLayout>
         ) : (
@@ -73,12 +69,7 @@ export default class CustomApp extends App<I18nProps> {
             >
               {t('powered_by')}
               <span className="mx-2">
-                <Image
-                  src="/vercel.svg"
-                  alt="Vercel Logo"
-                  width={72}
-                  height={16}
-                />
+                <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
               </span>
             </a>
           </Container>
