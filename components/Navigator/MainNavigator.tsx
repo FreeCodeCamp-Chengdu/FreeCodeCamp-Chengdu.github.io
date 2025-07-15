@@ -22,13 +22,13 @@ export const MainNavigator: FC = observer(() => {
           <Nav className="me-auto">
             <Nav.Link href="/article">{t('article')}</Nav.Link>
 
+            <Nav.Link href="/article/editor">Git pager</Nav.Link>
+
             <Nav.Link href="/activity">{t('activity')}</Nav.Link>
 
             <Nav.Link href="/community">{t('community')}</Nav.Link>
 
-            <Nav.Link href="/article/Wiki/_posts/Profile/about">
-              {t('about')}
-            </Nav.Link>
+            <Nav.Link href="/article/Wiki/_posts/Profile/about">{t('about')}</Nav.Link>
 
             <Nav.Link
               target="_blank"

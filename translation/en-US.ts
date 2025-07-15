@@ -17,15 +17,13 @@ export default {
   pagination: 'Pagination',
   powered_by: 'Powered by',
   documentation: 'Documentation',
-  documentation_summary:
-    'Find in-depth information about Next.js features and API.',
+  documentation_summary: 'Find in-depth information about Next.js features and API.',
   learn: 'Learn',
   learn_summary: 'Learn about Next.js in an interactive course with quizzes!',
   examples: 'Examples',
   examples_summary: 'Discover and deploy boilerplate example Next.js projects.',
   deploy: 'Deploy',
-  deploy_summary:
-    'Instantly deploy your Next.js site to a public URL with Vercel.',
+  deploy_summary: 'Instantly deploy your Next.js site to a public URL with Vercel.',
 
   // Pagination Table
   create: 'Create',
@@ -33,10 +31,8 @@ export default {
   cancel: 'Cancel',
   edit: 'Edit',
   delete: 'Delete',
-  total_x_rows: ({ totalCount }: { totalCount: number }) =>
-    `Total ${totalCount} rows`,
-  sure_to_delete_x: ({ keys }: { keys: IDType[] }) =>
-    `Are you sure to delete ${keys.join(', ')}?`,
+  total_x_rows: ({ totalCount }: { totalCount: number }) => `Total ${totalCount} rows`,
+  sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `Are you sure to delete ${keys.join(', ')}?`,
   repository_name: 'Repository Name',
   programming_language: 'Programming Language',
   topic: 'Topic',
@@ -49,6 +45,16 @@ export default {
 
   // MDX Article
   article: 'Article',
+
+  // Git pager
+  repository: 'repository',
+  file_path: 'file path',
+  commit_message: 'commit message',
+  commit: 'commit',
+  clear: 'clear',
+  meta: 'meta',
+  content: 'content',
+  copy_MarkDown: 'copy Markdown',
 
   // Search
   keywords: 'Keywords',
