@@ -1,10 +1,12 @@
+import { parseCookie } from 'mobx-i18n';
+
 export const isServer = () => typeof window === 'undefined';
 
 export const Name = process.env.NEXT_PUBLIC_SITE_NAME,
   Summary = process.env.NEXT_PUBLIC_SITE_SUMMARY,
   DefaultImage = process.env.NEXT_PUBLIC_LOGO!;
 
-export const { VERCEL_URL, GITHUB_TOKEN } = process.env;
+export const { VERCEL, VERCEL_URL } = process.env;
 
 export const API_Host = isServer()
   ? VERCEL_URL
@@ -13,6 +15,10 @@ export const API_Host = isServer()
   : globalThis.location.origin;
 
 export const CACHE_HOST = process.env.NEXT_PUBLIC_CACHE_HOST!;
+
+export const ProxyBaseURL = 'https://2025.fcc-cd.dev/proxy';
+
+export const GithubToken = (globalThis.document && parseCookie().token) || process.env.GITHUB_TOKEN;
 
 export const LARK_API_HOST = `${API_Host}/api/Lark/`;
 

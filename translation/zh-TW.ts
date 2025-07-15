@@ -31,10 +31,8 @@ export default {
   cancel: '取消',
   edit: '編輯',
   delete: '刪除',
-  total_x_rows: ({ totalCount }: { totalCount: number }) =>
-    `共 ${totalCount} 行`,
-  sure_to_delete_x: ({ keys }: { keys: IDType[] }) =>
-    `您確定刪除 ${keys.join('、')} 嗎？`,
+  total_x_rows: ({ totalCount }: { totalCount: number }) => `共 ${totalCount} 行`,
+  sure_to_delete_x: ({ keys }: { keys: IDType[] }) => `您確定刪除 ${keys.join('、')} 嗎？`,
   repository_name: '倉庫名',
   programming_language: '編程語言',
   topic: '話題',
@@ -47,6 +45,16 @@ export default {
 
   // MDX Article
   article: '文章',
+
+  // Git pager
+  repository: '程式碼倉庫',
+  file_path: '檔案路徑',
+  commit_message: '提交訊息',
+  commit: '提交',
+  clear: '清空',
+  meta: '詮釋資料',
+  content: '内容',
+  copy_MarkDown: '複製 Markdown',
 
   // Search
   keywords: '關鍵詞',
