@@ -19,12 +19,8 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => (
           <Col key={name}>
             <Card body>
               <Card.Title className="text-dark">{name}</Card.Title>
-              <Card.Text className="text-dark">
-                时间: {meta?.start || 'N/A'}
-              </Card.Text>
-              <Card.Text className="text-dark">
-                地点: {meta?.address || 'N/A'}
-              </Card.Text>
+              <Card.Text className="text-dark">时间: {meta?.start || 'N/A'}</Card.Text>
+              <Card.Text className="text-dark">地点: {meta?.address || 'N/A'}</Card.Text>
 
               <Link href={path || '#'} className="btn btn-primary">
                 查看详情
@@ -34,7 +30,7 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => (
         ))}
       </Row>
       <div className="text-center mt-4">
-        <Button variant="outline-primary" size="lg" href="/article/Activity">
+        <Button variant="outline-primary" size="lg" href="/activity">
           查看全部活动 →
         </Button>
       </div>

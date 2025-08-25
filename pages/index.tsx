@@ -63,65 +63,57 @@ export const getStaticProps = async () => {
   };
 };
 
-const HomePage: FC<HomePageProps> = observer(
-  ({ latestArticles, upcomingEvents, sponsors }) => (
-    <main className="min-vh-100">
-      <PageHead title="Home" />
+const HomePage: FC<HomePageProps> = observer(({ latestArticles, upcomingEvents, sponsors }) => (
+  <main className="min-vh-100">
+    <PageHead title="Home" />
 
-      <div className={styles.hero}>
-        <Container>
-          <Row className="d-flex align-items-center">
-            <Col xs={12} md={7}>
-              <h1 className="fw-bold display-4 hero-dark-text">
-                freeCodeCamp 成都社区
-              </h1>
-              <p className="fs-5 mt-3 hero-dark-text">
-                一个友好的技术社区，致力于交流、学习和互助，帮助成都的开发者和技术爱好者提升个人技术能力。
-              </p>
-              <div className="mt-4">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="me-3"
-                  href="https://open-source-bazaar.feishu.cn/share/base/form/shrcnUC1stOces9sfPbHbEseep8"
-                >
-                  加入社区
-                </Button>
-                <Button variant="outline-primary" size="lg" href="#">
-                  查看活动
-                </Button>
-              </div>
-            </Col>
-            <Col
-              xs={12}
-              md={5}
-              className="d-flex justify-content-center mt-5 mt-md-0"
-            >
-              <div
-                className="bg-white rounded-4 d-flex justify-content-center align-items-center"
-                style={{ width: '25rem', height: '18.75rem' }}
+    <div className={styles.hero}>
+      <Container>
+        <Row className="d-flex align-items-center">
+          <Col xs={12} md={7}>
+            <h1 className="fw-bold display-4 hero-dark-text">freeCodeCamp 成都社区</h1>
+            <p className="fs-5 mt-3 hero-dark-text">
+              一个友好的技术社区，致力于交流、学习和互助，帮助成都的开发者和技术爱好者提升个人技术能力。
+            </p>
+            <div className="mt-4">
+              <Button
+                variant="primary"
+                size="lg"
+                className="me-3"
+                href="https://open-source-bazaar.feishu.cn/share/base/form/shrcnUC1stOces9sfPbHbEseep8"
               >
-                <Image
-                  src="https://github.com/FreeCodeCamp-Chengdu.png"
-                  alt="freeCodeCamp Chengdu"
-                  fluid
-                  className="rounded-3"
-                  style={{ maxWidth: '80%', maxHeight: '80%' }}
-                />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      <UpcomingEvents events={upcomingEvents} />
+                加入社区
+              </Button>
+              <Button variant="outline-primary" size="lg" href="/activity">
+                查看活动
+              </Button>
+            </div>
+          </Col>
+          <Col xs={12} md={5} className="d-flex justify-content-center mt-5 mt-md-0">
+            <div
+              className="bg-white rounded-4 d-flex justify-content-center align-items-center"
+              style={{ width: '25rem', height: '18.75rem' }}
+            >
+              <Image
+                src="https://github.com/FreeCodeCamp-Chengdu.png"
+                alt="freeCodeCamp Chengdu"
+                fluid
+                className="rounded-3"
+                style={{ maxWidth: '80%', maxHeight: '80%' }}
+              />
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+    <UpcomingEvents events={upcomingEvents} />
 
-      <LatestBlogs articles={latestArticles} />
+    <LatestBlogs articles={latestArticles} />
 
-      <CommunityStats />
+    <CommunityStats />
 
-      <Sponsors sponsors={sponsors} />
-    </main>
-  ),
-);
+    <Sponsors sponsors={sponsors} />
+  </main>
+));
 
 export default HomePage;
