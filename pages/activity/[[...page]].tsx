@@ -1,6 +1,5 @@
-import 'core-js/full/array/from-async';
-
 import { observer } from 'mobx-react';
+import { Pager } from 'mobx-restful-table';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { FC, useContext } from 'react';
 import { Container } from 'react-bootstrap';
@@ -23,17 +22,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const activities = await getMarkdownListSortedByDate('/article/Wiki/_posts/Activity');
   const totalPages = Math.ceil(activities.length / ITEMS_PER_PAGE);
 
-  const paths = Array.from({ length: totalPages }, (_, i) => ({
-    params: { page: [(i + 1).toString()] },
-  }));
+  const paths = [
+    { params: { page: [] } },
+    ...Array.from({ length: totalPages }, (_, i) => ({
+      params: { page: [i + 1 + ''] },
+    }))
+  ];
 
-  // Also add the base path without page parameter
-  paths.unshift({ params: { page: [] } });
-
-  return {
-    paths,
-    fallback: false,
-  };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<ActivityPageProps> = async ({ params }) => {
@@ -57,14 +53,14 @@ export const getStaticProps: GetStaticProps<ActivityPageProps> = async ({ params
 };
 
 const ActivityPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = observer(
-  ({ activities }) => {
+  ({ activities, currentPage, totalPages }) => {
     const { t } = useContext(I18nContext);
 
     return (
       <div className="min-vh-100">
-        <PageHead title={t('activity_calendar')} />
-
         <Container className="py-5 mt-5">
+          <PageHead title={t('activity_calendar')} />
+
           <hgroup className="d-flex flex-column align-items-center gap-4">
             <h1>{t('activity_calendar')}</h1>
             <p className="lead">{t('activity_calendar_description')}</p>
@@ -79,7 +75,21 @@ const ActivityPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = observe
             />
           </section>
 
-          {activities.length > 0 && <UpcomingEvents events={activities} />}
+          {activities.length > 0 && (
+            <div className="py-5 bg-white w-100 m-0">
+              <UpcomingEvents events={activities} />
+            </div>
+          )}
+
+          {totalPages > 1 && (
+            <div className="d-flex justify-content-center mt-4">
+              <Pager
+                pageCount={totalPages}
+                pageIndex={currentPage}
+                pageSize={ITEMS_PER_PAGE}
+              />
+            </div>
+          )}
         </Container>
       </div>
     );

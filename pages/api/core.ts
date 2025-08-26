@@ -1,3 +1,5 @@
+import 'core-js/full/array/from-async';
+
 import Router, { RouterParamContext } from '@koa/router';
 import { Context, Middleware } from 'koa';
 import { HTTPError } from 'koajax';
@@ -115,9 +117,10 @@ export function* traverseTree<K extends string>(tree: TreeNode<K>, key: K): Gene
 
 /**
  * Get markdown file list from a directory and its subdirectories, sorted by date descending
+ *
  * @param path - Directory path to search
  * @param prefix - Path prefix (default: 'pages')
- * @returns Promise<ArticleMeta[]> - Sorted list of articles
+ * @returns - Sorted list of articles
  */
 export async function getMarkdownListSortedByDate(
   path: string,
