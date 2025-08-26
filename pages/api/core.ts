@@ -68,10 +68,7 @@ export async function frontMatterOf(path: string) {
   return frontMatter && parse(frontMatter);
 }
 
-export async function* pageListOf(
-  path: string,
-  prefix = 'pages',
-): AsyncGenerator<ArticleMeta> {
+export async function* pageListOf(path: string, prefix = 'pages'): AsyncGenerator<ArticleMeta> {
   const { readdir } = await import('fs/promises');
 
   const list = await readdir(prefix + path, { withFileTypes: true });
@@ -93,10 +90,7 @@ export async function* pageListOf(
 
         if (meta) article.meta = meta;
       } catch (error) {
-        console.error(
-          `Error reading front matter for ${node.path}/${node.name}:`,
-          error,
-        );
+        console.error(`Error reading front matter for ${node.path}/${node.name}:`, error);
       }
       yield article;
     }
@@ -112,12 +106,33 @@ export type TreeNode<K extends string> = {
   [key in K]: TreeNode<K>[];
 };
 
-export function* traverseTree<K extends string>(
-  tree: TreeNode<K>,
-  key: K,
-): Generator<TreeNode<K>> {
+export function* traverseTree<K extends string>(tree: TreeNode<K>, key: K): Generator<TreeNode<K>> {
   for (const node of tree[key] || []) {
     yield node;
     yield* traverseTree(node, key);
   }
+}
+
+/**
+ * Get markdown file list from a directory and its subdirectories, sorted by date descending
+ * @param path - Directory path to search
+ * @param prefix - Path prefix (default: 'pages')
+ * @returns Promise<ArticleMeta[]> - Sorted list of articles
+ */
+export async function getMarkdownListSortedByDate(
+  path: string,
+  prefix = 'pages',
+): Promise<ArticleMeta[]> {
+  const data = await Array.fromAsync(pageListOf(path, prefix));
+
+  return data
+    .map(root => [...traverseTree(root, 'subs')])
+    .flat()
+    .filter((event): event is ArticleMeta => 'meta' in event)
+    .sort((a, b) => {
+      const dateA = a.meta?.date ? new Date(a.meta.date).getTime() : 0;
+      const dateB = b.meta?.date ? new Date(b.meta.date).getTime() : 0;
+
+      return dateB - dateA;
+    });
 }

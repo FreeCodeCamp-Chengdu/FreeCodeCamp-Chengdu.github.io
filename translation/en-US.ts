@@ -59,4 +59,15 @@ export default {
   // Search
   keywords: 'Keywords',
   search_results: 'Search Results',
+
+  // Activity page
+  activity_calendar: 'Activity Calendar',
+  activity_calendar_description:
+    'View the latest activity schedules and historical activity records of freeCodeCamp Chengdu community',
+  activity_list: 'Activity List',
+  activity_time: 'Time',
+  activity_location: 'Location',
+  view_details: 'View Details',
+  upcoming_events: 'Upcoming Events',
+  view_all_activities: 'View All Activities',
 } as const;
