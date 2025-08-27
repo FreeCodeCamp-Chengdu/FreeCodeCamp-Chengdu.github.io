@@ -59,4 +59,14 @@ export default {
   // Search
   keywords: '关键词',
   search_results: '搜索结果',
+
+  // Activity page
+  activity_calendar: '活动日历',
+  activity_calendar_description: '查看 freeCodeCamp 成都社区的最新活动安排和历史活动记录',
+  activity_list: '活动列表',
+  activity_time: '时间',
+  activity_location: '地点',
+  view_details: '查看详情',
+  upcoming_events: '近期活动',
+  view_all_activities: '查看全部活动',
 } as const;
