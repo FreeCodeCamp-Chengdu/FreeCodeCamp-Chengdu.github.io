@@ -95,12 +95,24 @@ export async function* pageListOf(path: string, prefix = 'pages'): AsyncGenerato
         console.error(`Error reading front matter for ${node.path}/${node.name}:`, error);
       }
       yield article;
+    } else if (node.isFile() && !isMDX) {
+      // Handle non-Markdown files - link them to GitHub raw proxy
+      let proxyPath = path;
+      
+      // Check if this is in the PPT submodule directory
+      if (path.startsWith('/article/PPT/')) {
+        // Remove /article/PPT prefix and create GitHub raw proxy link
+        const relativePath = path.replace('/article/PPT/', '');
+        proxyPath = `/proxy/raw.githubusercontent.com/FreeCodeCamp-Chengdu/Activity_PPT/main/${relativePath}`;
+      }
+      
+      const article: ArticleMeta = { name: node.name, path: proxyPath, subs: [] };
+      yield article;
+    } else if (node.isDirectory()) {
+      const subs = await Array.fromAsync(pageListOf(path, prefix));
+
+      if (subs.length) yield { name, subs };
     }
-    if (!node.isDirectory()) continue;
-
-    const subs = await Array.fromAsync(pageListOf(path, prefix));
-
-    if (subs.length) yield { name, subs };
   }
 }
 
