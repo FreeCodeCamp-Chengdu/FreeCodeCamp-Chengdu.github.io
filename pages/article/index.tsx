@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
 const renderTree = (list: ArticleMeta[]) => (
   <ol>
     {list.map(({ name, path, meta, subs }) => (
-      <li key={name}>
+      <li key={path || name}>
         {path ? (
           <a
             className="h4 d-flex justify-content-between align-items-center"
