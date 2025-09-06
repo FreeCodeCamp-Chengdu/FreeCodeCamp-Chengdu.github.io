@@ -46,6 +46,23 @@ export default {
   // MDX Article
   article: 'Article',
 
+  // Weekly
+  weekly: 'IT Weekly',
+  weekly_description: 'Share the latest tech trends, open source projects and learning resources',
+  no_weekly_content: 'No weekly content available',
+  weekly_content_from_github: 'Weekly content will be auto-loaded from GitHub Issues',
+  view_on_github: 'View on GitHub',
+  view_all_issues: 'View All Issues',
+  weekly_author: 'Author',
+  weekly_published: 'Published',
+  weekly_updated: 'Updated',
+  back_to_weekly_list: 'Back to IT Weekly List',
+  github_document_description: 'This content is sourced from GitHub Issues, ',
+  view_original_on_github: 'view original on GitHub',
+  weekly_issue_no_content: 'This weekly issue has no content',
+  open: 'Open',
+  closed: 'Closed',
+
   // Git pager
   repository: 'repository',
   file_path: 'file path',

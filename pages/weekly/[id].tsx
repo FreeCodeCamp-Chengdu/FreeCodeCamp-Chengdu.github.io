@@ -2,11 +2,12 @@ import { marked } from 'marked';
 import { observer } from 'mobx-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Badge, Breadcrumb, Button, Card, Container } from 'react-bootstrap';
 
 import { PageHead } from '../../components/Layout/PageHead';
 import { githubClient } from '../../models/Base';
+import { I18nContext } from '../../models/Translation';
 import styles from '../../styles/Weekly.module.less';
 
 // GitHub Issue type definition
@@ -84,18 +85,19 @@ export const getStaticProps: GetStaticProps<WeeklyDetailProps, WeeklyDetailParam
 };
 
 const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
+  const { t } = useContext(I18nContext);
   const htmlContent = issue.body ? (marked(issue.body) as string) : '';
 
   return (
     <Container className={`py-4 ${styles.weeklyContainer}`}>
       <PageHead
-        title={`${issue.title} - IT 周刊`}
+        title={`${issue.title} - ${t('weekly')}`}
         description={issue.body ? issue.body.substring(0, 160) + '...' : issue.title}
       />
 
       <Breadcrumb className="mb-4">
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
-        <Breadcrumb.Item href="/weekly">IT 周刊</Breadcrumb.Item>
+        <Breadcrumb.Item href="/weekly">{t('weekly')}</Breadcrumb.Item>
         <Breadcrumb.Item active>#{issue.number}</Breadcrumb.Item>
       </Breadcrumb>
 
@@ -103,7 +105,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
         <header className="mb-4">
           <div className="d-flex justify-content-between align-items-start mb-3">
             <Badge bg={issue.state === 'open' ? 'success' : 'secondary'} className="fs-6">
-              {issue.state === 'open' ? '开放' : '已关闭'}
+              {issue.state === 'open' ? t('open') : t('closed')}
             </Badge>
             <span className="text-muted">#{issue.number}</span>
           </div>
@@ -129,12 +131,12 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
             <div className="text-muted">
               {issue.user && (
                 <span>
-                  作者: <strong>{issue.user.login}</strong>
+                  {t('weekly_author')}: <strong>{issue.user.login}</strong>
                 </span>
               )}
               {issue.created_at && (
                 <span className="ms-3">
-                  发布时间:{' '}
+                  {t('weekly_published')}:{' '}
                   <time dateTime={issue.created_at}>
                     {new Date(issue.created_at).toLocaleString('zh-CN')}
                   </time>
@@ -142,7 +144,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
               )}
               {issue.updated_at && issue.updated_at !== issue.created_at && (
                 <span className="ms-3">
-                  更新时间:{' '}
+                  {t('weekly_updated')}:{' '}
                   <time dateTime={issue.updated_at}>
                     {new Date(issue.updated_at).toLocaleString('zh-CN')}
                   </time>
@@ -158,7 +160,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                在 GitHub 上查看
+                {t('view_on_github')}
               </Button>
             </div>
           </div>
@@ -169,7 +171,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
         ) : (
           <Card>
             <Card.Body className="text-center text-muted">
-              <p>此周刊暂无内容</p>
+              <p>{t('weekly_issue_no_content')}</p>
             </Card.Body>
           </Card>
         )}
@@ -178,14 +180,14 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
       <footer className="mt-5 pt-4 border-top">
         <div className="d-flex justify-content-between align-items-center">
           <Button variant="outline-secondary" href="/weekly">
-            ← 返回 IT 周刊列表
+            ← {t('back_to_weekly_list')}
           </Button>
 
           <div className="text-muted small">
             <p className="mb-0">
-              本内容来源于 GitHub Issues，
+              {t('github_document_description')}
               <a href={issue.html_url} target="_blank" rel="noopener noreferrer" className="ms-1">
-                在 GitHub 上查看原文
+                {t('view_original_on_github')}
               </a>
             </p>
           </div>

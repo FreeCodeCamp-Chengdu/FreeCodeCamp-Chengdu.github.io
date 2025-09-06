@@ -26,7 +26,7 @@ export const MainNavigator: FC = observer(() => {
 
             <Nav.Link href="/activity">{t('activity')}</Nav.Link>
 
-            <Nav.Link href="/weekly">IT 周刊</Nav.Link>
+            <Nav.Link href="/weekly">{t('weekly')}</Nav.Link>
 
             <Nav.Link href="/community">{t('community')}</Nav.Link>
 
