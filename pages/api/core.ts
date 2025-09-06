@@ -88,14 +88,14 @@ export async function* pageListOf(path: string, prefix = 'pages'): AsyncGenerato
     if (node.isFile()) {
       const article: ArticleMeta = { name: isMDX ? name : node.name, path, subs: [] };
 
-      if (isMDX) {
+      if (isMDX)
         try {
           const meta = await frontMatterOf(`${node.path}/${node.name}`);
+
           if (meta) article.meta = meta;
         } catch (error) {
           console.error(`Error reading front matter for ${node.path}/${node.name}:`, error);
         }
-      }
 
       yield article;
     } else if (node.isDirectory()) {
