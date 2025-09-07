@@ -1,6 +1,5 @@
-import 'github-markdown-css/github-markdown-light.css';
-
 import { marked } from 'marked';
+import { IssueModel } from 'mobx-github';
 import { observer } from 'mobx-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
@@ -9,7 +8,6 @@ import { Badge, Breadcrumb, Button, Card, Container } from 'react-bootstrap';
 
 import { PageHead } from '../../components/Layout/PageHead';
 import type { Issue } from '../../models/Base';
-import { RepositoryModel } from '../../models/Base';
 import { I18nContext } from '../../models/Translation';
 import styles from '../../styles/Weekly.module.less';
 
@@ -22,10 +20,11 @@ interface WeeklyDetailProps {
 }
 
 export const getStaticPaths: GetStaticPaths<WeeklyDetailParams> = async () => {
-  const repository = new RepositoryModel('FreeCodeCamp-Chengdu');
-  const repo = await repository.getOne('IT-Technology-weekly', ['issues']);
-  
-  const paths = (repo.issues || []).map(issue => ({
+  const list = await new IssueModel('FreeCodeCamp-Chengdu', 'IT-Technology-weekly').getAll({
+    state: 'all',
+  });
+
+  const paths = list.map(issue => ({
     params: { id: issue.number.toString() },
   }));
 
@@ -36,21 +35,10 @@ export const getStaticProps: GetStaticProps<WeeklyDetailProps, WeeklyDetailParam
   params,
 }) => {
   const { id } = params!;
-  const repository = new RepositoryModel('FreeCodeCamp-Chengdu');
-  const repo = await repository.getOne('IT-Technology-weekly', ['issues']);
-  
-  const issue = repo.issues?.find(issue => issue.number.toString() === id);
-  
-  if (!issue) {
-    return {
-      notFound: true,
-    };
-  }
+  const issue = await new IssueModel('FreeCodeCamp-Chengdu', 'IT-Technology-weekly').getOne(id);
 
   return {
-    props: {
-      issue: JSON.parse(JSON.stringify(issue)),
-    },
+    props: JSON.parse(JSON.stringify(issue)),
     revalidate: 3600, // Revalidate every hour
   };
 };
@@ -63,7 +51,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
     <Container className={`py-4 ${styles.weeklyContainer}`}>
       <PageHead
         title={`${issue.title} - ${t('weekly')}`}
-        description={issue.body ? issue.body.substring(0, 160) + '...' : issue.title}
+        description={issue.body ? issue.body.slice(0, 160) + '...' : issue.title}
       />
 
       <Breadcrumb className="mb-4">
@@ -86,15 +74,15 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
           {issue.labels?.[0] && (
             <ul className="list-unstyled mb-3">
               {issue.labels.map((label, index) => (
-                <li key={index} className="d-inline-block me-2 mb-2">
-                  <Badge
-                    bg="light"
-                    text="dark"
-                    className={styles.labelBadge}
-                  >
-                    {typeof label === 'string' ? label : label.name}
-                  </Badge>
-                </li>
+                <Badge
+                  key={index}
+                  as="li"
+                  bg="light"
+                  text="dark"
+                  className={`d-inline-block me-2 mb-2 ${styles.labelBadge}`}
+                >
+                  {typeof label === 'string' ? label : label.name}
+                </Badge>
               ))}
             </ul>
           )}
@@ -143,13 +131,10 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
         </header>
 
         {htmlContent ? (
-          <div 
-            dangerouslySetInnerHTML={{ __html: htmlContent }} 
-            className="markdown-body" 
-          />
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="markdown-body" />
         ) : (
           <Card body>
-              <p className="text-center text-muted">{t('weekly_issue_no_content')}</p>
+            <p className="text-center text-muted">{t('weekly_issue_no_content')}</p>
           </Card>
         )}
       </article>

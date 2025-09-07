@@ -1,19 +1,18 @@
+import { observer } from 'mobx-react';
 import { FC, useContext } from 'react';
-import { Badge, Card } from 'react-bootstrap';
+import { Badge, Card, CardProps } from 'react-bootstrap';
 
-import type { Issue } from '../models/Base';
-import { I18nContext } from '../models/Translation';
-import styles from '../styles/Weekly.module.less';
+import type { Issue } from '../../models/Base';
+import { I18nContext } from '../../models/Translation';
+import styles from '../../styles/Weekly.module.less';
 
-interface IssueCardProps {
-  issue: Issue;
-}
+export type IssueCardProps = Issue & CardProps;
 
-export const IssueCard: FC<IssueCardProps> = ({ issue }) => {
+export const IssueCard: FC<IssueCardProps> = observer(({ className, ...issue }) => {
   const { t } = useContext(I18nContext);
 
   return (
-    <Card className={`h-100 shadow-sm ${styles.issueCard}`}>
+    <Card className={`h-100 shadow-sm ${styles.issueCard} ${className}`}>
       <Card.Body className="d-flex flex-column">
         <div className="d-flex justify-content-between align-items-start mb-3">
           <Badge bg={issue.state === 'open' ? 'success' : 'secondary'}>
@@ -39,24 +38,25 @@ export const IssueCard: FC<IssueCardProps> = ({ issue }) => {
         )}
 
         <div className="mt-auto">
-          {issue.labels && issue.labels.length > 0 && (
-            <div className="mb-2">
+          {issue.labels?.[0] && (
+            <ul className="list-unstyled mb-2">
               {issue.labels.slice(0, 3).map((label, index) => (
                 <Badge
                   key={index}
+                  as="li"
                   bg="light"
                   text="dark"
-                  className={`me-1 ${styles.labelBadge}`}
+                  className={`d-inline-block me-1 mb-1 ${styles.labelBadge}`}
                 >
                   {typeof label === 'string' ? label : label.name}
                 </Badge>
               ))}
               {issue.labels.length > 3 && (
-                <Badge bg="light" text="dark" className="small">
+                <Badge as="li" bg="light" text="dark" className="d-inline-block small">
                   +{issue.labels.length - 3}
                 </Badge>
               )}
-            </div>
+            </ul>
           )}
 
           <div
@@ -77,4 +77,4 @@ export const IssueCard: FC<IssueCardProps> = ({ issue }) => {
       </Card.Body>
     </Card>
   );
-};
+});

@@ -1,7 +1,7 @@
 import 'core-js/full/array/from-async';
 
 import { HTTPClient } from 'koajax';
-import { githubClient, RepositoryModel, Issue as GitHubIssue } from 'mobx-github';
+import { githubClient, Issue as GitHubIssue, RepositoryModel } from 'mobx-github';
 import { TableCellAttachment, TableCellMedia, TableCellValue } from 'mobx-lark';
 import { DataObject } from 'mobx-restful';
 import { isEmpty } from 'web-utility';
@@ -30,7 +30,7 @@ githubClient.use(({ request }, next) => {
   return next();
 });
 
-export { githubClient, RepositoryModel };
+export { githubClient };
 export type { GitHubIssue as Issue };
 
 export const githubRawClient = new HTTPClient({

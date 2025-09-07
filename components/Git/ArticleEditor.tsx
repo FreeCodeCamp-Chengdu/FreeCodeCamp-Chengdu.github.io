@@ -3,7 +3,7 @@ import { readAs } from 'koajax';
 import { debounce } from 'lodash';
 import { marked } from 'marked';
 import { computed, observable } from 'mobx';
-import { GitContent } from 'mobx-github';
+import { Content } from 'mobx-github';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { DataObject } from 'mobx-restful';
@@ -67,7 +67,7 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
   @observable
   accessor meta: PostMeta | null = null;
 
-  static contentFilter({ type, name }: GitContent) {
+  static contentFilter({ type, name }: Content) {
     return (
       type === 'dir' ||
       (type === 'file' && Object.values(fileType).flat().includes(name.split('.').slice(-1)[0]))

@@ -1,12 +1,12 @@
+import { IssueModel } from 'mobx-github';
 import { observer } from 'mobx-react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { FC, useContext } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
-import { IssueCard } from '../../components/IssueCard';
+import { IssueCard } from '../../components/Git/IssueCard';
 import { PageHead } from '../../components/Layout/PageHead';
 import type { Issue } from '../../models/Base';
-import { RepositoryModel } from '../../models/Base';
 import { I18nContext } from '../../models/Translation';
 import styles from '../../styles/Weekly.module.less';
 
@@ -15,12 +15,13 @@ interface WeeklyPageProps {
 }
 
 export const getStaticProps: GetStaticProps<WeeklyPageProps> = async () => {
-  const repository = new RepositoryModel('FreeCodeCamp-Chengdu');
-  const repo = await repository.getOne('IT-Technology-weekly', ['issues']);
+  const list = await new IssueModel('FreeCodeCamp-Chengdu', 'IT-Technology-weekly').getAll({
+    state: 'all',
+  });
 
   return {
     props: {
-      issues: JSON.parse(JSON.stringify(repo.issues || [])),
+      issues: JSON.parse(JSON.stringify(list)),
     },
     revalidate: 3600, // Revalidate every hour
   };
@@ -50,11 +51,9 @@ const WeeklyIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = obse
 
         {issues.length > 0 ? (
           <Row xs={1} md={2} lg={3} className="g-4">
-            {issues.map((issue) => (
+            {issues.map(issue => (
               <Col key={issue.id}>
-                <IssueCard
-                  issue={issue}
-                />
+                <IssueCard {...issue} />
               </Col>
             ))}
           </Row>
