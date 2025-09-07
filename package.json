@@ -15,6 +15,7 @@
     "copy-webpack-plugin": "^13.0.0",
     "core-js": "^3.44.0",
     "file-type": "^21.0.0",
+    "github-markdown-css": "^5.8.1",
     "idea-react": "^2.0.0-rc.13",
     "koa": "^2.16.1",
     "koajax": "^3.1.2",

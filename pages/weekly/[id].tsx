@@ -1,3 +1,5 @@
+import 'github-markdown-css/github-markdown-light.css';
+
 import { marked } from 'marked';
 import { observer } from 'mobx-react';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -6,82 +8,51 @@ import { FC, useContext } from 'react';
 import { Badge, Breadcrumb, Button, Card, Container } from 'react-bootstrap';
 
 import { PageHead } from '../../components/Layout/PageHead';
-import { githubClient } from '../../models/Base';
+import type { Issue } from '../../models/Base';
+import { RepositoryModel } from '../../models/Base';
 import { I18nContext } from '../../models/Translation';
 import styles from '../../styles/Weekly.module.less';
-
-// GitHub Issue type definition
-interface GitHubIssue {
-  id: number;
-  number: number;
-  title: string;
-  body: string | null;
-  state: 'open' | 'closed';
-  labels: Array<{ name: string; color: string } | string>;
-  user: {
-    login: string;
-    avatar_url: string;
-  } | null;
-  created_at: string;
-  updated_at: string;
-  html_url: string;
-}
 
 interface WeeklyDetailParams extends ParsedUrlQuery {
   id: string;
 }
 
 interface WeeklyDetailProps {
-  issue: GitHubIssue;
+  issue: Issue;
 }
 
 export const getStaticPaths: GetStaticPaths<WeeklyDetailParams> = async () => {
-  try {
-    const { body: issues } = await githubClient.get<GitHubIssue[]>(
-      'repos/FreeCodeCamp-Chengdu/IT-Technology-weekly/issues?state=all&sort=created&direction=desc',
-    );
+  const repository = new RepositoryModel('FreeCodeCamp-Chengdu');
+  const repo = await repository.getOne('IT-Technology-weekly', ['issues']);
+  
+  const paths = (repo.issues || []).map(issue => ({
+    params: { id: issue.number.toString() },
+  }));
 
-    const paths = (issues || []).map(issue => ({
-      params: { id: issue.number.toString() },
-    }));
-
-    return { paths, fallback: 'blocking' };
-  } catch (error) {
-    console.error('Failed to generate static paths:', error);
-
-    return { paths: [], fallback: 'blocking' };
-  }
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps<WeeklyDetailProps, WeeklyDetailParams> = async ({
   params,
 }) => {
   const { id } = params!;
-
-  try {
-    const { body: issue } = await githubClient.get<GitHubIssue>(
-      `repos/FreeCodeCamp-Chengdu/IT-Technology-weekly/issues/${id}`,
-    );
-
-    if (!issue) {
-      return {
-        notFound: true,
-      };
-    }
-
-    return {
-      props: {
-        issue: JSON.parse(JSON.stringify(issue)),
-      },
-      revalidate: 3600, // Revalidate every hour
-    };
-  } catch (error) {
-    console.error('Failed to fetch issue:', error);
-
+  const repository = new RepositoryModel('FreeCodeCamp-Chengdu');
+  const repo = await repository.getOne('IT-Technology-weekly', ['issues']);
+  
+  const issue = repo.issues?.find(issue => issue.number.toString() === id);
+  
+  if (!issue) {
     return {
       notFound: true,
     };
   }
+
+  return {
+    props: {
+      issue: JSON.parse(JSON.stringify(issue)),
+    },
+    revalidate: 3600, // Revalidate every hour
+  };
 };
 
 const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
@@ -96,7 +67,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
       />
 
       <Breadcrumb className="mb-4">
-        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
+        <Breadcrumb.Item href="/">{t('home_page')}</Breadcrumb.Item>
         <Breadcrumb.Item href="/weekly">{t('weekly')}</Breadcrumb.Item>
         <Breadcrumb.Item active>#{issue.number}</Breadcrumb.Item>
       </Breadcrumb>
@@ -112,62 +83,70 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
 
           <h1 className="display-5 mb-3">{issue.title}</h1>
 
-          {issue.labels && issue.labels.length > 0 && (
-            <div className="mb-3">
+          {issue.labels?.[0] && (
+            <ul className="list-unstyled mb-3">
               {issue.labels.map((label, index) => (
-                <Badge
-                  key={index}
-                  bg="light"
-                  text="dark"
-                  className={`me-2 mb-2 ${styles.labelBadge}`}
-                >
-                  {typeof label === 'string' ? label : label.name}
-                </Badge>
+                <li key={index} className="d-inline-block me-2 mb-2">
+                  <Badge
+                    bg="light"
+                    text="dark"
+                    className={styles.labelBadge}
+                  >
+                    {typeof label === 'string' ? label : label.name}
+                  </Badge>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
 
-          <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
-            <div className="text-muted">
-              {issue.user && (
-                <span>
-                  {t('weekly_author')}: <strong>{issue.user.login}</strong>
-                </span>
-              )}
-              {issue.created_at && (
-                <span className="ms-3">
-                  {t('weekly_published')}:{' '}
+          <dl className="row mb-4 pb-3 border-bottom">
+            {issue.user && (
+              <>
+                <dt className="col-sm-3 text-muted">{t('weekly_author')}:</dt>
+                <dd className="col-sm-9">
+                  <strong>{issue.user.login}</strong>
+                </dd>
+              </>
+            )}
+            {issue.created_at && (
+              <>
+                <dt className="col-sm-3 text-muted">{t('weekly_published')}:</dt>
+                <dd className="col-sm-9">
                   <time dateTime={issue.created_at}>
                     {new Date(issue.created_at).toLocaleString('zh-CN')}
                   </time>
-                </span>
-              )}
-              {issue.updated_at && issue.updated_at !== issue.created_at && (
-                <span className="ms-3">
-                  {t('weekly_updated')}:{' '}
+                </dd>
+              </>
+            )}
+            {issue.updated_at && issue.updated_at !== issue.created_at && (
+              <>
+                <dt className="col-sm-3 text-muted">{t('weekly_updated')}:</dt>
+                <dd className="col-sm-9">
                   <time dateTime={issue.updated_at}>
                     {new Date(issue.updated_at).toLocaleString('zh-CN')}
                   </time>
-                </span>
-              )}
-            </div>
-
-            <div className="d-flex gap-2">
-              <Button
-                variant="outline-primary"
-                size="sm"
-                href={issue.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t('view_on_github')}
-              </Button>
-            </div>
+                </dd>
+              </>
+            )}
+          </dl>
+          <div className="d-flex justify-content-end mb-4">
+            <Button
+              variant="outline-primary"
+              size="sm"
+              href={issue.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('view_on_github')}
+            </Button>
           </div>
         </header>
 
         {htmlContent ? (
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} className={styles.markdownBody} />
+          <div 
+            dangerouslySetInnerHTML={{ __html: htmlContent }} 
+            className="markdown-body" 
+          />
         ) : (
           <Card>
             <Card.Body className="text-center text-muted">
@@ -184,7 +163,7 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
           </Button>
 
           <div className="text-muted small">
-            <p className="mb-0">
+            <p>
               {t('github_document_description')}
               <a href={issue.html_url} target="_blank" rel="noopener noreferrer" className="ms-1">
                 {t('view_original_on_github')}
