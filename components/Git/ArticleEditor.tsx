@@ -3,14 +3,14 @@ import { readAs } from 'koajax';
 import { debounce } from 'lodash';
 import { marked } from 'marked';
 import { computed, observable } from 'mobx';
-import { Content } from 'mobx-github';
+import { Content, ContentModel } from 'mobx-github';
 import { observer } from 'mobx-react';
 import { ObservedComponent } from 'mobx-react-helper';
 import { DataObject } from 'mobx-restful';
 import { SearchableInput } from 'mobx-restful-table';
 import { ChangeEvent, FormEvent } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
-import { blobOf, formatDate, uniqueID } from 'web-utility';
+import { blobOf, encodeBase64, formatDate, uniqueID } from 'web-utility';
 import YAML from 'yaml';
 
 import { GitFileSearchModel } from '../../models/GitFile';
@@ -181,7 +181,8 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
 
     if (!editorContent) return;
 
-    const root = document.querySelector('div[contenteditable]');
+    const contentStore = new ContentModel(currentRepository.owner, currentRepository.name),
+      root = document.querySelector('div[contenteditable]');
     const media: HTMLMediaElement[] = [].filter.call(
       root!.querySelectorAll('img[src], audio[src], video[src]'),
       ({ src }) => new URL(src).protocol === 'blob:',
@@ -189,22 +190,22 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
 
     for (const file of media) {
       const blob = await blobOf(file.src);
+      const [, content] = ((await readAs(blob, 'dataURL').result) as string).split(',');
 
       const filePath = this.path.replace(/\.\w+$/, `/${uniqueID()}.${blob.type.split('/')[1]}`);
-      const { download_url } = await repositoryStore.updateContent(
+
+      const { download_url } = await contentStore.updateOne(
+        { content },
         filePath,
-        blob,
         '[Upload] from Git-Pager',
-        currentRepository.name,
       );
       file.src = download_url!;
     }
 
-    await repositoryStore.updateContent(
+    await contentStore.updateOne(
+      { content: encodeBase64(this.getContent() || '') },
       this.path,
-      this.getContent() as string,
       message.value.trim(),
-      currentRepository.name,
     );
     window.alert('Submitted');
   };

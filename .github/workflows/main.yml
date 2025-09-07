@@ -2,7 +2,7 @@ name: CI & CD
 on:
   push:
     branches:
-      - '*'
+      - '**'
 jobs:
   Build-and-Deploy:
     env:
