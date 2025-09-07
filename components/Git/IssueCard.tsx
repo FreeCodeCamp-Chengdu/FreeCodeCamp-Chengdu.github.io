@@ -14,7 +14,7 @@ export const IssueCard: FC<IssueCardProps> = observer(
     const { t } = useContext(I18nContext);
 
     return (
-      <Card className={`h-100 shadow-sm ${styles.issueCard} ${className}`}>
+      <Card className={`shadow-sm ${styles.issueCard} ${className}`}>
         <Card.Header className="d-flex justify-content-between align-items-center">
           <Badge bg={state === 'open' ? 'success' : 'secondary'}>
             {state === 'open' ? t('open') : t('closed')}
