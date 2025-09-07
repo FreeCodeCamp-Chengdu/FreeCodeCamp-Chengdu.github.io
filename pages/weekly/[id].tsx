@@ -148,10 +148,8 @@ const WeeklyDetailPage: FC<WeeklyDetailProps> = observer(({ issue }) => {
             className="markdown-body" 
           />
         ) : (
-          <Card>
-            <Card.Body className="text-center text-muted">
-              <p>{t('weekly_issue_no_content')}</p>
-            </Card.Body>
+          <Card body>
+              <p className="text-center text-muted">{t('weekly_issue_no_content')}</p>
           </Card>
         )}
       </article>
