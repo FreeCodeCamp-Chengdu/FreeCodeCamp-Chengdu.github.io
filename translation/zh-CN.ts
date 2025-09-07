@@ -46,6 +46,23 @@ export default {
   // MDX Article
   article: '文章',
 
+  // Weekly
+  weekly: 'IT 周刊',
+  weekly_description: '分享最新的技术动态、开源项目和学习资源',
+  no_weekly_content: '暂无周刊内容',
+  weekly_content_from_github: '周刊内容将从 GitHub Issues 自动加载',
+  view_on_github: '在 GitHub 上查看',
+  view_all_issues: '查看所有 Issues',
+  weekly_author: '作者',
+  weekly_published: '发布时间',
+  weekly_updated: '更新时间',
+  back_to_weekly_list: '返回 IT 周刊列表',
+  github_document_description: '本内容来源于 GitHub Issues，',
+  view_original_on_github: '在 GitHub 上查看原文',
+  weekly_issue_no_content: '此周刊暂无内容',
+  open: '开放',
+  closed: '已关闭',
+
   // Git pager
   repository: '代码仓库',
   file_path: '文件路径',

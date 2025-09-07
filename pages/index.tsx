@@ -106,7 +106,10 @@ const HomePage: FC<HomePageProps> = observer(({ latestArticles, upcomingEvents, 
         </Row>
       </Container>
     </div>
-    <UpcomingEvents events={upcomingEvents} />
+
+    <section className="py-5 px-4">
+      <UpcomingEvents events={upcomingEvents} />
+    </section>
 
     <LatestBlogs articles={latestArticles} />
 
