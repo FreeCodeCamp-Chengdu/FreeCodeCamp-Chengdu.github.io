@@ -1,4 +1,4 @@
-import { parseCookie } from 'mobx-i18n';
+import { parseCookie } from 'web-utility';
 
 export const isServer = () => typeof window === 'undefined';
 
