@@ -13,7 +13,7 @@
     "version": "4.2.1"
   },
   "dependencies": {
-    "cheerio": "^1.0.0",
+    "cheerio": "^1.1.2",
     "hexo": "^4.2.1",
     "hexo-auto-category": "^0.2.2",
     "hexo-deployer-git": "^2.1.0",
@@ -36,6 +36,23 @@
   "lint-staged": {
     "*.{html,md,css,less,js,json,yml,yaml}": "prettier --write"
   },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.4",
+    "prettier": "^3.6.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "ejs",
+      "highlight.js",
+      "web-fetch"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "tabWidth": 2
+  },
   "scripts": {
     "prepare": "husky",
     "test": "lint-staged",
@@ -43,15 +60,5 @@
     "start": "hexo clean  &&  hexo server --draft",
     "deploy": "hexo clean  &&  hexo deploy",
     "build": "hexo clean  &&  hexo generate"
-  },
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "prettier": "^3.5.2"
-  },
-  "prettier": {
-    "trailingComma": "none",
-    "arrowParens": "avoid",
-    "tabWidth": 2
   }
 }
