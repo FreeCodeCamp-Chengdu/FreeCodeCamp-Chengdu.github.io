@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  next: ^15.5.2
+  next: ^15.5.4
 
 importers:
 
@@ -33,7 +33,7 @@ importers:
         specifier: ^21.0.0
         version: 21.0.0
       idea-react:
-        specifier: 2.0.0-rc.13
+        specifier: ^2.0.0-rc.13
         version: 2.0.0-rc.13(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react-is@16.13.1)(react@19.2.0)(typescript@5.9.3)
       koa:
         specifier: ^3.0.1
@@ -1874,7 +1874,7 @@ packages:
     resolution: {integrity: sha512-uuniP80lwIZctgd3lxuKL+ke9bBGxJUfE/ek0cWAH99oQelaRXsU4hzwyEC62wxIoDwa+rvD9vwu82NkBPN5hA==}
     engines: {node: '>=18'}
     peerDependencies:
-      next: ^15.5.2
+      next: ^15.5.4
 
   '@sentry/node-core@10.19.0':
     resolution: {integrity: sha512-m3xTaIDSh1V88K+e1zaGwKKuhDUAHMX1nncJmsGm8Hwg7FLK2fdr7wm9IJaIF0S1E4R38oHC4kZdL+ebrUghDg==}
@@ -4264,12 +4264,12 @@ packages:
   next-pwa@5.6.0:
     resolution: {integrity: sha512-XV8g8C6B7UmViXU8askMEYhWwQ4qc/XqJGnexbLV68hzKaGHZDMtHsm2TNxFcbR7+ypVuth/wwpiIlMwpRJJ5A==}
     peerDependencies:
-      next: ^15.5.2
+      next: ^15.5.4
 
   next-ssr-middleware@1.0.3:
     resolution: {integrity: sha512-vV3W7bcNVrjPRov2N+IxMHmO9WF/fKezW25PJsm/Av3a5vGszKW6SDon07+/HZ9qsx5feIVeiXqdt20r/SMi9g==}
     peerDependencies:
-      next: ^15.5.2
+      next: ^15.5.4
       react: '>=18'
 
   next-with-less@3.0.1:
@@ -4277,7 +4277,7 @@ packages:
     peerDependencies:
       less: '*'
       less-loader: '>= 7.0.0'
-      next: ^15.5.2
+      next: ^15.5.4
 
   next@15.5.4:
     resolution: {integrity: sha512-xH4Yjhb82sFYQfY3vbkJfgSDgXvBB6a8xPs9i35k6oZJRoQRihZH+4s9Yo2qsWpzBmZ3lPXaJ2KPXLfkvW4LnA==}
