@@ -2,6 +2,9 @@ import { parseCookie } from 'web-utility';
 
 export const isServer = () => typeof window === 'undefined';
 
+export const MD_pattern = /\.(md|markdown)$/i,
+  MDX_pattern = /\.mdx?$/i;
+
 export const Name = process.env.NEXT_PUBLIC_SITE_NAME,
   Summary = process.env.NEXT_PUBLIC_SITE_SUMMARY,
   DefaultImage = process.env.NEXT_PUBLIC_LOGO!;

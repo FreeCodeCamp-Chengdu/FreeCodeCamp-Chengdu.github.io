@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
+import { MD_pattern } from '../../models/configuration';
 import { ArticleMeta } from '../../pages/api/core';
 import { SectionTitle } from './SectionTitle';
 
@@ -17,11 +18,11 @@ export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
         {articles.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card body>
-              <Card.Title className="text-dark">{name}</Card.Title>
-              <Card.Text className="text-dark">
-                发布日期: {meta?.date || '未知日期'}
-              </Card.Text>
-              <Button href={path || '#'} variant="secondary">
+              <Card.Title className="text-dark">
+                {meta?.title || name.replace(MD_pattern, '')}
+              </Card.Title>
+              <Card.Text className="text-dark">发布日期: {meta?.date || '未知日期'}</Card.Text>
+              <Button href={path?.replace(MD_pattern, '') || '#'} variant="secondary">
                 阅读文章
               </Button>
             </Card>

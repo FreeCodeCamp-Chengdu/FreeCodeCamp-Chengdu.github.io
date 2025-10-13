@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FC, useContext } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 
+import { MD_pattern } from '../../models/configuration';
 import { I18nContext } from '../../models/Translation';
 import { ArticleMeta } from '../../pages/api/core';
 import { SectionTitle } from './SectionTitle';
@@ -22,7 +23,9 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card body>
-              <Card.Title className="text-dark">{name}</Card.Title>
+              <Card.Title className="text-dark">
+                {meta?.title || name.replace(MD_pattern, '')}
+              </Card.Title>
               <Card.Text className="text-dark">
                 {t('activity_time')}: {meta?.start || 'N/A'}
               </Card.Text>
@@ -30,7 +33,7 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
                 {t('activity_location')}: {meta?.address || 'N/A'}
               </Card.Text>
 
-              <Link href={path || '#'} className="btn btn-primary">
+              <Link href={path?.replace(MD_pattern, '') || '#'} className="btn btn-primary">
                 {t('view_details')}
               </Link>
             </Card>

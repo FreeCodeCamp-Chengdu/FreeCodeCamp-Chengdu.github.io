@@ -8,6 +8,8 @@ import { basename } from 'path';
 import { ProxyAgent, setGlobalDispatcher } from 'undici';
 import { parse } from 'yaml';
 
+import { MDX_pattern } from '../../models/configuration';
+
 const { HTTP_PROXY } = process.env;
 
 if (HTTP_PROXY) setGlobalDispatcher(new ProxyAgent(HTTP_PROXY));
@@ -52,9 +54,6 @@ export interface ArticleMeta {
   meta?: DataObject;
   subs: ArticleMeta[];
 }
-
-export const MD_pattern = /\.(md|markdown)$/i,
-  MDX_pattern = /\.mdx?$/i;
 
 export function splitFrontMatter(raw: string) {
   const [, frontMatter, markdown] =
