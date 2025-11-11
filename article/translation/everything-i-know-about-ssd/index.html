@@ -1,0 +1,4062 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>我所知道的关于固态硬盘的一切 - FCC 成都社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    
+    <meta name="description" content="使用 NAND 闪存的固态硬盘，它们与机械硬盘的区别，以及它们如何影响文件删除和恢复。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我所知道的关于固态硬盘的一切">
+<meta property="og:url" content="https://fcc-cd.dev/article/translation/everything-i-know-about-ssd/index.html">
+<meta property="og:site_name" content="FCC 成都社区">
+<meta property="og:description" content="使用 NAND 闪存的固态硬盘，它们与机械硬盘的区别，以及它们如何影响文件删除和恢复。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-11T17:23:20.883Z">
+<meta property="article:author" content="freeCodeCamp ChengDu community">
+<meta property="article:tag" content="FCC freeCodeCamp 成都 社区 官方 网站">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="alternative" href="atom.xml" title="我所知道的关于固态硬盘的一切" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/FCC-CDC-v1-1.png">
+
+
+<link rel="stylesheet" href="https://npm.webcache.cn/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://npm.webcache.cn/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://npm.webcache.cn/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://npm.webcache.cn/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://npm.webcache.cn/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137453538-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137453538-1');
+</script>
+
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://npm.webcache.cn/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/common.css">
+
+<script src="https://npm.webcache.cn/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://npm.webcache.cn/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script src="https://npm.webcache.cn/ua-parser-js@0.7.19/dist/ua-parser.min.js"></script>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/FCC-CDC-v1-0.png" alt="我所知道的关于固态硬盘的一切" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/activity">活动</a>
+                
+                <a class="navbar-item"
+                href="http://cdfcc.lofter.com/">相册</a>
+                
+                <a class="navbar-item"
+                href="/categories">博文</a>
+                
+                <a class="navbar-item"
+                href="https://web-conf.dev/">大会</a>
+                
+                <a class="navbar-item"
+                href="/community">社群</a>
+                
+                <a class="navbar-item"
+                href="/categories/Profile/">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="登录" href="https://fcc-cd.leanapp.cn/signIn/">
+                        
+                        <i class="fas fa-sign-in-alt"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-28T16:00:00.000Z">2019-03-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Article/">Article</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Article/Translation/">Translation</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 小时 读完 (大约 13639 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                我所知道的关于固态硬盘的一切
+            
+
+            
+        </h1>
+        <div class="content">
+            <html><head><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="FCC 成都社区" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css"></head><body><p>使用 NAND 闪存的固态硬盘，它们与机械硬盘的区别，以及它们如何影响文件删除和恢复。</p>
+<a id="more"></a>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>我开始写这篇相当长的文章是为了自己的学习收益，当时我从 2006 年的旧款 Win 8 250GB 硬盘驱动的电脑升级到了一台带有 128GB SSD 的戴尔 Optiflex 3010。在系统盘上，我从未使用过超过 30 或 40GB 的空间，而且我既不是游戏玩家，也不是狂热的电影或音乐收藏家。至少在电脑上不是。随着我对我的新设备的不断摸索，我越来越意识到我对 SSD 中的 NAND 闪存了解甚少，不知道 SSD 是如何工作的，它们是如何读取、写入和存储数据的，以及它们使用了哪些技巧？我可以想象硬盘驱动器（HDD）在旋转的表面上写入微小的磁性记录，但 SSD 完全不同，差别巨大。</p>
+<p>关于 SSD，还有一些长期的误解，如果能够有些思考，甚至消除其中一些，那将是很好的。也许我自己也曾怀有不少误解。不管它是如何开始的，这篇文章逐渐发展成了一篇中级技术讨论。如果你只需要知道 SSD 安静、可靠、快速，并且能够使用多年，那么就没必要再读下去了。然而，如果你认为了解如何读取 3D TLC NAND 闪存单元是有趣的，那么你别无选择，只能继续深入了解。</p>
+<p>尽可能多的详细信息来源于企业和私人技术文章，特别是来自希捷（Seagate）和西部数据（WD），以及名字很有趣的 Flash Memory Summit（闪存峰会）。我所做的一些结论是尝试运用我能理解的逻辑和常识。NAND 闪存控制器的复杂性，它们操作方法的多样性，以及它们发展的速度，使得理解它们，更不用说跟上它们的步伐，至少可以说是困难的。我不能说我写的内容没有混淆或者完全正确，但它更像是一本指南而不是圣经。也会有一些重复的内容。而且很快它就会过时。</p>
+<p>我感激那些我借鉴的人，也将感激那些无需任何回报（除了贡献的满足感）就指出任何错误的人。我试图解释固态硬盘（SSD）与众不同的地方，以及为什么我们根深蒂固的硬盘驱动器（HDD）思维很难理解它。</p>
+<p>第一个误解可能是 SSD 的复数：从语法上讲，应该是 SSDs，但 SSD’s 几乎同样常见。在这里，我将坚持使用 SSD、SSDs。</p>
+<h2 id="软件和硬件"><a href="#软件和硬件" class="headerlink" title="软件和硬件"></a>软件和硬件</h2><p>本文写于 2019 年及之后，几乎完全围绕以个人电脑或笔记本电脑存储设备形式出现的 NAND 闪存展开，我们将其称为固态硬盘 (SSD)。我不会通过提及无处不在的闪存驱动器或其他 NAND 闪存设备来使事情变得更加复杂。如果存在显著差异，我将尝试在发生差异时进行说明，但默认情况下指的是内置驱动器。<strong>本文不涉及手机等设备中的闪存存储</strong>。</p>
+<p>本文的大部分细节内容是在我的电脑运行 Windows 10 家庭版系统时编写的，该系统配备了一个相当普通的内置 2.5 英寸西部数据 Green 120 GB 固态硬盘。该硬盘使用慧荣科技 SM2258XT 主控和四个 32 GB 的闪迪 05497 032G 15nm 3D TLC 闪存芯片，并内置了容量未知的 SLC 缓存。由于本文试图讨论固态硬盘作为一个整体的行为，因此使用什么主机操作系统或文件系统应该无关紧要，但在我的例子中是 Windows 和 NTFS。本文中的内容并非针对特定品牌或类型的固态硬盘，而应该是通用的。我们真正要讨论的是固态硬盘的工作原理。</p>
+<p>我唯一使用的额外软件应用程序是 Recuvae（Piriform 出品），HexDen (HxD)。Recuva 可以列出活动文件和已删除文件及其簇分配，而 HexDen 是一款非常实用且功能强大的十六进制编辑器。Recuva 可从 <a href="http://www.piriform.com" target="_blank" rel="noopener">www.piriform.com</a> （现在是 <a href="https://www.ccleaner.com/" target="_blank" rel="noopener">https://www.ccleaner.com/</a> ） 免费获取，HexDen 也可从 <a href="http://www.mh-nexus.de" target="_blank" rel="noopener">www.mh-nexus.de</a> 免费获取。我使用这两款软件的便携版（portable versions）。</p>
+<p>所有的结论和观点完全是来自我个人的工作经历，以及从我自己的电脑上获取的任何数据。在接受这些话作为真理之前，最好验证或至少同意我的推理。这里的很多内容是对一个非常复杂主题的简化解释。</p>
+<h2 id="SSD-物理内部结构"><a href="#SSD-物理内部结构" class="headerlink" title="SSD 物理内部结构"></a>SSD 物理内部结构</h2><p>打开固态硬盘，你会有些失望，只有一块小型印刷电路板，上面有几颗 NAND 闪存芯片和一颗主控芯片，重量轻，而且有点脆弱。至于主控内部的软件，我只能概括其基本任务。主控和内存芯片一样，通常都是从外部制造商处购买的，这似乎是司空见惯的事情。固态硬盘主控软件是专有的，非常复杂，而且受到高度保护，但所有主控都必须执行基本任务，即使我们不太清楚它是如何实现的。这里只能讨论这些任务，真正聪明的调整和技巧只能由制造商知晓。我将从一些基础知识开始。</p>
+<h2 id="NAND-闪存"><a href="#NAND-闪存" class="headerlink" title="NAND 闪存"></a>NAND 闪存</h2><p>我不打算深入探讨 NAND 闪存的内部结构，在维基百科上已经有足够多令人困惑的文章了。你真正需要知道的是，NAND（非与门）闪存利用浮动栅晶体管阵列来存储信息。浮动栅可以没有电子的充电状态，处于<code>空（empty）</code>逻辑状态，或者在不同的电压阈值下充满电子，处于表示某个值的逻辑状态。NAND 闪存是非易失性的，即使 SSD 没有通电，它也能保持其状态。哦，对了，之所以称之为 flash（闪存），是因为可以同时擦除（flashed）大量的单元。</p>
+<p>但如果你想了解更多，继续吧。这里的术语<code>单元（cell）</code>和<code>晶体管（transistor）</code>指的是同一物理实体，可以互换使用，我不会一直重复使用 NAND 这个词。</p>
+<p>闪存包含多个二维晶体管阵列，并支持三种基本操作：读取、编程（写入）和擦除。除了闪存阵列外，闪存芯片还包括命令和状态寄存器、控制单元、解码器、模拟电路、缓冲器以及地址和数据总线。一个单独的芯片承载着 SSD 控制器，它向闪存芯片发送读取、编程或擦除命令。在读取操作中，控制器将物理地址传递给闪存芯片，闪存芯片定位数据并将其发送回控制器。在编程操作中，数据和物理地址都会传递给芯片。在擦除操作中，只有物理地址会传递给芯片。</p>
+<p>闪存芯片的锁存器存储从闪存阵列传输到芯片和从芯片传输出的数据，而在读取操作期间，感应放大器用于检测比特线上的电压。控制器使用状态寄存器监控发送到芯片的命令。控制器还包括错误检查和纠正（EEC）算法，来管理芯片中的错误和可靠性问题，并确保读取或写入的数据是正确的。</p>
+<p>阵列的每一行通过字线（Word line）连接，每一列通过比特线（Bit line）连接。在行和列的交叉点是一个浮动栅晶体管，或称为单元，逻辑数据就存储在这里。字线并行连接到晶体管，比特线串行连接。比特线的端部连接到感应放大器。</p>
+<p>闪存阵列被划分为块，块又被划分为页。在一个块内，与每条字线相连的单元构成一个页。与位线相连的单元则表示块中的页数。常见的页面大小为 4k、8k 或 16k，128 到 256 个页面组成一个 512k 到 4mb 大小的块。页是芯片控制单元可寻址的最小数据粒度。</p>
+<p>读取或编程操作涉及芯片控制器使用块解码器选择相关块，然后使用页解码器选择块中的页。芯片控制器还负责激活正确的模拟电路，以产生编程和擦除操作所需的电压。</p>
+<p>虽然每行的单元格数名义上与页面大小相等，但每行的实际单元格数却高于每页的标称容量。这是因为每个页面都包含一组备用单元和数据单元。备用单元存储该页面的 ECC 位以及页面的物理地址到逻辑地址映射。控制器还可在备用区中保存有关页面的其他元数据信息。在读取操作过程中，整个页面（包括备用区中的位）都会传输到控制器。控制器中的 ECC 逻辑会检查并纠正读取的数据。在编程操作期间，控制器会将用户数据和 ECC 位传送到闪存。</p>
+<p>系统启动时，控制器会扫描整个闪存阵列中每个页面的空闲区域，将逻辑地址到物理地址的映射加载到自己的内存中（控制器中可能有其他保存映射数据的技术）。控制器在闪存转换层（FTL）中保存逻辑地址到物理地址的映射。FTL 还执行垃圾回收，清除写入后的无效页面，并执行损耗均衡，确保所有闪存块都得到均衡使用。</p>
+<p>由于闪存不支持原地更新，所以在内容可以被编程之前，页面需要被擦除；但不同于以页面粒度进行的编程或读取操作，擦除操作是以块粒度执行的。</p>
+<h2 id="2D、3D-和-Layers（层）"><a href="#2D、3D-和-Layers（层）" class="headerlink" title="2D、3D, 和 Layers（层）"></a>2D、3D, 和 Layers（层）</h2><p>在闪存架构中，一个平面闪存块，也就是一个二维的存储单元阵列，被称为 2D 闪存。如果一个或多个这样的阵列叠放在一起，那么就是 3D 闪存。3D NAND 闪存建立在一块芯片上，最多可达 32 层，是为了在平面闪存达到尺寸限制时降低成本而设计的：3D 闪存的生产成本几乎与 2D 相当，但存储容量大大增加。在 2D 和 3D 中，每个页面（即行）中的存储单元由单词线连接，而页面中的每个偏移量（即列）中的存储单元则通过位线连接（简单地说）。</p>
+<p>3D 闪存与层叠式闪存不同，后者是将多个独立的超薄芯片堆叠在一起。这种做法成本高得令人望而却步。大多数现代消费级固态硬盘（2010 年代）都使用 3D TLC 闪存。</p>
+<h2 id="我能看到其中一个单元吗？"><a href="#我能看到其中一个单元吗？" class="headerlink" title="我能看到其中一个单元吗？"></a>我能看到其中一个单元吗？</h2><p>终端用户闪存的单元尺寸极小，通常为 15 纳米，范围从 43 纳米到 12 纳米不等。实际上，单元尺寸或单元直径具有误导性，因为所述尺寸并非单元任何尺寸的测量值，而是芯片上离散组件之间距离的度量。芯片上的硅层厚度约为 0.5 至 3 纳米：相比之下，氢原子的直径为 0.1 纳米，而芯片制造中使用的硅原子为 0.2 纳米。一纳米 (nm) 确实非常小，仅为一米的十亿分之一，打个比方，如果一毫米相当于一颗标准弹珠的大小（约 13 毫米），那么一米就相当于地球的大小。十亿倍的威力令人印象深刻。</p>
+<h2 id="SLC、MLC、TLC、QLC-及其未来发展"><a href="#SLC、MLC、TLC、QLC-及其未来发展" class="headerlink" title="SLC、MLC、TLC、QLC 及其未来发展"></a>SLC、MLC、TLC、QLC 及其未来发展</h2><p>单级单元（SLC）有一个电子电荷阈值来指示一个位的状态，即一或零。多级单元（MLC）存储一个电压来表示两个位的状态，有三个不同的阈值分别代表 11、10、00 和 01。三级单元（TLC）存储三个位的状态，包括 111、110、100、101、001、000、010 和 011。如果有人感兴趣的话，可以推导出四级单元（QLC）使用的 15 个阈值。（我见过其他版本的阈值表示位的含义。）</p>
+<p>不幸的是，当双级单元被开发出来时，它被称为多级单元，并被赋予了 MLC 这个缩写，这迫使每个人在想要指代多个级别的存储单元时都要费力地打出“多级单元”这个词。如果它被称为双级单元，我们就可以自由地使用 DLC、TLC 和 QLC，并用 MLC 来描述所有这些，但现在为时已晚。如果闪存只停留在 SLC 阶段，有其是/否、一/零的状态，这些解释将更容易写，希望也更容易理解。</p>
+<p>在多级单元中，物理 NAND 页面代表两个或更多的逻辑页面。属于 MLC 的两个位分别映射到两个逻辑页面。奇数编号的页面（包括零）映射到最不重要的（右手）位，偶数编号的页面映射到最重要的（左手）位。同样，属于 TLC 的三个位分别映射到三个逻辑页面，而 QLC 映射到四个逻辑页面（TLC 和 QLC 的页面编号是未知的）。</p>
+<p>多层单元需要支持的位数越多，其性能就越受影响。对于 SLC，控制器只需要检查是否超过了一个阈值。而 MLC 单元可以有四个值，TLC 有八个，QLC 有 16 个。为了读取单元的正确值，SSD 控制器需要使用精确的电压和多次读取来确定单元中的电荷。很明显，如果一个物理页面支持多个逻辑页面，那么该页面的读写频率将高于 SLC 页面，从而影响其使用寿命。此外，显而易见的是，TLC SSD 只需要 SLC 设备三分之一的物理单元，因此我的 120 GB TLC SSD 实际上只包含 40 GB 的 NAND 单元。</p>
+<p>高使用率的企业级 SSD 曾经是 SLC 的天下，因为它具有更高的速度、耐用性、可靠性和读/写能力，而 MLC 和 TLC 也逐渐被企业级应用所接受。终端消费级 SSD 市场则获得了更便宜、容量更大，但速度更慢、更脆弱的多层单元。</p>
+<h3 id="为什么空代表一？"><a href="#为什么空代表一？" class="headerlink" title="为什么空代表一？"></a>为什么空代表一？</h3><p>任何仍在关注这一点的人可能已经注意到，单层和多层单元都有一个共同点，那就是一个空的单元格（其中浮栅没有电荷）代表一。与 HDD 不同，HDD 中任何位模式都可以写入任何位置，而 SSD 页面上存在一个默认的逻辑状态 1。这是因为单元上只有一个编程功能，即跨浮栅移动电子。NAND 闪存单元只能被编程为零状态，而没有能力编程为一。对于多层单元，所有页面的默认值仍然为 1，但即使在单元格被编程并且栅极上有电子存在之后，逻辑 1 仍然可以表示。</p>
+<p>自从斐波那契在 1202 年将带有零概念的印度-阿拉伯数字系统引入欧洲数学以来，人类的思维就将零与空联系在一起，将一与满联系在一起。空着却代表一，这让人相当困惑，而且似乎主要来自于惯例（空状态<em>可以</em>代表零，但需要在数据线上使用反相器）。可能是电路不那么复杂，也可能是空单元格传导电荷的能力意味着它是一。</p>
+<h2 id="它们都是-SLC"><a href="#它们都是-SLC" class="headerlink" title="它们都是 SLC"></a>它们都是 SLC</h2><p>在讨论了这么多之后，或许有必要强调一点：无论预期用途如何，所有 NAND 闪存的物理结构都是 SLC（单层存储）。即使你能观察 TLC（三层存储）单元的内部，你也不会看到 101、011 或任何类似的数字。一个单元格中永远只可能存在一定数量的电子，无论这个数量如何解释。SSD 控制器知道应该将单元格视为 SLC、MLC 还是其他类型，并相应地对其进行编程、测量电子数量，并确定它代表的逻辑值。但即使是四层单元格也只能包含一个值，就像 SLC 单元格一样。</p>
+<h2 id="迷思与误解"><a href="#迷思与误解" class="headerlink" title="迷思与误解"></a>迷思与误解</h2><p>现在我们来谈谈迷思、误解以及撰写本文的真正原因：当 SSD 页面被读取、写入和重写时会发生什么？这将如何影响已删除文件的恢复？一方面，我们有 NTFS，它专为 HDD 设计，远早于 SSD 的普及；另一方面，我们有 NAND 闪存，它有其独特的运作方式；此外，还有数十亿人多年来已经习惯了 HDD 的使用方式和预期。在这里，如果没有特别说明，我将交替使用 SSD 和 NAND 闪存，尽管这样说并不完全准确。</p>
+<h2 id="存储设备控制器"><a href="#存储设备控制器" class="headerlink" title="存储设备控制器"></a>存储设备控制器</h2><p>所有 HDD、SSD 和闪存驱动器都有一个内部控制器。用微软的话来说，控制器使得存储设备能够对主机进行“抽象化”。这种抽象是通过逻辑块寻址（LBA）实现的，其中存储设备上每个能够被寻址的簇都由主机通过一个递增的数字（LBA）来识别。存储设备控制器将该数字映射到设备上的扇区或页面。对于主机来说，这种映射是恒定的，一个簇会一直映射到同一个 LBA，直到主机更改它。在 HDD 上，这种关系是物理的、固定的：简单来说，HDD 控制器只是读取和写入主机要求的任何扇区。它不需要考虑以前那里有什么，它只是按照指令行事，将新数据写入旧数据之上。它之所以这样做，是因为它可以这样做，没有什么可以阻止新的簇直接写入旧簇的相同扇区之上。而在 SSD 上，情况就不同了。</p>
+<p>对于 SSD，主机仍然使用 LBA 寻址系统，并不断协调 LBA 和簇号之间的关系。它知道该设备是一个 SSD，并有一些技巧来适应这一点，但这些技巧将在后面介绍。然而，SSD 控制器有许多技巧来协调为 HDD 编写的文件系统与 NAND 闪存的需求。</p>
+<h2 id="闪存转换层（FTL）"><a href="#闪存转换层（FTL）" class="headerlink" title="闪存转换层（FTL）"></a>闪存转换层（FTL）</h2><p>主机仍然使用 LBA 寻址来对 SSD 进行读写操作，因为它不知道其他方式。这些命令会被 SSD 控制器上的闪存转换层 (FTL) 拦截。FTL 维护着一个 LBA 到物理块地址 (PBA) 的映射表，并将转换后的 PBA 传递给控制器。之所以需要这个映射表，是因为与 HDD 不同，LBA 到 PBA 的关系是易失的。之所以易失，是因为 NAND 闪存的写入数据方式。</p>
+<p>一个空的页面，所有单元都未充电，默认情况下包含全 1。然而，如果使用十六进制编辑器查看 SSD 的空扇区，它将显示为一组零。这是因为空页面没有分配给 LBA/PBA 映射表。相反，如果对一个空页面发出读取请求，则会返回一个默认的零页面。这适用于未分配的簇和属于文件的簇：SSD 不会分配一个页面并将所有单元从 1 改为 0。</p>
+<h2 id="浮栅晶体管"><a href="#浮栅晶体管" class="headerlink" title="浮栅晶体管"></a>浮栅晶体管</h2><p>在深入了解读取和写入操作之前，这一部分可能会有所帮助，在这里，单元格和（FG）晶体管可以互换使用（一个单元格就是一个晶体管）。如果想了解更多关于浮栅金属氧化物半导体场效应晶体管（Metal-Oxide-Semiconductor Field-Effect Transistors，简称 MOSFET）的信息，可以随时查阅维基百科。</p>
+<p>浮栅 MOS 晶体管有三个端子：栅极、漏极和源极。当一个电压被施加到栅极上时，电流就可以从源极流向漏极。施加到栅极的低电压会导致从源极到漏极的电压按比例变化。当电压升高时，这种比例响应会停止，不管怎样栅极都会关闭。</p>
+<p>浮栅中的电荷会改变晶体管的电压阈值，即栅极关闭的点。当栅极电压高于某个值，大约 0.5 伏时，栅极总是会关闭。当电压低于这个值时，栅极的关闭由浮栅电压决定。</p>
+<p>如果浮栅没有电荷，那么施加到栅极的低电压就会关闭栅极，并允许电流从源极流向漏极。如果浮栅带有电荷，那么需要施加更高的电压到栅极上，栅极才会关闭并且电流才会流动。浮栅中的电荷改变了为了使栅极关闭并导电所必须施加到栅极上的电压。</p>
+<h2 id="SSD-读取"><a href="#SSD-读取" class="headerlink" title="SSD 读取"></a>SSD 读取</h2><p>NAND 闪存的设计并没有固有的特性来阻止对单个单元格的读取和写入。然而，为了符合 NAND 闪存设计的目标——即简单和小巧——NAND 芯片接受的标准命令被构造成页面是最小的可寻址单元。这样就省去了存储额外指令和单元格到页面映射所需的空间。</p>
+<p>要读取单个页面及其内部的单元格，需要将该页面与块内的其他页面隔离开来。为此，未被读取的页面会被临时禁用。</p>
+<p>同一块内的同一行（一个页面）的所有单元格/晶体管通过字线（Word Line）并联连接到晶体管的栅极。同一列（单元格偏移）的所有晶体管串联在一起，通过位线（Bit Line）连接，将一个的漏极与下一个的源极相连。在每个位线的末端是一个感应放大器。进行读取操作时，除了正在读取的页面外，所有字线上都会施加一个穿透电压。穿透电压接近或高于可能的最高阈值电压，并迫使<em>所有未被读取页面中的</em>晶体管关闭，不管它们是否存储了电荷。所有位线都会通入低电流。</p>
+<p>正在读取的页面的字线会被给予一个参考电压，所有位线感应放大器进行读取。储存了足够电子数量的晶体管不会被参考电压关闭，位线电流不会通过源/漏链传递到感应放大器。没有电荷，或电荷低于阈值的晶体管会被参考电压关闭，并将位线电流传导到感应放大器。为了确定多级单元格的逻辑状态，需要进行多次不同阈值电压的读取。</p>
+<p>（为了增加或避免更多的混淆，浮栅晶体管可以是开启或关闭状态。开启状态的栅极不导电，关闭状态的栅极则导电。所以如果栅极是开启的，就没有电流能通过；如果关闭了，就能通过。难怪我们会感到困惑。）</p>
+<p>由此可见，要读取块中的一个页面，块中每个页面的所有晶体管都需要接收一个穿透电压或一个或多个参考电压。即使块中的其他页面部分或全部为空，这一点似乎仍然适用。这在下面的读取干扰中变得很重要。</p>
+<h2 id="读取存储"><a href="#读取存储" class="headerlink" title="读取存储"></a>读取存储</h2><p>理解 SLC 读取背后的概念相当容易。SLC 闪存只应用一个阈值，因此只需要一个测试电压——浮栅要么关闭，要么不关闭。如果阈值电压使栅极关闭，则位线电流流向读出放大器，存储值为 1。如果没有，则为 0。</p>
+<p>多级单元则不同，存储值位序背后的原因也变得明显。在 MLC 中，可能的用户信息位组合为 11、10、00 和 01，由三个阈值分隔。读取最高有效位 (l/h) 只需要读取一次中间阈值电压。如果栅极关闭，则最高有效位为 1，如果未关闭，则最高有效位为 0，无论最低有效位是什么。要读取最低有效位 (r/h)，需要读取两次，一次读取阈值一，一次读取阈值三。如果读取阈值一使栅极关闭，则最低有效位设置为 1，不需要读取第二次。如果栅极打开，则读取阈值三。如果它关闭，则最低有效位设置为 0。如果没有，则值为 1。</p>
+<p>TLC 单元中的位组合为 111、110、100、101、001、000、010 和 011，由七个阈值分隔，更难以理解。与 MLC 一样，最高有效位仍然只需要读取一次中间阈值。中间位需要读取两次，分别在阈值二和六，最低有效位需要读取四次，分别在阈值一、三、五和七。</p>
+<p>所有基于最高有效位 (l/h) 的多单元页面都被视为 SLC，只需要读取一次即可确定用户信息位值。</p>
+<h2 id="SSD-写入"><a href="#SSD-写入" class="headerlink" title="SSD 写入"></a>SSD 写入</h2><p>NAND 闪存最重要的方面，也是 HDD/SSD 路径上最大的分叉点，以及接下来所有内容的基础和关键因素是，数据只能写入空的 SSD 页面。这并不是什么新鲜事，也不是什么未知的事情，但它对数据安全和恢复有着最大的影响。</p>
+<p>虽然 SSD 可以读写单个页面，但它们不能覆盖页面，因为将 0 变回 1 所需的电压会损坏相邻的单元。所有写入和重写都需要一个空白页。与 HDD 不同，HDD 会将完整的簇写入磁盘，无论之前有什么内容，写入 SSD 页面的行为是分配一个默认值为全 1 的空白页，并对需要更改为 0 的单元施加电荷。这对多级单元和 SLC 都是一样的，因为无电荷全 1 的模式要么被替换为代表另一种模式的电荷，要么保持不变。这是一个一次性的过程。</p>
+<p>当发出写入请求时，会分配一个空页面（通常在同一个块内），然后写入数据。FTL 中的 LBA/PBA 映射会更新，以便将新页面分配给相关的 LBA。LBA 对主机来说始终保持不变：无论分配哪个页面，主机都不会知道。如果用户数据被重写或分配了一个新文件，这个过程是相同的：唯一的区别是重写的工作量会稍微多一些。旧页面将被标记为无效，主机将无法访问，但仍会占用其块内的空间，因为它无法被重用。</p>
+<p>虽然很容易理解写入 SLC 页面的过程，但多级单元页面的情况更难想象。控制器会将新的写入累积到 SSD 缓存中，直到收集到足够多的逻辑页面来填充一个物理页面，然后才会写入物理页面。这需要对页面进行最少的写入次数。如果修改了多级页面中的一个逻辑页面，则需要分配一个新页面并重写所有逻辑页面，因为物理页面中的各个值无法更改。如果删除了一个逻辑页面，那么我推测该逻辑页面会被标记为无效，当该块成为垃圾回收的候选对象时，任何有效的逻辑页面都会在写入之前进行合并。换句话说，一个多级页面，或者至少是其中的大部分，将始终包含一整套逻辑页面。</p>
+<p>很明显，如果 NAND 闪存以这种方式处理数据写入（事实也确实如此），那么 SSD 最终将充满有效和无效的页面，性能也会逐渐降低到爬行的程度。虽然单个 SSD 页面无法擦除，但一个块可以擦除，这种方法用于将块恢复到可写状态。为了加快这一过程，并确保始终有一组空块可用于写入，SSD 控制器会使用垃圾回收。</p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>从最简陋到容量最高的 SSD，垃圾回收功能都已启用：如果没有它，NAND 闪存将无法使用。垃圾回收是 SSD 控制器的一部分，主机并不知道它的工作。在最简单的形式中，GC 会选取一个包含有效和无效页面的块，将有效页面复制到一个新的空块中，更新 LBA 映射表，并将旧块放入无效块池中。在那里，该块及其页面将被重置为空状态，并将该块添加到可用块池中。因此，应该始终有一组可用块可用于写入活动。只要 SSD 通电，GC 就会执行其工作，无法停止。GC 例程有各种复杂的技术，所有这些技术都是专有的，而且主要只有制造商才知道。</p>
+<p>当一个全新的 SSD 从工厂出厂时，写入操作会以渐进的线性模式逐渐填满驱动器，直到可寻址存储空间被完全写入。然而，一旦垃圾回收开始，数据写入的方式（顺序写入还是随机写入）就会影响性能。顺序写入的数据会写入整个块，当数据被替换时，整个块会被标记为无效。在垃圾回收期间，不需要将任何数据移动到另一个块。这是最快的垃圾回收方式，也就是说，没有垃圾需要回收。当数据被随机写入时，无效页面会分散在整个 SSD 中。当垃圾回收作用于包含随机写入数据的块时，必须将更多数据移动到新块，然后才能擦除该块。</p>
+<h2 id="垃圾回收难题"><a href="#垃圾回收难题" class="headerlink" title="垃圾回收难题"></a>垃圾回收难题</h2><p>垃圾回收可以在后台进行（当主机空闲时），也可以在前台进行（当写入需要时）。虽然后台垃圾回收看起来更可取，但它也有缺点。如果主机在空闲时使用节能模式，垃圾回收要么会等待设备重新启动，从而导致用户延迟以完成垃圾回收，要么会唤醒设备并缩短电池寿命，而此时主机处于“空闲”状态。此外，垃圾回收并不知道它正在回收的数据。不可避免的是，一些数据在进行垃圾回收后不久就会被删除，从而导致另一轮垃圾回收和随之而来的额外和不必要的写入（写入放大，即实际写入与数据写入的比率）。前台垃圾回收看似与性能背道而驰，但它避免了节能问题，只在实际需要时才进行写入，并且借助快速缓存和高度发达的垃圾回收算法，不会给用户带来明显的性能损失。现代垃圾回收的趋势似乎是前台回收，或者前台和后台回收的组合。</p>
+<p>基于前台垃圾回收，以及大多数用户活动都是随机的，那么不可避免的结论是，SSD 将在其大部分生命周期中处于满容量状态，如果我们指的是可用块，即使分配给主机的空间看起来很低。</p>
+<p>然而，SSD 还存在另一个潜在问题，这与一个历史事件有关：文件系统的设计方式。</p>
+<h2 id="文件系统-——-非眼见为实"><a href="#文件系统-——-非眼见为实" class="headerlink" title="文件系统 —— 非眼见为实"></a>文件系统 —— 非眼见为实</h2><p>主机文件系统的设计可以追溯到 HDD 称霸的时代，因为 SSD 那时还没有以可用且价格合理的形态出现。文件系统没有考虑到 NAND 闪存的需求。文件在不断地更新：它们被分配、移动和删除，大小也在增长和缩减。文件系统处理这些操作的方式与 NAND 闪存的工作机制不兼容。</p>
+<p>值得强调的是，存储设备对主机操作系统是抽象的。虽然资源管理器以人类完全可以理解的形式显示了一系列文件夹和文件，但这只是一种假象。资源管理器显示的是一个完全由文件系统表中的元数据创建的逻辑结构。存储设备控制器对文件、文件夹、表或操作系统一无所知：HDD 或 SSD 看到的只是读取或写入特定扇区的命令，而它们也忠实地执行了这些命令。然而，SSD 与 HDD 相比有一个优势，它知道哪些页面保存着数据并映射到 LBA，哪些页面是空的、不保存有效数据且未映射到 LBA。相反，HDD 不需要知道这些，对 HDD 来说，所有扇区都是一样的。</p>
+<h2 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h2><p>在 NTFS 文件系统中，当一个文件被删除时，主文件表 (MFT) 中的对应条目会被标记为已删除，并且集群位图也会被修改，将该文件占用的集群标记为可重用。整个删除过程只在 MFT 和集群位图中进行。这对 HDD 来说完全足够了，因为 NTFS 可以随时重用 MFT 条目和集群。</p>
+<p>在 SSD 上，从 NTFS 的角度来看，这个过程完全相同，因为 NTFS 没有其他删除文件的方法。然而，SSD 看到的只是 HDD 看到的内容，即对几个页面的更新。HDD 和 SSD 都不知道正在更新的是 MFT 和集群位图，因为它们对这些东西一无所知。由于已删除文件的集群上没有任何活动，因此 SSD 中保存这些集群的页面仍然映射到 FTL 中的 LBA。SSD 的 FTL 无法知道这些页面不再被 NTFS 分配：对 SSD 来说，这些页面仍然有效，不会被垃圾回收清理。</p>
+<p>由于这些“死”页面被分配给了 LBA，因此当分配或扩展文件并且主机使用该 LBA 时，它们可能会被释放。在这种情况下，该页面将被标记为无效，并使用一个新页面。然而，最终不可避免地会出现大量未被标记为垃圾回收的未使用和不需要的数据，这些数据会被 SSD 控制器毫无意义地维护，并且无法重用。为了克服这个问题，并将主机对已分配和未分配页面的视图与 SSD 的视图关联起来，从 Windows 7 开始，NTFS 获得了 TRIM 命令。</p>
+<h2 id="SSD-检测"><a href="#SSD-检测" class="headerlink" title="SSD 检测"></a>SSD 检测</h2><p>尽管文件系统对存储设备进行了抽象，但为了启用文件系统针对 SSD 的一些优化，它需要知道设备是 HDD 还是 SSD。有多种方法可以做到这一点，包括查询设备的转速，对于 SSD 来说，转速应该是零（或者可能是一）。这似乎是最广泛使用和最有效的方法。</p>
+<h2 id="TRIM"><a href="#TRIM" class="headerlink" title="TRIM"></a>TRIM</h2><p>TRIM 并非缩写，而是一条 SATA 指令，由文件系统发送至 SSD 控制器，用于指示特定页面不再包含有效数据，可以进行垃圾回收。在 Windows 系统中，只有 NTFS 卷支持 TRIM。文件删除、分区删除和磁盘格式化都会触发 TRIM。TRIM 指令需要 SSD 支持并在 NTFS 中启用才能生效。</p>
+<p>你可以使用命令 <code>fsutil behavior query disabledeletenotify</code> 来检查 TRIM 是否在操作系统中启用。如果返回值为 0，则表示 TRIM 已启用。但这并不代表 SSD 支持 TRIM（甚至不能确定是否安装了 SSD），不过目前所有现代 SSD 都支持某种版本的 TRIM。</p>
+<p>SATA 协议定义了三种不同类型的 TRIM，SSD 驱动器也实现了这三种类型：</p>
+<p>非确定性 TRIM：在执行 TRIM 后，每次读取命令都可能返回不同的数据。</p>
+<p>确定性 TRIM (DRAT)：在执行 TRIM 后，所有读取命令都返回相同的数据（即结果是确定的），并且在写入新数据之前不会改变。</p>
+<p>TRIM 后确定性读取零 (DZAT)：在执行 TRIM 后，所有读取命令都返回零，直到该页面被写入新数据。</p>
+<p>需要注意的是，虽然 DRAT 在读取时返回数据，但返回的数据并不是 TRIM 之前的用户数据，而是一些随机数据。</p>
+<p>幸运的是，非确定性 TRIM 很少使用，而且 Windows 也不支持 DRAT。因此，读取已 TRIM 的页面（使用十六进制编辑器很容易做到）会调用 DZAT，并在发出 TRIM 命令后立即返回零。尽管物理页面可能没有在 TRIM 命令之后立即被清理，但 SSD 控制器知道在已 TRIM 的页面地址上没有保存有效数据。</p>
+<p>TRIM 告诉 FTL（闪存转换层），分配给特定逻辑块地址 (LBA) 的页面将被归类为无效。当一个块不再有任何空闲页面，或者达到特定阈值时，该块就成为垃圾回收的候选对象。活动数据会被复制到一个新的空块中，而原始块会被擦除并重新可用。</p>
+<p>TRIM 是一种异步命令，会被排队等待低优先级操作。它不需要也不发送响应。TRIM 队列的大小是有限的，在高负载情况下，一些 TRIM 命令可能会被丢弃。这种情况不会有任何提示，因此一些不需要的页面可能会逃过垃圾回收。</p>
+<h2 id="RETRIM"><a href="#RETRIM" class="headerlink" title="RETRIM"></a>RETRIM</h2><p>Windows 系统中的磁盘碎片整理工具（现已更名为 <code>存储优化</code>）提供了一个优化 SSD 的选项。但这并不会对 SSD 进行碎片整理，而是向 NTFS 集群位图中标识的所有未分配页面发送一系列 TRIM 命令。</p>
+<p>这种全局 TRIM（或称为 RETRIM）命令的运行粒度经过精心设计，可以确保 TRIM 队列永远不会超过其允许的大小，并且不会丢弃任何 RETRIM 命令。存储优化工具会每月自动运行一次 RETRIM。</p>
+<h2 id="预留空间"><a href="#预留空间" class="headerlink" title="预留空间"></a>预留空间</h2><p>所有 NAND 闪存设备都使用预留空间，即额外容量，用于额外的写入操作、控制器固件、坏块替换以及 SSD 控制器使用的其他功能。这些容量并不是与用户容量物理隔离的，而仅仅是超出主机可分配空间的一部分。随着 SSD 的使用，这些额外空间中的特定页面会动态变化。</p>
+<p>希捷公司表示，最小预留空间是二进制和十进制命名约定之间的差异。SSD 作为存储设备销售，其容量以 GB（1,000,000,000 字节）为单位。然而，NAND 闪存属于内存，以 GiB（1,073,741,824 字节）为单位，这使得最小预留空间比例略高于 7.37%。即使 SSD 在主机看来已满，它仍然拥有 7.37% 的可用空间来维持功能和执行写入操作（尽管写入性能会非常糟糕）。</p>
+<p>除了内置的 7.37% 之外，制造商可能会进一步减少用户可用的容量，并将其作为额外的预留空间。主机也可以通过分配一个不使用驱动器全部容量的分区来创建额外的预留空间。未分配的空间将自动被控制器用作动态预留空间。</p>
+<p>例如，我的西部数据 SSD 有四个 32 GB 的芯片，但标称容量为 120 GB，这意味着它预留了 8 GB 作为额外的预留空间。再加上 7.37% 的最小值（9.4 GB），总共 17.4 GB 的预留空间几乎占总容量的 15%。</p>
+<h2 id="磨损均衡"><a href="#磨损均衡" class="headerlink" title="磨损均衡"></a>磨损均衡</h2><p>有些文件写入一次后就保持不变，而有些文件则会频繁更新。因此，一些块几乎不会进入无效块池，其擦写次数非常低，而另一些块则每隔几分钟就会进入一次池，擦写次数非常高。为了分散磨损，使所有块的擦写次数相等，并保持 SSD 在其使用寿命内的性能，就需要使用磨损均衡技术。</p>
+<p>磨损均衡使用算法来识别擦除次数最低的块，并将内容移动到擦除次数高的块；并在分配新数据时选择擦除次数低的块。与垃圾回收一样，磨损均衡的复杂程度远远超出了我的理解范围，更不用说解释了。</p>
+<h2 id="读取干扰"><a href="#读取干扰" class="headerlink" title="读取干扰"></a>读取干扰</h2><p>SSD 读取操作并非完全免费，需要付出一定的代价。如上所述，读取一个页面会在该块中的所有其他单元上产生穿通电压。这种电压可能低于单元可以保持的最高阈值，但它仍然会在单元上产生微弱的编程效应，从而无意中改变其阈值电压。穿通电压会导致电隧道效应，使未读取单元的电压向更高的值移动，从而干扰单元内容。随着闪存单元尺寸的减小，晶体管氧化层变得更薄，进而增加了这种隧道效应，未读取的闪存单元只需要更少的相邻页面读取操作就会受到干扰，并进入不同的逻辑状态。保持较低阈值的单元更容易受到读取干扰的影响。</p>
+<p>因此，每次读取都可能导致同一块中其他未读取单元的阈值电压向更高的值移动。在大量读取操作之后，这可能会导致这些单元出现读取错误。每个块都会保留一个读取计数，如果超过该计数，则会重写该块。SLC 单元的读取计数很高，大约为 100 万次，25 纳米 MLC 单元的读取计数较低，大约为 40,000 次，而 15 纳米 TLC 单元的读取计数则更低。</p>
+<h2 id="文件恢复"><a href="#文件恢复" class="headerlink" title="文件恢复"></a>文件恢复</h2><p>在 SSD 上，NTFS 删除文件的过程与在 HDD 上完全相同，只是多了 TRIM 命令。TRIM 命令（假设它被执行）和一些 SSD 的特性会破坏任何实际恢复已删除文件的可能性。</p>
+<p>如上所述，TRIM 命令在 SSD 控制器中有一个对应的设置，即 DRAT 和 DZAT。（我不认为任何知名品牌的 SSD 会使用非确定性 TRIM，而且我认为 Windows 不支持 DRAT，但我没有证据。）DZAT 的实现意味着，一旦 TRIM 命令成功执行（在大多数情况下，这会在文件删除后立即执行），任何读取已 TRIM 页面的尝试都将返回零。页面上的数据在被垃圾收集器处理之前仍然存在，但这些数据无法通过任何实际方法或任何通用软件从主机访问。</p>
+<p>垃圾回收独立于主机设备，并由 SSD 控制器决定何时调用。一旦该过程开始，就无法停止，除非关闭 SSD 的电源。一旦重新上电，垃圾收集器将恢复其职责，直到完成。</p>
+<p>对于最终用户来说，在现代 SSD 上恢复已删除的文件几乎是不可能的，而在 Windows 下，这几乎是不可能的。从理论上对芯片进行检查很可能会显示出经过压缩和加密的数据，这些数据分布在多个块上，并且不可能将多个页面中的一个数据页与另一个数据页关联起来。有一种非常小的可能性可以恢复最近删除的文件，方法是立即关闭 SSD 的电源，并将其送到专业的 数据恢复公司。在有足够的时间和金钱的情况下，他们可能会恢复一些数据。</p>
+<p>在删除文件（例如运行 Piriform 的 CCleaner）之后，在 SSD 上运行 Recuva。找到的已删除文件（以及可能的文件的其余部分）的标题都将为零。这是 TRIM 和 DZAT 在几秒钟内完成的工作，从而扼杀了任何恢复已删除文件的可能性。当然，TRIM 可以被禁用，但代价是性能下降，但如果要删除以后可能需要的文件，最好还是谨慎一些。</p>
+<h2 id="安全删除文件"><a href="#安全删除文件" class="headerlink" title="安全删除文件"></a>安全删除文件</h2><p>安全删除文件的概念，在删除之前覆盖文件的数据，是无关紧要的，并且如果选择除零以外的任何其他模式，只会对 SSD 造成额外且毫无意义的磨损。即使使用零覆盖也会导致写入事务日志和其他文件，因此永远不应该在 SSD 上使用安全删除文件。擦除可用空间对于无意义的写入来说要糟糕得多，而且比安全删除文件更加徒劳无功。删除的文件根本就不存在了。</p>
+<h2 id="OCZ-论坛传说"><a href="#OCZ-论坛传说" class="headerlink" title="OCZ 论坛传说"></a>OCZ 论坛传说</h2><p>几年前（作为对这些大段文字的一点轻松调剂），OCZ 论坛上充斥着恢复 SSD 性能的最新方法：运行 Piriform 的 CCleaner 擦除可用空间功能，并使用零进行一次覆盖。虽然性能可能已经恢复，但逻辑和常识却荡然无存。当时的理论是，用零覆盖页面等同于擦除块（这在 TRIM 出现之前）。这是无稽之谈，从一开始就应该很明显。空页面的默认状态是全 1，而不是零，而且软件怎么可能擦除 NAND 闪存？真正的原因是，当 CCleaner 用零填充页面时，SSD 控制器只是取消了页面的映射，并向主机显示默认的零页面。然后，无效页面成为垃圾收集的候选对象，这为写入提供了更大的块池，从而获得了更好的性能。这是一种在 RETRIM 发明之前的类似技术。</p>
+<h2 id="SSD-碎片整理"><a href="#SSD-碎片整理" class="headerlink" title="SSD 碎片整理"></a>SSD 碎片整理</h2><p>关于固态硬盘的一条准则是永远不要对其进行碎片整理。虽然将簇重新排列到相邻页面几乎没有什么好处（有一点好处）——固态硬盘在随机读取时没有明显的开销——但固态硬盘碎片整理并非完全禁止。事实上，从 Windows 8 开始，如果满足某些条件，存储优化器将对固态硬盘进行碎片整理。如果启用了系统还原，碎片级别高于 10%，并且自上次碎片整理以来至少过去了一个月，Windows 存储优化器计划维护将对固态硬盘进行碎片整理。这就是微软所说的传统碎片整理，它不是优化（RETRIM）。启用系统还原时，需要进行碎片整理以减少卷快照文件上的区段。</p>
+<p>每月进行一次碎片整理没有什么可怕的。大多数用户不会达到 10% 的碎片标准，因此将运行简单的 RETRIM，而 Windows 10 用户无论如何都不会进行碎片整理（默认情况下，Windows 10 中禁用了系统还原）。固态硬盘寿命的减少不会被注意到。此外，尽管固态硬盘不受随机读取的影响，但文件确实会变得碎片化，这意味着 I/O 会显着增加。偶尔清理一下是有益的。</p>
+<p><strong>固态硬盘寿命：</strong> 许多用户担心固态硬盘的使用寿命。是的，连续的写入/擦除循环，以及额外和不可见的写入放大，确实会影响 NAND 闪存的寿命。使用固态硬盘确实会将其磨损。我的西部数据 Green 120 GB 固态硬盘，一款来自信誉良好的制造商但成本最低的三层单元 (TLC) 固态硬盘，估计寿命为 100 多万小时，写入限制为 40 TB。100 万小时是 114 年，所以我们可以忘记这一点。至于写入，以每天 1 GB 的速度（远远超过我目前的数据使用率），将需要相同的 114 年才能达到 40 TB。即使有巨大的写入开销，这款固态硬盘在可预见的未来也不会磨损。如果所有 128 GiB 的可用闪存都得到平等使用，则 40 TB 相当于每个单元 312 次写入，这是一个非常保守的数字。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>唯一要补充的是，NAND 闪存、固态硬盘，尤其是固态硬盘控制器，远比我在这里写的内容、我所知道的、我可能理解的以及我可能解释的更加复杂、精密和难以理解。我还应该加上“秘密”一词，因为它们的软件是专有的。虽然机械硬盘是以极低的成本实现的复杂机电工程的奇迹，但固态硬盘是以略高的成本实现的同样出色和复杂的电子和软件产品。我们应该对两者都心存感激。</p>
+<p>你可以点击<a href="http://kcall.co.uk/" target="_blank" rel="noopener"><em>此处</em></a>，返回我的主页</p>
+<p>如果你有任何问题意见或想指出的问题，请告诉我：请发送电子邮件至 <a href="mailto:kes@kcall.co.uk">kes@kcall.co.uk</a>。</p>
+<p>© Webmaster. All rights reserved.</p>
+</body></html>
+        </div>
+
+        <hr>
+
+        
+          <aside class="content">
+          
+  <blockquote>
+    <p>
+      原文链接：<a target="_blank" href="https://kcall.co.uk/ssd/index.html">
+        https://kcall.co.uk/ssd/index.html
+      </a>
+    </p>
+  </blockquote>
+  <div class="content">
+  
+
+
+  <h3>作者</h3>
+  <style>
+  ol.flow-box {
+    margin-left: 0;
+  }
+  ol.flow-box > li {
+    margin: 0.25rem;
+    position: relative;
+  }
+  ol.flow-box > li > a {
+    display: block;
+    position: relative;
+  }
+  ol.flow-box > li > a.count::before {
+    content: attr(data-count);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: red;
+    color: white;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+  }
+  ol.flow-box img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+  }
+  ol.flow-box > li > .card {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 2;
+    max-width: inherit;
+    white-space: nowrap;
+    text-align: left;
+    display: none;
+  }
+  ol.flow-box > li .card-content {
+    margin: 0 0 0 1rem;
+  }
+  ol.flow-box > li > a {
+    width: 6rem;
+  }
+  ol.flow-box > li .image {
+    width: 100%;
+    height: 6rem;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<ol class="flow-box">
+  
+    <li>
+      <a title="luojiyin1987" href="https://github.com/luojiyin1987"
+        class="has-text-centered "
+        data-count="">
+
+        <div class="image has-mb-6" style="background-image: url(https://avatars.githubusercontent.com/u/6524977?s=96)"></div>
+
+        <div>luo jiyin</div>
+      </a>
+
+      
+    </li>
+  
+</ol>
+
+<script>
+  $( document.currentScript ).prev().on('mouseenter',  'li',  function () {
+
+    $('.card', this).show('fast');
+
+  }).on('mouseleave',  'li',  function () {
+
+    $('.card', this).hide('fast');
+  });
+</script>
+
+
+
+  </div>
+
+          </aside>
+        
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/FCC-CDC-Alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/activity/workshop/hexo-web-app/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">内容型网站应用一小时实战</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/activity/workshop/coding-dojo-1/">
+                <span class="level-item">CodingDojo 编程道场 #1</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://fcc-cd.dev/article/translation/everything-i-know-about-ssd/';
+        this.page.identifier = 'article/translation/everything-i-know-about-ssd/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'fcc-cdc' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+<style>
+  .image.is-128x128 {
+    height: auto;
+  }
+</style>
+
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/FCC-CDC-v1-0.png" alt="freeCodeCamp 成都社区">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        freeCodeCamp 成都社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        公益编程技术社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ChengDu, SiChuan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        107
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        113
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/FreeCodeCamp-Chengdu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="GitHub" href="https://github.com/FreeCodeCamp-Chengdu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微博" href="https://weibo.com/u/6165665516">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微信服务号" href="/contact/#%E5%BE%AE%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%B7">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="QQ 群" href="/contact/#QQ-%E7%BE%A4">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/fCC-Coffee-and-Code.png" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年11月16日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-11-08T03:23:00.000Z">2025-11-08</time></div>
+                    <a href="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年11月16日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Workshop/">Workshop</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-10-19/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://reportyak.com/wp-content/uploads/2022/08/NGO_concept_shutterstock_1247512159-1-1-scaled.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年10月19日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-09-12T10:27:00.000Z">2025-09-12</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-10-19/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年10月19日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-09-07/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,quality=80,format=auto,onerror=redirect/uploads/asset/file/c2ba129c-c80a-4e9b-9eab-baa84665c784/VPL_Claude_for_Non-Coders_-_01.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年9月7日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-24T02:34:00.000Z">2025-08-24</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-09-07/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年9月7日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-08-24/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img.alicdn.com/bao/uploaded/i1/2592222097/O1CN01yD7NvL1RMT4meiGQR_!!0-item_pic.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年8月24日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-19T16:00:00.000Z">2025-08-20</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-08-24/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年8月24日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/20250803-coffee-code/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mockup-api.teespring.com/v3/image/Q7sCRZTzB5LINlodX8FFEEnCl0k/800/800.jpg" alt="fCC Coffee &amp; Code 周末编程自习室 2025年8月3日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-02T16:00:00.000Z">2025-08-03</time></div>
+                    <a href="/activity/salon/20250803-coffee-code/" class="has-link-black-ter is-size-6">fCC Coffee &amp; Code 周末编程自习室 2025年8月3日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#介绍">
+        <span class="has-mr-6">1</span>
+        <span>介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#软件和硬件">
+        <span class="has-mr-6">2</span>
+        <span>软件和硬件</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-物理内部结构">
+        <span class="has-mr-6">3</span>
+        <span>SSD 物理内部结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#NAND-闪存">
+        <span class="has-mr-6">4</span>
+        <span>NAND 闪存</span>
+        </a></li><li>
+        <a class="is-flex" href="#2D、3D-和-Layers（层）">
+        <span class="has-mr-6">5</span>
+        <span>2D、3D, 和 Layers（层）</span>
+        </a></li><li>
+        <a class="is-flex" href="#我能看到其中一个单元吗？">
+        <span class="has-mr-6">6</span>
+        <span>我能看到其中一个单元吗？</span>
+        </a></li><li>
+        <a class="is-flex" href="#SLC、MLC、TLC、QLC-及其未来发展">
+        <span class="has-mr-6">7</span>
+        <span>SLC、MLC、TLC、QLC 及其未来发展</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#为什么空代表一？">
+        <span class="has-mr-6">7.1</span>
+        <span>为什么空代表一？</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#它们都是-SLC">
+        <span class="has-mr-6">8</span>
+        <span>它们都是 SLC</span>
+        </a></li><li>
+        <a class="is-flex" href="#迷思与误解">
+        <span class="has-mr-6">9</span>
+        <span>迷思与误解</span>
+        </a></li><li>
+        <a class="is-flex" href="#存储设备控制器">
+        <span class="has-mr-6">10</span>
+        <span>存储设备控制器</span>
+        </a></li><li>
+        <a class="is-flex" href="#闪存转换层（FTL）">
+        <span class="has-mr-6">11</span>
+        <span>闪存转换层（FTL）</span>
+        </a></li><li>
+        <a class="is-flex" href="#浮栅晶体管">
+        <span class="has-mr-6">12</span>
+        <span>浮栅晶体管</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-读取">
+        <span class="has-mr-6">13</span>
+        <span>SSD 读取</span>
+        </a></li><li>
+        <a class="is-flex" href="#读取存储">
+        <span class="has-mr-6">14</span>
+        <span>读取存储</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-写入">
+        <span class="has-mr-6">15</span>
+        <span>SSD 写入</span>
+        </a></li><li>
+        <a class="is-flex" href="#垃圾回收">
+        <span class="has-mr-6">16</span>
+        <span>垃圾回收</span>
+        </a></li><li>
+        <a class="is-flex" href="#垃圾回收难题">
+        <span class="has-mr-6">17</span>
+        <span>垃圾回收难题</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件系统-——-非眼见为实">
+        <span class="has-mr-6">18</span>
+        <span>文件系统 —— 非眼见为实</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件删除">
+        <span class="has-mr-6">19</span>
+        <span>文件删除</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-检测">
+        <span class="has-mr-6">20</span>
+        <span>SSD 检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#TRIM">
+        <span class="has-mr-6">21</span>
+        <span>TRIM</span>
+        </a></li><li>
+        <a class="is-flex" href="#RETRIM">
+        <span class="has-mr-6">22</span>
+        <span>RETRIM</span>
+        </a></li><li>
+        <a class="is-flex" href="#预留空间">
+        <span class="has-mr-6">23</span>
+        <span>预留空间</span>
+        </a></li><li>
+        <a class="is-flex" href="#磨损均衡">
+        <span class="has-mr-6">24</span>
+        <span>磨损均衡</span>
+        </a></li><li>
+        <a class="is-flex" href="#读取干扰">
+        <span class="has-mr-6">25</span>
+        <span>读取干扰</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件恢复">
+        <span class="has-mr-6">26</span>
+        <span>文件恢复</span>
+        </a></li><li>
+        <a class="is-flex" href="#安全删除文件">
+        <span class="has-mr-6">27</span>
+        <span>安全删除文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#OCZ-论坛传说">
+        <span class="has-mr-6">28</span>
+        <span>OCZ 论坛传说</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-碎片整理">
+        <span class="has-mr-6">29</span>
+        <span>SSD 碎片整理</span>
+        </a></li><li>
+        <a class="is-flex" href="#结语">
+        <span class="has-mr-6">30</span>
+        <span>结语</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E5%AE%9E%E6%88%98/">
+                        <span class="tag">AI实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E6%95%99%E8%82%B2/">
+                        <span class="tag">AI时代编程教育</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agent/">
+                        <span class="tag">Agent</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Caddy/">
+                        <span class="tag">Caddy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Coffee-Code/">
+                        <span class="tag">Coffee&amp;Code</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DeepSeek/">
+                        <span class="tag">DeepSeek</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSL/">
+                        <span class="tag">SSL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vibe-Coding/">
+                        <span class="tag">Vibe Coding</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/copilot/">
+                        <span class="tag">copilot</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/https/">
+                        <span class="tag">https</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%9A%E5%8A%A1/">
+                        <span class="tag">会务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%AC%E7%9B%8A/">
+                        <span class="tag">公益</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91/">
+                        <span class="tag">内网</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E4%B9%A6%E9%A6%86/">
+                        <span class="tag">图书馆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%98%E7%BD%91/">
+                        <span class="tag">官网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90%E5%B8%82%E9%9B%86/">
+                        <span class="tag">开源市集</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%88%90%E9%83%BD/">
+                        <span class="tag">成都</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%90%86%E8%B4%A2/">
+                        <span class="tag">理财</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BB%93%E5%AF%B9%E7%BC%96%E7%A8%8B/">
+                        <span class="tag">结对编程</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/">
+                        <span class="tag">脚手架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%BB%91%E5%AE%A2%E6%9D%BE/">
+                        <span class="tag">黑客松</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#介绍">
+        <span class="has-mr-6">1</span>
+        <span>介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#软件和硬件">
+        <span class="has-mr-6">2</span>
+        <span>软件和硬件</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-物理内部结构">
+        <span class="has-mr-6">3</span>
+        <span>SSD 物理内部结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#NAND-闪存">
+        <span class="has-mr-6">4</span>
+        <span>NAND 闪存</span>
+        </a></li><li>
+        <a class="is-flex" href="#2D、3D-和-Layers（层）">
+        <span class="has-mr-6">5</span>
+        <span>2D、3D, 和 Layers（层）</span>
+        </a></li><li>
+        <a class="is-flex" href="#我能看到其中一个单元吗？">
+        <span class="has-mr-6">6</span>
+        <span>我能看到其中一个单元吗？</span>
+        </a></li><li>
+        <a class="is-flex" href="#SLC、MLC、TLC、QLC-及其未来发展">
+        <span class="has-mr-6">7</span>
+        <span>SLC、MLC、TLC、QLC 及其未来发展</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#为什么空代表一？">
+        <span class="has-mr-6">7.1</span>
+        <span>为什么空代表一？</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#它们都是-SLC">
+        <span class="has-mr-6">8</span>
+        <span>它们都是 SLC</span>
+        </a></li><li>
+        <a class="is-flex" href="#迷思与误解">
+        <span class="has-mr-6">9</span>
+        <span>迷思与误解</span>
+        </a></li><li>
+        <a class="is-flex" href="#存储设备控制器">
+        <span class="has-mr-6">10</span>
+        <span>存储设备控制器</span>
+        </a></li><li>
+        <a class="is-flex" href="#闪存转换层（FTL）">
+        <span class="has-mr-6">11</span>
+        <span>闪存转换层（FTL）</span>
+        </a></li><li>
+        <a class="is-flex" href="#浮栅晶体管">
+        <span class="has-mr-6">12</span>
+        <span>浮栅晶体管</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-读取">
+        <span class="has-mr-6">13</span>
+        <span>SSD 读取</span>
+        </a></li><li>
+        <a class="is-flex" href="#读取存储">
+        <span class="has-mr-6">14</span>
+        <span>读取存储</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-写入">
+        <span class="has-mr-6">15</span>
+        <span>SSD 写入</span>
+        </a></li><li>
+        <a class="is-flex" href="#垃圾回收">
+        <span class="has-mr-6">16</span>
+        <span>垃圾回收</span>
+        </a></li><li>
+        <a class="is-flex" href="#垃圾回收难题">
+        <span class="has-mr-6">17</span>
+        <span>垃圾回收难题</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件系统-——-非眼见为实">
+        <span class="has-mr-6">18</span>
+        <span>文件系统 —— 非眼见为实</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件删除">
+        <span class="has-mr-6">19</span>
+        <span>文件删除</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-检测">
+        <span class="has-mr-6">20</span>
+        <span>SSD 检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#TRIM">
+        <span class="has-mr-6">21</span>
+        <span>TRIM</span>
+        </a></li><li>
+        <a class="is-flex" href="#RETRIM">
+        <span class="has-mr-6">22</span>
+        <span>RETRIM</span>
+        </a></li><li>
+        <a class="is-flex" href="#预留空间">
+        <span class="has-mr-6">23</span>
+        <span>预留空间</span>
+        </a></li><li>
+        <a class="is-flex" href="#磨损均衡">
+        <span class="has-mr-6">24</span>
+        <span>磨损均衡</span>
+        </a></li><li>
+        <a class="is-flex" href="#读取干扰">
+        <span class="has-mr-6">25</span>
+        <span>读取干扰</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件恢复">
+        <span class="has-mr-6">26</span>
+        <span>文件恢复</span>
+        </a></li><li>
+        <a class="is-flex" href="#安全删除文件">
+        <span class="has-mr-6">27</span>
+        <span>安全删除文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#OCZ-论坛传说">
+        <span class="has-mr-6">28</span>
+        <span>OCZ 论坛传说</span>
+        </a></li><li>
+        <a class="is-flex" href="#SSD-碎片整理">
+        <span class="has-mr-6">29</span>
+        <span>SSD 碎片整理</span>
+        </a></li><li>
+        <a class="is-flex" href="#结语">
+        <span class="has-mr-6">30</span>
+        <span>结语</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E5%AE%9E%E6%88%98/">
+                        <span class="tag">AI实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E6%95%99%E8%82%B2/">
+                        <span class="tag">AI时代编程教育</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agent/">
+                        <span class="tag">Agent</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Caddy/">
+                        <span class="tag">Caddy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Coffee-Code/">
+                        <span class="tag">Coffee&amp;Code</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DeepSeek/">
+                        <span class="tag">DeepSeek</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSL/">
+                        <span class="tag">SSL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vibe-Coding/">
+                        <span class="tag">Vibe Coding</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/copilot/">
+                        <span class="tag">copilot</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/https/">
+                        <span class="tag">https</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%9A%E5%8A%A1/">
+                        <span class="tag">会务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%AC%E7%9B%8A/">
+                        <span class="tag">公益</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91/">
+                        <span class="tag">内网</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E4%B9%A6%E9%A6%86/">
+                        <span class="tag">图书馆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%98%E7%BD%91/">
+                        <span class="tag">官网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90%E5%B8%82%E9%9B%86/">
+                        <span class="tag">开源市集</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%88%90%E9%83%BD/">
+                        <span class="tag">成都</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%90%86%E8%B4%A2/">
+                        <span class="tag">理财</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BB%93%E5%AF%B9%E7%BC%96%E7%A8%8B/">
+                        <span class="tag">结对编程</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/">
+                        <span class="tag">脚手架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%BB%91%E5%AE%A2%E6%9D%BE/">
+                        <span class="tag">黑客松</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/FCC-CDC-v1-0.png" alt="我所知道的关于固态硬盘的一切" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 freeCodeCamp ChengDu community&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Code of Conduct" href="/profile/code-of-conduct/">
+                        
+                        <i class="fas fa-balance-scale"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Fork on GitHub" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://npm.webcache.cn/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://npm.webcache.cn/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://npm.webcache.cn/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://npm.webcache.cn/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

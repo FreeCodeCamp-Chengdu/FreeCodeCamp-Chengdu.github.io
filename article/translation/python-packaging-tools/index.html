@@ -1,0 +1,4668 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>对 Python 对环境管理和包管理工具的一次公正评估 - FCC 成都社区</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    
+    <meta name="description" content="Anna-Lena Popkes 动机当我开始使用 Python 并创建我的第一个包时，我感到困惑。创建和管理一个包比我预期的要困难得多。此外，存在多种工具，我不确定该使用哪一个。我相信你们中的大多数人过去也遇到过同样的问题。Python 有大量的工具来管理虚拟环境和创建包，要理解哪一个最适合你的需求可能很难（或几乎不可能）。关于这个话题存在多个演讲和博客文章，但没有一个提供完整的概览或以结构化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对 Python 对环境管理和包管理工具的一次公正评估">
+<meta property="og:url" content="https://fcc-cd.dev/article/translation/python-packaging-tools/index.html">
+<meta property="og:site_name" content="FCC 成都社区">
+<meta property="og:description" content="Anna-Lena Popkes 动机当我开始使用 Python 并创建我的第一个包时，我感到困惑。创建和管理一个包比我预期的要困难得多。此外，存在多种工具，我不确定该使用哪一个。我相信你们中的大多数人过去也遇到过同样的问题。Python 有大量的工具来管理虚拟环境和创建包，要理解哪一个最适合你的需求可能很难（或几乎不可能）。关于这个话题存在多个演讲和博客文章，但没有一个提供完整的概览或以结构化">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1.itc.cn/q_70/images03/20210809/1e2ff3ae07dd41d7bc190c7699f9583a.png">
+<meta property="article:published_time" content="2023-08-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-22T16:23:00.000Z">
+<meta property="article:author" content="freeCodeCamp ChengDu community">
+<meta property="article:tag" content="FCC freeCodeCamp 成都 社区 官方 网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1.itc.cn/q_70/images03/20210809/1e2ff3ae07dd41d7bc190c7699f9583a.png">
+
+
+
+
+
+<link rel="alternative" href="atom.xml" title="对 Python 对环境管理和包管理工具的一次公正评估" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/FCC-CDC-v1-1.png">
+
+
+<link rel="stylesheet" href="https://npm.webcache.cn/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://npm.webcache.cn/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://npm.webcache.cn/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://npm.webcache.cn/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://npm.webcache.cn/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137453538-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-137453538-1');
+</script>
+
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://npm.webcache.cn/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/common.css">
+
+<script src="https://npm.webcache.cn/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://npm.webcache.cn/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+<script src="https://npm.webcache.cn/ua-parser-js@0.7.19/dist/ua-parser.min.js"></script>
+<script>
+  if ([
+    '2345Explorer', 'BIDUBrowser', 'Baidu', 'IE', 'IEMobile', 'Mobile Safari',
+    'QQBrowser', 'Safari', 'WeChat'
+  ].indexOf(
+    self.UAParser(navigator.userAgent).browser.name.toLowerCase()
+  ) > -1)
+    self.alert(
+      (navigator.languages.pop() === 'zh')
+        ? '您当前浏览器可能存在 国际标准支持残缺、劫持用户访问 等问题，强烈建议使用 谷歌、火狐、微软 Edge、欧朋 等主流浏览器！'
+        : 'Your current browser may have International standards incompatibility, Hijacking user access, etc. It is strongly recommended to use Mainstream browsers such as Chrome, Firefox, Microsoft Edge, and Opera!'
+    );
+</script>
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/FCC-CDC-v1-0.png" alt="对 Python 对环境管理和包管理工具的一次公正评估" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/activity">活动</a>
+                
+                <a class="navbar-item"
+                href="http://cdfcc.lofter.com/">相册</a>
+                
+                <a class="navbar-item"
+                href="/categories">博文</a>
+                
+                <a class="navbar-item"
+                href="https://web-conf.dev/">大会</a>
+                
+                <a class="navbar-item"
+                href="/community">社群</a>
+                
+                <a class="navbar-item"
+                href="/categories/Profile/">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="登录" href="https://fcc-cd.leanapp.cn/signIn/">
+                        
+                        <i class="fas fa-sign-in-alt"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://p1.itc.cn/q_70/images03/20210809/1e2ff3ae07dd41d7bc190c7699f9583a.png" alt="对 Python 对环境管理和包管理工具的一次公正评估">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2023-08-23T16:00:00.000Z">2023-08-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Article/">Article</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Article/Translation/">Translation</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    36 分钟 读完 (大约 5410 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                对 Python 对环境管理和包管理工具的一次公正评估
+            
+
+            
+        </h1>
+        <div class="content">
+            <html><head><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="FCC 成都社区" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-okaidia.css" type="text/css"></head><body><p><img src="https://alpopkes.com/images/author/image_al_hu6aa485cfd64a98f54b411e3a0324b396_178285_120x120_fit_q75_box.jpg" alt="作者头像"></p>
+<p>Anna-Lena Popkes</p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>当我开始使用 Python 并创建我的第一个包时，我感到困惑。创建和管理一个包比我预期的要困难得多。此外，存在多种工具，我不确定该使用哪一个。我相信你们中的大多数人过去也遇到过同样的问题。Python 有大量的工具来管理虚拟环境和创建包，要理解哪一个最适合你的需求可能很难（或几乎不可能）。关于这个话题存在多个演讲和博客文章，但没有一个提供完整的概览或以结构化的方式评估这些工具。这就是本文的目的。我想给你一个真正无偏见的评价，关于现有的打包和环境管理工具。如果你宁愿观看一个演讲，可以看看 <a href="https://www.youtube.com/watch?v=MsJjzVIVs6M" target="_blank" rel="noopener">PyCon DE 2023</a> 或 <a href="https://www.youtube.com/watch?v=3-drZY3u5vo" target="_blank" rel="noopener">EuroPython 2023</a> 的录像。</p>
+<a id="more"></a>
+
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>为了撰写本文，我确定了环境和软件包管理的五大重要类别：</p>
+<ul>
+<li>环境管理（主要涉及虚拟环境）</li>
+<li>软件包管理</li>
+<li>Python 版本管理</li>
+<li>软件包构建</li>
+<li>软件包发布</li>
+</ul>
+<p>正如你在下面的维恩图中所看到的，存在大量的工具。有些可以做一件事（即它们是单一用途的），而其他工具可以执行多个任务（因此我称它们为多用途工具）。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/venn_diagram.png" alt="工具分类示意图"></p>
+<p>让我们从开发者的角度来逐一介绍这些类别。假设您除了工作项目之外，还在进行个人项目。在工作中，您使用的是 Python 3.7，而您的个人项目应该使用最新的 Python 版本（目前是 3.11）。换句话说：您希望能够安装不同的 Python 版本并在它们之间切换。这就是我们的第一个类别，<strong>Python 版本管理</strong>的意义所在。</p>
+<p>在您的项目中，您会使用其他软件包（例如用于数据科学的 <code>pandas</code> 或 <code>sklearn</code>）。这些是您项目的依赖项，您必须安装和管理它们（例如，在新版本发布时进行升级）。这就是<strong>软件包管理</strong>的意义所在。</p>
+<p>由于不同的项目可能需要相同软件包的不同版本，因此您需要创建（和管理）虚拟环境以避免依赖项冲突。用于此目的的工具被归类在<strong>环境管理</strong>类别中。大多数工具使用虚拟环境，但有些工具使用另一种称为<strong>本地软件包</strong>的概念，我们将在后面介绍。</p>
+<p>一旦您的代码处于适当的状态，您可能希望与其他开发人员共享它。为此，您必须先构建您的软件包（<strong>软件包构建</strong>），然后才能将其发布到 PyPI 或其他索引（<strong>软件包发布</strong>）。</p>
+<p>接下来，我们将更详细地了解每个类别，包括简短的定义、动机和可用工具。我将更详细地介绍一些单一用途的工具，并在最后的部分单独介绍几种多用途工具。让我们从第一个类别开始：Python 版本管理。</p>
+<h2 id="Python-版本管理"><a href="#Python-版本管理" class="headerlink" title="Python 版本管理"></a>Python 版本管理</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>能够控制 Python 版本管理的工具，允许您安装 Python 版本并轻松地在它们之间切换。</p>
+<h3 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h3><p>我们为什么要使用不同的 Python 版本？ 有几个原因。 例如，您可能正在处理多个项目，其中每个项目都需要不同的 Python 版本。 或者您可能正在开发一个支持多个 Python 版本的项目，并且您想要测试所有这些版本。 除此之外，查看最新的 Python 版本提供了什么，或者测试 Python 的预发布版本是否存在错误也是一件好事。</p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>我们的维恩图显示了可用于 Python 版本管理的工具：<code>pyenv</code>、<code>conda</code>、<code>rye</code> 和 <code>PyFlow</code>。我们将首先看看 <code>pyenv</code>，并在单独的部分中考虑多用途工具。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/python_version_management.png" alt="版本管理工具对比图"></p>
+<h3 id="PyEnv"><a href="#PyEnv" class="headerlink" title="PyEnv"></a>PyEnv</h3><p>Python 有一个单一用途的工具可以让您安装和管理 Python 版本：<a href="https://github.com/pyenv/pyenv" target="_blank" rel="noopener">pyenv</a>！ PyEnv 易于使用。 最重要的命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Install specific Python version</span>
+pyenv <span class="token function">install</span> 3.10.4
+
+<span class="token comment" spellcheck="true"># Switch between Python versions</span>
+pyenv shell <span class="token operator">&lt;</span>version<span class="token operator">&gt;</span> <span class="token comment" spellcheck="true"># select version just for current shell session</span>
+pyenv local <span class="token operator">&lt;</span>version<span class="token operator">&gt;</span> <span class="token comment" spellcheck="true"># automatically select version whenever you are in the current directory</span>
+pyenv global <span class="token operator">&lt;</span>version<span class="token operator">&gt;</span> <span class="token comment" spellcheck="true"># select version globally for your user account</span></code></pre>
+<h2 id="Virtual-environment-management（虚拟环境管理）"><a href="#Virtual-environment-management（虚拟环境管理）" class="headerlink" title="Virtual environment management（虚拟环境管理）"></a>Virtual environment management（虚拟环境管理）</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>环境管理工具可以创建和管理（虚拟）环境。</p>
+<h3 id="动机-2"><a href="#动机-2" class="headerlink" title="动机"></a>动机</h3><p>我们为什么首先要使用环境？ 正如开头所提到的，项目有特定的要求（即它们依赖于其他包）。 通常情况下，不同的项目需要相同包的不同版本。 这会导致依赖冲突。 此外，使用 <code>pip install</code> 安装包时可能会出现问题，因为该包与您的系统范围内的 Python 安装放在一起。 其中一些问题可以通过在 <code>pip</code> 命令中使用 <code>--user</code> 标志来解决。 但是，这个选项可能不是每个人都知道，尤其是初学者。</p>
+<h3 id="工具-1"><a href="#工具-1" class="headerlink" title="工具"></a>工具</h3><p>许多工具允许用户创建和管理环境。 它们是：<code>venv、virtualenv、pipenv、conda、pdm、poetry、hatch、rye</code> 和 <code>PyFlow</code>。 其中只有两个是单一用途的工具：<code>venv</code> 和 <code>virtualenv</code>。 让我们更详细地了解它们。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/env_management.png" alt="管理环境工具对比图"></p>
+<h3 id="VEnv"><a href="#VEnv" class="headerlink" title="VEnv"></a>VEnv</h3><p><a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="noopener">VEnv</a> 是用于创建虚拟环境的内置 Python 包。 这意味着它随 Python 一起提供，用户无需安装。 最重要的命令如下：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create new environment</span>
+python3 -m venv <span class="token operator">&lt;</span>env_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Activate an environment</span>
+<span class="token keyword">.</span> <span class="token operator">&lt;</span>env_name<span class="token operator">&gt;</span>/bin/activate
+
+<span class="token comment" spellcheck="true"># Deactivate an active environment</span>
+deactivate</code></pre>
+<h3 id="VirtualEnv"><a href="#VirtualEnv" class="headerlink" title="VirtualEnv"></a>VirtualEnv</h3><p><a href="https://virtualenv.pypa.io/en/latest" target="_blank" rel="noopener">VirtualEnv</a> 试图改进 <code>venv</code>。 它提供了比 <code>venv</code> 更多的功能，并且速度更快、功能更强大。 最重要的命令与 <code>venv</code> 的命令类似，只是创建一个新环境更简洁：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create new environment</span>
+virtualenv <span class="token operator">&lt;</span>env_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Activate an environment</span>
+<span class="token keyword">.</span> <span class="token operator">&lt;</span>env_name<span class="token operator">&gt;</span>/bin/activate
+
+<span class="token comment" spellcheck="true"># Deactivate an active environment</span>
+deactivate</code></pre>
+<h2 id="回顾-1-pyproject-toml"><a href="#回顾-1-pyproject-toml" class="headerlink" title="回顾 1 - pyproject.toml"></a>回顾 1 - <code>pyproject.toml</code></h2><p>在讨论打包之前，我想确保你了解打包最重要的文件：<code>pyproject.toml</code>。</p>
+<p>Python 中的打包已经走过了漫长的道路。直到 <a href="https://peps.python.org/pep-0518" target="_blank" rel="noopener">PEP 518</a> <code>setup.py</code> 文件被用于打包，使用 <code>setuptools</code> 作为构建工具。<a href="https://peps.python.org/pep-0518" target="_blank" rel="noopener">PEP 518</a> 引入了 <code>pyproject.toml</code> 文件的使用。因此，在创建包时，你始终需要一个 <code>pyproject.toml</code> 文件。<code>pyproject.toml</code> 用于定义项目的设置、定义元数据以及许多其他内容。如果你想查看示例，请查看 <a href="https://github.com/pandas-dev/pandas/blob/main/pyproject.toml" target="_blank" rel="noopener">pandas 库的 <code>pyproject.toml</code> 文件</a>。了解了 <code>pyproject.toml</code> 后，我们可以继续看看包管理。</p>
+<h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>能够执行包管理的工具能够下载和安装库及其依赖项。</p>
+<h3 id="动机-3"><a href="#动机-3" class="headerlink" title="动机"></a>动机</h3><p>为什么我们关心包？包允许我们定义模块的层次结构，并使用点语法（<code>from package.module import my_function</code>）轻松访问模块。此外，它们使得与其他开发者共享代码变得容易。由于每个包都包含一个定义其依赖项的 <code>pyproject.toml</code> 文件，其他开发者不必单独安装所需的包，而是可以直接从其 <code>pyproject.toml</code> 文件安装包。</p>
+<h3 id="工具-2"><a href="#工具-2" class="headerlink" title="工具"></a>工具</h3><p>许多工具都可以执行包管理：<code>pip</code>、<code>pipx</code>、<code>pipenv</code>、<code>conda</code>、<code>pdm</code>、<code>poetry</code>、<code>rye</code> 和 <code>PyFlow</code>。<code>pip</code> 是 Python 社区中众所周知的专用包管理工具。<br><img src="https://alpopkes.com/posts/python/figures/package_management.png" alt="包管理工具对比"></p>
+<h4 id="PIP"><a href="#PIP" class="headerlink" title="PIP"></a>PIP</h4><p>Python 的标准包管理器是 <a href="https://pip.pypa.io/en/stable" target="_blank" rel="noopener"><code>pip</code></a>。它随 Python 一起提供，允许你从 PyPI 和其他索引安装软件包。主要命令（可能是 Python 开发人员学习的第一个命令之一）是 <code>pip install &lt;package_name&gt;</code>。当然，<code>pip</code> 还提供了许多其他选项。查看<a href="https://pip.pypa.io/en/stable" target="_blank" rel="noopener">文档</a>以获取有关可用标志等的更多信息。</p>
+<h2 id="回顾-2-Lock-file"><a href="#回顾-2-Lock-file" class="headerlink" title="回顾 2 - Lock file"></a>回顾 2 - Lock file</h2><p>在我们继续讨论多用途工具之前，还有一个对打包很重要的文件：锁文件。<code>pyproject.toml</code> 包含抽象依赖项，而锁文件包含具体依赖项。它记录了为项目安装的所有依赖项的确切版本（例如 <code>pandas==2.0.3</code>）。这使得项目能够在多个平台上重现。如果你以前从未见过锁文件，请查看<a href="https://github.com/python-poetry/poetry/blob/master/poetry.lock" target="_blank" rel="noopener">这个来自 <code>poetry</code> 的文件</a>：</p>
+<p><img src="https://alpopkes.com/posts/python/figures/poetry_lock.png" alt="poetry_lock 文件"></p>
+<h2 id="多用途的工具"><a href="#多用途的工具" class="headerlink" title="多用途的工具"></a>多用途的工具</h2><p>了解了锁文件之后，我们可以开始研究执行多用途的工具。我们将从 <code>pipenv</code> 和 <code>conda</code> 开始，然后再过渡到 <code>poetry</code> 和 <code>pdm</code> 等打包工具。</p>
+<h3 id="PipEnv"><a href="#PipEnv" class="headerlink" title="PipEnv"></a>PipEnv</h3><p>顾名思义，<a href="https://pipenv.pypa.io/en/latest" target="_blank" rel="noopener"><code>pipenv</code></a> 结合了 <code>pip</code> 和 <code>virtualenv</code>。正如我们在维恩图中看到的，它允许你执行虚拟环境管理和包管理：</p>
+<p><img src="https://alpopkes.com/posts/python/figures/pipenv.png" alt="pipenv 文件"></p>
+<p><code>pipenv</code> 引入了两个额外的文件：</p>
+<ul>
+<li><code>Pipfile</code></li>
+<li><code>Pipfile.lock</code></li>
+</ul>
+<p><code>Pipfile</code> 是一个 TOML 文件（类似于 <code>pyproject.toml</code>），用于定义项目依赖项。当开发者调用 <code>pipenv</code> 命令（如 <code>pipenv install</code>）时，它由开发者管理。<code>Pipfile.lock</code> 允许确定性构建。它消除了对 <code>requirements.txt</code> 文件的需求，并通过锁定操作自动管理。</p>
+<p>最重要的 <code>pipenv</code> 命令是：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Install package</span>
+pipenv <span class="token function">install</span> <span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Run Python script within virtual env</span>
+pipenv run <span class="token operator">&lt;</span>script_name.py<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Activate virtual env</span>
+pipenv shell</code></pre>
+<h3 id="Conda"><a href="#Conda" class="headerlink" title="Conda"></a>Conda</h3><p><a href="https://conda.io/projects/conda/en/latest/index.html" target="_blank" rel="noopener"><code>Conda</code></a> 是一个通用的包管理系统。这意味着它不局限于 Python 包。Conda 是一个功能强大的工具，拥有许多功能。有许多教程和博客文章（例如<a href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-python" target="_blank" rel="noopener">官方教程</a>），因此我在这里不再赘述。但是，我想提一点：虽然可以使用 <code>conda</code> 构建和发布包，但我没有将该工具包含在相应的类别中。这是因为使用 <code>conda</code> 打包的工作方式略有不同，生成的包将是 <code>conda</code> 包。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/conda.png" alt="conda"></p>
+<h3 id="功能评估"><a href="#功能评估" class="headerlink" title="功能评估"></a>功能评估</h3><p>最后但同样重要的是，我想介绍一些用于打包的多功能工具。我承诺进行公正的评估。为此，我创建了一个我认为在比较不同工具时很重要的功能列表。这些功能包括：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>?</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>?</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>?</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>?</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>?</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>?</td>
+</tr>
+</tbody></table>
+<p>关于这两个 PEP：Python 在打包方面有很多开放和关闭的 PEP。有关完整概述，请查看<a href="https://peps.python.org/topic/packaging/" target="_blank" rel="noopener">此页面</a>。我仅出于特定原因包含了 PEP 660 和 PEP 621：</p>
+<ul>
+<li><a href="https://peps.python.org/pep-0660/" target="_blank" rel="noopener">PEP 660</a> 是关于基于 <code>pyproject.toml</code> 构建的可编辑安装。当你使用 <code>pip</code> 安装软件包时，你可以选择使用 <code>pip install -e package_name</code> 以可编辑模式安装它。当你正在开发一个软件包并希望你的更改直接反映在你的环境中时，这是一个非常重要的功能。</li>
+<li><a href="https://peps.python.org/pep-0621/" target="_blank" rel="noopener">PEP 621</a> 指定了如何在 <code>pyproject.toml</code> 文件中写入项目的核心元数据。我添加它是为了说明，目前有一个软件包（剧透：它是 <code>poetry</code>）不支持此 PEP，而是使用自己的方式声明元数据。</li>
+</ul>
+<h3 id="Flit"><a href="#Flit" class="headerlink" title="Flit"></a>Flit</h3><p><a href="https://flit.pypa.io/en/stable/" target="_blank" rel="noopener">Flit</a> 试图创建一个将 Python 包和模块放到 PyPI 上的简单方法。它有一个非常具体的用例：它旨在用于打包纯 Python 包（即没有构建步骤的包）。它不关心任何其他任务：</p>
+<ul>
+<li>Python 版本管理：❌</li>
+<li>包管理：❌</li>
+<li>环境管理：❌</li>
+<li>构建包：✅</li>
+<li>发布包：✅</li>
+</ul>
+<p>这也反映在我们的维恩图中：</p>
+<p><img src="https://alpopkes.com/posts/python/figures/flit.png" alt="flit"></p>
+<h4 id="功能评估-1"><a href="#功能评估-1" class="headerlink" title="功能评估"></a>功能评估</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h4 id="主要命令"><a href="#主要命令" class="headerlink" title="主要命令"></a>主要命令</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create new pyproject.toml</span>
+flit init
+
+<span class="token comment" spellcheck="true"># Build and publish</span>
+flit publish</code></pre>
+<h3 id="Poetry"><a href="#Poetry" class="headerlink" title="Poetry"></a>Poetry</h3><p><a href="https://python-poetry.org/" target="_blank" rel="noopener">Poetry</a> 是打包界中一个众所周知的工具。正如维恩图所示，除了 Python 版本管理之外，它可以做任何事情：</p>
+<ul>
+<li>Python 版本管理：❌</li>
+<li>包管理：✅</li>
+<li>环境管理：✅</li>
+<li>构建包：✅</li>
+<li>发布包：✅</li>
+</ul>
+<p><img src="https://alpopkes.com/posts/python/figures/poetry.png" alt="poetry"></p>
+<p>查看下面的功能评估，您会发现 Poetry <strong>不</strong>支持 PEP 621。在 GitHub 上有一个关于此的开放问题大约 1.5 年了，但它还没有被集成到主代码库中（还）。</p>
+<h4 id="功能评估-2"><a href="#功能评估-2" class="headerlink" title="功能评估"></a>功能评估</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<h4 id="主要命令-1"><a href="#主要命令-1" class="headerlink" title="主要命令"></a>主要命令</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create directory structure and pyproject.toml</span>
+poetry new <span class="token operator">&lt;</span>project_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Create pyproject.toml interactively</span>
+poetry init
+
+<span class="token comment" spellcheck="true"># Install package from pyproject.toml</span>
+poetry <span class="token function">install</span></code></pre>
+<h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Add dependency</span>
+poetry add <span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Display all dependencies</span>
+poetry show --tree</code></pre>
+<h4 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a>运行代码</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Activate virtual env</span>
+poetry shell
+
+<span class="token comment" spellcheck="true"># Run script within virtual env</span>
+poetry run python <span class="token operator">&lt;</span>script_name.py<span class="token operator">&gt;</span></code></pre>
+<h4 id="Lock-file"><a href="#Lock-file" class="headerlink" title="Lock file"></a>Lock file</h4><p>首次安装软件包时，Poetry 会解析 <code>pyproject.toml</code> 文件中列出的所有依赖项，并下载软件包的最新版本。Poetry 完成安装后，它会将所有软件包及其下载的确切版本写入 <code>poetry.lock</code> 文件，将项目锁定到这些特定版本。建议将锁定文件提交到项目仓库，以便所有参与项目的人员都锁定到相同版本的依赖项。要将依赖项更新到最新版本，请使用 <code>poetry update</code> 命令。</p>
+<h4 id="Build-publish-flow（构建-发布流程）"><a href="#Build-publish-flow（构建-发布流程）" class="headerlink" title="Build/publish flow（构建/发布流程）"></a>Build/publish flow（构建/发布流程）</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Package code (creates `.tar.gz` and `.whl` files)</span>
+poetry build
+
+<span class="token comment" spellcheck="true"># Publish to PyPI</span>
+poetry publish</code></pre>
+<h3 id="PDM"><a href="#PDM" class="headerlink" title="PDM"></a>PDM</h3><p><a href="https://pdm.fming.dev/latest/" target="_blank" rel="noopener">PDM</a> 是一个相对较新的包和依赖管理器（始于 2019 年），它很大程度上受到 Poetry 和 PyFlow 的启发。您会注意到，我在这篇文章中没有谈论 PyFlow。这是因为 PyFlow 不再积极开发——在快速发展的打包领域中，这是一个必须的条件。作为一个更新的工具，PDM 需要 Python 3.7 或更高版本。与其他工具的另一个区别是 PDM 允许用户选择构建后端。</p>
+<p>PDM 是唯一一个（除了 PyFlow）在本地包上实现 <a href="https://peps.python.org/pep-0582" target="_blank" rel="noopener">PEP 582</a> 的工具，这是一种实现环境管理的替代方法。请注意，此 PEP 最近被拒绝。</p>
+<p>如维恩图所示，PDM 位于 Poetry 旁边。这意味着它可以做除 Python 版本管理之外的所有事情：</p>
+<ul>
+<li>Python 版本管理：❌</li>
+<li>包管理：✅</li>
+<li>环境管理：✅</li>
+<li>构建包：✅</li>
+<li>发布包：✅</li>
+</ul>
+<p>PDM 的主要命令与 Poetry 类似。但是，存在的命令较少。例如，目前没有 <code>pdm shell</code> 或 <code>pdm new</code>。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/pdm.png" alt=""></p>
+<h4 id="功能评估-3"><a href="#功能评估-3" class="headerlink" title="功能评估"></a>功能评估</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h4 id="创建新项目"><a href="#创建新项目" class="headerlink" title="创建新项目"></a>创建新项目</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create pyproject.toml interactively</span>
+pdm init
+
+<span class="token comment" spellcheck="true"># Install package from pyproject.toml</span>
+pdm <span class="token function">install</span></code></pre>
+<h4 id="依赖管理-1"><a href="#依赖管理-1" class="headerlink" title="依赖管理"></a>依赖管理</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Add dependency</span>
+pdm add <span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Display all dependencies</span>
+pdm list --graph</code></pre>
+<h4 id="运行代码-1"><a href="#运行代码-1" class="headerlink" title="运行代码"></a>运行代码</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># No pdm shell command</span>
+
+<span class="token comment" spellcheck="true"># Run script within env</span>
+pdm run python <span class="token operator">&lt;</span>script_name.py<span class="token operator">&gt;</span></code></pre>
+<h4 id="Lock-file-1"><a href="#Lock-file-1" class="headerlink" title="Lock file"></a>Lock file</h4><p>PDM 的锁定功能类似于 Poetry。首次安装软件包时，PDM 会解析 <code>pyproject.toml</code> 文件中列出的所有依赖项，并下载软件包的最新版本。PDM 完成安装后，会将所有软件包及其下载的确切版本写入 <code>pdm.lock</code> 文件，将项目锁定到这些特定版本。建议将锁定文件提交到项目仓库，以便所有参与项目的人员都锁定到相同版本的依赖项。要将依赖项更新到最新版本，请使用 <code>pdm update</code> 命令。</p>
+<h4 id="Build-publish-flow（构建-发布流程）-1"><a href="#Build-publish-flow（构建-发布流程）-1" class="headerlink" title="Build/publish flow（构建/发布流程）"></a>Build/publish flow（构建/发布流程）</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Package code (creates `.tar.gz` and `.whl` files)</span>
+pdm build
+
+<span class="token comment" spellcheck="true"># Publish to PyPI</span>
+pdm publish</code></pre>
+<h3 id="Hatch"><a href="#Hatch" class="headerlink" title="Hatch"></a>Hatch</h3><p><a href="https://hatch.pypa.io/latest" target="_blank" rel="noopener">Hatch</a> 可以执行以下任务：</p>
+<ul>
+<li>Python 版本管理：❌</li>
+<li>软件包管理：❌</li>
+<li>环境管理：✅</li>
+<li>构建软件包：✅</li>
+<li>发布软件包：✅</li>
+</ul>
+<p>需要注意的是，Hatch 的作者承诺很快就会添加锁定功能，这也应该能够实现软件包管理。 在阅读本文时，请务必查看最新版本的 Hatch，以了解是否已实现此功能。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/hatch.png" alt="hatch"></p>
+<h4 id="功能评估-4"><a href="#功能评估-4" class="headerlink" title="功能评估"></a>功能评估</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h4 id="创建一个新项目"><a href="#创建一个新项目" class="headerlink" title="创建一个新项目"></a>创建一个新项目</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create directory structure and pyproject.toml</span>
+hatch new <span class="token operator">&lt;</span>project_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Interactive mode</span>
+hatch new -i <span class="token operator">&lt;</span>project_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Initialize existing project / create pyproject.toml</span>
+hatch new --init</code></pre>
+<h4 id="依赖管理-2"><a href="#依赖管理-2" class="headerlink" title="依赖管理"></a>依赖管理</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Packages are added manually to pyproject.toml</span>
+hatch add <span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span> <span class="token comment" spellcheck="true"># This command doesn't exist!</span>
+
+<span class="token comment" spellcheck="true"># Display dependencies</span>
+hatch dep show table</code></pre>
+<h4 id="运行代码-2"><a href="#运行代码-2" class="headerlink" title="运行代码"></a>运行代码</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Activate virtual env</span>
+hatch shell
+
+<span class="token comment" spellcheck="true"># Run script within virtual env</span>
+hatch run python <span class="token operator">&lt;</span>script_name.py<span class="token operator">&gt;</span></code></pre>
+<h4 id="Build-publish-flow（构建-发布流程）-2"><a href="#Build-publish-flow（构建-发布流程）-2" class="headerlink" title="Build/publish flow（构建/发布流程）"></a>Build/publish flow（构建/发布流程）</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Package code (creates `.tar.gz` and `.whl` files)</span>
+hatch build
+
+<span class="token comment" spellcheck="true"># Publish to PyPI</span>
+hatch publish</code></pre>
+<h4 id="Declarative-environment-management（声明式环境管理）"><a href="#Declarative-environment-management（声明式环境管理）" class="headerlink" title="Declarative environment management（声明式环境管理）"></a>Declarative environment management（声明式环境管理）</h4><p>Hatch 的特别之处在于它允许您在 <code>pyproject.toml</code> 文件中配置您的虚拟环境。此外，它还允许您专门为某个环境定义脚本。这方面的一个示例用例是 <a href="https://hatch.pypa.io/1.1/config/environment/#scripts" target="_blank" rel="noopener">代码格式化</a>。</p>
+<h3 id="Rye"><a href="#Rye" class="headerlink" title="Rye"></a>Rye</h3><p><a href="https://rye-up.com" target="_blank" rel="noopener">Rye</a> 是由 Flask 框架的创建者 Armin Ronacher 最近开发的（第一个版本于 2023 年 5 月发布）。它的灵感很大程度上来自于 <code>rustup</code> 和 <code>cargo</code>，这两个都是 Rust 编程语言的打包工具。Rye 是用 Rust 编写的，并且能够执行我们维恩图中的所有任务：</p>
+<ul>
+<li>Python 版本管理：✅</li>
+<li>软件包管理：✅</li>
+<li>环境管理：✅</li>
+<li>构建软件包：✅</li>
+<li>发布软件包：✅</li>
+</ul>
+<p>目前，Rye 没有插件接口。但是，由于新版本会定期发布，因此将来可能会添加此功能。</p>
+<p><img src="https://alpopkes.com/posts/python/figures/rye.png" alt="rye"></p>
+<h4 id="功能评估-5"><a href="#功能评估-5" class="headerlink" title="功能评估"></a>功能评估</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h4 id="创建一个新项目-1"><a href="#创建一个新项目-1" class="headerlink" title="创建一个新项目"></a>创建一个新项目</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Create directory structure and pyproject.toml</span>
+rye init <span class="token operator">&lt;</span>project_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Pin a Python version</span>
+rye pin 3.10</code></pre>
+<h4 id="依赖管理-3"><a href="#依赖管理-3" class="headerlink" title="依赖管理"></a>依赖管理</h4><pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># Add dependency - this does not install the package!</span>
+rye add <span class="token operator">&lt;</span>package_name<span class="token operator">&gt;</span>
+
+<span class="token comment" spellcheck="true"># Synchronize virtual envs, lock file, etc.</span>
+<span class="token comment" spellcheck="true"># This install packages and Python versions</span>
+rye sync</code></pre>
+<h4 id="运行代码-3"><a href="#运行代码-3" class="headerlink" title="运行代码"></a>运行代码</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Activate virtual env</span>
+rye shell
+
+<span class="token comment" spellcheck="true"># Run script within virtual env</span>
+rye run python <span class="token operator">&lt;</span>script_name.py<span class="token operator">&gt;</span></code></pre>
+<h4 id="Build-publish-flow（构建-发布流程）-3"><a href="#Build-publish-flow（构建-发布流程）-3" class="headerlink" title="Build/publish flow（构建/发布流程）"></a>Build/publish flow（构建/发布流程）</h4><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Package code (creates `.tar.gz` and `.whl` files)</span>
+rye build
+
+<span class="token comment" spellcheck="true"># Publish to PyPI</span>
+rye publish</code></pre>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Flit</th>
+<th>Poetry</th>
+<th>PDM</th>
+<th>Hatch</th>
+<th>Rye</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>该工具是否管理依赖项？</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否解析/锁定依赖项？</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>是否有干净的构建/发布流程？</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否允许使用插件？</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 660（可编辑安装）？</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>它是否支持 PEP 621（项目元数据）？</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h2 id="不属于这些类别的工具"><a href="#不属于这些类别的工具" class="headerlink" title="不属于这些类别的工具"></a>不属于这些类别的工具</h2><p>有些工具不属于我的任何类别。它们是：</p>
+<ul>
+<li><a href="https://pip-tools.readthedocs.io/en/latest" target="_blank" rel="noopener">pip-tools</a> 帮助您保持基于 <code>pip</code> 的软件包版本最新。</li>
+<li><a href="https://tox.wiki" target="_blank" rel="noopener">tox</a> 和 <a href="https://nox.thea.codes" target="_blank" rel="noopener">nox</a> 主要用于测试，但也处理虚拟环境。</li>
+</ul>
+<p><a href="https://github.com/zotroneneis/zotroneneis.github.io/edit/main/content/posts/python/packaging_tools.md" target="_blank" rel="noopener">给本博文提供建议</a></p>
+</body></html>
+        </div>
+
+        <hr>
+
+        
+          <aside class="content">
+          
+  <blockquote>
+    <p>
+      原文链接：<a target="_blank" href="https://alpopkes.com/posts/python/packaging_tools/">
+        https://alpopkes.com/posts/python/packaging_tools/
+      </a>
+    </p>
+  </blockquote>
+  <div class="content">
+  
+
+
+  <h3>作者</h3>
+  <style>
+  ol.flow-box {
+    margin-left: 0;
+  }
+  ol.flow-box > li {
+    margin: 0.25rem;
+    position: relative;
+  }
+  ol.flow-box > li > a {
+    display: block;
+    position: relative;
+  }
+  ol.flow-box > li > a.count::before {
+    content: attr(data-count);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: red;
+    color: white;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+  }
+  ol.flow-box img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+  }
+  ol.flow-box > li > .card {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 2;
+    max-width: inherit;
+    white-space: nowrap;
+    text-align: left;
+    display: none;
+  }
+  ol.flow-box > li .card-content {
+    margin: 0 0 0 1rem;
+  }
+  ol.flow-box > li > a {
+    width: 6rem;
+  }
+  ol.flow-box > li .image {
+    width: 100%;
+    height: 6rem;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<ol class="flow-box">
+  
+    <li>
+      <a title="luojiyin1987" href="https://github.com/luojiyin1987"
+        class="has-text-centered "
+        data-count="">
+
+        <div class="image has-mb-6" style="background-image: url(https://avatars.githubusercontent.com/u/6524977?s=96)"></div>
+
+        <div>luo jiyin</div>
+      </a>
+
+      
+    </li>
+  
+</ol>
+
+<script>
+  $( document.currentScript ).prev().on('mouseenter',  'li',  function () {
+
+    $('.card', this).show('fast');
+
+  }).on('mouseleave',  'li',  function () {
+
+    $('.card', this).hide('fast');
+  });
+</script>
+
+
+
+  </div>
+  <div class="content">
+    <h2>精彩瞬间</h2>
+    <div class="justified-gallery">
+      <a class="gallery-item" href="/article/translation/python-packaging-tools/https:/p1.itc.cn/q_70/images03/20210809/1e2ff3ae07dd41d7bc190c7699f9583a.png">
+        <img src="/article/translation/python-packaging-tools/https:/p1.itc.cn/q_70/images03/20210809/1e2ff3ae07dd41d7bc190c7699f9583a.png" alt="对 Python 对环境管理和包管理工具的一次公正评估">
+      </a>
+</div>
+
+  </div>
+
+          </aside>
+        
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/FCC-CDC-Alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/article/translation/some-miscellaneous-git-facts/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">一些杂七杂八的 Git 知识</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/article/translation/why-i-like-nox/">
+                <span class="level-item">为什么我喜欢 Nox</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://fcc-cd.dev/article/translation/python-packaging-tools/';
+        this.page.identifier = 'article/translation/python-packaging-tools/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'fcc-cdc' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+<style>
+  .image.is-128x128 {
+    height: auto;
+  }
+</style>
+
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/FCC-CDC-v1-0.png" alt="freeCodeCamp 成都社区">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        freeCodeCamp 成都社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        公益编程技术社区
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ChengDu, SiChuan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        107
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        113
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/FreeCodeCamp-Chengdu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/atom.xml">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="GitHub" href="https://github.com/FreeCodeCamp-Chengdu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微博" href="https://weibo.com/u/6165665516">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="微信服务号" href="/contact/#%E5%BE%AE%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%B7">
+                
+                <i class="fab fa-weixin"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="QQ 群" href="/contact/#QQ-%E7%BE%A4">
+                
+                <i class="fab fa-qq"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/fCC-Coffee-and-Code.png" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年11月16日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-11-08T03:23:00.000Z">2025-11-08</time></div>
+                    <a href="/activity/workshop/fcc-chengdu-coffee-and-code-2025-11-16/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年11月16日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Workshop/">Workshop</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-10-19/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://reportyak.com/wp-content/uploads/2022/08/NGO_concept_shutterstock_1247512159-1-1-scaled.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年10月19日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-09-12T10:27:00.000Z">2025-09-12</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-10-19/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年10月19日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-09-07/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,quality=80,format=auto,onerror=redirect/uploads/asset/file/c2ba129c-c80a-4e9b-9eab-baa84665c784/VPL_Claude_for_Non-Coders_-_01.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年9月7日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-24T02:34:00.000Z">2025-08-24</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-09-07/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年9月7日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-08-24/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://img.alicdn.com/bao/uploaded/i1/2592222097/O1CN01yD7NvL1RMT4meiGQR_!!0-item_pic.jpg" alt="fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年8月24日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-19T16:00:00.000Z">2025-08-20</time></div>
+                    <a href="/activity/salon/fcc-chengdu-coffee-and-code-2025-08-24/" class="has-link-black-ter is-size-6">fCC 成都社区 Coffee &amp; Code 周末编程自习室 2025年8月24日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/activity/salon/20250803-coffee-code/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://mockup-api.teespring.com/v3/image/Q7sCRZTzB5LINlodX8FFEEnCl0k/800/800.jpg" alt="fCC Coffee &amp; Code 周末编程自习室 2025年8月3日">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-08-02T16:00:00.000Z">2025-08-03</time></div>
+                    <a href="/activity/salon/20250803-coffee-code/" class="has-link-black-ter is-size-6">fCC Coffee &amp; Code 周末编程自习室 2025年8月3日</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Activity/">Activity</a> / <a class="has-link-grey -link" href="/categories/Activity/Salon/">Salon</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#动机">
+        <span class="has-mr-6">1</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#分类">
+        <span class="has-mr-6">2</span>
+        <span>分类</span>
+        </a></li><li>
+        <a class="is-flex" href="#Python-版本管理">
+        <span class="has-mr-6">3</span>
+        <span>Python 版本管理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义">
+        <span class="has-mr-6">3.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-1">
+        <span class="has-mr-6">3.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具">
+        <span class="has-mr-6">3.3</span>
+        <span>工具</span>
+        </a></li><li>
+        <a class="is-flex" href="#PyEnv">
+        <span class="has-mr-6">3.4</span>
+        <span>PyEnv</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Virtual-environment-management（虚拟环境管理）">
+        <span class="has-mr-6">4</span>
+        <span>Virtual environment management（虚拟环境管理）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义-1">
+        <span class="has-mr-6">4.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-2">
+        <span class="has-mr-6">4.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具-1">
+        <span class="has-mr-6">4.3</span>
+        <span>工具</span>
+        </a></li><li>
+        <a class="is-flex" href="#VEnv">
+        <span class="has-mr-6">4.4</span>
+        <span>VEnv</span>
+        </a></li><li>
+        <a class="is-flex" href="#VirtualEnv">
+        <span class="has-mr-6">4.5</span>
+        <span>VirtualEnv</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#回顾-1-pyproject-toml">
+        <span class="has-mr-6">5</span>
+        <span>回顾 1 - pyproject.toml</span>
+        </a></li><li>
+        <a class="is-flex" href="#包管理">
+        <span class="has-mr-6">6</span>
+        <span>包管理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义-2">
+        <span class="has-mr-6">6.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-3">
+        <span class="has-mr-6">6.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具-2">
+        <span class="has-mr-6">6.3</span>
+        <span>工具</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#PIP">
+        <span class="has-mr-6">6.3.1</span>
+        <span>PIP</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#回顾-2-Lock-file">
+        <span class="has-mr-6">7</span>
+        <span>回顾 2 - Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#多用途的工具">
+        <span class="has-mr-6">8</span>
+        <span>多用途的工具</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#PipEnv">
+        <span class="has-mr-6">8.1</span>
+        <span>PipEnv</span>
+        </a></li><li>
+        <a class="is-flex" href="#Conda">
+        <span class="has-mr-6">8.2</span>
+        <span>Conda</span>
+        </a></li><li>
+        <a class="is-flex" href="#功能评估">
+        <span class="has-mr-6">8.3</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#Flit">
+        <span class="has-mr-6">8.4</span>
+        <span>Flit</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-1">
+        <span class="has-mr-6">8.4.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#主要命令">
+        <span class="has-mr-6">8.4.2</span>
+        <span>主要命令</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Poetry">
+        <span class="has-mr-6">8.5</span>
+        <span>Poetry</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-2">
+        <span class="has-mr-6">8.5.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#主要命令-1">
+        <span class="has-mr-6">8.5.2</span>
+        <span>主要命令</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理">
+        <span class="has-mr-6">8.5.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码">
+        <span class="has-mr-6">8.5.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Lock-file">
+        <span class="has-mr-6">8.5.5</span>
+        <span>Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）">
+        <span class="has-mr-6">8.5.6</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#PDM">
+        <span class="has-mr-6">8.6</span>
+        <span>PDM</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-3">
+        <span class="has-mr-6">8.6.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建新项目">
+        <span class="has-mr-6">8.6.2</span>
+        <span>创建新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-1">
+        <span class="has-mr-6">8.6.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-1">
+        <span class="has-mr-6">8.6.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Lock-file-1">
+        <span class="has-mr-6">8.6.5</span>
+        <span>Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-1">
+        <span class="has-mr-6">8.6.6</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Hatch">
+        <span class="has-mr-6">8.7</span>
+        <span>Hatch</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-4">
+        <span class="has-mr-6">8.7.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建一个新项目">
+        <span class="has-mr-6">8.7.2</span>
+        <span>创建一个新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-2">
+        <span class="has-mr-6">8.7.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-2">
+        <span class="has-mr-6">8.7.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-2">
+        <span class="has-mr-6">8.7.5</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li><li>
+        <a class="is-flex" href="#Declarative-environment-management（声明式环境管理）">
+        <span class="has-mr-6">8.7.6</span>
+        <span>Declarative environment management（声明式环境管理）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Rye">
+        <span class="has-mr-6">8.8</span>
+        <span>Rye</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-5">
+        <span class="has-mr-6">8.8.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建一个新项目-1">
+        <span class="has-mr-6">8.8.2</span>
+        <span>创建一个新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-3">
+        <span class="has-mr-6">8.8.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-3">
+        <span class="has-mr-6">8.8.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-3">
+        <span class="has-mr-6">8.8.5</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#概述">
+        <span class="has-mr-6">8.9</span>
+        <span>概述</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#不属于这些类别的工具">
+        <span class="has-mr-6">9</span>
+        <span>不属于这些类别的工具</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E5%AE%9E%E6%88%98/">
+                        <span class="tag">AI实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E6%95%99%E8%82%B2/">
+                        <span class="tag">AI时代编程教育</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agent/">
+                        <span class="tag">Agent</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Caddy/">
+                        <span class="tag">Caddy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Coffee-Code/">
+                        <span class="tag">Coffee&amp;Code</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DeepSeek/">
+                        <span class="tag">DeepSeek</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSL/">
+                        <span class="tag">SSL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vibe-Coding/">
+                        <span class="tag">Vibe Coding</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/copilot/">
+                        <span class="tag">copilot</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/https/">
+                        <span class="tag">https</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%9A%E5%8A%A1/">
+                        <span class="tag">会务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%AC%E7%9B%8A/">
+                        <span class="tag">公益</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91/">
+                        <span class="tag">内网</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E4%B9%A6%E9%A6%86/">
+                        <span class="tag">图书馆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%98%E7%BD%91/">
+                        <span class="tag">官网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90%E5%B8%82%E9%9B%86/">
+                        <span class="tag">开源市集</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%88%90%E9%83%BD/">
+                        <span class="tag">成都</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%90%86%E8%B4%A2/">
+                        <span class="tag">理财</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BB%93%E5%AF%B9%E7%BC%96%E7%A8%8B/">
+                        <span class="tag">结对编程</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/">
+                        <span class="tag">脚手架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%BB%91%E5%AE%A2%E6%9D%BE/">
+                        <span class="tag">黑客松</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#动机">
+        <span class="has-mr-6">1</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#分类">
+        <span class="has-mr-6">2</span>
+        <span>分类</span>
+        </a></li><li>
+        <a class="is-flex" href="#Python-版本管理">
+        <span class="has-mr-6">3</span>
+        <span>Python 版本管理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义">
+        <span class="has-mr-6">3.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-1">
+        <span class="has-mr-6">3.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具">
+        <span class="has-mr-6">3.3</span>
+        <span>工具</span>
+        </a></li><li>
+        <a class="is-flex" href="#PyEnv">
+        <span class="has-mr-6">3.4</span>
+        <span>PyEnv</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Virtual-environment-management（虚拟环境管理）">
+        <span class="has-mr-6">4</span>
+        <span>Virtual environment management（虚拟环境管理）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义-1">
+        <span class="has-mr-6">4.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-2">
+        <span class="has-mr-6">4.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具-1">
+        <span class="has-mr-6">4.3</span>
+        <span>工具</span>
+        </a></li><li>
+        <a class="is-flex" href="#VEnv">
+        <span class="has-mr-6">4.4</span>
+        <span>VEnv</span>
+        </a></li><li>
+        <a class="is-flex" href="#VirtualEnv">
+        <span class="has-mr-6">4.5</span>
+        <span>VirtualEnv</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#回顾-1-pyproject-toml">
+        <span class="has-mr-6">5</span>
+        <span>回顾 1 - pyproject.toml</span>
+        </a></li><li>
+        <a class="is-flex" href="#包管理">
+        <span class="has-mr-6">6</span>
+        <span>包管理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#定义-2">
+        <span class="has-mr-6">6.1</span>
+        <span>定义</span>
+        </a></li><li>
+        <a class="is-flex" href="#动机-3">
+        <span class="has-mr-6">6.2</span>
+        <span>动机</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具-2">
+        <span class="has-mr-6">6.3</span>
+        <span>工具</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#PIP">
+        <span class="has-mr-6">6.3.1</span>
+        <span>PIP</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#回顾-2-Lock-file">
+        <span class="has-mr-6">7</span>
+        <span>回顾 2 - Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#多用途的工具">
+        <span class="has-mr-6">8</span>
+        <span>多用途的工具</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#PipEnv">
+        <span class="has-mr-6">8.1</span>
+        <span>PipEnv</span>
+        </a></li><li>
+        <a class="is-flex" href="#Conda">
+        <span class="has-mr-6">8.2</span>
+        <span>Conda</span>
+        </a></li><li>
+        <a class="is-flex" href="#功能评估">
+        <span class="has-mr-6">8.3</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#Flit">
+        <span class="has-mr-6">8.4</span>
+        <span>Flit</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-1">
+        <span class="has-mr-6">8.4.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#主要命令">
+        <span class="has-mr-6">8.4.2</span>
+        <span>主要命令</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Poetry">
+        <span class="has-mr-6">8.5</span>
+        <span>Poetry</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-2">
+        <span class="has-mr-6">8.5.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#主要命令-1">
+        <span class="has-mr-6">8.5.2</span>
+        <span>主要命令</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理">
+        <span class="has-mr-6">8.5.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码">
+        <span class="has-mr-6">8.5.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Lock-file">
+        <span class="has-mr-6">8.5.5</span>
+        <span>Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）">
+        <span class="has-mr-6">8.5.6</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#PDM">
+        <span class="has-mr-6">8.6</span>
+        <span>PDM</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-3">
+        <span class="has-mr-6">8.6.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建新项目">
+        <span class="has-mr-6">8.6.2</span>
+        <span>创建新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-1">
+        <span class="has-mr-6">8.6.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-1">
+        <span class="has-mr-6">8.6.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Lock-file-1">
+        <span class="has-mr-6">8.6.5</span>
+        <span>Lock file</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-1">
+        <span class="has-mr-6">8.6.6</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Hatch">
+        <span class="has-mr-6">8.7</span>
+        <span>Hatch</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-4">
+        <span class="has-mr-6">8.7.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建一个新项目">
+        <span class="has-mr-6">8.7.2</span>
+        <span>创建一个新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-2">
+        <span class="has-mr-6">8.7.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-2">
+        <span class="has-mr-6">8.7.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-2">
+        <span class="has-mr-6">8.7.5</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li><li>
+        <a class="is-flex" href="#Declarative-environment-management（声明式环境管理）">
+        <span class="has-mr-6">8.7.6</span>
+        <span>Declarative environment management（声明式环境管理）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Rye">
+        <span class="has-mr-6">8.8</span>
+        <span>Rye</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#功能评估-5">
+        <span class="has-mr-6">8.8.1</span>
+        <span>功能评估</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建一个新项目-1">
+        <span class="has-mr-6">8.8.2</span>
+        <span>创建一个新项目</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖管理-3">
+        <span class="has-mr-6">8.8.3</span>
+        <span>依赖管理</span>
+        </a></li><li>
+        <a class="is-flex" href="#运行代码-3">
+        <span class="has-mr-6">8.8.4</span>
+        <span>运行代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#Build-publish-flow（构建-发布流程）-3">
+        <span class="has-mr-6">8.8.5</span>
+        <span>Build/publish flow（构建/发布流程）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#概述">
+        <span class="has-mr-6">8.9</span>
+        <span>概述</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#不属于这些类别的工具">
+        <span class="has-mr-6">9</span>
+        <span>不属于这些类别的工具</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/Activity_PPT" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">活动 PPT</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">技术周刊</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://www.freecodecamp.org/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">国际总部</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://chinese.freecodecamp.org/forum/" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">中文论坛</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">chinese.freecodecamp.org</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2025/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2025</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2024/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2024</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2023/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2023</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2022/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2022</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI/">
+                        <span class="tag">AI</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E5%AE%9E%E6%88%98/">
+                        <span class="tag">AI实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AI%E6%97%B6%E4%BB%A3%E7%BC%96%E7%A8%8B%E6%95%99%E8%82%B2/">
+                        <span class="tag">AI时代编程教育</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agent/">
+                        <span class="tag">Agent</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Agile/">
+                        <span class="tag">Agile</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apollo/">
+                        <span class="tag">Apollo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BOM/">
+                        <span class="tag">BOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BootStrap/">
+                        <span class="tag">BootStrap</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bronze-3/">
+                        <span class="tag">Bronze-3</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/COSCon/">
+                        <span class="tag">COSCon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Caddy/">
+                        <span class="tag">Caddy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/China/">
+                        <span class="tag">China</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Chrome/">
+                        <span class="tag">Chrome</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Codespaces/">
+                        <span class="tag">Codespaces</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Coffee-Code/">
+                        <span class="tag">Coffee&amp;Code</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Conference/">
+                        <span class="tag">Conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DeepSeek/">
+                        <span class="tag">DeepSeek</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deno/">
+                        <span class="tag">Deno</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ECMAScript/">
+                        <span class="tag">ECMAScript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GitHub/">
+                        <span class="tag">GitHub</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google/">
+                        <span class="tag">Google</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GraphQL/">
+                        <span class="tag">GraphQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HTML/">
+                        <span class="tag">HTML</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Koa/">
+                        <span class="tag">Koa</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MobX/">
+                        <span class="tag">MobX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB/">
+                        <span class="tag">MongoDB</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NGO/">
+                        <span class="tag">NGO</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-JS/">
+                        <span class="tag">Node.JS</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Open-Source/">
+                        <span class="tag">Open-Source</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PWA/">
+                        <span class="tag">PWA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Puppeteer/">
+                        <span class="tag">Puppeteer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RESTful/">
+                        <span class="tag">RESTful</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/React/">
+                        <span class="tag">React</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSL/">
+                        <span class="tag">SSL</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Strapi/">
+                        <span class="tag">Strapi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TDD/">
+                        <span class="tag">TDD</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vibe-Coding/">
+                        <span class="tag">Vibe Coding</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/W3C/">
+                        <span class="tag">W3C</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WeChat/">
+                        <span class="tag">WeChat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Web/">
+                        <span class="tag">Web</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebCell/">
+                        <span class="tag">WebCell</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Wiki/">
+                        <span class="tag">Wiki</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/algorithm/">
+                        <span class="tag">algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/automation/">
+                        <span class="tag">automation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary/">
+                        <span class="tag">binary</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bundle/">
+                        <span class="tag">bundle</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/circuit/">
+                        <span class="tag">circuit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/college/">
+                        <span class="tag">college</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/community/">
+                        <span class="tag">community</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/component/">
+                        <span class="tag">component</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/conference/">
+                        <span class="tag">conference</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cooperation/">
+                        <span class="tag">cooperation</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/copilot/">
+                        <span class="tag">copilot</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/crawler/">
+                        <span class="tag">crawler</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/design/">
+                        <span class="tag">design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/development/">
+                        <span class="tag">development</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/editor/">
+                        <span class="tag">editor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/english/">
+                        <span class="tag">english</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/freeCodeCamp/">
+                        <span class="tag">freeCodeCamp</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/front-end/">
+                        <span class="tag">front-end</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/full-stack/">
+                        <span class="tag">full-stack</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/functional-programming/">
+                        <span class="tag">functional-programming</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/guide/">
+                        <span class="tag">guide</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hardware/">
+                        <span class="tag">hardware</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/history/">
+                        <span class="tag">history</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/https/">
+                        <span class="tag">https</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logic/">
+                        <span class="tag">logic</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mentor/">
+                        <span class="tag">mentor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/offline/">
+                        <span class="tag">offline</span>
+                        <span class="tag is-grey">19</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/online/">
+                        <span class="tag">online</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pair-programming/">
+                        <span class="tag">pair-programming</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/performance/">
+                        <span class="tag">performance</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/product/">
+                        <span class="tag">product</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/robot/">
+                        <span class="tag">robot</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/science/">
+                        <span class="tag">science</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/state/">
+                        <span class="tag">state</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/teenager/">
+                        <span class="tag">teenager</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/translation/">
+                        <span class="tag">translation</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/university/">
+                        <span class="tag">university</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webpack/">
+                        <span class="tag">webpack</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/workshop/">
+                        <span class="tag">workshop</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="tag">二叉树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BC%9A%E5%8A%A1/">
+                        <span class="tag">会务</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%85%AC%E7%9B%8A/">
+                        <span class="tag">公益</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%86%85%E7%BD%91/">
+                        <span class="tag">内网</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%9B%BE%E4%B9%A6%E9%A6%86/">
+                        <span class="tag">图书馆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A0%86%E6%A0%88/">
+                        <span class="tag">堆栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%AE%98%E7%BD%91/">
+                        <span class="tag">官网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%B1%95%E8%A7%88/">
+                        <span class="tag">展览</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90%E5%B8%82%E9%9B%86/">
+                        <span class="tag">开源市集</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%88%90%E9%83%BD/">
+                        <span class="tag">成都</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%96%87%E8%A8%80/">
+                        <span class="tag">文言</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%90%86%E8%B4%A2/">
+                        <span class="tag">理财</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%BB%93%E5%AF%B9%E7%BC%96%E7%A8%8B/">
+                        <span class="tag">结对编程</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/">
+                        <span class="tag">脚手架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%87%8D%E5%BA%86/">
+                        <span class="tag">重庆</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="tag">链表</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%BB%91%E5%AE%A2%E6%9D%BE/">
+                        <span class="tag">黑客松</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/FCC-CDC-v1-0.png" alt="对 Python 对环境管理和包管理工具的一次公正评估" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 freeCodeCamp ChengDu community&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Code of Conduct" href="/profile/code-of-conduct/">
+                        
+                        <i class="fas fa-balance-scale"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Fork on GitHub" href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://npm.webcache.cn/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://npm.webcache.cn/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://npm.webcache.cn/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://npm.webcache.cn/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
