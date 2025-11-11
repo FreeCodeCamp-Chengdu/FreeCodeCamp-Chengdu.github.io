@@ -47,7 +47,6 @@ export default tsEslint.config(
         warnOnUnsupportedTypeScriptVersion: false,
       },
     },
-    // @ts-expect-error https://github.com/vercel/next.js/issues/81695
     rules: {
       // spellchecker
       '@cspell/spellchecker': [

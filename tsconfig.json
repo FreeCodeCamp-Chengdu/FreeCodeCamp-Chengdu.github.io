@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "downlevelIteration": true,
     "useDefineForClassFields": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.mjs", "**/*.ts", "**/*.tsx"],

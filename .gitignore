@@ -10,6 +10,7 @@ package-lock.json
 /coverage
 
 # next.js
+next-env.d.ts
 /.next/
 /out/
 

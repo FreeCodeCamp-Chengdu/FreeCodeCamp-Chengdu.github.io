@@ -20,6 +20,9 @@ jobs:
           submodules: recursive
           lfs: true
 
+      - run: git submodule update --init --remote --recursive
+        if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
+
       - name: Deploy to Vercel
         id: vercel-deployment
         uses: amondnet/vercel-action@v25
