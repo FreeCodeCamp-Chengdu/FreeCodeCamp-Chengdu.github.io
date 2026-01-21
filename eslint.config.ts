@@ -2,6 +2,7 @@ import cspellPlugin from '@cspell/eslint-plugin';
 import eslint from '@eslint/js';
 import nextPlugin from '@next/eslint-plugin-next';
 import stylistic from '@stylistic/eslint-plugin';
+import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
@@ -16,7 +17,7 @@ import { fileURLToPath } from 'url';
 
 const tsconfigRootDir = fileURLToPath(new URL('.', import.meta.url));
 
-export default tsEslint.config(
+export default defineConfig(
   // register all of the plugins up-front
   {
     plugins: {
@@ -25,6 +26,7 @@ export default tsEslint.config(
       'simple-import-sort': simpleImportSortPlugin,
       '@typescript-eslint': tsEslint.plugin,
       react,
+      // @ts-expect-error https://github.com/vercel/next.js/discussions/84792
       '@next/next': nextPlugin,
     },
   },
@@ -81,6 +83,7 @@ export default tsEslint.config(
         },
       ],
       'consistent-return': 'warn',
+      'prefer-const': 'warn',
       'prefer-destructuring': ['error', { object: true, array: true }],
       // simple-import-sort
       'simple-import-sort/exports': 'error',

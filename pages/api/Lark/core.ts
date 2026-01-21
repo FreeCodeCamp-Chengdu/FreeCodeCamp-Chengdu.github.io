@@ -1,11 +1,6 @@
 import { Context, Middleware } from 'koa';
 import { marked } from 'marked';
-import {
-  LarkApp,
-  LarkData,
-  normalizeTextArray,
-  TableCellText,
-} from 'mobx-lark';
+import { LarkApp, LarkData, normalizeTextArray, TableCellText } from 'mobx-lark';
 
 import { LarkAppMeta } from '../../../models/configuration';
 
@@ -17,7 +12,7 @@ export const normalizeMarkdownArray = (list: TableCellText[]) =>
 export const proxyLark = async <T extends LarkData>({
   method,
   url,
-  headers: { host, authorization, ...headers },
+  headers: { host, authorization, 'content-length': _, ...headers },
   request,
 }: Context) => {
   await lark.getAccessToken();

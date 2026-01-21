@@ -4,7 +4,6 @@ import { Context, Middleware } from 'koa';
 import { HTTPError } from 'koajax';
 import { DataObject } from 'mobx-restful';
 import { KoaOption, withKoa } from 'next-ssr-middleware';
-import { basename } from 'path';
 import { ProxyAgent, setGlobalDispatcher } from 'undici';
 import { parse } from 'yaml';
 
@@ -78,34 +77,31 @@ export async function* pageListOf(path: string, prefix = 'pages'): AsyncGenerato
   const list = await readdir(prefix + path, { withFileTypes: true });
 
   for (const node of list) {
-    let { name, path } = node;
+    let { name, parentPath } = node;
 
     if (name.startsWith('.')) continue;
 
     const isMDX = MDX_pattern.test(name);
 
-    name = basename(name);
-    path = `${path}/${name}`.replace(new RegExp(`^${prefix}`), '');
+    name = name.replace(MDX_pattern, '');
+    const path = `${parentPath}/${name}`.replace(new RegExp(`^${prefix}`), '');
 
-    if (node.isFile()) {
+    if (node.isFile() && isMDX) {
       const article: ArticleMeta = { name, path, subs: [] };
 
-      if (isMDX)
-        try {
-          const rawFile = await readFile(`${node.path}/${node.name}`, { encoding: 'utf-8' });
+      const file = await readFile(`${parentPath}/${node.name}`, 'utf-8');
 
-          const { meta } = splitFrontMatter(rawFile);
+      const { meta } = splitFrontMatter(file);
 
-          if (meta) article.meta = meta;
-        } catch (error) {
-          console.error(`Error reading front matter for ${node.path}/${node.name}:`, error);
-        }
+      if (meta) article.meta = meta;
+
       yield article;
-    } else if (node.isDirectory()) {
-      const subs = await Array.fromAsync(pageListOf(path, prefix));
-
-      if (subs[0]) yield { name, subs };
     }
+    if (!node.isDirectory()) continue;
+
+    const subs = await Array.fromAsync(pageListOf(path, prefix));
+
+    if (subs[0]) yield { name, subs };
   }
 }
 

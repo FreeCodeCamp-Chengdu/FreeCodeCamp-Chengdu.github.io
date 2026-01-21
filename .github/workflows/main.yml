@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
         with:
           submodules: recursive
@@ -36,7 +36,7 @@ jobs:
           vercel-args: ${{ github.ref == 'refs/heads/main' && ' --prod' || '' }}
 
       - name: Lark notification
-        uses: foxundermoon/feishu-action@v2
+        uses: Open-Source-Bazaar/feishu-action@v2
         with:
           url: ${{ secrets.LARK_CHATBOT_HOOK_URL }}
           msg_type: post

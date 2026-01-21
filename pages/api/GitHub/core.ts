@@ -7,7 +7,7 @@ import { ProxyBaseURL, VERCEL } from '../../../models/configuration';
 export const proxyGithub = async <T>({
   method,
   url,
-  headers: { host, ...headers },
+  headers: { host, authorization, 'content-length': _, ...headers },
   request,
 }: Context) => {
   const path = url!.slice(`/api/GitHub/`.length),

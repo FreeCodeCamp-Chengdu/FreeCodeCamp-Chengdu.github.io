@@ -20,7 +20,7 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Inject Environment variables
         run: |
@@ -46,7 +46,7 @@ jobs:
           mv ${{ env.ARTIFACT_PATH }} ./docker-compose.yml ./start.sh ./build
 
       - name: Transport Image
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v1
         with:
           source: ./build/*.*
           target: /tmp/${{ env.BOX_NAME }}
