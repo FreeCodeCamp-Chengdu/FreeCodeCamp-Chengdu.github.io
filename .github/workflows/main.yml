@@ -23,45 +23,65 @@ jobs:
       - run: git submodule update --init --remote --recursive
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
 
-      - name: Deploy to Vercel
-        id: vercel-deployment
-        uses: amondnet/vercel-action@v25
+      - uses: actions/setup-node@v6
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
-          vercel-args: ${{ github.ref == 'refs/heads/main' && ' --prod' || '' }}
+          node-version: 24
+
+      - name: Deploy to Vercel
+        id: vercel-deployment
+        if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          npm install vercel -g
+
+          if [[ "$GITHUB_REF" == 'refs/heads/main' ]]; then
+            DeployOutput=$(vercel -t "$VERCEL_TOKEN" --prod)
+          else
+            DeployOutput=$(vercel -t "$VERCEL_TOKEN")
+          fi
+          echo "$DeployOutput"
+
+          ParsedURL=$(echo "$DeployOutput" | grep -Eo 'https://[^[:space:]]*\.vercel\.app' | tail -n 1)
+
+          if [[ -z "$ParsedURL" ]]; then
+            echo "Failed to parse Vercel URL from deploy output"
+            exit 1
+          fi
+          vercel inspect "$ParsedURL" -t "$VERCEL_TOKEN" -F json > vercel-inspect.json
+
+          InspectURL=$(jq -r '.url // empty' vercel-inspect.json)
+
+          if [[ -z "$InspectURL" ]]; then
+            echo "Failed to parse inspect url from vercel-inspect.json"
+            exit 1
+          fi
+          if [[ "$InspectURL" != http* ]]; then
+            InspectURL="https://$InspectURL"
+          fi
+          echo "preview-url=$InspectURL" >> "$GITHUB_OUTPUT"
 
       - name: Lark notification
-        uses: Open-Source-Bazaar/feishu-action@v2
+        uses: Open-Source-Bazaar/feishu-action@v3
         with:
           url: ${{ secrets.LARK_CHATBOT_HOOK_URL }}
-          msg_type: post
+          msg_type: interactive
           content: |
-            post:
-              en_us:
-                title: "Vercel Preview Environment"
-                content:
-                  - - tag: text
-                      text: "Git Repository: "
-                    - tag: a
-                      text: ${{ github.server_url }}/${{ github.repository }}
-                      href: ${{ github.server_url }}/${{ github.repository }}
-                  - - tag: text
-                      text: "Code Branch: "
-                    - tag: a
-                      text: ${{ github.ref }}
-                      href: ${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }}
-                  - - tag: text
-                      text: "Commit Author: "
-                    - tag: a
-                      text: ${{ github.actor }}
-                      href: ${{ github.server_url }}/${{ github.actor }}
-                  - - tag: text
-                      text: "Preview Link: "
-                    - tag: a
-                      text: ${{ steps.vercel-deployment.outputs.preview-url }}
-                      href: ${{ steps.vercel-deployment.outputs.preview-url }}
+            schema: "2.0"
+            config:
+              wide_screen_mode: true
+            header:
+              title:
+                tag: plain_text
+                content: Vercel 预览部署
+              template: blue
+            body:
+              elements:
+                - tag: markdown
+                  content: |
+                    - **Git 仓库**: [${{ github.server_url }}/${{ github.repository }}](${{ github.server_url }}/${{ github.repository }})
+                    - **代码分支**:    [${{ github.ref }}](${{ github.server_url }}/${{ github.repository }}/tree/${{ github.ref_name }})
+                    - **提交作者**:  [${{ github.actor }}](${{ github.server_url }}/${{ github.actor }})
+                    - **预览链接**:   [${{ steps.vercel-deployment.outputs.preview-url }}](${{ steps.vercel-deployment.outputs.preview-url }})
