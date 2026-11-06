@@ -1,5 +1,5 @@
+import { Container, ContainerProps } from 'idea-react';
 import { FC } from 'react';
-import { Container, ContainerProps } from 'react-bootstrap';
 
 import { PageHead } from './PageHead';
 

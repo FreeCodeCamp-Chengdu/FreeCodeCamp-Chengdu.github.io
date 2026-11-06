@@ -1,23 +1,24 @@
-import { observer } from 'mobx-react';
-import { FC, useContext } from 'react';
 import {
   Button,
   Form,
+  FormControl,
   FormControlProps,
   FormProps,
   InputGroup,
   InputGroupProps,
-} from 'react-bootstrap';
+} from 'idea-react';
+import { observer } from 'mobx-react';
+import { FC, useContext } from 'react';
 
 import { I18nContext } from '../../models/Translation';
 import styles from './SearchBar.module.less';
 
 export interface SearchBarProps
-  extends Omit<FormProps, 'onChange'>,
-    Pick<InputGroupProps, 'size'>,
-    Pick<
-      FormControlProps,
-      'name' | 'placeholder' | 'defaultValue' | 'value' | 'onChange'
+  extends
+    Omit<FormProps, 'onChange'>,
+    Partial<Pick<InputGroupProps, 'size'>>,
+    Partial<
+      Pick<FormControlProps, 'name' | 'placeholder' | 'defaultValue' | 'value' | 'onChange'>
     > {
   expanded?: boolean;
 }
@@ -41,12 +42,12 @@ export const SearchBar: FC<SearchBarProps> = observer(
     return (
       <Form {...{ action, ...props }}>
         <InputGroup size={size}>
-          <Form.Control
+          <FormControl
             className={expanded ? '' : styles.input}
             type="search"
             {...{ name, placeholder, defaultValue, value, onChange }}
           />
-          <Button type="submit" variant="light">
+          <Button type="submit" theme="light">
             🔍
           </Button>
         </InputGroup>

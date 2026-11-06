@@ -1,7 +1,7 @@
+import { Image, ImageProps } from 'idea-react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Component } from 'react';
-import { Image, ImageProps } from 'react-bootstrap';
 
 export interface GitLogoProps extends ImageProps {
   name: string;

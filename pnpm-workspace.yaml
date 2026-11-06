@@ -1,0 +1,9 @@
+packages:
+  - .
+autoInstallPeers: false
+minimumReleaseAge: 0
+patchedDependencies:
+  next@16.4.5: patches/next@16.4.5.patch
+allowBuilds:
+  '@sentry/cli': true
+  core-js: true

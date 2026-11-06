@@ -1,11 +1,11 @@
 import '../styles/globals.less';
 
+import { Container, Image } from 'idea-react';
 import { HTTPError } from 'koajax';
 import { configure } from 'mobx';
 import { enableStaticRendering, observer } from 'mobx-react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
-import { Container, Image } from 'react-bootstrap';
 
 import { MDXLayout } from '../components/Layout/MDXLayout';
 import { MainNavigator } from '../components/Navigator/MainNavigator';

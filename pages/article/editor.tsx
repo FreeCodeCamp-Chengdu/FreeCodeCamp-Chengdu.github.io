@@ -1,5 +1,5 @@
+import { Container } from 'idea-react';
 import { compose } from 'next-ssr-middleware';
-import { Container } from 'react-bootstrap';
 
 import { ArticleEditor } from '../../components/Git/ArticleEditor';
 import { PageHead } from '../../components/Layout/PageHead';

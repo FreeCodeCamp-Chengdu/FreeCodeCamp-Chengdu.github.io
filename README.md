@@ -8,13 +8,13 @@
 
 ## Technology stack
 
-- Language: [TypeScript v5][2] + [MDX v3][10]
-- Component engine: [Next.js v15][3]
-- Component suite: [Bootstrap v5][4]
+- Language: [TypeScript v6][2] + [MDX v3][10]
+- Component engine: [Next.js v16][3]
+- Component suite: [Idea-React v3][33] + [Bootstrap v6][4]
 - PWA framework: [Workbox v6][5]
-- State management: [MobX v6][11]
+- State management: [MobX v7][11]
 - CI / CD: GitHub [Actions][12] + [Vercel][13]
-- Monitor service: [Sentry][14]
+- Monitor service: [Sentry v11][14]
 
 ## Major examples
 
@@ -179,3 +179,4 @@ pnpm container
 [30]: https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#create-initialization-config-files
 [31]: https://open.larksuite.com/document/server-docs/getting-started/api-access-token/app-access-token-development-guide#1f8b587c
 [32]: https://nextjs.org/docs/deployment
+[33]: https://idea-react.pages.dev/
