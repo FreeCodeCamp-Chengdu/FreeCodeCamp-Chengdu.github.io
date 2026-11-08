@@ -14,7 +14,7 @@ export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
     <Container>
       <SectionTitle>最新文章</SectionTitle>
 
-      <Row className="g-4" cols={1} sm={2} md={3}>
+      <Row className="g-4" xs={1} sm={2} md={3}>
         {articles.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card>

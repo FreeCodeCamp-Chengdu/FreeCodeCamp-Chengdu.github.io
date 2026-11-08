@@ -14,7 +14,7 @@ export const Sponsors: FC<SponsorsProps> = ({ sponsors }) => (
     <Container>
       <SectionTitle>赞助商</SectionTitle>
 
-      <Row className="g-4" cols={1} sm={2} md={3}>
+      <Row className="g-4" xs={1} sm={2} md={3}>
         {sponsors.map(({ name, meta }) => (
           <Col key={name}>
             <Card>

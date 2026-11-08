@@ -19,7 +19,7 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
     <>
       <SectionTitle>{t('upcoming_events')}</SectionTitle>
 
-      <Row className="g-4" cols={1} sm={2} md={3}>
+      <Row className="g-4" xs={1} sm={2} md={3}>
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card>

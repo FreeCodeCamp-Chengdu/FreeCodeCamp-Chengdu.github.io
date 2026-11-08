@@ -29,9 +29,28 @@ export class MainNavigator extends Component<{}, typeof i18n> {
 
   hide = action(() => (this.open = false));
 
-  render() {
+  renderLinks() {
     const { t } = this.context;
 
+    return (
+      <NavbarNav className="flex-fill" onClick={this.hide}>
+        <NavLink href="/article">{t('article')}</NavLink>
+        <NavLink href="/article/editor">Git pager</NavLink>
+        <NavLink href="/activity">{t('activity')}</NavLink>
+        <NavLink href="/weekly">{t('weekly')}</NavLink>
+        <NavLink href="/article/Wiki/community">{t('community')}</NavLink>
+        <NavLink href="/article/Wiki/_posts/Profile/about">{t('about')}</NavLink>
+        <NavLink
+          target="_blank"
+          href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io"
+        >
+          {t('source_code')}
+        </NavLink>
+      </NavbarNav>
+    );
+  }
+
+  render() {
     return (
       <Navbar className="fixed-top bg-light" theme="light" expand="sm">
         <Container>
@@ -48,33 +67,7 @@ export class MainNavigator extends Component<{}, typeof i18n> {
             open={this.open}
             onDismiss={this.hide}
           >
-            <NavbarNav className="flex-fill">
-              <NavLink href="/article" onClick={this.hide}>
-                {t('article')}
-              </NavLink>
-              <NavLink href="/article/editor" onClick={this.hide}>
-                Git pager
-              </NavLink>
-              <NavLink href="/activity" onClick={this.hide}>
-                {t('activity')}
-              </NavLink>
-              <NavLink href="/weekly" onClick={this.hide}>
-                {t('weekly')}
-              </NavLink>
-              <NavLink href="/community" onClick={this.hide}>
-                {t('community')}
-              </NavLink>
-              <NavLink href="/article/Wiki/_posts/Profile/about" onClick={this.hide}>
-                {t('about')}
-              </NavLink>
-              <NavLink
-                target="_blank"
-                href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io"
-                onClick={this.hide}
-              >
-                {t('source_code')}
-              </NavLink>
-            </NavbarNav>
+            {this.renderLinks()}
 
             <LanguageMenu />
           </Drawer>

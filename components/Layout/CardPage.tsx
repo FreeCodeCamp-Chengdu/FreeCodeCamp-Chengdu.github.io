@@ -18,7 +18,7 @@ export const CardPage: FC<CardPageProps> = ({
   pageLinkOf,
 }) => (
   <>
-    <Row className="g-3 my-3" cols={1} md={2} lg={3}>
+    <Row className="g-3 my-3" xs={1} md={2} lg={3}>
       {currentPage.map(item => (
         <Col key={item.id as string}>
           <Card className="h-100" linkOf={cardLinkOf} {...item} />

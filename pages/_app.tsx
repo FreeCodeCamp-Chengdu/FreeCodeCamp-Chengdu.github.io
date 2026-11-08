@@ -51,13 +51,15 @@ export default class CustomApp extends App<I18nProps> {
 
         <MainNavigator />
 
-        {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
-          <MDXLayout title={asPath.split('/').at(-1)}>
+        <div className="mt-10 pt-10 pb-6">
+          {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
+            <MDXLayout title={asPath.split('/').at(-1)}>
+              <Component {...pageProps} />
+            </MDXLayout>
+          ) : (
             <Component {...pageProps} />
-          </MDXLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </div>
 
         <footer className="section-wrapper border-top py-4">
           <Container className="d-flex justify-content-center align-items-center">

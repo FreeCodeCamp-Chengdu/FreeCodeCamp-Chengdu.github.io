@@ -50,7 +50,7 @@ const WeeklyIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = obse
         </div>
 
         {issues[0] ? (
-          <Row cols={1} md={2} lg={3} className="g-4">
+          <Row xs={1} md={2} lg={3} className="g-4">
             {issues.map(({ id, ...issue }) => (
               <Col key={id}>
                 <IssueCard className="h-100" {...issue} />
