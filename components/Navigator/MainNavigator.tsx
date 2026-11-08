@@ -1,48 +1,78 @@
+import {
+  Container,
+  Drawer,
+  Navbar,
+  NavbarBrand,
+  NavbarNav,
+  NavbarToggler,
+  NavLink,
+} from 'idea-react';
+import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import dynamic from 'next/dynamic';
-import { FC, useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Component } from 'react';
 
 import { Name } from '../../models/configuration';
-import { I18nContext } from '../../models/Translation';
+import { i18n, I18nContext } from '../../models/Translation';
 
 const LanguageMenu = dynamic(() => import('./LanguageMenu'), { ssr: false });
 
-export const MainNavigator: FC = observer(() => {
-  const { t } = useContext(I18nContext);
+@observer
+export class MainNavigator extends Component<{}, typeof i18n> {
+  static contextType = I18nContext;
 
-  return (
-    <Navbar bg="light" variant="light" fixed="top" expand="sm" collapseOnSelect>
-      <Container>
-        <Navbar.Brand href="/">{Name}</Navbar.Brand>
+  declare context: typeof i18n;
 
-        <Navbar.Toggle aria-controls="navbar-inner" />
+  @observable accessor open = false;
 
-        <Navbar.Collapse id="navbar-inner">
-          <Nav className="me-auto">
-            <Nav.Link href="/article">{t('article')}</Nav.Link>
+  show = action(() => (this.open = true));
 
-            <Nav.Link href="/article/editor">Git pager</Nav.Link>
+  hide = action(() => (this.open = false));
 
-            <Nav.Link href="/activity">{t('activity')}</Nav.Link>
+  renderLinks() {
+    const { t } = this.context;
 
-            <Nav.Link href="/weekly">{t('weekly')}</Nav.Link>
+    return (
+      <NavbarNav className="flex-fill" onClick={this.hide}>
+        <NavLink href="/article">{t('article')}</NavLink>
+        <NavLink href="/article/editor">Git pager</NavLink>
+        <NavLink href="/activity">{t('activity')}</NavLink>
+        <NavLink href="/weekly">{t('weekly')}</NavLink>
+        <NavLink href="/article/Wiki/community">{t('community')}</NavLink>
+        <NavLink href="/article/Wiki/_posts/Profile/about">{t('about')}</NavLink>
+        <NavLink
+          target="_blank"
+          href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io"
+        >
+          {t('source_code')}
+        </NavLink>
+      </NavbarNav>
+    );
+  }
 
-            <Nav.Link href="/community">{t('community')}</Nav.Link>
+  render() {
+    return (
+      <Navbar className="fixed-top bg-light" theme="light" expand="sm">
+        <Container>
+          <NavbarBrand href="/">{Name}</NavbarBrand>
 
-            <Nav.Link href="/article/Wiki/_posts/Profile/about">{t('about')}</Nav.Link>
+          <NavbarToggler expanded={this.open} aria-label="Toggle navigation" onClick={this.show} />
 
-            <Nav.Link
-              target="_blank"
-              href="https://github.com/FreeCodeCamp-Chengdu/FreeCodeCamp-Chengdu.github.io"
-            >
-              {t('source_code')}
-            </Nav.Link>
-          </Nav>
+          <Drawer
+            className="w-100"
+            bodyClassName="d-flex"
+            title={Name}
+            responsive="sm"
+            placement="end"
+            open={this.open}
+            onDismiss={this.hide}
+          >
+            {this.renderLinks()}
 
-          <LanguageMenu />
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-});
+            <LanguageMenu />
+          </Drawer>
+        </Container>
+      </Navbar>
+    );
+  }
+}

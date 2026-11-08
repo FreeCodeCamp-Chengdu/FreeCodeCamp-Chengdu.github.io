@@ -1,7 +1,6 @@
+import { Button, Col, Container, Image, Row } from 'idea-react';
 import { observer } from 'mobx-react';
 import { FC } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
 
 import { CommunityStats } from '../components/Home/CommunityStats';
 import { LatestBlogs } from '../components/Home/LatestBlogs';
@@ -70,26 +69,26 @@ const HomePage: FC<HomePageProps> = observer(({ latestArticles, upcomingEvents, 
     <div className={styles.hero}>
       <Container>
         <Row className="d-flex align-items-center">
-          <Col xs={12} md={7}>
+          <Col md={7}>
             <h1 className="fw-bold display-4 hero-dark-text">freeCodeCamp 成都社区</h1>
             <p className="fs-5 mt-3 hero-dark-text">
               一个友好的技术社区，致力于交流、学习和互助，帮助成都的开发者和技术爱好者提升个人技术能力。
             </p>
             <div className="mt-4">
               <Button
-                variant="primary"
+                theme="primary"
                 size="lg"
                 className="me-3"
                 href="https://open-source-bazaar.feishu.cn/share/base/form/shrcnUC1stOces9sfPbHbEseep8"
               >
                 加入社区
               </Button>
-              <Button variant="outline-primary" size="lg" href="/activity">
+              <Button variant="outline" theme="primary" size="lg" href="/activity">
                 查看活动
               </Button>
             </div>
           </Col>
-          <Col xs={12} md={5} className="d-flex justify-content-center mt-5 mt-md-0">
+          <Col md={5} className="d-flex justify-content-center mt-5 md:mt-0">
             <div
               className="bg-white rounded-4 d-flex justify-content-center align-items-center"
               style={{ width: '25rem', height: '18.75rem' }}

@@ -1,5 +1,5 @@
+import { Button, Card, CardBody, CardText, CardTitle, Col, Container, Row } from 'idea-react';
 import { FC } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 import { MD_pattern } from '../../models/configuration';
 import { ArticleMeta } from '../../pages/api/core';
@@ -17,17 +17,19 @@ export const Sponsors: FC<SponsorsProps> = ({ sponsors }) => (
       <Row className="g-4" xs={1} sm={2} md={3}>
         {sponsors.map(({ name, meta }) => (
           <Col key={name}>
-            <Card body>
-              <Card.Title className="text-dark">
-                {meta?.title || name.replace(MD_pattern, '')}
-              </Card.Title>
-              <Card.Text className="text-dark">{meta?.description || '暂无描述'}</Card.Text>
+            <Card>
+              <CardBody>
+                <CardTitle className="text-dark">
+                  {meta?.title || name.replace(MD_pattern, '')}
+                </CardTitle>
+                <CardText className="text-dark">{meta?.description || '暂无描述'}</CardText>
+              </CardBody>
             </Card>
           </Col>
         ))}
       </Row>
       <div className="text-center mt-4">
-        <Button variant="outline-primary" size="lg" href="/article/Partner">
+        <Button variant="outline" theme="primary" size="lg" href="/article/Partner">
           成为赞助商 →
         </Button>
       </div>

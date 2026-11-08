@@ -1,11 +1,11 @@
 import '../styles/globals.less';
 
+import { Container, Image } from 'idea-react';
 import { HTTPError } from 'koajax';
 import { configure } from 'mobx';
 import { enableStaticRendering, observer } from 'mobx-react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
-import { Container, Image } from 'react-bootstrap';
 
 import { MDXLayout } from '../components/Layout/MDXLayout';
 import { MainNavigator } from '../components/Navigator/MainNavigator';
@@ -51,13 +51,15 @@ export default class CustomApp extends App<I18nProps> {
 
         <MainNavigator />
 
-        {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
-          <MDXLayout title={asPath.split('/').at(-1)}>
+        <div className="mt-10 pt-10 pb-6">
+          {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
+            <MDXLayout title={asPath.split('/').at(-1)}>
+              <Component {...pageProps} />
+            </MDXLayout>
+          ) : (
             <Component {...pageProps} />
-          </MDXLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </div>
 
         <footer className="section-wrapper border-top py-4">
           <Container className="d-flex justify-content-center align-items-center">

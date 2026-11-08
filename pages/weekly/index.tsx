@@ -1,10 +1,10 @@
 import '../../models/Base';
 
+import { Button, Card, Col, Container, Row } from 'idea-react';
 import { Issue, IssueModel } from 'mobx-github';
 import { observer } from 'mobx-react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { FC, useContext } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 import { IssueCard } from '../../components/Git/IssueCard';
 import { PageHead } from '../../components/Layout/PageHead';
@@ -38,7 +38,8 @@ const WeeklyIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = obse
           <h1>{t('weekly')}</h1>
           <p className="lead">{t('weekly_description')}</p>
           <Button
-            variant="outline-light"
+            variant="outline"
+            theme="light"
             size="lg"
             href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly"
             target="_blank"
@@ -59,9 +60,9 @@ const WeeklyIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = obse
         ) : (
           <Card body className="text-center">
             <h5>{t('no_weekly_content')}</h5>
-            <p className="text-muted">{t('weekly_content_from_github')}</p>
+            <p className="text-body-secondary">{t('weekly_content_from_github')}</p>
             <Button
-              variant="primary"
+              theme="primary"
               href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly/issues"
               target="_blank"
               rel="noopener noreferrer"
