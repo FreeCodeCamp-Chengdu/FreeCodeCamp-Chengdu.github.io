@@ -82,7 +82,7 @@
   },
   "scripts": {
     "prepare": "husky || true",
-    "install": "next typegen",
+    "install": "next typegen --webpack",
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
