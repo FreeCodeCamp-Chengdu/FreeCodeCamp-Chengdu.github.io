@@ -62,6 +62,7 @@ const WeeklyIndexPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = obse
             <h5>{t('no_weekly_content')}</h5>
             <p className="text-body-secondary">{t('weekly_content_from_github')}</p>
             <Button
+              variant="solid"
               theme="primary"
               href="https://github.com/FreeCodeCamp-Chengdu/IT-Technology-weekly/issues"
               target="_blank"

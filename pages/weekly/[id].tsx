@@ -7,7 +7,6 @@ import {
   BreadcrumbLink,
   Button,
   Card,
-  CardBody,
   Col,
   Container,
   Row,
@@ -137,10 +136,8 @@ const WeeklyDetailPage: FC<Issue> = observer(
           {htmlContent ? (
             <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="markdown-body" />
           ) : (
-            <Card>
-              <CardBody>
-                <p className="text-center text-body-secondary">{t('weekly_issue_no_content')}</p>
-              </CardBody>
+            <Card body>
+              <p className="text-center text-body-secondary">{t('weekly_issue_no_content')}</p>
             </Card>
           )}
         </article>

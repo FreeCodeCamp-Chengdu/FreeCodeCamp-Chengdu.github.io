@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardText, CardTitle, Col, Row } from 'idea-react';
+import { Button, Card, CardText, CardTitle, Col, Row } from 'idea-react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { FC, useContext } from 'react';
@@ -22,22 +22,20 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
       <Row className="g-4" xs={1} sm={2} md={3}>
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
-            <Card>
-              <CardBody>
-                <CardTitle className="text-dark">
-                  {meta?.title || name.replace(MD_pattern, '')}
-                </CardTitle>
-                <CardText className="text-dark">
-                  {t('activity_time')}: {meta?.start || 'N/A'}
-                </CardText>
-                <CardText className="text-dark">
-                  {t('activity_location')}: {meta?.address || 'N/A'}
-                </CardText>
+            <Card body>
+              <CardTitle className="text-dark">
+                {meta?.title || name.replace(MD_pattern, '')}
+              </CardTitle>
+              <CardText className="text-dark">
+                {t('activity_time')}: {meta?.start || 'N/A'}
+              </CardText>
+              <CardText className="text-dark">
+                {t('activity_location')}: {meta?.address || 'N/A'}
+              </CardText>
 
-                <Link href={path?.replace(MD_pattern, '') || '#'} className="btn theme-primary">
-                  {t('view_details')}
-                </Link>
-              </CardBody>
+              <Link href={path?.replace(MD_pattern, '') || '#'} className="btn theme-primary">
+                {t('view_details')}
+              </Link>
             </Card>
           </Col>
         ))}

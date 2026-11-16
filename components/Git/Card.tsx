@@ -73,7 +73,7 @@ export const GitCard: FC<GitCardProps> = observer(
         </CardBody>
         <CardFooter className="d-flex justify-content-between align-items-center">
           {homepage && (
-            <Button theme="success" target="_blank" href={homepage}>
+            <Button variant="solid" theme="success" target="_blank" href={homepage}>
               {t('home_page')}
             </Button>
           )}

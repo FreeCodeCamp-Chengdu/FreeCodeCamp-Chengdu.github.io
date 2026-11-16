@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardText, CardTitle, Col, Container, Row } from 'idea-react';
+import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'idea-react';
 import { FC } from 'react';
 
 import { MD_pattern } from '../../models/configuration';
@@ -17,13 +17,11 @@ export const Sponsors: FC<SponsorsProps> = ({ sponsors }) => (
       <Row className="g-4" xs={1} sm={2} md={3}>
         {sponsors.map(({ name, meta }) => (
           <Col key={name}>
-            <Card>
-              <CardBody>
-                <CardTitle className="text-dark">
-                  {meta?.title || name.replace(MD_pattern, '')}
-                </CardTitle>
-                <CardText className="text-dark">{meta?.description || '暂无描述'}</CardText>
-              </CardBody>
+            <Card body>
+              <CardTitle className="text-dark">
+                {meta?.title || name.replace(MD_pattern, '')}
+              </CardTitle>
+              <CardText className="text-dark">{meta?.description || '暂无描述'}</CardText>
             </Card>
           </Col>
         ))}

@@ -14,7 +14,7 @@ export const CommunityStats = () => (
           { number: '200+', label: '技术文章' },
           { number: '30+', label: '开源项目' },
         ].map(({ number, label }) => (
-          <Col key={label} sm={6} md={3} className="mb-3">
+          <Col key={label} xs={12} sm={6} md={3} className="mb-3">
             <Card className="border-0 shadow-sm p-3" body>
               <strong className="text-dark">{number}</strong>
 

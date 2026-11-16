@@ -47,7 +47,7 @@ export const SearchBar: FC<SearchBarProps> = observer(
             type="search"
             {...{ name, placeholder, defaultValue, value, onChange }}
           />
-          <Button type="submit" theme="light">
+          <Button variant="solid" type="submit" theme="light">
             🔍
           </Button>
         </InputGroup>

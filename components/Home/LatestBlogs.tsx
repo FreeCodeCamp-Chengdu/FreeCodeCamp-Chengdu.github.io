@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardText, CardTitle, Col, Container, Row } from 'idea-react';
+import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'idea-react';
 import { FC } from 'react';
 
 import { MD_pattern } from '../../models/configuration';
@@ -17,16 +17,14 @@ export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
       <Row className="g-4" xs={1} sm={2} md={3}>
         {articles.map(({ name, meta, path }) => (
           <Col key={name}>
-            <Card>
-              <CardBody>
-                <CardTitle className="text-dark">
-                  {meta?.title || name.replace(MD_pattern, '')}
-                </CardTitle>
-                <CardText className="text-dark">发布日期: {meta?.date || '未知日期'}</CardText>
-                <Button href={path?.replace(MD_pattern, '') || '#'} theme="secondary">
-                  阅读文章
-                </Button>
-              </CardBody>
+            <Card body>
+              <CardTitle className="text-dark">
+                {meta?.title || name.replace(MD_pattern, '')}
+              </CardTitle>
+              <CardText className="text-dark">发布日期: {meta?.date || '未知日期'}</CardText>
+              <Button variant="solid" href={path?.replace(MD_pattern, '') || '#'} theme="secondary">
+                阅读文章
+              </Button>
             </Card>
           </Col>
         ))}

@@ -36,7 +36,7 @@ export default class CustomDocument extends Document<CustomDocumentProps> {
           />
           <link
             rel="stylesheet"
-            href="https://unpkg.com/mobx-restful-table@3.0.0-rc.0/dist/index.css"
+            href="https://unpkg.com/mobx-restful-table@3.0.0-rc.4/dist/index.css"
           />
         </Head>
 

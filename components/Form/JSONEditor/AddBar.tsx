@@ -15,7 +15,14 @@ export interface AddBarProps {
 export const AddBar: FC<AddBarProps> = ({ onSelect }) => (
   <nav className="d-flex gap-1">
     {Object.entries(type_map).map(([key, { title, icon }]) => (
-      <Button key={key} size="sm" theme="success" title={title} onClick={onSelect.bind(null, key)}>
+      <Button
+        key={key}
+        variant="solid"
+        size="sm"
+        theme="success"
+        title={title}
+        onClick={onSelect.bind(null, key)}
+      >
         <Icon name={icon} />
       </Button>
     ))}

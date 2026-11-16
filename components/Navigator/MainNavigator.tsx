@@ -61,9 +61,9 @@ export class MainNavigator extends Component<{}, typeof i18n> {
           <Drawer
             className="w-100"
             bodyClassName="d-flex"
-            title={Name}
             responsive="sm"
             placement="end"
+            title={Name}
             open={this.open}
             onDismiss={this.hide}
           >

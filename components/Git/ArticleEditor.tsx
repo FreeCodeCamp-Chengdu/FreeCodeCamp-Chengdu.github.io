@@ -1,6 +1,7 @@
 import { Button, Col, Form, FormGroup, FormTextArea, Loading } from 'idea-react';
 import { readAs } from 'koajax';
 import { debounce } from 'lodash';
+import { marked } from 'marked';
 import { computed, observable } from 'mobx';
 import { Content, ContentModel } from 'mobx-github';
 import { observer } from 'mobx-react';
@@ -117,8 +118,6 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
 
       if (meta[1]) await this.setPostMeta(meta[1]);
     }
-
-    const { marked } = await import('marked');
 
     this.editorContent = marked(content) as string;
   };
@@ -269,10 +268,10 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
             <FormTextArea name="message" required />
           </Col>
           <Col sm={3} className="d-flex flex-wrap gap-2 justify-content-around align-items-center">
-            <Button type="submit" theme="primary">
+            <Button variant="solid" type="submit" theme="primary">
               {t('commit')}
             </Button>
-            <Button type="reset" theme="danger">
+            <Button variant="solid" type="reset" theme="danger">
               {t('clear')}
             </Button>
           </Col>

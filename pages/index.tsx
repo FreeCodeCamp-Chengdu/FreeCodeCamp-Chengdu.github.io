@@ -76,6 +76,7 @@ const HomePage: FC<HomePageProps> = observer(({ latestArticles, upcomingEvents, 
             </p>
             <div className="mt-4">
               <Button
+                variant="solid"
                 theme="primary"
                 size="lg"
                 className="me-3"
