@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
         with:
           submodules: recursive
@@ -23,45 +23,17 @@ jobs:
       - run: git submodule update --init --remote --recursive
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
 
-      - uses: actions/setup-node@v6
-        if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
-        with:
-          node-version: 24
-
       - name: Deploy to Vercel
         id: vercel-deployment
         if: ${{ env.VERCEL_TOKEN && env.VERCEL_ORG_ID && env.VERCEL_PROJECT_ID }}
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          npm install vercel -g
-
-          if [[ "$GITHUB_REF" == 'refs/heads/main' ]]; then
-            DeployOutput=$(vercel -t "$VERCEL_TOKEN" --prod)
-          else
-            DeployOutput=$(vercel -t "$VERCEL_TOKEN")
-          fi
-          echo "$DeployOutput"
-
-          ParsedURL=$(echo "$DeployOutput" | grep -Eo 'https://[^[:space:]]*\.vercel\.app' | tail -n 1)
-
-          if [[ -z "$ParsedURL" ]]; then
-            echo "Failed to parse Vercel URL from deploy output"
-            exit 1
-          fi
-          vercel inspect "$ParsedURL" -t "$VERCEL_TOKEN" -F json > vercel-inspect.json
-
-          InspectURL=$(jq -r '.url // empty' vercel-inspect.json)
-
-          if [[ -z "$InspectURL" ]]; then
-            echo "Failed to parse inspect url from vercel-inspect.json"
-            exit 1
-          fi
-          if [[ "$InspectURL" != http* ]]; then
-            InspectURL="https://$InspectURL"
-          fi
-          echo "preview-url=$InspectURL" >> "$GITHUB_OUTPUT"
+        uses: amondnet/vercel-action@v42.3.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: ${{ github.ref == 'refs/heads/main' && ' --prod' || '' }}
 
       - name: Lark notification
         uses: Open-Source-Bazaar/feishu-action@v3
