@@ -1,6 +1,6 @@
 {
   "name": "@freecodecamp-chengdu/freecodecamp-chengdu.github.io",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Lark project scaffold based on TypeScript, React, Next.js, Bootstrap & Serwist.",
   "private": true,
   "engines": {
