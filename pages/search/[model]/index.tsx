@@ -1,13 +1,7 @@
+import { Container, Nav, NavItem, NavLink } from 'idea-react';
 import { observer } from 'mobx-react';
-import {
-  cache,
-  compose,
-  errorLogger,
-  RouteProps,
-  router,
-} from 'next-ssr-middleware';
+import { cache, compose, errorLogger, RouteProps, router } from 'next-ssr-middleware';
 import { FC, useContext } from 'react';
-import { Container, Nav } from 'react-bootstrap';
 import { buildURLData } from 'web-utility';
 
 import { CardPage, CardPageProps } from '../../../components/Layout/CardPage';
@@ -18,10 +12,7 @@ import { I18nContext } from '../../../models/Translation';
 
 type SearchModelPageProps = RouteProps<{ model: string }> & SearchPageMeta;
 
-export const getServerSideProps = compose<
-  { model: string },
-  SearchModelPageProps
->(
+export const getServerSideProps = compose<{ model: string }, SearchModelPageProps>(
   cache(),
   router,
   errorLogger,
@@ -65,21 +56,14 @@ const SearchModelPage: FC<SearchModelPageProps> = observer(
         <h1 className="my-3 text-center">{title}</h1>
 
         <header className="d-flex flex-wrap align-items-center gap-3">
-          <SearchBar
-            className="flex-fill"
-            action={`/search/${model}`}
-            defaultValue={keywords}
-          />
-          <Nav variant="pills" defaultActiveKey={model}>
+          <SearchBar className="flex-fill" action={`/search/${model}`} defaultValue={keywords} />
+          <Nav variant="pills">
             {Object.entries(nameMap).map(([key, value]) => (
-              <Nav.Item key={key}>
-                <Nav.Link
-                  eventKey={key}
-                  href={`/search/${key}?keywords=${keywords}`}
-                >
+              <NavItem key={key}>
+                <NavLink active={key === model} href={`/search/${key}?keywords=${keywords}`}>
                   {value}
-                </Nav.Link>
-              </Nav.Item>
+                </NavLink>
+              </NavItem>
             ))}
           </Nav>
         </header>
@@ -87,9 +71,7 @@ const SearchModelPage: FC<SearchModelPageProps> = observer(
         <CardPage
           {...{ Card, ...pageMeta }}
           cardLinkOf={model === 'suit' ? id => `/suit/${id}` : undefined}
-          pageLinkOf={page =>
-            `/search/${model}?${buildURLData({ keywords, page })}`
-          }
+          pageLinkOf={page => `/search/${model}?${buildURLData({ keywords, page })}`}
         />
       </Container>
     );

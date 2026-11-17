@@ -28,11 +28,16 @@ export default class CustomDocument extends Document<CustomDocumentProps> {
 
           <link
             rel="stylesheet"
-            href="https://unpkg.com/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+            href="https://unpkg.com/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
           />
           <link
             rel="stylesheet"
-            href="https://unpkg.com/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+            href="https://unpkg.com/bootstrap-icons@1.13.2/font/bootstrap-icons.css"
+          />
+          <link rel="stylesheet" href="https://unpkg.com/idea-react@3.0.0-rc.4/dist/style.css" />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/mobx-restful-table@3.0.0-rc.3/dist/index.css"
           />
         </Head>
 

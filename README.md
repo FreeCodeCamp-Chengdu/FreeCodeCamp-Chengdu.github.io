@@ -8,13 +8,13 @@
 
 ## Technology stack
 
-- Language: [TypeScript v5][2] + [MDX v3][10]
-- Component engine: [Next.js v15][3]
-- Component suite: [Bootstrap v5][4]
-- PWA framework: [Workbox v6][5]
-- State management: [MobX v6][11]
+- Language: [TypeScript v6][2] + [MDX v3][10]
+- Component engine: [Next.js v16][3]
+- Component suite: [Idea-React v3][33] + [Bootstrap v6][4]
+- PWA framework: [Serwist v9][5]
+- State management: [MobX v7][11]
 - CI / CD: GitHub [Actions][12] + [Vercel][13]
-- Monitor service: [Sentry][14]
+- Monitor service: [Sentry v11][14]
 
 ## Major examples
 
@@ -151,7 +151,7 @@ pnpm container
 [2]: https://www.typescriptlang.org/
 [3]: https://nextjs.org/
 [4]: https://getbootstrap.com/
-[5]: https://developers.google.com/web/tools/workbox
+[5]: https://serwist.pages.dev/
 [6]: https://github.com/FreeCodeCamp-Chengdu/Wiki/#%E6%9C%AC%E6%9C%BA%E7%BC%96%E8%BE%91
 [7]: https://github.com/freecodecamp-chengdu/freecodecamp-chengdu.github.io/actions/workflows/main.yml
 [8]: https://codespaces.new/freecodecamp-chengdu/freecodecamp-chengdu.github.io
@@ -179,3 +179,4 @@ pnpm container
 [30]: https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#create-initialization-config-files
 [31]: https://open.larksuite.com/document/server-docs/getting-started/api-access-token/app-access-token-development-guide#1f8b587c
 [32]: https://nextjs.org/docs/deployment
+[33]: https://idea-react.pages.dev/

@@ -1,11 +1,13 @@
 import '../styles/globals.less';
+import '@khmyznikov/pwa-install';
 
+import { SerwistProvider } from '@serwist/next/react';
+import { Container, Image } from 'idea-react';
 import { HTTPError } from 'koajax';
 import { configure } from 'mobx';
 import { enableStaticRendering, observer } from 'mobx-react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
-import { Container, Image } from 'react-bootstrap';
 
 import { MDXLayout } from '../components/Layout/MDXLayout';
 import { MainNavigator } from '../components/Navigator/MainNavigator';
@@ -44,37 +46,43 @@ export default class CustomApp extends App<I18nProps> {
     const { asPath } = router;
 
     return (
-      <I18nContext.Provider value={this.i18nStore}>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
+      <SerwistProvider swUrl="/sw.js">
+        <I18nContext.Provider value={this.i18nStore}>
+          <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+          </Head>
 
-        <MainNavigator />
+          <pwa-install />
 
-        {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
-          <MDXLayout title={asPath.split('/').at(-1)}>
-            <Component {...pageProps} />
-          </MDXLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          <MainNavigator />
 
-        <footer className="section-wrapper border-top py-4">
-          <Container className="d-flex justify-content-center align-items-center">
-            <a
-              className="d-flex justify-content-center align-items-center"
-              href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t('powered_by')}
-              <span className="mx-2">
-                <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-              </span>
-            </a>
-          </Container>
-        </footer>
-      </I18nContext.Provider>
+          <div className="mt-10 pt-10 pb-6">
+            {asPath.startsWith('/article/') && !asPath.startsWith('/article/editor') ? (
+              <MDXLayout title={asPath.split('/').at(-1)}>
+                <Component {...pageProps} />
+              </MDXLayout>
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </div>
+
+          <footer className="section-wrapper border-top py-4">
+            <Container className="d-flex justify-content-center align-items-center">
+              <a
+                className="d-flex justify-content-center align-items-center"
+                href="https://vercel.com?utm_source=create-next-app&amp;utm_medium=default-template&amp;utm_campaign=create-next-app"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('powered_by')}
+                <span className="mx-2">
+                  <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+                </span>
+              </a>
+            </Container>
+          </footer>
+        </I18nContext.Provider>
+      </SerwistProvider>
     );
   }
 }

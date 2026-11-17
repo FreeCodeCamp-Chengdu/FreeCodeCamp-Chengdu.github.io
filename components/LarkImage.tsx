@@ -1,6 +1,6 @@
+import { Image, ImageProps } from 'idea-react';
 import { TableCellValue } from 'mobx-lark';
 import { FC } from 'react';
-import { Image, ImageProps } from 'react-bootstrap';
 
 import { fileURLOf } from '../models/Base';
 import { DefaultImage } from '../models/configuration';
@@ -9,11 +9,7 @@ export interface LarkImageProps extends Omit<ImageProps, 'src'> {
   src?: TableCellValue;
 }
 
-export const LarkImage: FC<LarkImageProps> = ({
-  src = DefaultImage,
-  alt,
-  ...props
-}) => (
+export const LarkImage: FC<LarkImageProps> = ({ src = DefaultImage, alt, ...props }) => (
   <Image
     fluid
     loading="lazy"

@@ -2,7 +2,7 @@
   "name": "freecodecamp-chengdu.github.io scaffold",
   "short_name": "Next.ts demo",
   "start_url": ".",
-  "description": "Lark project scaffold based on TypeScript, React, Next.js, Bootstrap & Workbox.",
+  "description": "Lark project scaffold based on TypeScript, React, Next.js, Bootstrap & Serwist.",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",

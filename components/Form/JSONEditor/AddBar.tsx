@@ -1,6 +1,5 @@
-import { Icon } from 'idea-react';
+import { Button, Icon } from 'idea-react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 
 const type_map = {
   string: { title: 'Inline text', icon: 'input-cursor' },
@@ -18,8 +17,9 @@ export const AddBar: FC<AddBarProps> = ({ onSelect }) => (
     {Object.entries(type_map).map(([key, { title, icon }]) => (
       <Button
         key={key}
+        variant="solid"
         size="sm"
-        variant="success"
+        theme="success"
         title={title}
         onClick={onSelect.bind(null, key)}
       >

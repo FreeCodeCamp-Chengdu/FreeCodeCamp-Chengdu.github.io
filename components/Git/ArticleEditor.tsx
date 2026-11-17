@@ -1,4 +1,4 @@
-import { Loading } from 'idea-react';
+import { Button, Col, Form, FormGroup, FormTextArea, Loading } from 'idea-react';
 import { readAs } from 'koajax';
 import { debounce } from 'lodash';
 import { marked } from 'marked';
@@ -9,7 +9,6 @@ import { ObservedComponent } from 'mobx-react-helper';
 import { DataObject } from 'mobx-restful';
 import { SearchableInput } from 'mobx-restful-table';
 import { ChangeEvent, FormEvent } from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
 import { blobOf, encodeBase64, formatDate, uniqueID } from 'web-utility';
 import YAML from 'yaml';
 
@@ -237,8 +236,8 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
       <Form className="my-3 d-flex flex-column gap-3" onReset={this.reset} onSubmit={this.submit}>
         {loading && <Loading />}
 
-        <Form.Group className="row">
-          <label className="col-sm-2 col-form-label">{t('repository')}</label>
+        <FormGroup className="row">
+          <label className="sm:col-2 col-form-label">{t('repository')}</label>
           <SearchableInput
             translator={i18n}
             store={this.repositorySearchStore}
@@ -247,9 +246,9 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
             placeholder="Search owner/repository"
             onChange={([{ label } = {}]) => (this.repository = label || '')}
           />
-        </Form.Group>
-        <Form.Group className="row">
-          <label className="col-sm-2 col-form-label">{t('file_path')}</label>
+        </FormGroup>
+        <FormGroup className="row">
+          <label className="sm:col-2 col-form-label">{t('file_path')}</label>
 
           {repository && (
             <SearchableInput
@@ -262,30 +261,32 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
               onChange={([{ label }]) => this.loadFile(label)}
             />
           )}
-        </Form.Group>
-        <Form.Group className="row align-items-center">
-          <label className="col-sm-2 col-form-label">{t('commit_message')}</label>
+        </FormGroup>
+        <FormGroup className="row align-items-center">
+          <label className="sm:col-2 col-form-label">{t('commit_message')}</label>
           <Col sm={7}>
-            <Form.Control as="textarea" name="message" required />
+            <FormTextArea name="message" required />
           </Col>
           <Col sm={3} className="d-flex flex-wrap gap-2 justify-content-around align-items-center">
-            <Button type="submit">{t('commit')}</Button>
-            <Button type="reset" variant="danger">
+            <Button variant="solid" type="submit" theme="primary">
+              {t('commit')}
+            </Button>
+            <Button variant="solid" type="reset" theme="danger">
               {t('clear')}
             </Button>
           </Col>
-        </Form.Group>
+        </FormGroup>
 
         {meta && (
-          <Form.Group>
+          <FormGroup>
             <label>{t('meta')}</label>
             <ListField
               value={meta}
               onChange={({ currentTarget: { value } }) => (this.meta = value as PostMeta)}
             />
-          </Form.Group>
+          </FormGroup>
         )}
-        <Form.Group onInput={this.fixURL}>
+        <FormGroup onInput={this.fixURL}>
           <div className="d-flex justify-content-between align-items-center my-2">
             <label>{t('content')}</label>
           </div>
@@ -295,7 +296,7 @@ export class ArticleEditor extends ObservedComponent<{}, typeof i18n> {
               onChange={value => (this.editorContent = value || '<br>')}
             />
           )}
-        </Form.Group>
+        </FormGroup>
       </Form>
     );
   }

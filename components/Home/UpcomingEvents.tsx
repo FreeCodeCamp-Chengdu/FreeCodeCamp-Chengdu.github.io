@@ -1,7 +1,7 @@
+import { Button, Card, CardText, CardTitle, Col, Row } from 'idea-react';
 import { observer } from 'mobx-react';
 import Link from 'next/link';
 import { FC, useContext } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
 
 import { MD_pattern } from '../../models/configuration';
 import { I18nContext } from '../../models/Translation';
@@ -23,17 +23,17 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
         {events.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card body>
-              <Card.Title className="text-dark">
+              <CardTitle className="text-dark">
                 {meta?.title || name.replace(MD_pattern, '')}
-              </Card.Title>
-              <Card.Text className="text-dark">
+              </CardTitle>
+              <CardText className="text-dark">
                 {t('activity_time')}: {meta?.start || 'N/A'}
-              </Card.Text>
-              <Card.Text className="text-dark">
+              </CardText>
+              <CardText className="text-dark">
                 {t('activity_location')}: {meta?.address || 'N/A'}
-              </Card.Text>
+              </CardText>
 
-              <Link href={path?.replace(MD_pattern, '') || '#'} className="btn btn-primary">
+              <Link href={path?.replace(MD_pattern, '') || '#'} className="btn theme-primary">
                 {t('view_details')}
               </Link>
             </Card>
@@ -41,7 +41,7 @@ export const UpcomingEvents: FC<UpcomingEventsProps> = observer(({ events }) => 
         ))}
       </Row>
       <div className="text-center mt-4">
-        <Button variant="outline-primary" size="lg" href="/activity">
+        <Button variant="outline" theme="primary" size="lg" href="/activity">
           {t('view_all_activities')} →
         </Button>
       </div>

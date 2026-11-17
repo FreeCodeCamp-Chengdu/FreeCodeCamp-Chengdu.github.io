@@ -1,4 +1,4 @@
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'idea-react';
 
 import { SectionTitle } from './SectionTitle';
 

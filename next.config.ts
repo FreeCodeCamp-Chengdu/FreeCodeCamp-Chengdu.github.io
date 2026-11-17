@@ -1,9 +1,11 @@
+import { spawnSync } from 'node:child_process';
+
 import NextMDX from '@next/mdx';
-import { withSentryConfig } from '@sentry/nextjs';
+import { withSentryConfig } from '@sentry/nextjs/config';
+import withSerwistInit from '@serwist/next';
 import CopyPlugin from 'copy-webpack-plugin';
 import { readdirSync, statSync } from 'fs';
 import { NextConfig } from 'next';
-import setPWA from 'next-pwa';
 // @ts-expect-error no official types
 import withLess from 'next-with-less';
 import RemarkFrontMatter from 'remark-frontmatter';
@@ -15,6 +17,19 @@ const { NODE_ENV, CI, SENTRY_AUTH_TOKEN, SENTRY_ORG, SENTRY_PROJECT } = process.
 
 const isDev = NODE_ENV === 'development';
 
+const { stdout, stderr } = spawnSync('git', ['rev-parse', 'HEAD'], {
+  encoding: 'utf8',
+});
+const { GITHUB_SHA, VERCEL_GIT_COMMIT_SHA } = process.env;
+const revision = stdout.trim() || VERCEL_GIT_COMMIT_SHA || GITHUB_SHA || crypto.randomUUID();
+
+if (!stdout.trim())
+  console.warn(
+    `Falling back to random UUID for Serwist revision: ${
+      stderr.trim() || 'Git revision is unavailable'
+    }`,
+  );
+
 const withMDX = NextMDX({
   extension: /\.mdx?$/,
   options: {
@@ -22,11 +37,10 @@ const withMDX = NextMDX({
   },
 });
 
-const withPWA = setPWA({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: isDev,
+const withSerwist = withSerwistInit({
+  swSrc: 'service-worker.ts',
+  swDest: 'public/sw.js',
+  additionalPrecacheEntries: [{ url: '/', revision }],
 });
 
 const webpack: NextConfig['webpack'] = config => {
@@ -87,13 +101,27 @@ const rewrites: NextConfig['rewrites'] = async () => ({
   ],
 });
 
-const nextConfig = withPWA(
+const nextConfig = withSerwist(
   withLess(
     withMDX({
       output: CI ? 'standalone' : undefined,
       pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-      transpilePackages: ['@sentry/browser'],
-
+      transpilePackages: [
+        '@sentry/browser',
+        '@sentry/nextjs',
+        '@serwist/next',
+        '@swc/helpers',
+        'idea-react',
+        'iterable-observer',
+        'koajax',
+        'marked',
+        'mobx-github',
+        'mobx-i18n',
+        'mobx-restful',
+        'mobx-restful-table',
+        'react-bootstrap-editor',
+        'web-utility',
+      ],
       webpack,
       rewrites,
     }),
@@ -103,7 +131,9 @@ const nextConfig = withPWA(
 export default isDev || !SENTRY_AUTH_TOKEN
   ? nextConfig
   : withSentryConfig(nextConfig, {
-      autoInstrumentServerFunctions: false,
+      webpack: {
+        autoInstrumentServerFunctions: false,
+      },
       org: SENTRY_ORG,
       project: SENTRY_PROJECT,
       authToken: SENTRY_AUTH_TOKEN,

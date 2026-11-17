@@ -1,8 +1,8 @@
+import { Container } from 'idea-react';
 import { observer } from 'mobx-react';
 import { Pager, PagerProps } from 'mobx-restful-table';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { FC, useContext } from 'react';
-import { Container } from 'react-bootstrap';
 
 import { UpcomingEvents } from '../../components/Home/UpcomingEvents';
 import { PageHead } from '../../components/Layout/PageHead';

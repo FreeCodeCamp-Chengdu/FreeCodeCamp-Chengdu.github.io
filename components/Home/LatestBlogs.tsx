@@ -1,5 +1,5 @@
+import { Button, Card, CardText, CardTitle, Col, Container, Row } from 'idea-react';
 import { FC } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 
 import { MD_pattern } from '../../models/configuration';
 import { ArticleMeta } from '../../pages/api/core';
@@ -18,11 +18,11 @@ export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
         {articles.map(({ name, meta, path }) => (
           <Col key={name}>
             <Card body>
-              <Card.Title className="text-dark">
+              <CardTitle className="text-dark">
                 {meta?.title || name.replace(MD_pattern, '')}
-              </Card.Title>
-              <Card.Text className="text-dark">发布日期: {meta?.date || '未知日期'}</Card.Text>
-              <Button href={path?.replace(MD_pattern, '') || '#'} variant="secondary">
+              </CardTitle>
+              <CardText className="text-dark">发布日期: {meta?.date || '未知日期'}</CardText>
+              <Button variant="solid" href={path?.replace(MD_pattern, '') || '#'} theme="secondary">
                 阅读文章
               </Button>
             </Card>
@@ -30,7 +30,7 @@ export const LatestBlogs: FC<LatestBlogsProps> = ({ articles }) => (
         ))}
       </Row>
       <div className="text-center mt-4">
-        <Button variant="outline-primary" size="lg" href="/article">
+        <Button variant="outline" theme="primary" size="lg" href="/article">
           查看全部文章 →
         </Button>
       </div>

@@ -1,8 +1,8 @@
+import { FormControl, FormTextArea } from 'idea-react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { DataObject } from 'mobx-restful';
 import { ChangeEvent, Component, ReactNode } from 'react';
-import { Form } from 'react-bootstrap';
 
 import { AddBar } from './AddBar';
 
@@ -133,7 +133,7 @@ export class ListField extends Component<FieldProps> {
     switch (type) {
       case 'string':
         return (
-          <Form.Control
+          <FormControl
             defaultValue={value}
             placeholder="Value"
             onBlur={this.setValue.bind(this, index)}
@@ -141,8 +141,7 @@ export class ListField extends Component<FieldProps> {
         );
       case 'text':
         return (
-          <Form.Control
-            as="textarea"
+          <FormTextArea
             defaultValue={value}
             placeholder="Value"
             onBlur={this.setValue.bind(this, index)}
@@ -170,7 +169,7 @@ export class ListField extends Component<FieldProps> {
         {children.map(({ type, key, value }, index) => (
           <li key={key} className="d-flex align-items-center gap-3">
             {field_type === 'object' && (
-              <Form.Control
+              <FormControl
                 defaultValue={key}
                 required
                 placeholder="Key"
