@@ -36,6 +36,6 @@ router.get('/apps/:app/tables/:table/records', safeAPI, async (context: Context)
   context.body = body;
 });
 
-router.all('/(.*)', safeAPI, proxyLarkAll);
+router.all('/*path', safeAPI, proxyLarkAll);
 
 export default withKoaRouter(router);

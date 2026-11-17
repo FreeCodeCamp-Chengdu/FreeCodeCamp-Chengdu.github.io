@@ -24,7 +24,7 @@ export const IssueCard: FC<IssueCardProps> = observer(
 
     return (
       <Card className={`shadow-sm ${styles.issueCard} ${className}`}>
-        <CardHeader className="d-flex justify-content-between align-items-center">
+        <CardHeader className="d-flex flex-row justify-content-between align-items-center">
           <Badge theme={state === 'open' ? 'success' : 'secondary'}>
             {state === 'open' ? t('open') : t('closed')}
           </Badge>

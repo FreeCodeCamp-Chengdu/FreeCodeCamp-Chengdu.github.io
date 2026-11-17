@@ -9,7 +9,7 @@ export const config = { api: { bodyParser: false } };
 
 const router = createKoaRouter(import.meta.url);
 
-router.all('/(.*)', safeAPI, async (context: Context) => {
+router.all('/*path', safeAPI, async (context: Context) => {
   const { method, url, headers, body } = context;
 
   delete headers.host;

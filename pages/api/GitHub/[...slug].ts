@@ -7,6 +7,6 @@ export const config = { api: { bodyParser: false } };
 
 const router = createKoaRouter(import.meta.url);
 
-router.get('/(.*)', safeAPI, proxyGitHubAll);
+router.get('/*path', safeAPI, proxyGitHubAll);
 
 export default withKoaRouter(router);
